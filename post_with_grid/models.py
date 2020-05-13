@@ -4,4 +4,4 @@ from django.db import models
 class Project(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
-    grid_path = models.FilePathField(path="/puzzle")
+    grid_path = models.FilePathField(path="/home/antoine/Documents")
