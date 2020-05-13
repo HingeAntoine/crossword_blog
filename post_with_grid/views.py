@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from projects.models import Project
+from post_with_grid.models import Project
 
 
 def project_index(request):
