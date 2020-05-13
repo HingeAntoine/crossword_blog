@@ -2,10 +2,18 @@
 {% load static %}
 
 {% block page_content %}
+<link href="{% static 'css/crosswordnexus.css' %}" rel="stylesheet">
+<script type="text/javascript" src="{% static 'js/crosswords.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/puz.js' %}"></script>
+
+<script src="{% static 'lib/jquery.js' %}"></script>
+<script src="{% static 'lib/zip/zip.js' %}"></script>
+<script src="{% static 'lib/jspdf.min.js' %}"></script>
+
 <h1>{{ project.title }}</h1>
 <div class="row">
     <div class="col-md-8">
-        <img src="{% static project.image %}" alt="" width="100%">
+        <div class="crossword"></div>
     </div>
     <div class="col-md-4">
         <h5>About the project:</h5>
@@ -13,4 +21,10 @@
         <br>
     </div>
 </div>
+
+<script>
+	(function(){
+		CrosswordNexus.createCrossword($('div.crossword'));
+	})();
+</script>
 {% endblock %}
