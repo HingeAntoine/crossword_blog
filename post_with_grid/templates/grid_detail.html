@@ -11,14 +11,14 @@
 <script src="{% static 'lib/jspdf.min.js' %}"></script>
 
 <h1>{{ project.title }}</h1>
-<div class="row">
-    <div class="col-md-8">
-        <div class="crossword"></div>
-    </div>
-    <div class="col-md-4">
+<div class="row" style="height:80%">
+    <div class="col-md-2">
         <h5>About the project:</h5>
         <p>{{ project.description }}</p>
         <br>
+    </div>
+    <div class="col-md-9">
+        <div class="crossword"></div>
     </div>
 </div>
 
