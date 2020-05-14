@@ -119,5 +119,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
-FILE_PATH_FIELD_DIRECTORY = "/home/antoine/PycharmProjects/crossword_blog/post_with_grid/static/puzzle"
