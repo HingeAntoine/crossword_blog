@@ -6,7 +6,15 @@
 {% for project in projects %}
   <li class="list-group-item" >
     <div>
-      <a href="{% url 'project_detail' project.pk %}">{{ project.title }} - Antoine HINGE - {{ project.date_created}}</a>
+      <a href="{% url 'project_detail' project.pk %}">
+          <div class="container">
+              <div class="row">
+                <div class="col-sm-2">{{ project.title }}</div>
+                <div class="col-sm-2">{{ project.author }}</div>
+                <div class="col-sm-2">{{ project.date_created}}</div>
+              </div>
+          </div>
+      </a>
     </div>
   </li>
 {% endfor %}
