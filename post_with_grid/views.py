@@ -18,3 +18,12 @@ def project_detail(request, pk):
     }
 
     return render(request, 'grid_detail.html', context)
+
+
+def project_archives(request):
+    projects = Project.objects.all()
+    context = {
+        'projects': projects
+    }
+
+    return render(request, 'grid_index.html', context)
