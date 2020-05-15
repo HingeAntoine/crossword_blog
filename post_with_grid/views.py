@@ -26,4 +26,4 @@ def project_archives(request):
         'projects': projects
     }
 
-    return render(request, 'grid_index.html', context)
+    return render(request, 'grid_archives.html', context)

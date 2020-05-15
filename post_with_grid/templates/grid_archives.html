@@ -4,7 +4,11 @@
 
 <ul class="list-group">
 {% for project in projects %}
-  <li class="list-group-item" href="{% url 'project_detail' project.pk %}">{{ project.title }}</li>
+  <li class="list-group-item" >
+    <div>
+      <a href="{% url 'project_detail' project.pk %}">{{ project.title }} - Antoine HINGE</a>
+    </div>
+  </li>
 {% endfor %}
 </ul>
 
