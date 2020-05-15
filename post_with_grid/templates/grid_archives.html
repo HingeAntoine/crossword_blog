@@ -6,7 +6,7 @@
 {% for project in projects %}
   <li class="list-group-item" >
     <div>
-      <a href="{% url 'project_detail' project.pk %}">{{ project.title }} - Antoine HINGE</a>
+      <a href="{% url 'project_detail' project.pk %}">{{ project.title }} - Antoine HINGE - {{ project.date_created}}</a>
     </div>
   </li>
 {% endfor %}
