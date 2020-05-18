@@ -95,17 +95,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
     var template = '' +
 '<div class="cw-main auto normal">'+
-    '<div class="cw-open-holder">'+
-        '<div class="cw-overflow"></div>'+
-        '<div class="cw-open-puzzle">'+
-            '<div class="cw-text">Select puzzle</div>'+
-            '<div class="cw-puzzles-list"></div>'+
-            '<div class="cw-text">or</div>'+
-            '<div class="cw-open-button"></div>'+
-        '</div>'+
-        '<input type="file" class="cw-open-jpz" accept=".puz,.xml,.jpz">'+
-    '</div>'+
-    '<div class="cw-notepad-icon"><span class="cwtooltip">Notepad</span></div>'+
     '<div class="cw-settings-icon"><span class="cwtooltip">Settings</span></div>'+
     '<div class="cw-settings">'+
         '<div class="cw-settings-overflow"></div>'+
