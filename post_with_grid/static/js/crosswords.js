@@ -332,7 +332,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         this.hidden_input = this.root.find('input.cw-hidden-input');
 
-        this.reveal_button = $('#reveal-button')
         this.reveal_letter = $('#reveal-letter')
         this.reveal_word = $('#reveal-word')
         this.reveal_puzzle = $('#reveal-puzzle')
@@ -846,7 +845,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.clues_holder.undelegate('div.cw-clues-items span');
         this.canvas.off('mousemove click');
 
-        this.reveal_button.off('click mouseenter mouseleave');
         this.reveal_letter.off('click');
         this.reveal_word.off('click');
         this.reveal_puzzle.off('click');
@@ -891,9 +889,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.canvas.on('click', $.proxy(this.mouseClicked, this));
 
         // REVEAL
-        this.reveal_button.on('click', $.proxy(this.toggleReveal, this));
-        this.reveal_button.on('mouseenter', $.proxy(this.openReveal, this));
-        this.reveal_button.on('mouseleave', $.proxy(this.closeReveal, this));
         this.reveal_letter.on('click', $.proxy(this.check_reveal, this, 'letter', 'reveal'));
         this.reveal_word.on('click', $.proxy(this.check_reveal, this, 'word', 'reveal'));
         this.reveal_puzzle.on('click', $.proxy(this.check_reveal, this, 'puzzle', 'reveal'));
@@ -1655,18 +1650,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         e.stopPropagation();
     };
 
-    CrossWord.prototype.openReveal = function() {
-        this.reveal_button.addClass('open');
-    };
-
-    CrossWord.prototype.closeReveal = function() {
-        this.reveal_button.removeClass('open');
-    };
-
-    CrossWord.prototype.toggleReveal = function() {
-        this.reveal_button.toggleClass('open');
-    };
-
     CrossWord.prototype.openCheck = function() {
         this.check_button.addClass('open');
     };
@@ -1749,7 +1732,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.renderCells();
         if (reveal_or_check == 'reveal') {
             this.checkIfSolved();
-            this.closeReveal();
         }
         else {this.closeCheck();}
         this.hidden_input.focus();
