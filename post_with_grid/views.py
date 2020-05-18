@@ -3,7 +3,7 @@ from post_with_grid.models import Project
 
 
 def project_index(request):
-    projects = Project.objects.all()
+    projects = Project.objects.all().order_by('-date_created', '-title')
     context = {
         'projects': projects
     }
