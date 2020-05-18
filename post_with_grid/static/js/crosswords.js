@@ -107,7 +107,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         '<div class="cw-option cw-skip-filled"><label><input type="checkbox">Skip filled letters</label></div>'+
         '<button>Ok</button>'+
     '</div>'+
-    '<div class="cw-top-text"></div>'+
     '<div class="cw-full-height"></div>'+
     '<input type="text" class="cw-hidden-input">'+
     '<div class="cw-canvas">'+
