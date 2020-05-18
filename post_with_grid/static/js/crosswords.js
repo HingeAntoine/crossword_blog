@@ -336,7 +336,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.reveal_word = $('#reveal-word')
         this.reveal_puzzle = $('#reveal-puzzle')
 
-        this.check_button = $('#check-button')
         this.check_letter = $('#check-letter')
         this.check_word = $('#check-word')
         this.check_puzzle = $('#check-puzzle')
@@ -849,7 +848,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.reveal_word.off('click');
         this.reveal_puzzle.off('click');
 
-        this.check_button.off('click mouseenter mouseleave');
         this.check_letter.off('click');
         this.check_word.off('click');
         this.check_puzzle.off('click');
@@ -894,9 +892,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.reveal_puzzle.on('click', $.proxy(this.check_reveal, this, 'puzzle', 'reveal'));
 
         // CHECK
-        this.check_button.on('click', $.proxy(this.toggleCheck, this));
-        this.check_button.on('mouseenter', $.proxy(this.openCheck, this));
-        this.check_button.on('mouseleave', $.proxy(this.closeCheck, this));
         this.check_letter.on('click', $.proxy(this.check_reveal, this, 'letter', 'check'));
         this.check_word.on('click', $.proxy(this.check_reveal, this, 'word', 'check'));
         this.check_puzzle.on('click', $.proxy(this.check_reveal, this, 'puzzle', 'check'));
@@ -1648,18 +1643,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         e.preventDefault();
         e.stopPropagation();
-    };
-
-    CrossWord.prototype.openCheck = function() {
-        this.check_button.addClass('open');
-    };
-
-    CrossWord.prototype.closeCheck = function() {
-        this.check_button.removeClass('open');
-    };
-
-    CrossWord.prototype.toggleCheck = function() {
-        this.check_button.toggleClass('open');
     };
 
     CrossWord.prototype.openFile = function() {
