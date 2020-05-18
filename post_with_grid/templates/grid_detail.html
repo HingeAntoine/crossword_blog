@@ -12,6 +12,23 @@
 
 <div><h1>{{ project.title }}</h1></div>
 
+<div class="dropdown show">
+  <a class="btn btn-secondary dropdown-toggle"
+     href="#" role="button"
+     id="dropdownMenuLink"
+     data-toggle="dropdown"
+     aria-haspopup="true"
+     aria-expanded="false">
+    Révéler
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" id="reveal-letter">Lettre</a>
+    <a class="dropdown-item" id="reveal-word">Mot</a>
+    <a class="dropdown-item" id="reveal-puzzle">Grille</a>
+  </div>
+</div>
+
 <div>
     <div class="cw-right">
         <div class="cw-buttons-holder">
@@ -27,13 +44,6 @@
                     <div class="cw-button cw-check-letter">Letter</div>
                     <div class="cw-button cw-check-word">Word</div>
                     <div class="cw-button cw-check-puzzle">Puzzle</div>
-                </div>
-            </div>
-            <div class="cw-button cw-reveal" id="reveal-button">Reveal
-                <div class="cw-reveal-buttons">
-                    <div class="cw-button cw-reveal-letter" id="reveal-letter">Letter</div>
-                    <div class="cw-button cw-reveal-word" id="reveal-word">Word</div>
-                    <div class="cw-button cw-reveal-puzzle" id="reveal-puzzle">Puzzle</div>
                 </div>
             </div>
             <div class="cw-button cw-timer">00:00</div>
