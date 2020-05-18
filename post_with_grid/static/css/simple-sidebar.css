@@ -26,6 +26,13 @@ body {
   width: 15rem;
 }
 
+#sidebar-wrapper .list-group-item{
+  font-size: 1.25rem;
+  background-color: #ffc857;
+  color: #481d24;
+  font-weight: bold;
+}
+
 #page-content-wrapper {
   min-width: 100vw;
 }
