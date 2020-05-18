@@ -342,15 +342,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.check_word = $('#check-word')
         this.check_puzzle = $('#check-puzzle')
 
-//        this.check_button = this.root.find('div.cw-buttons-holder div.cw-check');
-//        this.check_letter = this.root.find('div.cw-buttons-holder div.cw-check-letter');
-//        this.check_word = this.root.find('div.cw-buttons-holder div.cw-check-word');
-//        this.check_puzzle = this.root.find('div.cw-buttons-holder div.cw-check-puzzle');
-
-        this.file_button = this.root.find('div.cw-buttons-holder div.cw-file');
-        this.save_btn = this.root.find('div.cw-buttons-holder div.cw-save');
-        this.load_btn = this.root.find('div.cw-buttons-holder div.cw-load');
-        this.print_btn = this.root.find('div.cw-buttons-holder div.cw-print');
+        this.file_button = $('#file-button')
+        this.save_btn = $('#file-save')
+        this.load_btn = $('#file-load')
+        this.print_btn = $('#file-pdf')
 
         this.timer_button = this.root.find('div.cw-buttons-holder div.cw-timer');
         
