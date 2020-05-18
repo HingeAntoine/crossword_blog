@@ -10,63 +10,60 @@
 <script src="{% static 'lib/zip/zip.js' %}"></script>
 <script src="{% static 'lib/jspdf.min.js' %}"></script>
 
-<div><h1>{{ project.title }}</h1></div>
+<div class="row">
+    <a class="col-sm-8"><h1>{{ project.title }}</h1></a>
 
-<div class="dropdown show">
-  <a class="btn btn-secondary dropdown-toggle"
-     role="button"
-     id="dropdownReveal"
-     data-toggle="dropdown"
-     aria-haspopup="true"
-     aria-expanded="false">
-    Révéler
-  </a>
 
-  <div class="dropdown-menu" aria-labelledby="dropdownReveal">
-    <a class="dropdown-item" id="reveal-letter">Lettre</a>
-    <a class="dropdown-item" id="reveal-word">Mot</a>
-    <a class="dropdown-item" id="reveal-puzzle">Grille</a>
-  </div>
-</div>
+    <div class="btn">00:00</div>
 
-<div class="dropdown show">
-  <a class="btn btn-secondary dropdown-toggle"
-     role="button"
-     id="dropdownCheck"
-     data-toggle="dropdown"
-     aria-haspopup="true"
-     aria-expanded="false">
-    Vérifier
-  </a>
+    <div class="dropdown show col-sm-1">
+        <a class="btn btn-secondary dropdown-toggle"
+           role="button"
+           id="dropdownReveal"
+           data-toggle="dropdown"
+           aria-haspopup="true"
+           aria-expanded="false">
+            Révéler
+        </a>
 
-  <div class="dropdown-menu" aria-labelledby="dropdownCheck">
-    <a class="dropdown-item" id="check-letter">Lettre</a>
-    <a class="dropdown-item" id="check-word">Mot</a>
-    <a class="dropdown-item" id="check-puzzle">Grille</a>
-  </div>
-</div>
+        <div class="dropdown-menu" aria-labelledby="dropdownReveal">
+            <a class="dropdown-item" id="reveal-letter">Lettre</a>
+            <a class="dropdown-item" id="reveal-word">Mot</a>
+            <a class="dropdown-item" id="reveal-puzzle">Grille</a>
+        </div>
+    </div>
 
-<div class="dropdown show">
-  <a class="btn btn-secondary dropdown-toggle"
-     role="button"
-     id="dropdownFichier"
-     data-toggle="dropdown"
-     aria-haspopup="true"
-     aria-expanded="false">
-    Fichier
-  </a>
+    <div class="dropdown show col-sm-1">
+        <a class="btn btn-secondary dropdown-toggle"
+           role="button"
+           id="dropdownCheck"
+           data-toggle="dropdown"
+           aria-haspopup="true"
+           aria-expanded="false">
+            Vérifier
+        </a>
 
-  <div class="dropdown-menu" aria-labelledby="dropdownFichier">
-    <a class="dropdown-item" id="file-save">Sauver</a>
-    <a class="dropdown-item" id="file-load">Charger</a>
-    <a class="dropdown-item" id="file-pdf">Pdf</a>
-  </div>
-</div>
+        <div class="dropdown-menu" aria-labelledby="dropdownCheck">
+            <a class="dropdown-item" id="check-letter">Lettre</a>
+            <a class="dropdown-item" id="check-word">Mot</a>
+            <a class="dropdown-item" id="check-puzzle">Grille</a>
+        </div>
+    </div>
 
-<div>
-    <div class="cw-right">
-        <div class="cw-buttons-holder">
-            <div class="cw-button cw-timer">00:00</div>
+    <div class="dropdown show col-sm-1">
+        <a class="btn btn-secondary dropdown-toggle"
+           role="button"
+           id="dropdownFichier"
+           data-toggle="dropdown"
+           aria-haspopup="true"
+           aria-expanded="false">
+            Fichier
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownFichier">
+            <a class="dropdown-item" id="file-save">Sauver</a>
+            <a class="dropdown-item" id="file-load">Charger</a>
+            <a class="dropdown-item" id="file-pdf">Pdf</a>
         </div>
     </div>
 </div>
@@ -87,5 +84,6 @@
 	    };
 		CrosswordNexus.createCrossword($('div.crossword'), params1);
 	})();
+
 </script>
 {% endblock %}
