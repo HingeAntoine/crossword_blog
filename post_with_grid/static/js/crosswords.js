@@ -345,7 +345,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.load_btn = $('#file-load')
         this.print_btn = $('#file-pdf')
 
-        this.timer_button = this.root.find('div.cw-buttons-holder div.cw-timer');
+        this.timer_button = $('#timer-button')
         
         // function to process uploaded files
         function processFiles(files) {
