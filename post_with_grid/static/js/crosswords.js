@@ -332,10 +332,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         this.hidden_input = this.root.find('input.cw-hidden-input');
 
-        this.reveal_button = this.root.find('div.cw-buttons-holder div.cw-reveal');
-        this.reveal_letter = this.root.find('div.cw-buttons-holder div.cw-reveal-letter');
-        this.reveal_word = this.root.find('div.cw-buttons-holder div.cw-reveal-word');
-        this.reveal_puzzle = this.root.find('div.cw-buttons-holder div.cw-reveal-puzzle');
+        this.reveal_button = $('#reveal-button')
+        this.reveal_letter = $('#reveal-letter')
+        this.reveal_word = $('#reveal-word')
+        this.reveal_puzzle = $('#reveal-puzzle')
 
         this.check_button = this.root.find('div.cw-buttons-holder div.cw-check');
         this.check_letter = this.root.find('div.cw-buttons-holder div.cw-check-letter');
