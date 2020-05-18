@@ -96,7 +96,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     var template = '' +
     '<div class="cw-main auto normal">'+
         '<div class="cw-full-height"></div>'+
-        '<input type="text" class="cw-hidden-input">'+
+        '<input type="text" class="cw-hidden-input"' +
+        ' style="opacity: 0; position: fixed; top: -100px; left: -100px; width: 0; height: 0; z-index: -1;">'+
         '<div class="row">' +
             '<div class="cw-canvas col-lg-8">'+
                 '<canvas></canvas>'+
