@@ -94,51 +94,25 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     var xw_timer, xw_timer_seconds = 0;
 
     var template = '' +
-'<div class="cw-main auto normal">'+
-    '<div class="cw-full-height"></div>'+
-    '<input type="text" class="cw-hidden-input">'+
-    '<div class="row">' +
-        '<div class="cw-canvas col-lg-8">'+
-            '<canvas></canvas>'+
-        '</div>'+
-         '<div class="cw-clues-holder col-lg-4">'+
-            '<div class="cw-clues cw-clues-top">'+
-                '<div class="cw-clues-title"></div>'+
-                '<div class="cw-clues-items"></div>'+
+    '<div class="cw-main auto normal">'+
+        '<div class="cw-full-height"></div>'+
+        '<input type="text" class="cw-hidden-input">'+
+        '<div class="row">' +
+            '<div class="cw-canvas col-lg-8">'+
+                '<canvas></canvas>'+
             '</div>'+
-            '<div class="cw-clues cw-clues-bottom">'+
-                '<div class="cw-clues-title"></div>'+
-                '<div class="cw-clues-items"></div>'+
-            '</div>'+
-        '</div>'+
-    '</div>'+
-    '<div class="cw-right">'+
-        '<div class="cw-buttons-holder">'+
-            '<div class="cw-button cw-file">File'+
-                '<div class="cw-file-buttons">'+
-                    '<div class="cw-button cw-save">Save</div>'+
-                    '<div class="cw-button cw-load">Load</div>'+
-                    '<div class="cw-button cw-print">Print</div>'+
+             '<div class="cw-clues-holder col-lg-4">'+
+                '<div class="cw-clues cw-clues-top">'+
+                    '<div class="cw-clues-title"></div>'+
+                    '<div class="cw-clues-items"></div>'+
+                '</div>'+
+                '<div class="cw-clues cw-clues-bottom">'+
+                    '<div class="cw-clues-title"></div>'+
+                    '<div class="cw-clues-items"></div>'+
                 '</div>'+
             '</div>'+
-            '<div class="cw-button cw-check">Check'+
-                '<div class="cw-check-buttons">'+
-                    '<div class="cw-button cw-check-letter">Letter</div>'+
-                    '<div class="cw-button cw-check-word">Word</div>'+
-                    '<div class="cw-button cw-check-puzzle">Puzzle</div>'+
-                '</div>'+
-            '</div>'+
-            '<div class="cw-button cw-reveal">Reveal'+
-                '<div class="cw-reveal-buttons">'+
-                    '<div class="cw-button cw-reveal-letter">Letter</div>'+
-                    '<div class="cw-button cw-reveal-word">Word</div>'+
-                    '<div class="cw-button cw-reveal-puzzle">Puzzle</div>'+
-                '</div>'+
-            '</div>'+
-            '<div class="cw-button cw-timer">00:00</div>'+
         '</div>'+
-    '</div>'+
-'</div>';
+    '</div>';
 
     // returns deferred object
     function loadFileFromServer(path, type) {
