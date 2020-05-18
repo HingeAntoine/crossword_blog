@@ -109,10 +109,21 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     '</div>'+
     '<div class="cw-full-height"></div>'+
     '<input type="text" class="cw-hidden-input">'+
-    '<div class="cw-canvas">'+
-        '<canvas></canvas>'+
+    '<div class="row">' +
+        '<div class="cw-canvas col-lg-8">'+
+            '<canvas></canvas>'+
+        '</div>'+
+         '<div class="cw-clues-holder col-lg-4">'+
+            '<div class="cw-clues cw-clues-top">'+
+                '<div class="cw-clues-title"></div>'+
+                '<div class="cw-clues-items"></div>'+
+            '</div>'+
+            '<div class="cw-clues cw-clues-bottom">'+
+                '<div class="cw-clues-title"></div>'+
+                '<div class="cw-clues-items"></div>'+
+            '</div>'+
+        '</div>'+
     '</div>'+
-    '<div class="cw-bottom-text"></div>'+
     '<div class="cw-right">'+
         '<div class="cw-buttons-holder">'+
             '<div class="cw-button cw-file">File'+
@@ -137,16 +148,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                 '</div>'+
             '</div>'+
             '<div class="cw-button cw-timer">00:00</div>'+
-        '</div>'+
-        '<div class="cw-clues-holder">'+
-            '<div class="cw-clues cw-clues-top">'+
-                '<div class="cw-clues-title"></div>'+
-                '<div class="cw-clues-items"></div>'+
-            '</div>'+
-            '<div class="cw-clues cw-clues-bottom">'+
-                '<div class="cw-clues-title"></div>'+
-                '<div class="cw-clues-items"></div>'+
-            '</div>'+
         '</div>'+
     '</div>'+
 '</div>';
