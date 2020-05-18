@@ -95,18 +95,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
     var template = '' +
 '<div class="cw-main auto normal">'+
-    '<div class="cw-settings-icon"><span class="cwtooltip">Settings</span></div>'+
-    '<div class="cw-settings">'+
-        '<div class="cw-settings-overflow"></div>'+
-        '<div class="cw-settings-background"></div>'+
-        '<div class="cw-option cw-color-hover"><span class="cw-option-text">Hovered</span><input class="cw-input-color" type="text"><span class="cw-color-preview"></span></div>'+
-        '<div class="cw-option cw-color-selected"><span class="cw-option-text">Selected</span><input class="cw-input-color" type="text"><span class="cw-color-preview"></span></div>'+
-        '<div class="cw-option cw-color-word"><span class="cw-option-text">Word</span><input class="cw-input-color" type="text"><span class="cw-color-preview"></span></div>'+
-        '<div class="cw-option cw-color-hilite"><span class="cw-option-text">Hilite</span><input class="cw-input-color" type="text"><span class="cw-color-preview"></span></div>'+
-        '<div class="cw-option cw-cell-size"><span class="cw-option-text">Size</span><input class="cw-input-size" type="text"><label><input type="checkbox">Auto</label></div>'+
-        '<div class="cw-option cw-skip-filled"><label><input type="checkbox">Skip filled letters</label></div>'+
-        '<button>Ok</button>'+
-    '</div>'+
     '<div class="cw-full-height"></div>'+
     '<input type="text" class="cw-hidden-input">'+
     '<div class="row">' +
