@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block page_content %}
-<link href="{% static 'css/crosswordnexus.css' %}" rel="stylesheet">
+<!--<link href="{% static 'css/crosswordnexus.css' %}" rel="stylesheet">-->
 <script type="text/javascript" src="{% static 'js/crosswords.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/puz.js' %}"></script>
 
@@ -10,18 +10,11 @@
 <script src="{% static 'lib/zip/zip.js' %}"></script>
 <script src="{% static 'lib/jspdf.min.js' %}"></script>
 
-<div class="container">
-    <div class="row" style="height:80%">
-        <div class="col-md-2">
-            <h1>{{ project.title }}</h1>
-            <p>{{ project.description }}</p>
-            <br>
-        </div>
-        <div class="col-md-8">
-            <div class="crossword"></div>
-        </div>
-    </div>
-</div>
+<div><h1>{{ project.title }}</h1></div>
+
+<div class="crossword"></div>
+
+<p>{{ project.description }}</p>
 
 <script>
 	(function(){
