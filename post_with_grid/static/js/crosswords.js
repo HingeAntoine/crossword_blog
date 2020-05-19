@@ -345,61 +345,14 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                     loaded_callback = parsePUZ_callback;
             }
             loadFileFromServer(this.config.puzzle_file.url, this.config.puzzle_file.type).then(loaded_callback, error_callback);
-        } else { // shows open button and, optionally, list of available puzzles
-            var i, puzzle_file, el,
-                puzzles_holder = this.root.find('div.cw-open-puzzle'),
-                puzzles_list = this.root.find('div.cw-puzzles-list'),
-                puzzles_count = 0;
-                
-            // render list of puzzle files
-            if (this.config.puzzles && this.config.puzzles.length) {
-                for(i=0; puzzle_file = this.config.puzzles[i]; i++) {
-                    el = $('<span>'+puzzle_file.name+'</span>');
-                    el.data('url', puzzle_file.url);
-                    el.data('type', puzzle_file.type);
-                    puzzles_list.append(el);
-                    puzzles_count++;
-                }
-            }
-            if (!puzzles_count) {
-                puzzles_holder.addClass('empty');
-            } else {
-                puzzles_holder.delegate('div.cw-puzzles-list span', 'click', function(e) {
-                    var target = $(e.currentTarget),
-                        url = target.data('url'),
-                        type = target.data('type'),
-                        callback;
-                    if (type === FILE_JPZ) {
-                        callback = parseJPZ_callback;
-                    } else if (type === FILE_PUZ) {
-                        callback = parsePUZ_callback;
-                    }
-
-                    if (callback) {
-                        loadFileFromServer(url, type).then(callback, error_callback);
-                    }
-                });
-            }
-            this.open_button = this.root.find('div.cw-open-button');
-            this.file_input = this.root.find('input[type="file"]');
-
-            this.open_button.on('click', function(e) {
-                this.file_input.click();
-            }.bind(this));
-
-            this.file_input.on('change', function() {
-                var files = this.file_input[0].files.length ? this.file_input[0].files: null;
-                if (files) {
-                    processFiles(files);
-                }
-            }.bind(this));
-
         }
-        
+
         // mapping of number to cells
         this.number_to_cells = {};
+
         // the crossword type
         this.crossword_type = 'crossword';
+
         // whether the puzzle is autofill
         this.is_autofill = false;
 

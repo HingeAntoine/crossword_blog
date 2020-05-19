@@ -10,67 +10,72 @@
 <script src="{% static 'lib/zip/zip.js' %}"></script>
 <script src="{% static 'lib/jspdf.min.js' %}"></script>
 
+<!-- TOP BAR: Title and buttons-->
 <div class="row mt-2">
     <a class="col-sm-6"><h1>{{ project.title }}</h1></a>
 
-        <div class="span1 px-1">
-        <p><button type="button" class="btn btn-secondary btn-warning px-1" id="timer-button">Lancer le chrono</button></p>
+    <div class="span1 px-1">
+        <p>
+            <button type="button" class="btn btn-secondary btn-warning px-1" id="timer-button">Lancer le chrono</button>
+        </p>
+    </div>
+
+    <div class="dropdown px-1">
+        <a class="btn btn-secondary btn-warning dropdown-toggle"
+           role="button"
+           id="dropdownReveal"
+           data-toggle="dropdown"
+           aria-haspopup="true"
+           aria-expanded="false">
+            Révéler
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownReveal">
+            <a class="dropdown-item" id="reveal-letter">Lettre</a>
+            <a class="dropdown-item" id="reveal-word">Mot</a>
+            <a class="dropdown-item" id="reveal-puzzle">Grille</a>
         </div>
+    </div>
 
-        <div class="dropdown px-1">
-            <a class="btn btn-secondary btn-warning dropdown-toggle"
-               role="button"
-               id="dropdownReveal"
-               data-toggle="dropdown"
-               aria-haspopup="true"
-               aria-expanded="false">
-                Révéler
-            </a>
+    <div class="dropdown px-1">
+        <a class="btn btn-secondary btn-warning dropdown-toggle"
+           role="button"
+           id="dropdownCheck"
+           data-toggle="dropdown"
+           aria-haspopup="true"
+           aria-expanded="false">
+            Vérifier
+        </a>
 
-            <div class="dropdown-menu" aria-labelledby="dropdownReveal">
-                <a class="dropdown-item" id="reveal-letter">Lettre</a>
-                <a class="dropdown-item" id="reveal-word">Mot</a>
-                <a class="dropdown-item" id="reveal-puzzle">Grille</a>
-            </div>
+        <div class="dropdown-menu" aria-labelledby="dropdownCheck">
+            <a class="dropdown-item" id="check-letter">Lettre</a>
+            <a class="dropdown-item" id="check-word">Mot</a>
+            <a class="dropdown-item" id="check-puzzle">Grille</a>
         </div>
+    </div>
 
-        <div class="dropdown px-1">
-            <a class="btn btn-secondary btn-warning dropdown-toggle"
-               role="button"
-               id="dropdownCheck"
-               data-toggle="dropdown"
-               aria-haspopup="true"
-               aria-expanded="false">
-                Vérifier
-            </a>
+    <div class="dropdown px-1">
+        <a class="btn btn-secondary btn-warning dropdown-toggle"
+           role="button"
+           id="dropdownFichier"
+           data-toggle="dropdown"
+           aria-haspopup="true"
+           aria-expanded="false">
+            Fichier
+        </a>
 
-            <div class="dropdown-menu" aria-labelledby="dropdownCheck">
-                <a class="dropdown-item" id="check-letter">Lettre</a>
-                <a class="dropdown-item" id="check-word">Mot</a>
-                <a class="dropdown-item" id="check-puzzle">Grille</a>
-            </div>
+        <div class="dropdown-menu" aria-labelledby="dropdownFichier">
+            <a class="dropdown-item" id="file-save">Sauver</a>
+            <a class="dropdown-item" id="file-load">Charger</a>
+            <a class="dropdown-item" id="file-pdf">Pdf</a>
         </div>
-
-        <div class="dropdown px-1">
-            <a class="btn btn-secondary btn-warning dropdown-toggle"
-               role="button"
-               id="dropdownFichier"
-               data-toggle="dropdown"
-               aria-haspopup="true"
-               aria-expanded="false">
-                Fichier
-            </a>
-
-            <div class="dropdown-menu" aria-labelledby="dropdownFichier">
-                <a class="dropdown-item" id="file-save">Sauver</a>
-                <a class="dropdown-item" id="file-load">Charger</a>
-                <a class="dropdown-item" id="file-pdf">Pdf</a>
-            </div>
-        </div>
+    </div>
 </div>
 
+<!-- CLUE ZOOM-->
 <h4 class="row mt-2 px-2" id="cw-top-text"></h4>
 
+<!-- GRID AND CLUE LIST -->
 <div class="crossword mt-2">
     <div class="cw-main auto normal">
         <div class="cw-full-height"></div>
@@ -94,18 +99,17 @@
 </div>
 
 <script>
-	(function(){
-	    var params1 = {
-	      hover_enabled: false,
-	      settings_enabled: false,
-	      color_selected: '#FF0000',
-	      color_word: '#FFFF00',
-		  savegame_name: 'puzzle1',
-		  puzzle_file: {url: '{% static project.grid_path %}', type: 'puz'}
-	    };
-		CrosswordNexus.createCrossword($('div.crossword'), params1);
-	})();
-
+(function(){
+    var params1 = {
+      hover_enabled: false,
+      settings_enabled: false,
+      color_selected: '#FF0000',
+      color_word: '#FFFF00',
+      savegame_name: 'puzzle1',
+      puzzle_file: {url: '{% static project.grid_path %}', type: 'puz'}
+    };
+    CrosswordNexus.createCrossword($('div.crossword'), params1);
+})();
 
 </script>
 {% endblock %}
