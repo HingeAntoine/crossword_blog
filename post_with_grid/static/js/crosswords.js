@@ -450,11 +450,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         var x, y;
 
         if (Number(this.config.cell_size) === 0) {
-            var max_height, max_width;
             this.root.removeClass('fixed');
             this.root.addClass('auto');
-            max_height = this.root.height() - (this.top_text_height+this.bottom_text_height) - 6;
-            max_width = this.root.width() - 16;
+            var max_height = this.canvas_holder.height();
+            var max_width = this.canvas_holder.width();
             this.cell_size = Math.min(
               Math.floor(max_height/this.grid_height),
               Math.floor(max_width/this.grid_width)
