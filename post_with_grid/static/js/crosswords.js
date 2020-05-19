@@ -312,9 +312,9 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.top_text = this.root.find('div.cw-top-text');
         this.bottom_text = this.root.find('div.cw-bottom-text');
 
-        this.clues_holder = this.root.find('div.cw-clues-holder');
-        this.clues_top_container = this.root.find('div.cw-clues-top');
-        this.clues_bottom_container = this.root.find('div.cw-clues-bottom');
+        this.clues_holder = $('#cw-clues-holder'); //this.root.find('div.cw-clues-holder');
+        this.clues_top_container = $('#cw-clues-top'); //this.root.find('div.cw-clues-top');
+        this.clues_bottom_container = $('#cw-clues-bottom'); //this.root.find('div.cw-clues-bottom');
 
         this.canvas_holder = $('#cw-canvas-holder'); //this.root.find('div.cw-canvas');
         this.canvas = $('#cw-canvas'); //this.root.find('canvas');
@@ -518,7 +518,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         });
         this.clues_top = new CluesGroup(this, {
             id: CLUES_TOP,
-            title: "<b>Across</b>",
+            title: "<b>Horizontalement</b>",
             clues: acrossClueList,
             words_ids: Object.keys(puzzle.across_clues).map(function(key) {
                 return (acrossClueWordIdBase + parseInt(key)).toString();
@@ -533,7 +533,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         });
         this.clues_bottom = new CluesGroup(this, {
             id: CLUES_BOTTOM,
-            title: "<b>Down</b>",
+            title: "<b>Verticalement</b>",
             clues: downClueList,
             words_ids: Object.keys(puzzle.down_clues).map(function(key) {
                 return (downClueWordIdBase + parseInt(key)).toString();
