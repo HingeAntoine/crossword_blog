@@ -351,9 +351,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         // the crossword type
         this.crossword_type = 'crossword';
 
-        // whether the puzzle is autofill
-        this.is_autofill = false;
-
         this.root.appendTo(this.parent);
     };
 
@@ -501,11 +498,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                 break;
             }
         }
-        // determine whether we should autofill
-        if (this.crossword_type == 'acrostic' || this.crossword_type == 'coded') {
-            this.is_autofill = true;
-        }
-        
+
         if (!crossword.length) {
             this.error(ERR_NOT_CROSSWORD);
             return;
@@ -1136,7 +1129,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                 if (this.selected_cell && this.selected_word) {
                     this.selected_cell.letter = "";
                     this.selected_cell.checked = false;
-                    this.autofill();
                     var next_cell = this.selected_word.getNextCell(this.selected_cell.x, this.selected_cell.y);
                     this.setActiveCell(next_cell);
                 }
@@ -1158,7 +1150,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                 if (this.selected_cell) {
                     this.selected_cell.letter = "";
                     this.selected_cell.checked = false;
-                    this.autofill();
                 }
                 this.renderCells();
                 break;
@@ -1166,7 +1157,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                 if (this.selected_cell && this.selected_word) {
                     this.selected_cell.letter = "";
                     this.selected_cell.checked = false;
-                    this.autofill();
                     var prev_cell = this.selected_word.getPreviousCell(this.selected_cell.x, this.selected_cell.y);
                     this.setActiveCell(prev_cell);
                 }
@@ -1193,18 +1183,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         }
     };
     
-    CrossWord.prototype.autofill = function() {
-        if (this.is_autofill) {
-            var my_number = this.selected_cell.number;
-            var same_number_cells = this.number_to_cells[my_number] || [];
-            for (var my_cell of same_number_cells) {
-                var cell = this.cells[my_cell.x][my_cell.y];
-                cell.letter = this.selected_cell.letter;
-                cell.checked = this.selected_cell.checked;
-            }
-        }
-    }
-
     // Detects user inputs to hidden input element
     CrossWord.prototype.hiddenInputChanged = function(rebus_string) {
         var mychar = this.hidden_input.val().slice(0, 1).toUpperCase(),
@@ -1217,11 +1195,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                 this.selected_cell.letter = rebus_string.toUpperCase();
             }
             this.selected_cell.checked = false;
-            
-            // If this is a coded or acrostic
-            // find all cells with this number 
-            // and fill them with the same letter
-            this.autofill();
             
             // find empty cell, then next cell
             // Change this depending on config
@@ -1437,19 +1410,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                     }
                 }
                 break;
-        }
-        
-        // check and reveal also other numbers if autofill is on
-        if (this.is_autofill) {
-            var my_cells_length = my_cells.length;
-            for (var i=0; i<my_cells_length; i++) {
-                var my_number = my_cells[i].number;
-                if (my_number === null) {continue;}
-                var other_cells = this.number_to_cells[my_number] || [];
-                for (var other_cell of other_cells) {
-                    my_cells.push(this.cells[other_cell.x][other_cell.y]);
-                }
-            }
         }
         
         for (var i = 0; i < my_cells.length; i++) {
