@@ -315,8 +315,9 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.clues_holder = this.root.find('div.cw-clues-holder');
         this.clues_top_container = this.root.find('div.cw-clues-top');
         this.clues_bottom_container = this.root.find('div.cw-clues-bottom');
-        this.canvas_holder = this.root.find('div.cw-canvas');
-        this.canvas = this.root.find('canvas');
+
+        this.canvas_holder = $('#cw-canvas-holder'); //this.root.find('div.cw-canvas');
+        this.canvas = $('#cw-canvas'); //this.root.find('canvas');
         this.context = this.canvas[0].getContext('2d');
 
         this.settings_icon = this.root.find('div.cw-settings-icon');
