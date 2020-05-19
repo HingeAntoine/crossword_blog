@@ -68,8 +68,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     var MAX_CLUES_LENGTH = 2;
 
     var TYPE_UNDEFINED = typeof undefined;
-    var XMLDOM_ELEMENT = 1;
-    var XMLDOM_TEXT = 3;
     var ZIPJS_CONFIG_OPTION = 'zipjs_path';
     var ZIPJS_PATH = 'lib/zip';
 
@@ -85,8 +83,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
     var load_error = false;
 
-    var CROSSWORD_TYPES = ['crossword', 'coded', 'acrostic'];
-    
     var xw_timer, xw_timer_seconds = 0;
 
     var template = '' +
@@ -195,8 +191,9 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     var CrossWord = function(parent, user_config) {
         this.parent = parent;
         this.config = {};
-            // Load solver config
-            var solver_config_name = SETTINGS_STORAGE_KEY;
+
+        // Load solver config
+        var solver_config_name = SETTINGS_STORAGE_KEY;
         var saved_settings = JSON.parse(localStorage.getItem(solver_config_name));
         var i;
         for (i in default_config) {
@@ -451,7 +448,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.setActiveWord(first_word);
         this.setActiveCell(first_word.getFirstCell());
 
-        this.adjustPaddings();
         this.renderCells();
     }
 
@@ -597,8 +593,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     // Clears canvas and re-renders all cells
     CrossWord.prototype.renderCells = function() {
         var x, y;
-
-        this.adjustSize();
 
         if (Number(this.config.cell_size) === 0) {
             var max_height, max_width;
@@ -761,34 +755,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                 }
             }
         }
-    };
-
-    CrossWord.prototype.adjustSize = function() {
-        //var size = Math.min(this.root.outerWidth(true), 1.5 * this.root.outerHeight(true));
-        var size = this.root.outerWidth(true);
-        if (size >= BIG_THRESHOLD && !this.root.hasClass(SIZE_BIG)) {
-            this.root.addClass(SIZE_BIG);
-            this.root.removeClass(SIZE_NORMAL+' '+SIZE_SMALL+' '+SIZE_TINY);
-            this.adjustPaddings();
-        } else if (size < BIG_THRESHOLD && size >= NORMAL_THRESHOLD && !this.root.hasClass(SIZE_NORMAL)) {
-            this.root.addClass(SIZE_NORMAL);
-            this.root.removeClass(SIZE_BIG+' '+SIZE_SMALL+' '+SIZE_TINY);
-            this.adjustPaddings();
-        } else if (size < NORMAL_THRESHOLD && size >= SMALL_THRESHOLD && !this.root.hasClass(SIZE_SMALL)) {
-            this.root.addClass(SIZE_SMALL);
-            this.root.removeClass(SIZE_BIG+' '+SIZE_NORMAL+' '+SIZE_TINY);
-            this.adjustPaddings();
-        } else if (size < SMALL_THRESHOLD && size < SMALL_THRESHOLD && !this.root.hasClass(SIZE_TINY)) {
-            this.root.addClass(SIZE_TINY);
-            this.root.removeClass(SIZE_BIG+' '+SIZE_NORMAL+' '+SIZE_SMALL);
-            this.adjustPaddings();
-        }
-    };
-
-    CrossWord.prototype.adjustPaddings = function() {
-        this.top_text_height = this.top_text.outerHeight(true);
-        this.bottom_text_height = this.bottom_text.outerHeight(true);
-        this.canvas_holder.css({'padding-top': this.top_text_height, 'padding-bottom': this.bottom_text_height});
     };
 
     CrossWord.prototype.mouseMoved = function(e) {
