@@ -309,7 +309,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         // build structures
         this.root = $(template);
-        this.top_text = this.root.find('div.cw-top-text');
+        this.top_text = $('#cw-top-text');
         this.bottom_text = this.root.find('div.cw-bottom-text');
 
         this.clues_holder = $('#cw-clues-holder'); //this.root.find('div.cw-clues-holder');
