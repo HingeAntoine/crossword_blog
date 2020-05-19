@@ -25,7 +25,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
     var default_config = {
         hover_enabled: false,
-        settings_enabled: true,
         color_hover: "#FFFFAA",
         color_selected: "#FF0000",
         color_word: "#FFFF00",
@@ -286,7 +285,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.selected_word = null;
         this.hilited_word = null;
         this.selected_cell = null;
-        this.settings_open = false;
+
         // TIMER
         this.timer_running = false;
         
@@ -319,16 +318,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.canvas_holder = $('#cw-canvas-holder'); //this.root.find('div.cw-canvas');
         this.canvas = $('#cw-canvas'); //this.root.find('canvas');
         this.context = this.canvas[0].getContext('2d');
-
-        this.settings_icon = this.root.find('div.cw-settings-icon');
-        this.settings = this.root.find('div.cw-settings');
-        if (this.config.settings_enabled) {
-            this.settings_overflow = this.root.find('div.cw-settings-overflow');
-            this.settings_submit = this.root.find('div.cw-settings button');
-        } else {
-            this.settings_icon.remove();
-            this.settings.remove();
-        }
 
         this.notepad_icon = this.root.find('div.cw-notepad-icon');
 
@@ -618,7 +607,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             return;
         }
 
-
         // Check for applet settings
         var applet_settings = xmlDoc.getElementsByTagName('applet-settings');
 
@@ -859,15 +847,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         this.timer_button.off('click');
 
-        if (this.config.settings_enabled) {
-            this.settings_icon.off('click');
-            this.settings_overflow.off('click');
-            this.settings_submit.off('click');
-
-            this.settings.undelegate('div.cw-option input.cw-input-color');
-            this.settings.undelegate('div.cw-cell-size input[type=checkbox]');
-        }
-
         this.notepad_icon.off('click');
 
         this.hidden_input.off('input');
@@ -903,15 +882,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         // TIMER
         this.timer_button.on('click', $.proxy(this.toggleTimer, this));
-
-        if (this.config.settings_enabled) {
-            this.settings_icon.on('click', $.proxy(this.openSettings, this));
-            this.settings_overflow.on('click', $.proxy(this.closeSettings, this));
-            this.settings_submit.on('click', $.proxy(this.saveSettings, this));
-
-            this.settings.delegate('div.cw-option input.cw-input-color', 'input', $.proxy(this.settingChanged, this));
-            this.settings.delegate('div.cw-cell-size input[type=checkbox]', 'change', $.proxy(this.settingSizeAuto, this));
-        }
 
         // NOTEPAD
         if (this.notepad) {
@@ -1224,7 +1194,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     };
 
     CrossWord.prototype.keyPressed = function(e) {
-        if (this.settings_open) { return; }
         var prevent = [35, 36, 37, 38, 39, 40, 32, 46, 8, 9, 13].indexOf(e.keyCode) >= 0; // to prevent event propagation for specified keys
         switch (e.keyCode) {
             case 35: // end
@@ -1541,106 +1510,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     CrossWord.prototype.showNotepad = function() {
         alert(this.notepad);
     }
-
-    CrossWord.prototype.openSettings = function() {
-        this.settings.addClass('open');
-
-        this.settings.find('div.cw-color-hover input').val(this.config.color_hover);
-        this.settings.find('div.cw-color-hover span.cw-color-preview').css({background: this.config.color_hover});
-
-        this.settings.find('div.cw-color-selected input').val(this.config.color_selected);
-        this.settings.find('div.cw-color-selected span.cw-color-preview').css({background: this.config.color_selected});
-
-        this.settings.find('div.cw-color-word input').val(this.config.color_word);
-        this.settings.find('div.cw-color-word span.cw-color-preview').css({background: this.config.color_word});
-
-        this.settings.find('div.cw-color-hilite input').val(this.config.color_hilite);
-        this.settings.find('div.cw-color-hilite span.cw-color-preview').css({background: this.config.color_hilite});
-
-        if (!this.config.cell_size) {
-            this.settings.find('div.cw-cell-size input[type=text]').prop('disabled', true);
-            this.settings.find('div.cw-cell-size input[type=checkbox]').prop('checked', true);
-        } else {
-            this.settings.find('div.cw-cell-size input[type=text]').removeAttr('disabled');
-            this.settings.find('div.cw-cell-size input[type=text]').val(this.config.cell_size);
-            this.settings.find('div.cw-cell-size input[type=checkbox]').prop('checked', false);
-        }
-
-        this.settings.find('div.cw-skip-filled input[type=checkbox]').prop('checked',this.config.skip_filled_letters);
-
-        this.settings_open = true;
-    };
-
-    CrossWord.prototype.closeSettings = function() {
-            // Save the settings
-            // We don't do this for now: it was causing problems
-            // Instead just save an empty element
-            var saveconfig_name = SETTINGS_STORAGE_KEY;
-        localStorage.setItem(saveconfig_name, '{}');
-        this.settings.removeClass('open');
-        this.settings_open = false;
-            this.hidden_input.focus();
-    };
-
-    CrossWord.prototype.settingChanged = function(e) {
-        var target = $(e.currentTarget),
-            value = target.val();
-        if (value.match(/#[0-9a-fA-F]{6}/)) {
-            target.siblings('span.cw-color-preview').css({background: value});
-        }
-    };
-
-    CrossWord.prototype.settingSizeAuto = function(e) {
-        var target = $(e.currentTarget),
-            input = target.parent().siblings('input.cw-input-size');
-        if (target.prop('checked')) {
-            input.prop('disabled', true);
-            input.val('');
-        } else {
-            input.removeAttr('disabled');
-        }
-    };
-
-    CrossWord.prototype.saveSettings = function(e) {
-        var value;
-
-        value = this.settings.find('div.cw-color-hover input').val();
-        if (value.match(/#[0-9a-fA-F]{6}/)) {
-            this.config.color_hover = value;
-        }
-
-        value = this.settings.find('div.cw-color-selected input').val();
-        if (value.match(/#[0-9a-fA-F]{6}/)) {
-            this.config.color_selected = value;
-        }
-
-        value = this.settings.find('div.cw-color-word input').val();
-        if (value.match(/#[0-9a-fA-F]{6}/)) {
-            this.config.color_word = value;
-        }
-
-        value = this.settings.find('div.cw-color-hilite input').val();
-        if (value.match(/#[0-9a-fA-F]{6}/)) {
-            this.config.color_hilite = value;
-        }
-
-        value = this.settings.find('div.cw-cell-size input[type=checkbox]').prop('checked');
-        if (value) {
-            this.config.cell_size = null;
-        } else {
-            value = this.settings.find('div.cw-cell-size input.cw-input-size').val();
-            this.config.cell_size = Math.max(MIN_SIZE, Math.min(MAX_SIZE, Number(value)));
-        }
-
-        this.config.skip_filled_letters = this.settings.find('div.cw-skip-filled input[type=checkbox]').prop('checked');
-
-        this.closeSettings();
-        this.renderCells();
-        this.hidden_input.focus();
-
-        e.preventDefault();
-        e.stopPropagation();
-    };
 
     CrossWord.prototype.check_reveal = function(to_solve, reveal_or_check, e) {
         var my_cells = [], cell;
