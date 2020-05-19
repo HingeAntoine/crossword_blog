@@ -98,18 +98,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         '<input type="text" class="cw-hidden-input"' +
         ' style="opacity: 0; position: fixed; top: -100px; left: -100px; width: 0; height: 0; z-index: -1;">'+
         '<div class="row">' +
-            '<div class="cw-canvas col-lg-8">'+
+            '<div class="cw-canvas col-xl-8">'+
                 '<canvas></canvas>'+
-            '</div>'+
-             '<div class="cw-clues-holder col-lg-4">'+
-                '<div class="cw-clues cw-clues-top">'+
-                    '<div class="cw-clues-title"></div>'+
-                    '<div class="cw-clues-items"></div>'+
-                '</div>'+
-                '<div class="cw-clues cw-clues-bottom">'+
-                    '<div class="cw-clues-title"></div>'+
-                    '<div class="cw-clues-items"></div>'+
-                '</div>'+
             '</div>'+
         '</div>'+
     '</div>';
@@ -309,7 +299,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         // build structures
         this.root = $(template);
         this.top_text = $('#cw-top-text');
-        this.bottom_text = this.root.find('div.cw-bottom-text');
+        this.bottom_text = this.root.find('div.cw-bottom-text'); // TODO: Remove bottom text
 
         this.clues_holder = $('#cw-clues-holder');
         this.clues_top_container = $('#cw-clues-top');
