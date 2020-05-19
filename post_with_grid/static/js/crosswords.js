@@ -309,7 +309,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.canvas = $('#cw-canvas');
         this.context = this.canvas[0].getContext('2d');
 
-        this.hidden_input = this.root.find('input.cw-hidden-input');
+        this.hidden_input = this.root.find('input.cw-hidden-input'); //TODO: Remove hidden input from template
 
         this.reveal_letter = $('#reveal-letter')
         this.reveal_word = $('#reveal-word')
@@ -393,30 +393,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                     processFiles(files);
                 }
             }.bind(this));
-            
-            // drag-and-drop
-            if (isAdvancedUpload) {
-                var div_overflow = this.root.find('div.cw-overflow');
-                div_overflow.addClass('has-advanced-upload');
-                
-                var droppedFiles = false;
 
-                div_overflow.on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                })
-                .on('dragover dragenter', function() {
-                    div_overflow.addClass('is-dragover');
-                })
-                .on('dragleave dragend drop', function() {
-                    div_overflow.removeClass('is-dragover');
-                })
-                .on('drop', function(e) {
-                    droppedFiles = e.originalEvent.dataTransfer.files;
-                    processFiles(droppedFiles);
-                }); 
-            }
-            
         }
         
         // mapping of number to cells
