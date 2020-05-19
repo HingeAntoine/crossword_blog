@@ -311,15 +311,13 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.top_text = $('#cw-top-text');
         this.bottom_text = this.root.find('div.cw-bottom-text');
 
-        this.clues_holder = $('#cw-clues-holder'); //this.root.find('div.cw-clues-holder');
-        this.clues_top_container = $('#cw-clues-top'); //this.root.find('div.cw-clues-top');
-        this.clues_bottom_container = $('#cw-clues-bottom'); //this.root.find('div.cw-clues-bottom');
+        this.clues_holder = $('#cw-clues-holder');
+        this.clues_top_container = $('#cw-clues-top');
+        this.clues_bottom_container = $('#cw-clues-bottom');
 
-        this.canvas_holder = $('#cw-canvas-holder'); //this.root.find('div.cw-canvas');
-        this.canvas = $('#cw-canvas'); //this.root.find('canvas');
+        this.canvas_holder = $('#cw-canvas-holder');
+        this.canvas = $('#cw-canvas');
         this.context = this.canvas[0].getContext('2d');
-
-        this.notepad_icon = this.root.find('div.cw-notepad-icon');
 
         this.hidden_input = this.root.find('input.cw-hidden-input');
 
@@ -462,12 +460,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                 text += "<br>" + this.copyright;
             }
             this.bottom_text.html(text);
-        }
-
-        this.notepad = puzzle.notes;
-        if (!this.notepad)
-        {
-            this.notepad_icon.remove();
         }
 
         this.grid_width = puzzle.width;
@@ -687,13 +679,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.grid_height = Number(grid.getAttribute('height'));
         this.cell_size = grid_look.getAttribute('cell-size-in-pixels');
 
-        // Handle the notepad
-        this.notepad = description;
-        if (!this.notepad)
-        {
-            this.notepad_icon.remove();
-        }
-
         // parse cells
         for (i=0; cell=xml_cells[i]; i++) {
             var new_cell = {
@@ -847,8 +832,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         this.timer_button.off('click');
 
-        this.notepad_icon.off('click');
-
         this.hidden_input.off('input');
         this.hidden_input.off('keydown');
     };
@@ -882,11 +865,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         // TIMER
         this.timer_button.on('click', $.proxy(this.toggleTimer, this));
-
-        // NOTEPAD
-        if (this.notepad) {
-            this.notepad_icon.on('click',$.proxy(this.showNotepad,this));
-        }
 
         this.hidden_input.on('input', $.proxy(this.hiddenInputChanged, this, null));
         this.hidden_input.on('keydown', $.proxy(this.keyPressed, this));
@@ -1506,10 +1484,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             this.renderCells();
         }
     };
-
-    CrossWord.prototype.showNotepad = function() {
-        alert(this.notepad);
-    }
 
     CrossWord.prototype.check_reveal = function(to_solve, reveal_or_check, e) {
         var my_cells = [], cell;
