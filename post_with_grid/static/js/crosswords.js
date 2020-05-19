@@ -39,7 +39,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     };
 
     // constants
-    var FILE_JPZ = 'jpz';
     var FILE_PUZ = 'puz';
     var CLUES_TOP = "clues_top";
     var CLUES_BOTTOM = "clues_bottom";
@@ -77,10 +76,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     // errors
     var ERR_FILE_LOAD     = 'Error loading file';
     var ERR_UNZIP         = 'Failed to unzip file';
-    var ERR_PARSE_JPZ     = 'Error parsing JPZ file... Not JPZ or zipped JPZ file.';
     var ERR_NOT_CROSSWORD = 'Error opening file. Probably not a crossword.';
     var ERR_NO_JQUERY     = 'jQuery not found';
-    var ERR_CLUES_GROUPS  = 'Wrong number of clues in jpz file';
     var ERR_NO_ZIPJS      = 'Zip js not found';
     var ERR_NO_PUZJS      = 'Puz js not found';
     var ERR_LOAD          = 'Error loading savegame - probably corrupted';
@@ -132,13 +129,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         deferred = deferred || $.Deferred();
         reader.onload = function(event) {
             var string = event.target.result;
-            if (type === FILE_JPZ) {
-                if (string.match(/^<\?xml/)) { // xml
-                    parseJPZString(event.target.result, deferred);
-                } else { // probably, zipped xml
-                    unzip(new zip.TextReader(file), parseJPZString, deferred);
-                }
-            } else if (type === FILE_PUZ) {
+            if (type === FILE_PUZ) {
                 deferred.resolve(string);
             }
         };
@@ -169,45 +160,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         }, function(error) {
             deferred.reject(ERR_UNZIP);
         });
-    }
-
-    // parses XML string and creates DOMParser object
-    function parseJPZString(xml_string, deferred) {
-        var parser, xmlDoc;
-        // Some CS JPZs have &nbsp; in them.  Replace with a space.
-        xml_string = xml_string.replace('&nbsp;', ' ');
-        if (window.DOMParser) {
-            parser=new DOMParser();
-            xmlDoc=parser.parseFromString(xml_string,"text/xml");
-        } else { // Internet Explorer
-            xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
-            xmlDoc.async=false;
-            xmlDoc.loadXML(xml_string);
-        }
-
-        if (xmlDoc.getElementsByTagName('parsererror').length) {
-            deferred.reject(ERR_PARSE_JPZ);
-            return;
-        }
-
-        deferred.resolve(xmlDoc);
-    }
-
-    function XMLElementToString(element) {
-        var i, node, nodename,
-            nodes = element.childNodes,
-            result = '';
-        for (i=0;node=nodes[i];i++) {
-            if (node.nodeType === XMLDOM_TEXT) {
-                result += node.textContent;
-            }
-            if (node.nodeType === XMLDOM_ELEMENT) {
-                nodename = node.nodeName;
-                result += '<'+nodename+'>'+XMLElementToString(node)+'</'+nodename+'>';
-            }
-
-        }
-        return result;
     }
 
     // Return the first element of a string -- if it's null return null
@@ -288,7 +240,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     };
 
     CrossWord.prototype.init = function() {
-        var parseJPZ_callback = $.proxy(this.parseJPZPuzzle, this);
         var parsePUZ_callback = $.proxy(this.parsePUZPuzzle, this);
         var error_callback = $.proxy(this.error, this);
 
@@ -328,7 +279,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             if (files[0].name.endsWith(".puz")) {
                 loadFromFile(files[0], FILE_PUZ).then(parsePUZ_callback, error_callback);
             } else {
-                loadFromFile(files[0], FILE_JPZ).then(parseJPZ_callback, error_callback);
+                alert("File not supported")
             }
         }
 
@@ -337,8 +288,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             this.root.addClass('loading');
             var loaded_callback;
             switch (this.config.puzzle_file.type) {
-                case FILE_JPZ:
-                    loaded_callback = parseJPZ_callback;
                 case FILE_PUZ:
                     loaded_callback = parsePUZ_callback;
             }
@@ -482,215 +431,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         this.completeLoad();
     }
-
-    CrossWord.prototype.parseJPZPuzzle = function(xmlDoc) {
-        var crossword, puzzle, metadata, title, creator, copyright;
-        puzzle = xmlDoc.getElementsByTagName('rectangular-puzzle');
-        if (!puzzle.length) {
-            this.error(ERR_PARSE_JPZ);
-            return;
-        }
-        // determine the type of the crossword
-        for (var _i=0; _i<CROSSWORD_TYPES.length; _i++) {
-            this.crossword_type = CROSSWORD_TYPES[_i];
-            crossword = xmlDoc.getElementsByTagName(this.crossword_type);
-            if (crossword.length > 0) {
-                break;
-            }
-        }
-
-        if (!crossword.length) {
-            this.error(ERR_NOT_CROSSWORD);
-            return;
-        }
-
-        metadata = puzzle[0].getElementsByTagName('metadata');
-        if (!metadata.length) {
-            this.error(ERR_PARSE_JPZ);
-            return;
-        }
-
-        // Check for applet settings
-        var applet_settings = xmlDoc.getElementsByTagName('applet-settings');
-
-        if (applet_settings.length) {
-            var hidden_reveal_count = 0;
-            // If we have applet settings, we try to respect them
-            var all_settings = [
-                ["reveal-word", "div.cw-reveal-word"],
-                ["reveal-letter", "div.cw-reveal-letter"],
-                ["solution", "div.cw-reveal-puzzle"]
-            ];
-
-            var i; var items = $();
-            for (i = 0; i < all_settings.length; i++)
-            {
-                var elt = applet_settings[0].getElementsByTagName(all_settings[i][0]);
-                if (!elt.length)
-                {
-                    hidden_reveal_count = hidden_reveal_count + 1;
-                    var mydiv = all_settings[i][1]
-                    items = items.add(mydiv);
-                }
-            }
-            items.css({'display':'none'});
-            // Hide the reveal itself if we're hiding all its subelements
-            if (hidden_reveal_count == 3)
-            {
-                $('div.cw-reveal').css({'display':'none'});
-            }
-        }
-
-        title = metadata[0].getElementsByTagName('title');
-        creator = metadata[0].getElementsByTagName('creator');
-        copyright = metadata[0].getElementsByTagName('copyright');
-
-        this.title = ''; this.author = ''; this.copyright = '';
-
-        if (title.length) {
-            this.title = XMLElementToString(title[0]);
-            var text = this.title;
-            if (creator.length) {
-                this.author = XMLElementToString(creator[0]);
-                text += "<br>" + this.author;
-            }
-            if (copyright.length) {
-                this.copyright = XMLElementToString(copyright[0]);
-                text += "<br>" + this.copyright;
-            }
-            this.bottom_text.html(text);
-        }
-
-        var description = metadata[0].getElementsByTagName('description');
-        if (description.length) {
-            description = XMLElementToString(description[0]);
-        } else {
-            description = '';
-        }
-        
-        // solved message
-        var completion = xmlDoc.getElementsByTagName('completion');
-        if (completion.length) {
-            this.msg_solved = XMLElementToString(completion[0]);
-        }
-        
-        this.parseJPZCrossWord(crossword[0],description);
-    };
-
-    // parses crossword element from JPZ file and creates needed objects
-    CrossWord.prototype.parseJPZCrossWord = function(crossword,description) {
-        var i, cell, word, clues_block,
-            grid = crossword.getElementsByTagName('grid')[0],
-            grid_look = grid.getElementsByTagName('grid-look')[0],
-            xml_cells = grid.getElementsByTagName('cell'),
-            xml_words = crossword.getElementsByTagName('word'),
-            xml_clues = crossword.getElementsByTagName('clues');
-
-        this.grid_width = Number(grid.getAttribute('width'));
-        this.grid_height = Number(grid.getAttribute('height'));
-        this.cell_size = grid_look.getAttribute('cell-size-in-pixels');
-
-        // parse cells
-        for (i=0; cell=xml_cells[i]; i++) {
-            var new_cell = {
-                x: Number(cell.getAttribute('x')),
-                y: Number(cell.getAttribute('y')),
-                solution: cell.getAttribute('solution'),
-                number: cell.getAttribute('number'),
-                color: cell.getAttribute('background-color'),
-                shape: cell.getAttribute('background-shape'),
-                empty: (cell.getAttribute('type') === 'block' || cell.getAttribute('type') === 'void' || cell.getAttribute('type') === 'clue'),
-                letter: cell.getAttribute('solve-state'),
-                top_right_number: cell.getAttribute('top-right-number'),
-                is_void: cell.getAttribute('type') === 'void',
-                clue: cell.getAttribute('type') === 'clue',
-                value: cell.textContent
-            };
-            
-            // maintain the mapping of number -> cells
-            if (!this.number_to_cells[new_cell.number]) {
-                this.number_to_cells[new_cell.number] = [new_cell];
-            }
-            else {
-                this.number_to_cells[new_cell.number].push(new_cell);
-            }
-            
-
-            // for barred puzzles
-            if (cell.getAttribute('top-bar') || cell.getAttribute('bottom-bar') || cell.getAttribute('left-bar') || cell.getAttribute('right-bar')) {
-                new_cell.bar = {
-                    top: cell.getAttribute('top-bar') === 'true',
-                    bottom : cell.getAttribute('bottom-bar') === 'true',
-                    left: cell.getAttribute('left-bar') === 'true',
-                    right : cell.getAttribute('right-bar') === 'true'
-                }
-            }
-
-            if (!this.cells[new_cell.x]) {this.cells[new_cell.x] = {};}
-            this.cells[new_cell.x][new_cell.y] = new_cell;
-        }
-
-        // parse words
-        for (i=0; word=xml_words[i]; i++) {
-            var new_word = new Word(this);
-            new_word.fromJPZ(word);
-            this.words[new_word.id] = new_word;
-        }
-
-        // parse clues
-        // We handle them differently for coded crosswords
-        if (this.crossword_type == 'coded') {
-            var across_group = new CluesGroup(this, {id: CLUES_TOP, title: 'ACROSS', clues: [], words_ids: []});
-            var down_group = new CluesGroup(this, {id: CLUES_BOTTOM, title: 'DOWN', clues: [], words_ids: []});
-            for (i=0; word=xml_words[i]; i++) {
-                var id = word.getAttribute('id'),
-                x = word.getAttribute('x'),
-                y = word.getAttribute('y');
-                if (y.indexOf('-') == -1) {
-                    // Across clue
-                    // We need words_ids and clues
-                    across_group.clues.push({word: id, number: id, text: '--'});
-                    across_group.words_ids.push(id);
-                }
-                else {
-                    // Down clue
-                    down_group.clues.push({word: id, number: id, text: '--'});
-                    down_group.words_ids.push(id);
-                }
-            }
-            this.clues_top = across_group; this.clues_bottom = down_group;
-            // Also, in a coded crossword, there's no reason to show the clues
-            $('div.cw-right').css({'display':'none'});
-            $('div.cw-main').css({'margin-right':'0px'});
-        }
-        else { // not a coded crossword
-            var clues_length = xml_clues.length;
-            if (clues_length == 1) {
-                // hide the bottom clues
-                $('div.cw-clues-bottom').css({'display':'none'});
-                // Make the top clues take up the whole pane
-                $('div.cw-clues-top').css({'bottom': '0%'});
-            }
-            
-            if (xml_clues.length > MAX_CLUES_LENGTH) {
-                this.error(ERR_CLUES_GROUPS);
-                return;
-            }
-            for (i=0; clues_block=xml_clues[i]; i++) {
-                var group = new CluesGroup(this);
-                group.fromJPZ(clues_block);
-                if (!this.clues_top) {
-                    group.id = CLUES_TOP;
-                    this.clues_top = group;
-                } else {
-                    group.id = CLUES_BOTTOM;
-                    this.clues_bottom = group;
-                }
-            }
-        }
-
-        this.completeLoad();
-    };
 
     CrossWord.prototype.completeLoad = function() {
         this.changeActiveClues();
