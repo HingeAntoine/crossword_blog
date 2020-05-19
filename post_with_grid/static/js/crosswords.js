@@ -301,7 +301,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.top_text = $('#cw-top-text');
         this.bottom_text = this.root.find('div.cw-bottom-text'); // TODO: Remove bottom text
 
-        this.clues_holder = $('#cw-clues-holder');
         this.clues_top_container = $('#cw-clues-top');
         this.clues_bottom_container = $('#cw-clues-bottom');
 
@@ -735,7 +734,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
     CrossWord.prototype.removeListeners = function() {
         this.removeGlobalListeners();
-        this.clues_holder.undelegate('div.cw-clues-items span');
+        this.clues_top_container.undelegate('div.cw-clues-items span');
+        this.clues_bottom_container.undelegate('div.cw-clues-items span');
         this.canvas.off('mousemove click');
 
         this.reveal_letter.off('click');
@@ -759,9 +759,13 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     CrossWord.prototype.addListeners = function() {
         $(window).on('resize', this.render_cells_callback);
 
-        this.clues_holder.delegate('div.cw-clues-items div.cw-clue', 'mouseenter', $.proxy(this.mouseEnteredClue, this));
-        this.clues_holder.delegate('div.cw-clues-items div.cw-clue', 'mouseleave', $.proxy(this.mouseLeftClue, this));
-        this.clues_holder.delegate('div.cw-clues-items div.cw-clue', 'click', $.proxy(this.clueClicked, this));
+        this.clues_top_container.delegate('div.cw-clues-items div.cw-clue', 'mouseenter', $.proxy(this.mouseEnteredClue, this));
+        this.clues_top_container.delegate('div.cw-clues-items div.cw-clue', 'mouseleave', $.proxy(this.mouseLeftClue, this));
+        this.clues_top_container.delegate('div.cw-clues-items div.cw-clue', 'click', $.proxy(this.clueClicked, this));
+
+        this.clues_bottom_container.delegate('div.cw-clues-items div.cw-clue', 'mouseenter', $.proxy(this.mouseEnteredClue, this));
+        this.clues_bottom_container.delegate('div.cw-clues-items div.cw-clue', 'mouseleave', $.proxy(this.mouseLeftClue, this));
+        this.clues_bottom_container.delegate('div.cw-clues-items div.cw-clue', 'click', $.proxy(this.clueClicked, this));
 
         if (this.config.hover_enabled) {
             this.canvas.on('mousemove', $.proxy(this.mouseMoved, this));
