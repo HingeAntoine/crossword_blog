@@ -339,9 +339,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.clues_bottom_container.delegate('div.cw-clues-items div.cw-clue', 'mouseleave', $.proxy(this.mouseLeftClue, this));
         this.clues_bottom_container.delegate('div.cw-clues-items div.cw-clue', 'click', $.proxy(this.clueClicked, this));
 
-        if (this.config.hover_enabled) {
-            this.canvas.on('mousemove', $.proxy(this.mouseMoved, this));
-        }
         this.canvas.on('click', $.proxy(this.mouseClicked, this));
 
         // REVEAL
@@ -470,7 +467,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                     var color = cell.color || this.config.color_none;
                     if (this.hilited_word && this.hilited_word.hasCell(cell.x, cell.y)) {color = this.config.color_hilite;}
                     if (this.selected_word && this.selected_word.hasCell(cell.x, cell.y)) {color = this.config.color_word;}
-                    if (this.config.hover_enabled && x == this.hovered_x && y == this.hovered_y) {color = this.config.color_hover;}
                     if (this.selected_cell && x == this.selected_cell.x && y == this.selected_cell.y) {color = this.config.color_selected;}
                     this.context.fillRect(cell_x, cell_y, this.cell_size, this.cell_size);
                     
@@ -581,22 +577,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                     this.context.textBaseline = "middle";
                     this.context.fillText(cell.letter, cell_x+this.cell_size/2, cell_y+ 2 * this.cell_size/3);
                 }
-            }
-        }
-    };
-
-    CrossWord.prototype.mouseMoved = function(e) {
-        if (this.config.hover_enabled) {
-            var offset = this.canvas.offset(),
-                mouse_x = e.pageX - offset.left,
-                mouse_y = e.pageY - offset.top,
-                index_x = Math.ceil(mouse_x / this.cell_size),
-                index_y = Math.ceil(mouse_y / this.cell_size);
-
-            if (index_x !== this.hovered_x || index_y !== this.hovered_y) {
-                this.hovered_x = index_x;
-                this.hovered_y = index_y;
-                this.renderCells();
             }
         }
     };
