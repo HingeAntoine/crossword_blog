@@ -166,7 +166,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                 this.copyright = puzzle.copyright;
                 text += "<br>" + this.copyright;
             }
-            this.bottom_text.html(text);
         }
 
         this.grid_width = puzzle.width;
