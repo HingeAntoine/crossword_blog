@@ -77,12 +77,6 @@ function loadFileFromServer(path, type) {
     return deferred;
 }
 
-// Check if we can drag and drop files
-var isAdvancedUpload = function() {
-  var div = document.createElement('div');
-  return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window;
-}();
-
 function loadFromFile(file, type, deferred) {
     var reader = new FileReader();
     deferred = deferred || $.Deferred();
