@@ -947,46 +947,14 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         e.stopPropagation();
     }
 
+    // save cells of puzzle
     CrossWord.prototype.savePuzzle = function(e) {
-        var i, savegame_name, savegame = {
-            cell_size: this.cell_size,
-            top_text_height: this.top_text_height,
-            bottom_text_height: this.bottom_text_height,
-            grid_width: this.grid_width,
-            grid_height: this.grid_height,
+        var savegame = { cells: this.cells};
 
-            bottom_text: this.bottom_text.html(),
-            top_clues: {
-                id: this.clues_top.id,
-                title: this.clues_top.title,
-                clues: this.clues_top.clues,
-                words_ids: this.clues_top.words_ids
-            },
-            bottom_clues: {
-                id: this.clues_bottom.id,
-                title: this.clues_bottom.title,
-                clues: this.clues_bottom.clues,
-                words_ids: this.clues_bottom.words_ids
-            },
-            words: {},
-            cells: this.cells
-        };
-        for(i in this.words) {
-            if (this.words.hasOwnProperty(i)) {
-                savegame.words[i] = {
-                    id: this.words[i].id,
-                    cell_ranges: this.words[i].cell_ranges,
-                    cells: this.words[i].cells,
-                    clue: this.words[i].clue
-                };
-            }
-        }
-
-        savegame_name = STORAGE_KEY + (this.config.savegame_name || '');
+        var savegame_name = STORAGE_KEY + (this.config.savegame_name || '');
         localStorage.setItem(savegame_name, JSON.stringify(savegame));
         alert(MSG_SAVED);
 
-        this.closeFile();
         e.preventDefault();
         e.stopPropagation();
     };
@@ -996,61 +964,20 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         var i, savegame_name, savegame, active_word;
         savegame_name = STORAGE_KEY + (this.config.savegame_name || '');
         savegame = JSON.parse(localStorage.getItem(savegame_name));
-        if (savegame && savegame.hasOwnProperty('bottom_text') && savegame.hasOwnProperty('top_clues') && savegame.hasOwnProperty('bottom_clues') && savegame.hasOwnProperty('words') && savegame.hasOwnProperty('cells')
-            && savegame.hasOwnProperty('cell_size') && savegame.hasOwnProperty('top_text_height') && savegame.hasOwnProperty('bottom_text_height') && savegame.hasOwnProperty('grid_width') && savegame.hasOwnProperty('grid_height')) {
 
-            this.cell_size = savegame.cell_size;
-            this.top_text_height = savegame.top_text_height;
-            this.bottom_text_height = savegame.bottom_text_height;
-            this.grid_width = savegame.grid_width;
-            this.grid_height = savegame.grid_height;
-
-            this.bottom_text.html(savegame.bottom_text);
-
-            this.selected_cell = null;
-            this.selected_word = null;
-
-            // restore words
-            this.words = {};
-            for (i in savegame.words) {
-                if (savegame.words.hasOwnProperty(i)) {
-                    this.words[i] = new Word(this, savegame.words[i]);
-                }
-            }
-
+        if (savegame && savegame.hasOwnProperty('cells'))
+        {
             this.cells = savegame.cells;
             load_error = false;
-
-            // restore clues
-            this.clues_top = new CluesGroup(this, savegame.top_clues);
-            this.clues_bottom = new CluesGroup(this, savegame.bottom_clues);
 
             if (load_error) {
                 this.error(ERR_LOAD);
                 return;
             }
 
-            if (this.clues_top) {
-                this.renderClues(this.clues_top, this.clues_top_container);
-            }
-            if (this.clues_bottom) {
-                this.renderClues(this.clues_bottom, this.clues_bottom_container);
-            }
-
-            this.active_clues = null;
-            this.inactive_clues = null;
-            this.changeActiveClues();
-
-            active_word = this.active_clues.getFirstWord();
-            this.setActiveWord(active_word);
-            this.setActiveCell(active_word.getFirstCell());
-
             this.renderCells();
-            alert(MSG_LOADED);
-        } else {
-            alert(ERR_NO_SAVEGAME);
         }
-        this.closeFile();
+
         e.preventDefault();
         e.stopPropagation();
     };
