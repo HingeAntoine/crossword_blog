@@ -957,9 +957,9 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
     // loads saved puzzle
     CrossWord.prototype.loadPuzzle = function() {
-        console.log("Loading!")
         var savegame_name = STORAGE_KEY + (this.config.savegame_name || '');
         var savegame = JSON.parse(localStorage.getItem(savegame_name));
+        console.log(savegame_name)
 
         if (savegame && savegame.hasOwnProperty('cells'))
         {

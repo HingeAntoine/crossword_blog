@@ -105,7 +105,7 @@
       settings_enabled: false,
       color_selected: '#FF0000',
       color_word: '#FFFF00',
-      savegame_name: 'puzzle1',
+      savegame_name: '{{ project.pk }}',
       puzzle_file: {url: '{% static project.grid_path %}', type: 'puz'}
     };
     CrosswordNexus.createCrossword($('div.crossword'), params1);
