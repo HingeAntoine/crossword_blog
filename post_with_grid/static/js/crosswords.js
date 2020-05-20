@@ -142,9 +142,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             }
             loadFileFromServer(this.config.puzzle_file.url, this.config.puzzle_file.type).then(loaded_callback, error_callback);
         }
-
-        // mapping of number to cells
-        this.number_to_cells = {};
     };
 
     CrossWord.prototype.error = function(message) {
@@ -270,6 +267,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                 clue: downClueList[i],
             });
         }
+
+        this.loadPuzzle();
 
         this.completeLoad();
     }
@@ -948,38 +947,25 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     }
 
     // save cells of puzzle
-    CrossWord.prototype.savePuzzle = function(e) {
-        var savegame = { cells: this.cells};
+    CrossWord.prototype.savePuzzle = function() {
+        var savegame = {cells: this.cells};
 
         var savegame_name = STORAGE_KEY + (this.config.savegame_name || '');
         localStorage.setItem(savegame_name, JSON.stringify(savegame));
         alert(MSG_SAVED);
-
-        e.preventDefault();
-        e.stopPropagation();
     };
 
     // loads saved puzzle
-    CrossWord.prototype.loadPuzzle = function(e) {
-        var i, savegame_name, savegame, active_word;
-        savegame_name = STORAGE_KEY + (this.config.savegame_name || '');
-        savegame = JSON.parse(localStorage.getItem(savegame_name));
+    CrossWord.prototype.loadPuzzle = function() {
+        console.log("Loading!")
+        var savegame_name = STORAGE_KEY + (this.config.savegame_name || '');
+        var savegame = JSON.parse(localStorage.getItem(savegame_name));
 
         if (savegame && savegame.hasOwnProperty('cells'))
         {
             this.cells = savegame.cells;
-            load_error = false;
-
-            if (load_error) {
-                this.error(ERR_LOAD);
-                return;
-            }
-
             this.renderCells();
         }
-
-        e.preventDefault();
-        e.stopPropagation();
     };
 
     CrossWord.prototype.toggleTimer = function() {
