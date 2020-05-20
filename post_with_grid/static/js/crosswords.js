@@ -99,12 +99,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         var parsePUZ_callback = $.proxy(this.parsePUZPuzzle, this);
         var error_callback = $.proxy(this.error, this);
 
-        if (this.root) {
-            this.remove();
-        }
-
         // build structures
-        this.root = $(template);
         this.top_text = $('#cw-top-text');
 
         this.clues_top_container = $('#cw-clues-top');
@@ -140,7 +135,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         // preload one puzzle
         if (this.config.puzzle_file && this.config.puzzle_file.hasOwnProperty('url') && this.config.puzzle_file.hasOwnProperty('type')) {
-            this.root.addClass('loading');
             var loaded_callback;
             switch (this.config.puzzle_file.type) {
                 case FILE_PUZ:
@@ -151,8 +145,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         // mapping of number to cells
         this.number_to_cells = {};
-
-        this.root.appendTo(this.parent);
     };
 
     CrossWord.prototype.error = function(message) {
@@ -295,9 +287,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         this.addListeners();
 
-        this.root.removeClass('loading');
-        this.root.addClass('loaded');
-
         var first_word = this.active_clues.getFirstWord();
         this.setActiveWord(first_word);
         this.setActiveCell(first_word.getFirstCell());
@@ -307,7 +296,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
     CrossWord.prototype.remove = function() {
         this.removeListeners();
-        this.root.remove();
     };
 
     CrossWord.prototype.removeGlobalListeners = function() {
@@ -449,8 +437,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         var x, y;
 
         if (Number(this.config.cell_size) === 0) {
-            this.root.removeClass('fixed');
-            this.root.addClass('auto');
             var max_height = this.canvas_holder.height();
             var max_width = this.canvas_holder.width();
             this.cell_size = Math.min(
@@ -458,8 +444,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
               Math.floor(max_width/this.grid_width)
             );
         } else {
-            this.root.removeClass('auto');
-            this.root.addClass('fixed');
             this.cell_size = Number(this.config.cell_size);
         }
 

@@ -60,8 +60,6 @@ var load_error = false;
 
 var xw_timer, xw_timer_seconds = 0;
 
-var template = '';
-
 // returns deferred object
 function loadFileFromServer(path, type) {
     var xhr = new XMLHttpRequest(),
