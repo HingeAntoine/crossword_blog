@@ -106,7 +106,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         // build structures
         this.root = $(template);
         this.top_text = $('#cw-top-text');
-        this.bottom_text = this.root.find('div.cw-bottom-text'); // TODO: Remove bottom text
 
         this.clues_top_container = $('#cw-clues-top');
         this.clues_bottom_container = $('#cw-clues-bottom');
@@ -115,7 +114,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.canvas = $('#cw-canvas');
         this.context = this.canvas[0].getContext('2d');
 
-        this.hidden_input = this.root.find('input.cw-hidden-input'); //TODO: Remove hidden input from template
+        this.hidden_input = $('#hidden-input');
 
         this.reveal_letter = $('#reveal-letter')
         this.reveal_word = $('#reveal-word')

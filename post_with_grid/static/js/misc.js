@@ -60,11 +60,7 @@ var load_error = false;
 
 var xw_timer, xw_timer_seconds = 0;
 
-var template = '' +
-'<div class="cw-main auto normal">'+
-    '<input type="text" class="cw-hidden-input"' +
-    ' style="opacity: 0; position: fixed; top: -100px; left: -100px; width: 0; height: 0; z-index: -1;">'+
-'</div>';
+var template = '';
 
 // returns deferred object
 function loadFileFromServer(path, type) {
