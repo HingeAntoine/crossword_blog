@@ -120,7 +120,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.check_puzzle = $('#check-puzzle')
 
         this.save_btn = $('#file-save')
-        this.load_btn = $('#file-load')
 
         this.timer_button = $('#timer-button')
         
@@ -315,7 +314,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.check_puzzle.off('click');
 
         this.save_btn.off('click');
-        this.load_btn.off('click');
 
         this.timer_button.off('click');
 
@@ -351,7 +349,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         // FILE
         this.save_btn.on('click', $.proxy(this.savePuzzle, this));
-        this.load_btn.on('click', $.proxy(this.loadPuzzle, this));
 
         // TIMER
         this.timer_button.on('click', $.proxy(this.toggleTimer, this));
