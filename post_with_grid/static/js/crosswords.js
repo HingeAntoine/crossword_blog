@@ -416,7 +416,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
     CrossWord.prototype.renderClues = function(clues_group, clues_container) {
         var i, clue, clue_el,
-            title = clues_container.find('div.cw-clues-title'),
             items = clues_container.find('div.cw-clues-items');
         items.find('div.cw-clue').remove();
         for (i=0; clue = clues_group.clues[i]; i++) {
@@ -428,7 +427,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             clue_el.addClass('word-'+clue.word);
             items.append(clue_el);
         }
-        title.html(clues_group.title);
         clues_group.clues_container = items;
     };
 
