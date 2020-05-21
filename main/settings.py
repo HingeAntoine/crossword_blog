@@ -25,7 +25,10 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'anth61%6z2!n(a*dxs@s%26-h+4+ro
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'sheltered-depths-00403.herokuapp.com',
+    '127.0.0.1',
+                 ]
 
 
 # Application definition
