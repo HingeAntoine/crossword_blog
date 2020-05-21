@@ -2,9 +2,9 @@
 {% load static %}
 {% block page_content %}
 
-<ul class="list-group">
+<ul class="list-group mt-2">
 {% for project in projects %}
-  <li class="list-group-item" >
+  <li class="list-group-item " >
     <div>
       <a href="{% url 'project_detail' project.pk %}">
           <div class="container">
