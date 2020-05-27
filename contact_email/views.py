@@ -10,11 +10,11 @@ def contact_view(request):
     else:
         form = ContactForm(request.POST)
         if form.is_valid():
-            subject = form.cleaned_data['subject']
-            from_email = form.cleaned_data['from_email']
+            subject = form.cleaned_data['sujet']
+            from_email = form.cleaned_data['email']
             message = form.cleaned_data['message']
             try:
-                send_mail(subject, message, from_email, ['postmaster@casevide.fr'])
+                send_mail(subject, message, from_email, ['antoine@casevide.fr'])
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect('success')
@@ -23,4 +23,3 @@ def contact_view(request):
 
 def success_view(request):
     return HttpResponse('Success! Thank you for your message.')
-

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'post_with_grid',
     'contact_email',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -147,3 +148,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Email config
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
