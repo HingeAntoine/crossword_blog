@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'post_with_grid',
+    'contact_email',
 ]
 
 MIDDLEWARE = [
@@ -143,3 +144,6 @@ STATIC_URL = '/static/'
 # Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Email config
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

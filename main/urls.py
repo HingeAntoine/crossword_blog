@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include("post_with_grid.urls")),
     path('grilles/', include("post_with_grid.urls")),
     path("about/", views.about, name="about"),
+    path('contact/', include('contact_email.urls')),
 ]
 
 if settings.DEBUG:
