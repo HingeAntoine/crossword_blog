@@ -148,5 +148,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Email config
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+SERVER_EMAIL = 'template@gmail.com'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
