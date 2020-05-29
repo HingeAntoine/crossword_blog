@@ -27,9 +27,9 @@ var STORAGE_KEY = 'crossword_nexus_savegame';
 var SETTINGS_STORAGE_KEY = 'crossword_nexus_settings';
 
 // messages
-var MSG_SAVED = 'Crossword saved';
+var MSG_SAVED = 'Grille sauvée';
 var MSG_LOADED = 'Crossword loaded';
-var MSG_SOLVED = 'Crossword solved! Congratulations!';
+var MSG_SOLVED = 'Vous avez fini la grille. Bravo!';
 
 var SIZE_BIG = 'big';
 var SIZE_NORMAL = 'normal';

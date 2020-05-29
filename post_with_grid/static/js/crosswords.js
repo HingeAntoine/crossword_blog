@@ -739,7 +739,20 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             this.timer_running = false;
         }
         alert(this.msg_solved);
-        
+
+        // Send POST when solved to increment solve count
+        jQuery.ajax(
+            {
+                'type': 'POST',
+                'url': '',
+                'contentType': 'application/json',
+                'data': {
+                    'content':'xxx',
+                },
+                'dataType': 'json',
+            }
+        );
+
     };
 
     // callback for shift+arrows
@@ -956,7 +969,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     CrossWord.prototype.loadPuzzle = function() {
         var savegame_name = STORAGE_KEY + (this.config.savegame_name || '');
         var savegame = JSON.parse(localStorage.getItem(savegame_name));
-        console.log(savegame_name)
 
         if (savegame && savegame.hasOwnProperty('cells'))
         {
