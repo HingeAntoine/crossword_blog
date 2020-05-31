@@ -19,7 +19,6 @@ def project_detail(request, pk):
     }
 
     if request.method == 'POST':
-        print(request)
         Project.objects.filter(pk=pk).update(solve_count=F("solve_count") + 1)
 
     return render(request, 'grid_detail.html', context)
