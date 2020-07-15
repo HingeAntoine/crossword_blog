@@ -429,10 +429,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         if (Number(this.config.cell_size) === 0) {
             var max_height = this.canvas_holder.height();
             var max_width = this.canvas_holder.width();
-            this.cell_size = Math.min(
-              Math.floor(max_height/this.grid_height),
-              Math.floor(max_width/this.grid_width)
-            );
+            this.cell_size = Math.floor(max_width/this.grid_width)
         } else {
             this.cell_size = Number(this.config.cell_size);
         }
@@ -447,7 +444,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.canvas[0].style.height = heightDps + "px";
         this.context.scale(devicePixelRatio, devicePixelRatio);
 
-        //this.context.clearRect(0, 0, this.canvas[0].width, this.canvas[0].height);
+        this.context.clearRect(0, 0, this.canvas[0].width, this.canvas[0].height);
         this.context.fillRect(0, 0, this.canvas[0].width, this.canvas[0].height);
         this.context.fillStyle = this.config.color_block;
 
