@@ -30,9 +30,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                 if (typeof jQuery === TYPE_UNDEFINED) {
                     throw new Error(ERR_NO_JQUERY);
                 }
-                if (typeof zip === TYPE_UNDEFINED) {
-                    throw new Error(ERR_NO_ZIPJS);
-                }
                 if (typeof PUZAPP === TYPE_UNDEFINED) {
                     throw new Error(ERR_NO_PUZJS);
                 }

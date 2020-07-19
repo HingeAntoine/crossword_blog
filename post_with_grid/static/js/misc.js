@@ -51,7 +51,6 @@ var ERR_FILE_LOAD     = 'Error loading file';
 var ERR_UNZIP         = 'Failed to unzip file';
 var ERR_NOT_CROSSWORD = 'Error opening file. Probably not a crossword.';
 var ERR_NO_JQUERY     = 'jQuery not found';
-var ERR_NO_ZIPJS      = 'Zip js not found';
 var ERR_NO_PUZJS      = 'Puz js not found';
 var ERR_LOAD          = 'Error loading savegame - probably corrupted';
 var ERR_NO_SAVEGAME   = 'No saved game found';
