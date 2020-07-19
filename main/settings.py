@@ -151,3 +151,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 SERVER_EMAIL = 'template@gmail.com'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+CSRF_USE_SESSIONS = True
