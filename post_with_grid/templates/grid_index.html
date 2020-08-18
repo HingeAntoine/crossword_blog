@@ -2,6 +2,19 @@
 {% load static %}
 {% block page_content %}
 
+<!--  EDITO BLOCK      -->
+<div class="row no-gutters bg-light position-relative mt-4">
+    <div class="col-md-6 mb-md-0 p-md-4">
+        <img src="static/img/logo.png" class="w-25" alt="...">
+    </div>
+    <div class="col-md-6 position-static p-4 pl-md-0">
+        <h5 class="mt-0">{{ edito.title }} {{ edito.date_created }}</h5>
+        <p>{{ edito.content }}</p>
+    </div>
+</div>
+
+<h2> Test </h2>
+
 <div class="row mt-3">
     {% for project in projects %}
     <div class="col-md-2">
