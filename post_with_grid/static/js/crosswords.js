@@ -120,8 +120,11 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         this.timer_button = $('#timer-button')
 
-        this.alert_bar = $('#finish-warning')
-        this.alert_bar.hide()
+        this.success_bar = $('#finish-success')
+        this.success_bar.hide()
+
+        this.warning_bar = $('#finish-warning')
+        this.warning_bar.hide()
         
         // function to process uploaded files
         function processFiles(files) {
@@ -719,23 +722,35 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     };
 
     CrossWord.prototype.checkIfSolved = function() {
-        var i, j, cell;
+        var i, j, cell, is_finished=true;
         for(i in this.cells) {
             for(j in this.cells[i]) {
                 cell = this.cells[i][j];
                 // if found cell without letter or with incorrect letter - return
-                if (!cell.empty && (!cell.letter || firstChar(cell.letter) != firstChar(cell.solution))) {
+                if (!cell.empty && !cell.letter) {
                     return;
+                }
+
+                if (!cell.empty && firstChar(cell.letter) != firstChar(cell.solution)) {
+                    is_finished=false;
                 }
             }
         }
+
+        if(!is_finished){
+            this.warning_bar.show();
+            return;
+        }
+
         // Puzzle is solved!  Stop the timer and show a message.
         if (this.timer_running) {
             clearTimeout(xw_timer);
             this.timer_button.removeClass('running');
             this.timer_running = false;
         }
-        this.alert_bar.show();
+        this.warning_bar.hide();
+        this.success_bar.show();
+
 
         // Send POST when solved to increment solve count
         jQuery.ajax(
