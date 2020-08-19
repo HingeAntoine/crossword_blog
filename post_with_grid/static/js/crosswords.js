@@ -119,6 +119,9 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.save_btn = $('#file-save')
 
         this.timer_button = $('#timer-button')
+
+        this.alert_bar = $('#finish-warning')
+        this.alert_bar.hide()
         
         // function to process uploaded files
         function processFiles(files) {
@@ -732,7 +735,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             this.timer_button.removeClass('running');
             this.timer_running = false;
         }
-        alert(this.msg_solved);
+        this.alert_bar.show();
 
         // Send POST when solved to increment solve count
         jQuery.ajax(
