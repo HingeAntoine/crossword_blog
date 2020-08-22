@@ -5,7 +5,7 @@ from post_with_grid.models import Edito
 
 
 def project_index(request):
-    projects = Project.objects.all().order_by("-date_created", "-title")
+    projects = Project.objects.all().order_by("-date_created", "-title")[:6]
     edito = Edito.objects.last()
     context = {"projects": projects, "edito": edito}
 
