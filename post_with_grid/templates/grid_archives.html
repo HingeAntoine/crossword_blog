@@ -2,13 +2,13 @@
 {% load static %}
 {% block page_content %}
 
-<div class="btn-group mt-4" role="group">
-  <button type="button" class="btn btn-secondary">Classique</button>
-  <button type="button" class="btn btn-secondary">Cryptique</button>
-</div>
+<form class="mt-4" method="get">
+    {{ projects.form.as_p }}
+    <button type="submit">Search</button>
+</form>
 
 <ul class="list-group mt-4">
-    {% for project in projects %}
+    {% for project in projects.qs %}
     <li class="list-group-item ">
         <div>
             <a href="{% url 'project_detail' project.pk %}">

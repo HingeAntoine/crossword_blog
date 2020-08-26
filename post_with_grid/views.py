@@ -2,6 +2,7 @@ from django.db.models import F
 from django.shortcuts import render
 from post_with_grid.models import Project
 from post_with_grid.models import Edito
+from .filters import GridFilter
 
 
 def project_index(request):
@@ -24,6 +25,7 @@ def project_detail(request, pk):
 
 def project_archives(request):
     projects = Project.objects.all().order_by("-date_created", "-title")
-    context = {"projects": projects}
+    grid_filter = GridFilter(request.GET, queryset=projects)
+    context = {"projects": grid_filter}
 
     return render(request, "grid_archives.html", context)
