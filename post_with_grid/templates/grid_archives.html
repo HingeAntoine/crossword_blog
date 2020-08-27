@@ -29,13 +29,11 @@
         </thead>
         <tbody>
         {% for project in projects.qs %}
-        <tr class="">
-            <a href="{% url 'project_detail' project.pk %}">
-                <td>{{ project.title }}</td>
-                <td>{{ project.author }}</td>
-                <td>{{ project.date_created }}</td>
-                <td><span class="badge badge-primary badge-pill">{{ project.solve_count }}</span></td>
-            </a>
+        <tr>
+            <td><a href="{% url 'project_detail' project.pk %}">{{ project.title }}</a></td>
+            <td>{{ project.author }}</td>
+            <td>{{ project.date_created }}</td>
+            <td><span class="badge badge-primary badge-pill">{{ project.solve_count }}</span></td>
         </tr>
         {% endfor %}
         </tbody>
