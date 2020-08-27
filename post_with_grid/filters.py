@@ -6,5 +6,5 @@ class GridFilter(django_filters.FilterSet):
     class Meta:
         model = Project
         fields = [
-            "crossword_type",
+            "crossword_type", "grid_size"
         ]
