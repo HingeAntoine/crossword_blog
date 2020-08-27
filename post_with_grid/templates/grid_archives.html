@@ -5,29 +5,41 @@
 
 {% block page_content %}
 
-<form class="mt-4" method="get">
-    {{ projects.form | crispy }}
-    <button type="submit">Search</button>
-</form>
+<div class="row mt-4">
 
-<ul class="list-group mt-4">
-    {% for project in projects.qs %}
-    <li class="list-group-item ">
-        <div>
+    <div class="col-sm-1"></div>
+
+    <form class="col-sm-2" method="get">
+        {{ projects.form | crispy }}
+        <button type="submit">Search</button>
+    </form>
+
+    <table class="col-sm-8 table ">
+        <thead>
+        <tr>
+            <th class="th-sm">Nom
+            </th>
+            <th class="th-sm">Auteur - Autrice
+            </th>
+            <th class="th-sm">Date
+            </th>
+            <th class="th-sm">Résolution
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for project in projects.qs %}
+        <tr class="">
             <a href="{% url 'project_detail' project.pk %}">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-2">{{ project.title }}</div>
-                        <div class="col-sm-2">{{ project.author }}</div>
-                        <div class="col-sm-2">{{ project.date_created }}</div>
-                        <div class="col-sm-2">Résolu {{ project.solve_count }} fois</div>
-                    </div>
-                </div>
+                <td>{{ project.title }}</td>
+                <td>{{ project.author }}</td>
+                <td>{{ project.date_created }}</td>
+                <td><span class="badge badge-primary badge-pill">{{ project.solve_count }}</span></td>
             </a>
-        </div>
-    </li>
-    {% endfor %}
-</ul>
-
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </div>
+
 {% endblock %}
