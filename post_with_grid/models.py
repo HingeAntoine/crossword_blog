@@ -7,6 +7,13 @@ class CrosswordsType(IntEnum):
     CRYPTIC = 1
 
 
+class CrosswordsSize(IntEnum):
+    MINI = 0
+    MIDI = 1
+    NORMAL = 2
+    BIG = 3
+
+
 # Create your models here.
 class Project(models.Model):
     title = models.CharField(max_length=100)
@@ -19,6 +26,15 @@ class Project(models.Model):
         choices=[
             (CrosswordsType.CLASSIC.value, "Classique"),
             (CrosswordsType.CRYPTIC.value, "Cryptique"),
+        ],
+    )
+    grid_size = models.IntegerField(
+        default=0,
+        choices=[
+            (CrosswordsSize.MINI.value, "Petite"),
+            (CrosswordsSize.MIDI.value, "Moyenne"),
+            (CrosswordsSize.NORMAL.value, "Grande"),
+            (CrosswordsSize.BIG.value, "Très grande"),
         ],
     )
 
