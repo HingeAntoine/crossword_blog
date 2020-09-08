@@ -1,6 +1,7 @@
 from django.db import models
 from enum import IntEnum
 
+from datetime import datetime, timedelta
 
 class CrosswordsType(IntEnum):
     CLASSIC = 0
@@ -37,6 +38,10 @@ class Project(models.Model):
             (CrosswordsSize.BIG.value, "Très grande"),
         ],
     )
+
+    @property
+    def is_new(self):
+        return datetime.today().date() - self.date_created < timedelta(weeks=1)
 
 
 class Edito(models.Model):
