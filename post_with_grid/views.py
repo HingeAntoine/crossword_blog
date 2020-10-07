@@ -5,7 +5,7 @@ from post_with_grid.models import Edito
 from .filters import GridFilter
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-PAGINATOR_ARCHIVE_SIZE = 25
+PAGINATOR_ARCHIVE_SIZE = 2
 
 
 def project_index(request):
