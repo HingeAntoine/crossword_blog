@@ -10,7 +10,7 @@
     <div class="col-sm-1"></div>
 
     <form class="col-sm-2" method="get">
-        {{ projects.form | crispy }}
+        {{ form | crispy }}
         <button type="submit">Search</button>
     </form>
 
@@ -28,12 +28,12 @@
         </tr>
         </thead>
         <tbody>
-        {% for project in projects.qs %}
+        {% for grid in grids %}
         <tr>
-            <td><a href="{% url 'project_detail' project.pk %}">{{ project.title }}</a></td>
-            <td>{{ project.author }}</td>
-            <td>{{ project.date_created }}</td>
-            <td><span class="badge badge-primary badge-pill">{{ project.solve_count }}</span></td>
+            <td><a href="{% url 'project_detail' grid.pk %}">{{ grid.title }}</a></td>
+            <td>{{ grid.author }}</td>
+            <td>{{ grid.date_created }}</td>
+            <td><span class="badge badge-primary badge-pill">{{ grid.solve_count }}</span></td>
         </tr>
         {% endfor %}
         </tbody>

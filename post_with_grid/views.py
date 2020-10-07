@@ -5,6 +5,8 @@ from post_with_grid.models import Edito
 from .filters import GridFilter
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+PAGINATOR_ARCHIVE_SIZE = 25
+
 
 def project_index(request):
     projects = Project.objects.all().order_by("-date_created", "-title")[:6]
@@ -26,10 +28,10 @@ def project_detail(request, pk):
 
 def project_archives(request):
     projects = Project.objects.all().order_by("-date_created", "-title")
-    grid_filter_qs = GridFilter(request.GET, queryset=projects).qs
-    paginator = Paginator(grid_filter_qs, 25)
+    grid_filter = GridFilter(request.GET, queryset=projects)
+    paginator = Paginator(grid_filter.qs, PAGINATOR_ARCHIVE_SIZE)
 
-    page = request.GET.get('page')
+    page = request.GET.get("page")
     try:
         response = paginator.page(page)
     except PageNotAnInteger:
@@ -38,7 +40,5 @@ def project_archives(request):
         response = paginator.page(paginator.num_pages)
 
     return render(
-        request,
-        'grid_archives.html',
-        {'projects': response}
+        request, "grid_archives.html", {"grids": response, "form": grid_filter.form}
     )
