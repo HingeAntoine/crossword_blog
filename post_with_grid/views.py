@@ -5,7 +5,7 @@ from post_with_grid.models import Edito
 from .filters import GridFilter
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-PAGINATOR_ARCHIVE_SIZE = 2
+PAGINATOR_ARCHIVE_SIZE = 15
 
 
 def project_index(request):
@@ -27,6 +27,11 @@ def project_detail(request, pk):
 
 
 def project_archives(request):
+
+    #####################################
+    # Get grids, filtered and paginated #
+    #####################################
+
     projects = Project.objects.all().order_by("-date_created", "-title")
     grid_filter = GridFilter(request.GET, queryset=projects)
     paginator = Paginator(grid_filter.qs, PAGINATOR_ARCHIVE_SIZE)
@@ -39,6 +44,47 @@ def project_archives(request):
     except EmptyPage:
         response = paginator.page(paginator.num_pages)
 
+    ####################################
+    # Generate query dict with filters #
+    ####################################
+
+    query_dict = request.GET.copy()
+
+    if response.has_previous():
+        query_dict.setlist("page", "1")
+        url_first = query_dict.urlencode()
+
+        query_dict.setlist("page", str(response.previous_page_number()))
+        url_previous = query_dict.urlencode()
+    else:
+        url_first = ""
+        url_previous = ""
+
+    if response.has_next():
+        query_dict.setlist("page", str(response.next_page_number()))
+        url_next = query_dict.urlencode()
+
+        query_dict.setlist("page", str(paginator.num_pages))
+        url_last = query_dict.urlencode()
+    else:
+        url_next = ""
+        url_last = ""
+
+    ######################
+    # Return render dict #
+    ######################
+
     return render(
-        request, "grid_archives.html", {"grids": response, "form": grid_filter.form}
+        request,
+        "grid_archives.html",
+        {
+            "grids": response,
+            "form": grid_filter.form,
+            "pagnav": {
+                "first": url_first,
+                "previous": url_previous,
+                "next": url_next,
+                "last": url_last,
+            },
+        },
     )

@@ -46,16 +46,16 @@
     <nav aria-label="Page navigation" class="col-sm-8">
         <ul class="pagination">
             {% if grids.has_previous %}
-            <li class="page-item"><a class="page-link" href="?page=1">&laquo;</a></li>
-            <li class="page-item"><a class="page-link" href="?page={{ grids.previous_page_number }}"><</a></li>
+            <li class="page-item"><a class="page-link" href="?{{ pagnav.first }}">&laquo;</a></li>
+            <li class="page-item"><a class="page-link" href="?{{ pagnav.previous }}"><</a></li>
             {% endif %}
 
             <li class="page-item"><a class="page-link">Page {{ grids.number }} sur {{ grids.paginator.num_pages }}.</a>
             </li>
 
             {% if grids.has_next %}
-            <li class="page-item"><a class="page-link" href="?page={{ grids.next_page_number }}">></a></li>
-            <li class="page-item"><a class="page-link" href="?page={{ grids.paginator.num_pages }}">&raquo;</a></li>
+            <li class="page-item"><a class="page-link" href="?{{ pagnav.next }}">></a></li>
+            <li class="page-item"><a class="page-link" href="?{{ pagnav.last }}">&raquo;</a></li>
             {% endif %}
 
         </ul>
