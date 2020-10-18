@@ -318,7 +318,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         this.save_btn.off('click');
 
-//        this.timer_button.off('click');
+        $('#submit-time').off('click');
 
         this.hidden_input.off('input');
         this.hidden_input.off('keydown');
@@ -353,8 +353,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         // FILE
         this.save_btn.on('click', $.proxy(this.savePuzzle, this));
 
-        // TIMER
-//        this.timer_button.on('click', $.proxy(this.toggleTimer, this));
+        // MODAL BUTTON
+        $("#submit-time").on('click', $.proxy(this.submitTime, this));
 
         this.hidden_input.on('input', $.proxy(this.hiddenInputChanged, this, null));
         this.hidden_input.on('keydown', $.proxy(this.keyPressed, this));
@@ -751,8 +751,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.warning_bar.hide();
         this.success_bar.show();
         $('#submitModal').modal('show');
-        $('#open-modal-button').removeClass('btn-secondary').addClass('btn-primary').attr("data-target", "#submitModal");
-
+        $('#open-modal-button').removeClass('btn-secondary').addClass('btn-primary');
+        $('#open-modal-button').attr("data-target", "#submitModal"),
 
         // Send POST when solved to increment solve count
         jQuery.ajax(
@@ -1026,6 +1026,11 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             timer();
         }
 
+    }
+
+    CrossWord.prototype.submitTime = function() {
+        $("#open-modal-button").removeClass("btn-primary").addClass("btn-secondary");
+        $("#open-modal-button").removeAttr("data-target");
     }
 
     if ( typeof define === "function" && define.amd ) {
