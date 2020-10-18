@@ -750,6 +750,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         }
         this.warning_bar.hide();
         this.success_bar.show();
+        $('#submitModal').modal('show');
+        $('#open-modal-button').removeClass('btn-secondary').addClass('btn-primary').attr("data-target", "#submitModal");
 
 
         // Send POST when solved to increment solve count
