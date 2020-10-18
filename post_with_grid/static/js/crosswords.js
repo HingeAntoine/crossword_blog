@@ -318,7 +318,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         this.save_btn.off('click');
 
-        this.timer_button.off('click');
+//        this.timer_button.off('click');
 
         this.hidden_input.off('input');
         this.hidden_input.off('keydown');
@@ -354,7 +354,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.save_btn.on('click', $.proxy(this.savePuzzle, this));
 
         // TIMER
-        this.timer_button.on('click', $.proxy(this.toggleTimer, this));
+//        this.timer_button.on('click', $.proxy(this.toggleTimer, this));
 
         this.hidden_input.on('input', $.proxy(this.hiddenInputChanged, this, null));
         this.hidden_input.on('keydown', $.proxy(this.keyPressed, this));

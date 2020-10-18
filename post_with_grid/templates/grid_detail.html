@@ -16,7 +16,7 @@
     <div class="col-lg-6">
 
         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-            <button type="button" class="btn btn-primary" id="timer-button">Lancer le chrono</button>
+            <button type="button" class="btn btn-primary" id="timer-button">00:00</button>
             <button type="button" class="btn btn-primary" id="file-save">Sauver</button>
 
             <!-- REVEAL BUTTON -->
@@ -101,7 +101,8 @@
       savegame_name: '{{ project.pk }}',
       puzzle_file: {url: '{{ project.grid_file.url }}', type: 'puz'}
     };
-    CrosswordNexus.createCrossword($('div.crossword'), params1);
+    grid = CrosswordNexus.createCrossword($('div.crossword'), params1);
+    grid.toggleTimer();
 })();
 
 </script>
