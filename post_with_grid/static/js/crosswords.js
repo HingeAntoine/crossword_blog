@@ -758,12 +758,12 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         jQuery.ajax(
             {
                 'type': 'POST',
-                'url': '',
-                'contentType': 'application/json',
+                'url': 'increment_solve',
                 'data': {
                     'content':'xxx',
                 },
                 'dataType': 'json',
+                'contentType': 'application/json',
             }
         );
 

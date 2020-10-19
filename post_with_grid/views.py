@@ -6,8 +6,23 @@ from post_with_grid.models import Score
 from post_with_grid.models import CrosswordsSize
 from .filters import GridFilter
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import HttpResponse
 
 PAGINATOR_ARCHIVE_SIZE = 15
+
+
+#######
+# API #
+#######
+
+def increment_solve(request, pk):
+    if request.method == "POST":
+        Project.objects.filter(pk=pk).update(solve_count=F("solve_count") + 1)
+    return HttpResponse()
+
+
+def score_exists_name():
+    pass
 
 
 #################
@@ -44,11 +59,11 @@ def project_detail(request, pk):
     context = {"project": project, "scores": scores}
 
     if request.method == "POST":
-        Project.objects.filter(pk=pk).update(solve_count=F("solve_count") + 1)
-        name = "Anout_c"
-        time = 200
-        points = _compute_score(time, project.grid_size)
-        Score(grid=pk, pseudo=name, time=time, score=points).save()
+        if "score" in request.POST:
+            name = "Anout_c"
+            time = 200
+            points = _compute_score(time, project.grid_size)
+            Score(grid=pk, pseudo=name, time=time, score=points).save()
 
     return render(request, "grid_detail.html", context)
 
