@@ -6,5 +6,5 @@ urlpatterns = [
     path("archives/", views.project_archives, name="project_archives"),
     path("<int:pk>/", views.project_detail, name="project_detail"),
     path("<int:pk>/increment_solve", views.increment_solve, name="increment_solve"),
-
+    path("<int:pk>/send_score/<str:name>", views.send_score, name="send_score"),
 ]

@@ -752,18 +752,13 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.success_bar.show();
         $('#submitModal').modal('show');
         $('#open-modal-button').removeClass('btn-secondary').addClass('btn-primary');
-        $('#open-modal-button').attr("data-target", "#submitModal"),
+        $('#open-modal-button').attr("data-target", "#submitModal");
 
         // Send POST when solved to increment solve count
-        jQuery.ajax(
+        $.ajax(
             {
                 'type': 'POST',
-                'url': 'increment_solve',
-                'data': {
-                    'content':'xxx',
-                },
-                'dataType': 'json',
-                'contentType': 'application/json',
+                'url': 'increment_solve'
             }
         );
 
@@ -1029,6 +1024,30 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     }
 
     CrossWord.prototype.submitTime = function() {
+        // Check username already has score
+        var pseudo = $("#inputPseudo").val()
+
+        if (pseudo.length == 0){
+            return
+        }
+
+//        var serializedData = pseudo.serialize()
+
+        $.ajax(
+            {
+                type: 'POST',
+                url: '',
+                data: {
+                    'name': pseudo,
+                    'score': 123,
+                }
+            }
+        );
+
+        // If it does
+
+
+        // If not
         $("#open-modal-button").removeClass("btn-primary").addClass("btn-secondary");
         $("#open-modal-button").removeAttr("data-target");
     }

@@ -21,8 +21,12 @@ def increment_solve(request, pk):
     return HttpResponse()
 
 
-def score_exists_name():
-    pass
+def send_score(request, pk, name):
+    if request.method == "GET":
+        print("COCORICOOOOOOOOOOOOO")
+    if request.method == "POST":
+        print("KIKIRIKIIIIIIIIIIIII")
+    return HttpResponse()
 
 
 #################
@@ -59,9 +63,9 @@ def project_detail(request, pk):
     context = {"project": project, "scores": scores}
 
     if request.method == "POST":
-        if "score" in request.POST:
-            name = "Anout_c"
-            time = 200
+        if "name" in request.POST:
+            name = request.POST["name"]
+            time = int(request.POST["score"])
             points = _compute_score(time, project.grid_size)
             Score(grid=pk, pseudo=name, time=time, score=points).save()
 
