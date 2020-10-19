@@ -117,6 +117,13 @@
     </div>
 </div>
 
+<!-- BEST TIMES -->
+<ul>
+    {% for score in scores %}
+    <li>{{ score.pseudo }} = {{ score.time }}</li>
+    {% endfor %}
+</ul>
+
 <script>
 (function(){
     var params1 = {

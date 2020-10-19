@@ -2,11 +2,17 @@ from django.db.models import F
 from django.shortcuts import render
 from post_with_grid.models import Project
 from post_with_grid.models import Edito
+from post_with_grid.models import Score
+from post_with_grid.models import CrosswordsSize
 from .filters import GridFilter
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 PAGINATOR_ARCHIVE_SIZE = 15
 
+
+#################
+# Project Index #
+#################
 
 def project_index(request):
     projects = Project.objects.all().order_by("-date_created", "-title")[:6]
@@ -16,15 +22,40 @@ def project_index(request):
     return render(request, "grid_index.html", context)
 
 
+##################
+# Project Detail #
+##################
+
+CROSSWORD_SIZE_REF_TIME = {
+    CrosswordsSize.MINI.value: 5 * 60,
+    CrosswordsSize.MIDI.value: 15 * 60,
+    CrosswordsSize.NORMAL.value: 30 * 60,
+    CrosswordsSize.BIG.value: 60 * 60,
+}
+
+
+def _compute_score(time, size):
+    return max(CROSSWORD_SIZE_REF_TIME[size] - time, 0)
+
+
 def project_detail(request, pk):
     project = Project.objects.get(pk=pk)
-    context = {"project": project}
+    scores = Score.objects.filter(grid=pk)
+    context = {"project": project, "scores": scores}
 
     if request.method == "POST":
         Project.objects.filter(pk=pk).update(solve_count=F("solve_count") + 1)
+        name = "Anout_c"
+        time = 200
+        points = _compute_score(time, project.grid_size)
+        Score(grid=pk, pseudo=name, time=time, score=points).save()
 
     return render(request, "grid_detail.html", context)
 
+
+####################
+# Project Archives #
+####################
 
 def project_archives(request):
 

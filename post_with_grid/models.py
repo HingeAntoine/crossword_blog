@@ -3,6 +3,7 @@ from enum import IntEnum
 
 from datetime import datetime, timedelta
 
+
 class CrosswordsType(IntEnum):
     CLASSIC = 0
     CRYPTIC = 1
@@ -48,3 +49,13 @@ class Edito(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
     date_created = models.DateField(auto_now_add=True)
+
+
+class Score(models.Model):
+    grid = models.IntegerField()
+    pseudo = models.CharField(max_length=25)
+    time = models.IntegerField()
+    score = models.IntegerField()
+
+    class Meta:
+        unique_together = (("grid", "pseudo"),)
