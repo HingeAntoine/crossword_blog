@@ -6,27 +6,8 @@ from post_with_grid.models import Score
 from post_with_grid.models import CrosswordsSize
 from .filters import GridFilter
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import HttpResponse
 
 PAGINATOR_ARCHIVE_SIZE = 15
-
-
-#######
-# API #
-#######
-
-def increment_solve(request, pk):
-    if request.method == "POST":
-        Project.objects.filter(pk=pk).update(solve_count=F("solve_count") + 1)
-    return HttpResponse()
-
-
-def send_score(request, pk, name):
-    if request.method == "GET":
-        print("COCORICOOOOOOOOOOOOO")
-    if request.method == "POST":
-        print("KIKIRIKIIIIIIIIIIIII")
-    return HttpResponse()
 
 
 #################
@@ -63,6 +44,9 @@ def project_detail(request, pk):
     context = {"project": project, "scores": scores}
 
     if request.method == "POST":
+        print(request.POST)
+        if "increment" in request.POST:
+            Project.objects.filter(pk=pk).update(solve_count=F("solve_count") + 1)
         if "name" in request.POST:
             name = request.POST["name"]
             time = int(request.POST["score"])

@@ -757,8 +757,9 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         // Send POST when solved to increment solve count
         $.ajax(
             {
-                'type': 'POST',
-                'url': 'increment_solve'
+                type: 'POST',
+                url: '',
+                data: {'increment': true}
             }
         );
 
@@ -1026,12 +1027,11 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     CrossWord.prototype.submitTime = function() {
         // Check username already has score
         var pseudo = $("#inputPseudo").val()
+        alert(pseudo)
 
         if (pseudo.length == 0){
             return
         }
-
-//        var serializedData = pseudo.serialize()
 
         $.ajax(
             {
@@ -1039,7 +1039,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                 url: '',
                 data: {
                     'name': pseudo,
-                    'score': 123,
+                    'score': xw_timer_seconds,
                 }
             }
         );
