@@ -56,6 +56,7 @@ class Score(models.Model):
     pseudo = models.CharField(max_length=25)
     time = models.IntegerField()
     score = models.IntegerField()
+    solved_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         unique_together = (("grid", "pseudo"),)

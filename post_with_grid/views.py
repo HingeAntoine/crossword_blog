@@ -140,7 +140,7 @@ def project_archives(request):
 ###########
 
 def project_ranking(request, pk):
-    scores = Score.objects.filter(grid=pk).order_by("time")
+    scores = Score.objects.filter(grid=pk).order_by("time", "solved_at", "pseudo")
     context = {"scores": scores}
 
     return render(request, "grid_scores.html", context)
