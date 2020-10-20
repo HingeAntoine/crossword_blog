@@ -1,8 +1,8 @@
 from django.db import models
 from enum import IntEnum
 
+import time
 from datetime import datetime, timedelta
-
 
 class CrosswordsType(IntEnum):
     CLASSIC = 0
@@ -57,6 +57,12 @@ class Score(models.Model):
     time = models.IntegerField()
     score = models.IntegerField()
     solved_at = models.DateTimeField(auto_now_add=True)
+
+    @property
+    def get_minute_secs(self):
+        if self.time >= 3600:
+            return time.strftime('%H:%M:%S', time.gmtime(self.time))
+        return time.strftime('%M:%S', time.gmtime(self.time))
 
     class Meta:
         unique_together = (("grid", "pseudo"),)

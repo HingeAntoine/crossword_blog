@@ -20,7 +20,7 @@
         {% for score in scores %}
         <tr>
             <td>{{ score.pseudo }}</td>
-            <td>{{ score.time }}</td>
+            <td>{{ score.get_minute_secs }}</td>
             <td>{{ score.solved_at}}</td>
         </tr>
         {% endfor %}
