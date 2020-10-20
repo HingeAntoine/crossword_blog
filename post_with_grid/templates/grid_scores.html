@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block page_content %}
+
+<div class="row mt-4">
+    <table class="col-sm-8 table">
+        <thead>
+        <tr>
+            <th class="th-sm">Pseudo
+            </th>
+            <th class="th-sm">Score
+            </th>
+            <th class="th-sm">Date résolution
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for score in scores %}
+        <tr>
+            <td>{{ score.pseudo }}</td>
+            <td>{{ score.time }}</td>
+            <td>Aujourd'hui</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
