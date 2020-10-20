@@ -83,8 +83,11 @@
                         <input type="string" class="form-control" id="inputPseudo" placeholder="Entrez votre pseudo">
                         <small id="emailHelp" class="form-text text-muted">Gardez le même pseudo pour apparaître dans le
                             classement global.</small>
+                        <div class="invalid-feedback">
+                            Ce pseudo correspond déjà à un score pour la grille.
+                        </div>
                     </div>
-                    <button type="button" class="btn btn-primary" id="submit-time">Soumettre
+                    <button type="submit" class="btn btn-primary">Soumettre
                     </button>
                 </form>
             </div>
@@ -157,13 +160,14 @@
                 $("#submitModal").modal("hide")
             },
             error: function (data) {
-                alert("error");
+                $("#inputPseudo").addClass("is-invalid");
             }
         });
         return false;
     });
 
 })();
+
 
 
 </script>
