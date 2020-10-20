@@ -318,8 +318,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         this.save_btn.off('click');
 
-        $('#submit-time').off('click');
-
         this.hidden_input.off('input');
         this.hidden_input.off('keydown');
     };
@@ -352,9 +350,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         // FILE
         this.save_btn.on('click', $.proxy(this.savePuzzle, this));
-
-        // MODAL BUTTON
-        $("#submit-time").on('click', $.proxy(this.submitTime, this));
 
         this.hidden_input.on('input', $.proxy(this.hiddenInputChanged, this, null));
         this.hidden_input.on('keydown', $.proxy(this.keyPressed, this));
@@ -1050,6 +1045,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         // If not
         $("#open-modal-button").removeClass("btn-primary").addClass("btn-secondary");
         $("#open-modal-button").removeAttr("data-target");
+    }
+
+    CrossWord.prototype.getTime = function() {
+        return xw_timer_seconds;
     }
 
     if ( typeof define === "function" && define.amd ) {

@@ -77,14 +77,14 @@
         <div class="modal-content">
             <div class="modal-body">
                 <!-- Submit form (pseudonym) -->
-                <form>
+                <form id="submit-form">
                     <div class="form-group">
                         <label for="inputPseudo">Pseudo</label>
                         <input type="string" class="form-control" id="inputPseudo" placeholder="Entrez votre pseudo">
                         <small id="emailHelp" class="form-text text-muted">Gardez le même pseudo pour apparaître dans le
                             classement global.</small>
                     </div>
-                    <button type="button" class="btn btn-primary" id="submit-time" data-dismiss="modal">Soumettre
+                    <button type="button" class="btn btn-primary" id="submit-time">Soumettre
                     </button>
                 </form>
             </div>
@@ -137,9 +137,33 @@
     };
     grid = CrosswordNexus.createCrossword($('div.crossword'), params1);
     grid.toggleTimer();
+
+    // Listen to submit-form
+    var frm = $('#submit-form');
+    frm.submit(function () {
+        $.ajax({
+            type: 'POST',
+            url: '',
+            data: {
+                'score': grid.getTime(),
+                'name': $('#inputPseudo').val(),
+            },
+            success: function (data) {
+                // No longer able to submit result
+                $("#open-modal-button").removeClass("btn-primary").addClass("btn-secondary");
+                $("#open-modal-button").removeAttr("data-target");
+
+                // Toggle modal
+                $("#submitModal").modal("hide")
+            },
+            error: function (data) {
+                alert("error");
+            }
+        });
+        return false;
+    });
+
 })();
-
-
 
 
 </script>
