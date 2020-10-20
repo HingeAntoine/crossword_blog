@@ -6,6 +6,7 @@ from post_with_grid.models import Score
 from post_with_grid.models import CrosswordsSize
 from .filters import GridFilter
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import JsonResponse
 
 PAGINATOR_ARCHIVE_SIZE = 15
 
@@ -49,6 +50,16 @@ def project_detail(request, pk):
             Project.objects.filter(pk=pk).update(solve_count=F("solve_count") + 1)
         if "name" in request.POST:
             name = request.POST["name"]
+
+            if len(name) < 3:
+                return JsonResponse({"error": "Le pseudo doit contenir au moins 3 caractères."}, status=403)
+
+            if len(name) > 25:
+                return JsonResponse({"error": "Le pseudo doit contenir au max. 25 caractères."}, status=403)
+
+            if len(Score.objects.filter(grid=pk, pseudo=name)) > 0:
+                return JsonResponse({"error": "Ce pseudo correspond déjà à un score pour la grille."}, status=403)
+
             time = int(request.POST["score"])
             points = _compute_score(time, project.grid_size)
             Score(grid=pk, pseudo=name, time=time, score=points).save()

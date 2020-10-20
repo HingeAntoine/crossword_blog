@@ -1019,34 +1019,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
     }
 
-    CrossWord.prototype.submitTime = function() {
-        // Check username already has score
-        var pseudo = $("#inputPseudo").val()
-        alert(pseudo)
-
-        if (pseudo.length == 0){
-            return
-        }
-
-        $.ajax(
-            {
-                type: 'POST',
-                url: '',
-                data: {
-                    'name': pseudo,
-                    'score': xw_timer_seconds,
-                }
-            }
-        );
-
-        // If it does
-
-
-        // If not
-        $("#open-modal-button").removeClass("btn-primary").addClass("btn-secondary");
-        $("#open-modal-button").removeAttr("data-target");
-    }
-
     CrossWord.prototype.getTime = function() {
         return xw_timer_seconds;
     }
