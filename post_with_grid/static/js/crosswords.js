@@ -966,7 +966,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
     // save cells of puzzle
     CrossWord.prototype.savePuzzle = function() {
-        var savegame = {cells: this.cells};
+        var savegame = {cells: this.cells, time: xw_timer_seconds};
 
         var savegame_name = STORAGE_KEY + (this.config.savegame_name || '');
         localStorage.setItem(savegame_name, JSON.stringify(savegame));
@@ -982,6 +982,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         {
             this.cells = savegame.cells;
             this.renderCells();
+        }
+
+        if (savegame && savegame.hasOwnProperty('time')){
+            xw_timer_seconds = savegame.time
         }
     };
 
