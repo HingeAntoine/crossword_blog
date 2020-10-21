@@ -126,6 +126,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.warning_bar = $('#finish-warning')
         this.warning_bar.hide()
 
+        this.need_increment = true;
         this.can_submit_score = true;
         
         // preload one puzzle
@@ -742,13 +743,18 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.success_bar.show();
 
         // Send POST when solved to increment solve count
-        $.ajax(
-            {
-                type: 'POST',
-                url: '',
-                data: {'increment': true}
-            }
-        );
+        if(this.need_increment) {
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: '',
+                    data: {'increment': true},
+                    success: function (data) {
+                        this.need_increment = false;
+                    }
+                }
+            );
+        }
 
         // If able to submit score (did not check or reveal)
         // display modal
@@ -958,7 +964,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         if (reveal_or_check == 'reveal') {
             this.checkIfSolved();
         }
-        else {this.closeCheck();}
+
         this.hidden_input.focus();
         e.preventDefault();
         e.stopPropagation();
@@ -966,7 +972,11 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
     // save cells of puzzle
     CrossWord.prototype.savePuzzle = function() {
-        var savegame = {cells: this.cells, time: xw_timer_seconds};
+        var savegame = {
+            cells: this.cells,
+            time: xw_timer_seconds,
+            score_status: this.can_submit_score
+        };
 
         var savegame_name = STORAGE_KEY + (this.config.savegame_name || '');
         localStorage.setItem(savegame_name, JSON.stringify(savegame));
@@ -986,6 +996,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         if (savegame && savegame.hasOwnProperty('time')){
             xw_timer_seconds = savegame.time
+        }
+
+        if (savegame && savegame.hasOwnProperty('score_status')){
+            this.can_submit_score = savegame.score_status
         }
     };
 
