@@ -125,16 +125,9 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         this.warning_bar = $('#finish-warning')
         this.warning_bar.hide()
-        
-        // function to process uploaded files
-        function processFiles(files) {
-            if (files[0].name.endsWith(".puz")) {
-                loadFromFile(files[0], FILE_PUZ).then(parsePUZ_callback, error_callback);
-            } else {
-                alert("File not supported")
-            }
-        }
 
+        this.can_submit_score = true;
+        
         // preload one puzzle
         if (this.config.puzzle_file && this.config.puzzle_file.hasOwnProperty('url') && this.config.puzzle_file.hasOwnProperty('type')) {
             var loaded_callback;
@@ -743,11 +736,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             this.timer_button.removeClass('running');
             this.timer_running = false;
         }
+
+        // Display success bar and hide warning bar if it was displayed
         this.warning_bar.hide();
         this.success_bar.show();
-        $('#submitModal').modal('show');
-        $('#open-modal-button').removeClass('btn-secondary').addClass('btn-primary');
-        $('#open-modal-button').attr("data-target", "#submitModal");
 
         // Send POST when solved to increment solve count
         $.ajax(
@@ -757,6 +749,15 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                 data: {'increment': true}
             }
         );
+
+        // If able to submit score (did not check or reveal)
+        // display modal
+        // Make modal button clickable
+        if (this.can_submit_score) {
+            $('#submitModal').modal('show');
+            $('#open-modal-button').removeClass('btn-secondary').addClass('btn-primary');
+            $('#open-modal-button').attr("data-target", "#submitModal");
+        }
 
     };
 
@@ -910,6 +911,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     };
 
     CrossWord.prototype.check_reveal = function(to_solve, reveal_or_check, e) {
+        this.can_submit_score = false;
+
         var my_cells = [], cell;
         switch (to_solve) {
             case 'letter' :
