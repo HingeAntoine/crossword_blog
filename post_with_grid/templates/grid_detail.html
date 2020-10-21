@@ -153,6 +153,9 @@
 
                 // Toggle modal
                 $("#submitModal").modal("hide")
+
+                // Change state of can_submit_score
+                grid.can_submit_score = false
             },
             error: function (data) {
                 $('#pseudo-feedback').text(data.responseJSON.error);

@@ -749,11 +749,9 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                     type: 'POST',
                     url: '',
                     data: {'increment': true},
-                    success: function (data) {
-                        this.need_increment = false;
-                    }
                 }
             );
+            this.need_increment = false;
         }
 
         // If able to submit score (did not check or reveal)
@@ -1001,6 +999,12 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         if (savegame && savegame.hasOwnProperty('score_status')){
             this.can_submit_score = savegame.score_status
         }
+
+        if(this.can_submit_score){
+            $('#open-modal-button').removeClass('btn-secondary').addClass('btn-primary');
+            $('#open-modal-button').attr("data-target", "#submitModal");
+        }
+
     };
 
     CrossWord.prototype.toggleTimer = function() {
