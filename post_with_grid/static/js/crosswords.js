@@ -126,9 +126,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.warning_bar = $('#finish-warning')
         this.warning_bar.hide()
 
+        this.grid_is_finished = false;
         this.need_increment = true;
         this.can_submit_score = true;
-        
+
         // preload one puzzle
         if (this.config.puzzle_file && this.config.puzzle_file.hasOwnProperty('url') && this.config.puzzle_file.hasOwnProperty('type')) {
             var loaded_callback;
@@ -732,6 +733,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         }
 
         // Puzzle is solved!  Stop the timer and show a message.
+        this.grid_is_finished = true;
+
         if (this.timer_running) {
             clearTimeout(xw_timer);
             this.timer_button.removeClass('running');
@@ -973,7 +976,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         var savegame = {
             cells: this.cells,
             time: xw_timer_seconds,
-            score_status: this.can_submit_score
+            score_status: this.can_submit_score,
+            is_finished: this.grid_is_finished,
         };
 
         var savegame_name = STORAGE_KEY + (this.config.savegame_name || '');
@@ -998,6 +1002,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         if (savegame && savegame.hasOwnProperty('score_status')){
             this.can_submit_score = savegame.score_status
+        }
+
+        if (savegame && savegame.hasOwnProperty('is_finished')){
+            this.grid_is_finished = savegame.is_finished
         }
 
         if(this.can_submit_score){
