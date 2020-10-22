@@ -175,7 +175,6 @@
       puzzle_file: {url: '{{ project.grid_file.url }}', type: 'puz'}
     };
     grid = CrosswordNexus.createCrossword($('div.crossword'), params1);
-    grid.toggleTimer();
 
     // Add onunload save call
     window.onbeforeunload = function(){

@@ -284,6 +284,9 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         if(!this.grid_is_finished){
             this.changeActiveClues();
             this.addListeners();
+            this.toggleTimer();
+        } else {
+            this.timer_button.html(formatDisplayTime(xw_timer_seconds))
         }
 
         // If grid is finished and you can submit score
@@ -1020,12 +1023,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         function add() {
             xw_timer_seconds = xw_timer_seconds + 1;
-            display_seconds = xw_timer_seconds % 60;
-            display_minutes = (xw_timer_seconds - display_seconds) / 60;
 
-            var display = (display_minutes ? (display_minutes > 9 ? display_minutes : "0" + display_minutes) : "00") + ":" + (display_seconds > 9 ? display_seconds : "0" + display_seconds);
-
-            timer_btn.html(display);
+            timer_btn.html(this.formatDisplayTime(xw_timer_seconds));
 
             timer();
         }

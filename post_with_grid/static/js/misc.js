@@ -119,3 +119,12 @@ function firstChar(str) {
     if (str == null) {return null;}
     else {return str.charAt(0);}
 }
+
+function formatDisplayTime(xw_timer_seconds) {
+    display_seconds = xw_timer_seconds % 60;
+    display_minutes = (xw_timer_seconds - display_seconds) / 60;
+
+    var display = (display_minutes ? (display_minutes > 9 ? display_minutes : "0" + display_minutes) : "00") + ":" + (display_seconds > 9 ? display_seconds : "0" + display_seconds);
+
+    return display
+}
