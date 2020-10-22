@@ -41,7 +41,7 @@ def _compute_score(time, size):
 
 def project_detail(request, pk):
     project = Project.objects.get(pk=pk)
-    scores = Score.objects.filter(grid=pk)
+    scores = Score.objects.filter(grid=pk).order_by("time", "solved_at", "pseudo")
     context = {"project": project, "scores": scores}
 
     if request.method == "POST":
