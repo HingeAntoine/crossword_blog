@@ -19,7 +19,6 @@
             <button type="button" class="btn btn-primary" id="timer-button">00:00</button>
             <button type="button" class="btn btn-secondary" id="open-modal-button" data-toggle="modal">Poster mon chrono
             </button>
-            <button type="button" class="btn btn-primary" id="file-save">Sauver</button>
 
             <!-- REVEAL BUTTON -->
             <div class="btn-group" role="group">
@@ -135,6 +134,11 @@
     };
     grid = CrosswordNexus.createCrossword($('div.crossword'), params1);
     grid.toggleTimer();
+
+    // Add onunload save call
+    window.onbeforeunload = function(){
+        grid.savePuzzle()
+    }
 
     // Listen to submit-form
     var frm = $('#submit-form');

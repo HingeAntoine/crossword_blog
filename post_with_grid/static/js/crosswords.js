@@ -116,8 +116,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.check_word = $('#check-word')
         this.check_puzzle = $('#check-puzzle')
 
-        this.save_btn = $('#file-save')
-
         this.timer_button = $('#timer-button')
 
         this.success_bar = $('#finish-success')
@@ -128,7 +126,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         this.grid_is_finished = false;
         this.need_increment = true;
-        this.can_submit_score = true;
+        this.can_submit_score = false;
 
         // preload one puzzle
         if (this.config.puzzle_file && this.config.puzzle_file.hasOwnProperty('url') && this.config.puzzle_file.hasOwnProperty('type')) {
@@ -317,8 +315,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.check_word.off('click');
         this.check_puzzle.off('click');
 
-        this.save_btn.off('click');
-
         this.hidden_input.off('input');
         this.hidden_input.off('keydown');
     };
@@ -348,9 +344,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.check_letter.on('click', $.proxy(this.check_reveal, this, 'letter', 'check'));
         this.check_word.on('click', $.proxy(this.check_reveal, this, 'word', 'check'));
         this.check_puzzle.on('click', $.proxy(this.check_reveal, this, 'puzzle', 'check'));
-
-        // FILE
-        this.save_btn.on('click', $.proxy(this.savePuzzle, this));
 
         this.hidden_input.on('input', $.proxy(this.hiddenInputChanged, this, null));
         this.hidden_input.on('keydown', $.proxy(this.keyPressed, this));
@@ -988,7 +981,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         var savegame_name = STORAGE_KEY + (this.config.savegame_name || '');
         localStorage.setItem(savegame_name, JSON.stringify(savegame));
-        alert(MSG_SAVED);
     };
 
     // loads saved puzzle
