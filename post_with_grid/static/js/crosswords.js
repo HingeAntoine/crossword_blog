@@ -271,8 +271,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     }
 
     CrossWord.prototype.completeLoad = function() {
-        this.changeActiveClues();
 
+        // Render clues if clue boxes exist
         if (this.clues_top) {
             this.renderClues(this.clues_top, this.clues_top_container);
         }
@@ -280,7 +280,13 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             this.renderClues(this.clues_bottom, this.clues_bottom_container);
         }
 
-        this.addListeners();
+        // If grid is not finished
+        // Add listeners
+        // Select first word as active clue
+        if(!this.grid_is_finished){
+            this.changeActiveClues();
+            this.addListeners();
+        }
 
         var first_word = this.active_clues.getFirstWord();
         this.setActiveWord(first_word);
