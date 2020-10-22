@@ -8,12 +8,16 @@ from .filters import GridFilter
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
 
+from django.db.models.expressions import Window
+from django.db.models.functions import Rank
+
 PAGINATOR_ARCHIVE_SIZE = 15
 
 
 #################
 # Project Index #
 #################
+
 
 def project_index(request):
     projects = Project.objects.all().order_by("-date_created", "-title")[:6]
@@ -41,7 +45,11 @@ def _compute_score(time, size):
 
 def project_detail(request, pk):
     project = Project.objects.get(pk=pk)
-    scores = Score.objects.filter(grid=pk).order_by("time", "solved_at", "pseudo")
+    scores = (
+        Score.objects.filter(grid=pk)
+        .annotate(rank=Window(expression=Rank(), order_by=[F("time"), F("solved_at")]))
+        .order_by("time", "solved_at", "pseudo")[:5]
+    )
     context = {"project": project, "scores": scores}
 
     if request.method == "POST":
@@ -52,13 +60,22 @@ def project_detail(request, pk):
             name = request.POST["name"]
 
             if len(name) < 3:
-                return JsonResponse({"error": "Le pseudo doit contenir au moins 3 caractères."}, status=403)
+                return JsonResponse(
+                    {"error": "Le pseudo doit contenir au moins 3 caractères."},
+                    status=403,
+                )
 
             if len(name) > 25:
-                return JsonResponse({"error": "Le pseudo doit contenir au max. 25 caractères."}, status=403)
+                return JsonResponse(
+                    {"error": "Le pseudo doit contenir au max. 25 caractères."},
+                    status=403,
+                )
 
             if len(Score.objects.filter(grid=pk, pseudo=name)) > 0:
-                return JsonResponse({"error": "Ce pseudo correspond déjà à un score pour la grille."}, status=403)
+                return JsonResponse(
+                    {"error": "Ce pseudo correspond déjà à un score pour la grille."},
+                    status=403,
+                )
 
             time = int(request.POST["score"])
             points = _compute_score(time, project.grid_size)
@@ -70,6 +87,7 @@ def project_detail(request, pk):
 ####################
 # Project Archives #
 ####################
+
 
 def project_archives(request):
 
@@ -138,6 +156,7 @@ def project_archives(request):
 ###########
 # Ranking #
 ###########
+
 
 def project_ranking(request, pk):
     scores = Score.objects.filter(grid=pk).order_by("time", "solved_at", "pseudo")

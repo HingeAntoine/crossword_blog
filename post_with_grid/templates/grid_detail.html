@@ -105,14 +105,31 @@
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5>Hall of fame</h5>
+            <div class="modal-header d-flex align-items-center justify-content-center">
+                <h5><i class="em em-classical_building" aria-role="presentation" aria-label=""></i> Panthéon <i
+                        class="em em-classical_building" aria-role="presentation" aria-label=""></i></h5>
             </div>
-            <div class="modal-body">
+            <div class="modal-body  d-flex align-items-center justify-content-center">
                 <ul>
-                {% for score in scores %}
-                    <li>{{ score.pseudo }} + {{ score.get_minute_secs }} + {{ score.score }}</li>
-                {% endfor %}
+                    {% for score in scores %}
+                    {% if score.rank == 1 %}
+                    <li><i class="em em-first_place_medal" aria-role="presentation" aria-label="FIRST PLACE MEDAL"></i>
+                        {{ score.pseudo }} {{ score.get_minute_secs }}
+                    </li>
+                    {% elif score.rank == 2 %}
+                    <li><i class="em em-second_place_medal" aria-role="presentation"
+                           aria-label="SECOND PLACE MEDAL"></i> {{ score.pseudo }} {{ score.get_minute_secs }}
+                    </li>
+                    {% elif score.rank == 3 %}
+                    <li><i class="em em-third_place_medal" aria-role="presentation" aria-label="THIRD PLACE MEDAL"></i>
+                        {{ score.pseudo }} {{ score.get_minute_secs }}
+                    </li>
+                    {% else %}
+                    <li><i class="em em-sports_medal" aria-role="presentation" aria-label="SPORTS MEDAL"></i>
+                        {{ score.pseudo }} {{ score.get_minute_secs }}
+                    </li>
+                    {% endif %}
+                    {% endfor %}
                 </ul>
             </div>
         </div>
@@ -195,6 +212,8 @@
     });
 
 })();
+
+
 
 
 
