@@ -1,5 +1,5 @@
 from django.db.models import F
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from post_with_grid.models import Project
 from post_with_grid.models import Edito
 from post_with_grid.models import Score
