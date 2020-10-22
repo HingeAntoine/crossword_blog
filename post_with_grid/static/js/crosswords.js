@@ -126,7 +126,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         this.grid_is_finished = false;
         this.need_increment = true;
-        this.can_submit_score = false;
+        this.can_submit_score = true;
 
         // preload one puzzle
         if (this.config.puzzle_file && this.config.puzzle_file.hasOwnProperty('url') && this.config.puzzle_file.hasOwnProperty('type')) {
@@ -284,6 +284,12 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         if(!this.grid_is_finished){
             this.changeActiveClues();
             this.addListeners();
+        }
+
+        // If grid is finished and you can submit score
+        if(this.can_submit_score && this.grid_is_finished){
+            $('#open-modal-button').removeClass('btn-secondary').addClass('btn-primary');
+            $('#open-modal-button').attr("data-target", "#submitModal");
         }
 
         var first_word = this.active_clues.getFirstWord();
@@ -1004,11 +1010,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         if (savegame && savegame.hasOwnProperty('is_finished')){
             this.grid_is_finished = savegame.is_finished
-        }
-
-        if(this.can_submit_score){
-            $('#open-modal-button').removeClass('btn-secondary').addClass('btn-primary');
-            $('#open-modal-button').attr("data-target", "#submitModal");
         }
 
     };

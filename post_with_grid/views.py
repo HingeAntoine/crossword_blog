@@ -47,7 +47,7 @@ def project_detail(request, pk):
     project = Project.objects.get(pk=pk)
     scores = (
         Score.objects.filter(grid=pk)
-        .annotate(rank=Window(expression=Rank(), order_by=[F("time"), F("solved_at")]))
+        .annotate(rank=Window(expression=Rank(), order_by=[F("time")]))
         .order_by("time", "solved_at", "pseudo")[:5]
     )
     context = {"project": project, "scores": scores}
