@@ -1,5 +1,5 @@
 from django.db.models import F
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from post_with_grid.models import Project
 from post_with_grid.models import Edito
 from post_with_grid.models import Score
@@ -53,7 +53,6 @@ def project_detail(request, pk):
     context = {"project": project, "scores": scores}
 
     if request.method == "POST":
-        print(request.POST)
         if "increment" in request.POST:
             Project.objects.filter(pk=pk).update(solve_count=F("solve_count") + 1)
         if "name" in request.POST:
