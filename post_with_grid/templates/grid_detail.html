@@ -110,27 +110,31 @@
                         class="em em-classical_building" aria-role="presentation" aria-label=""></i></h5>
             </div>
             <div class="modal-body  d-flex align-items-center justify-content-center">
-                <ul>
+                <div class="container">
                     {% for score in scores %}
-                    {% if score.rank == 1 %}
-                    <li><i class="em em-first_place_medal" aria-role="presentation" aria-label="FIRST PLACE MEDAL"></i>
-                        {{ score.pseudo }} {{ score.get_minute_secs }}
-                    </li>
-                    {% elif score.rank == 2 %}
-                    <li><i class="em em-second_place_medal" aria-role="presentation"
-                           aria-label="SECOND PLACE MEDAL"></i> {{ score.pseudo }} {{ score.get_minute_secs }}
-                    </li>
-                    {% elif score.rank == 3 %}
-                    <li><i class="em em-third_place_medal" aria-role="presentation" aria-label="THIRD PLACE MEDAL"></i>
-                        {{ score.pseudo }} {{ score.get_minute_secs }}
-                    </li>
-                    {% else %}
-                    <li><i class="em em-sports_medal" aria-role="presentation" aria-label="SPORTS MEDAL"></i>
-                        {{ score.pseudo }} {{ score.get_minute_secs }}
-                    </li>
-                    {% endif %}
+                    <div class="row mb-2">
+                        <div class="col-8">
+                            {% if score.rank == 1 %}
+                            <i class="em em-first_place_medal" aria-role="presentation"
+                               aria-label="MEDAILLE D'OR"></i>
+                            {% elif score.rank == 2 %}
+                            <i class="em em-second_place_medal" aria-role="presentation"
+                               aria-label="MEDAILLE D'ARGENT"></i>
+                            {% elif score.rank == 3 %}
+                            <i class="em em-third_place_medal" aria-role="presentation"
+                               aria-label="MEDAILLE DE BRONZE"></i>
+                            {% else %}
+                            <i class="em em-sports_medal" aria-role="presentation"
+                               aria-label="MEDAILLE"></i>
+                            {% endif %}
+                            {{ score.pseudo }}
+                        </div>
+                        <div class="col-4 d-flex align-items-center justify-content-center">
+                            {{ score.get_minute_secs }}
+                        </div>
+                    </div>
                     {% endfor %}
-                </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -211,6 +215,12 @@
     });
 
 })();
+
+
+
+
+
+
 
 
 

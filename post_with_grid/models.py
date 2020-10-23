@@ -4,6 +4,7 @@ from enum import IntEnum
 import time
 from datetime import datetime, timedelta
 
+
 class CrosswordsType(IntEnum):
     CLASSIC = 0
     CRYPTIC = 1
