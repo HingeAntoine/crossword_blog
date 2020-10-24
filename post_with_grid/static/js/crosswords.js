@@ -756,6 +756,12 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         // Remove listeners
         this.removeListeners()
 
+        // Remove highlights when finishing the grid
+        this.selected_word = null
+        this.selected_cell = null
+        this.hilited_word = null
+        this.renderCells()
+
 
         // Send POST when solved to increment solve count
         if(this.need_increment) {
