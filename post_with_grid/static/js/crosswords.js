@@ -312,8 +312,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
     CrossWord.prototype.removeListeners = function() {
         this.removeGlobalListeners();
-        this.clues_top_container.undelegate('div.cw-clues-items span');
-        this.clues_bottom_container.undelegate('div.cw-clues-items span');
+        this.clues_top_container.undelegate();
+        this.clues_bottom_container.undelegate();
         this.canvas.off('mousemove click');
 
         this.reveal_letter.off('click');
@@ -752,6 +752,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         // Display success bar and hide warning bar if it was displayed
         this.warning_bar.hide();
         this.success_bar.show();
+
+        // Remove listeners
+        this.removeListeners()
+
 
         // Send POST when solved to increment solve count
         if(this.need_increment) {
