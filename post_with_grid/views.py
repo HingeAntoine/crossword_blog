@@ -1,3 +1,4 @@
+import json
 from django.db.models import F
 from django.shortcuts import render
 from post_with_grid.models import Project
@@ -6,7 +7,7 @@ from post_with_grid.models import Score
 from post_with_grid.models import CrosswordsSize
 from .filters import GridFilter
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 
 from django.db.models.expressions import Window
 from django.db.models.functions import Rank
@@ -79,6 +80,9 @@ def project_detail(request, pk):
             time = int(request.POST["score"])
             points = _compute_score(time, project.grid_size)
             Score(grid=pk, pseudo=name, time=time, score=points).save()
+
+            # Return an ajax call response
+            return JsonResponse({'url': request.get_full_path() + 'classement/'})
 
     return render(request, "grid_detail.html", context)
 

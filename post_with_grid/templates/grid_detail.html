@@ -196,15 +196,11 @@
                 'name': $('#inputPseudo').val(),
             },
             success: function (data) {
-                // No longer able to submit result
-                $("#open-modal-button").removeClass("btn-primary").addClass("btn-secondary");
-                $("#open-modal-button").removeAttr("data-target");
-
-                // Toggle modal
-                $("#submitModal").modal("hide")
-
                 // Change state of can_submit_score
                 grid.can_submit_score = false
+
+                // Redirect to score window
+                window.location.href = data.url;
             },
             error: function (data) {
                 $('#pseudo-feedback').text(data.responseJSON.error);
@@ -215,22 +211,6 @@
     });
 
 })();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </script>
 {% endblock %}
