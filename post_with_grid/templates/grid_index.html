@@ -48,16 +48,19 @@ var finished_grid = 'em-crown';
                     </h1>
 
                     <script>
-                    var saveName = "crossword_nexus_savegame{{ project.pk}}";
+                    var saveName = "crossword_nexus_savegame{{ project.pk }}";
+                    var card = $('#status-{{project.pk}}');
                     if (saveName in localStorage) {
                         json_grid = JSON.parse(localStorage[saveName])
                         if(json_grid["is_finished"]){
-                            $('#status-{{project.pk}}').addClass(finished_grid);
+                            card.addClass(finished_grid);
                         } else {
-                            $('#status-{{project.pk}}').addClass(start_grid);
+                            card.addClass(start_grid);
                         }
                     } else {
-                        $('#status-{{project.pk}}').addClass(new_grid);
+                        {% if project.is_new %}
+                        card.addClass(new_grid);
+                        {% endif %}
                     }
                     </script>
 
