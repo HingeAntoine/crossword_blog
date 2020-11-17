@@ -23,6 +23,12 @@
 <h3 class="mt-4"> Les dernières grilles </h3>
 <hr>
 
+<script>
+var new_grid = 'em-new';
+var start_grid = 'em-black_nib';
+var finished_grid = 'em-crown';
+</script>
+
 <div class="row">
     {% for project in projects %}
     <div class="col-sm-6 col-lg-4 col-xl-2 mt-3">
@@ -35,11 +41,26 @@
                         {{ project.title }}
                     </h5>
 
-                    <h6 style="margin-top: 5%;">{{ project.date_created}}</h6>
+                    <h6 style="margin-top: 5%;">{{ project.date_created }}</h6>
 
-                    {% if project.is_new  %}
-                    <span class="badge badge-primary badge-pill">Nouveau</span>
-                    {% endif %}
+                    <h1 class="mt-4">
+                        <i id="status-{{ project.pk }}" class="em" aria-role="presentation" aria-label="BLACK NIB"></i>
+                    </h1>
+
+                    <script>
+                    var saveName = "crossword_nexus_savegame{{ project.pk}}";
+                    if (saveName in localStorage) {
+                        json_grid = JSON.parse(localStorage[saveName])
+                        if(json_grid["is_finished"]){
+                            $('#status-{{project.pk}}').addClass(finished_grid);
+                        } else {
+                            $('#status-{{project.pk}}').addClass(start_grid);
+                        }
+                    } else {
+                        $('#status-{{project.pk}}').addClass(new_grid);
+                    }
+                    </script>
+
                 </div>
                 <a href="{% url 'project_detail' project.pk %}" class="stretched-link"></a>
             </div>
