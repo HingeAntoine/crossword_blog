@@ -7,19 +7,21 @@
 
 <div class="row mt-4">
 
-    <div class="col-md-1"></div>
+    <div class="col-xl-1"></div>
 
-    <form class="col-md-2" method="get">
+    <form class="col-lg-2" method="get">
         {{ form | crispy }}
         <button class="btn btn-primary" type="submit">Rechercher</button>
     </form>
 
-    <table class="col-md-8 table ">
+    <table class="col-lg-8 table ">
         <thead>
         <tr>
             <th class="th-sm">Nom
             </th>
             <th class="th-sm">Auteur - Autrice
+            </th>
+            <th class="th-sm">Statut
             </th>
             <th class="th-sm">Date
             </th>
@@ -32,6 +34,7 @@
         <tr>
             <td><a href="{% url 'project_detail' grid.pk %}">{{ grid.title }}</a></td>
             <td>{{ grid.author }}</td>
+            <td><i id="status-{{ project.pk }}" class="em em-new"></i></td>
             <td>{{ grid.date_created }}</td>
             <td><span class="badge badge-primary badge-pill">{{ grid.solve_count }}</span></td>
         </tr>

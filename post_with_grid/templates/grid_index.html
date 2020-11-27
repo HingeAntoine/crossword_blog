@@ -23,11 +23,7 @@
 <h3 class="mt-4"> Les dernières grilles </h3>
 <hr>
 
-<script>
-var new_grid = 'em-new';
-var start_grid = 'em-black_nib';
-var finished_grid = 'em-crown';
-</script>
+<script type="text/javascript" src="{% static 'js/status.js' %}"></script>
 
 <div class="row">
     {% for project in projects %}
@@ -48,20 +44,7 @@ var finished_grid = 'em-crown';
                     </h1>
 
                     <script>
-                    var saveName = "crossword_nexus_savegame{{ project.pk }}";
-                    var card = $('#status-{{project.pk}}');
-                    if (saveName in localStorage) {
-                        json_grid = JSON.parse(localStorage[saveName])
-                        if(json_grid["is_finished"]){
-                            card.addClass(finished_grid);
-                        } else {
-                            card.addClass(start_grid);
-                        }
-                    } else {
-                        {% if project.is_new %}
-                        card.addClass(new_grid);
-                        {% endif %}
-                    }
+                    get_status({{project.pk}}, '{{project.is_new}}')
                     </script>
 
                 </div>

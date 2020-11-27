@@ -7,7 +7,7 @@ from post_with_grid.models import Score
 from post_with_grid.models import CrosswordsSize
 from .filters import GridFilter
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 
 from django.db.models.expressions import Window
 from django.db.models.functions import Rank
