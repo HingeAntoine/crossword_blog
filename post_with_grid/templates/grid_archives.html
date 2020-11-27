@@ -5,6 +5,12 @@
 
 {% block page_content %}
 
+<!-- JAVASCRIPT BLOCK -->
+
+<script type="text/javascript" src="{% static 'js/status.js' %}"></script>
+
+<!-- TABLE BLOCK -->
+
 <div class="row mt-4">
 
     <div class="col-xl-1"></div>
@@ -34,10 +40,11 @@
         <tr>
             <td><a href="{% url 'project_detail' grid.pk %}">{{ grid.title }}</a></td>
             <td>{{ grid.author }}</td>
-            <td><i id="status-{{ project.pk }}" class="em em-new"></i></td>
+            <td><i id="status-{{ grid.pk }}" class="em"></i></td>
             <td>{{ grid.date_created }}</td>
             <td><span class="badge badge-primary badge-pill">{{ grid.solve_count }}</span></td>
         </tr>
+        <script>get_status({{grid.pk}}, '{{grid.is_new}}')</script>
         {% endfor %}
         </tbody>
     </table>

@@ -2,6 +2,10 @@
 {% load static %}
 {% block page_content %}
 
+<!-- JAVASCRIPT BLOCK -->
+
+<script type="text/javascript" src="{% static 'js/status.js' %}"></script>
+
 <!-- EDITO BLOCK -->
 <h3 class="mt-4"> Edito </h3>
 <hr>
@@ -22,8 +26,6 @@
 <!-- GRID VIEW BLOCK -->
 <h3 class="mt-4"> Les dernières grilles </h3>
 <hr>
-
-<script type="text/javascript" src="{% static 'js/status.js' %}"></script>
 
 <div class="row">
     {% for project in projects %}
