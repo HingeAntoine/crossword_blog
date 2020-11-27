@@ -82,7 +82,7 @@ def project_detail(request, pk):
             Score(grid=pk, pseudo=name, time=time, score=points).save()
 
             # Return an ajax call response
-            return JsonResponse({'url': request.get_full_path() + 'classement/'})
+            return JsonResponse({"url": request.get_full_path() + "classement/"})
 
     return render(request, "grid_detail.html", context)
 
@@ -139,6 +139,9 @@ def project_archives(request):
     ######################
     # Return render dict #
     ######################
+
+    grid_filter.form.fields["crossword_type"].label = "Type de grille"
+    grid_filter.form.fields["grid_size"].label = "Taille de grille"
 
     return render(
         request,
