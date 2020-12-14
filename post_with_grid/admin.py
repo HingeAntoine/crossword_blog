@@ -5,7 +5,14 @@ from post_with_grid.models import Edito
 
 # Register your models here.
 class ProjectAdmin(admin.ModelAdmin):
-    fields = ("title", "grid_file", "author", "crossword_type", "grid_size")
+    fields = (
+        "title",
+        "grid_file",
+        "author",
+        "crossword_type",
+        "grid_size",
+        "twitter_card_clue",
+    )
 
 
 class EditoAdmin(admin.ModelAdmin):

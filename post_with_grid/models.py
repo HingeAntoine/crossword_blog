@@ -41,6 +41,10 @@ class Project(models.Model):
         ],
     )
 
+    twitter_card_clue = models.CharField(
+        default="Grille de mots croisés", max_length=200
+    )
+
     @property
     def is_new(self):
         return datetime.today().date() - self.date_created < timedelta(weeks=1)
@@ -62,8 +66,8 @@ class Score(models.Model):
     @property
     def get_minute_secs(self):
         if self.time >= 3600:
-            return time.strftime('%H:%M:%S', time.gmtime(self.time))
-        return time.strftime('%M:%S', time.gmtime(self.time))
+            return time.strftime("%H:%M:%S", time.gmtime(self.time))
+        return time.strftime("%M:%S", time.gmtime(self.time))
 
     class Meta:
         unique_together = (("grid", "pseudo"),)
