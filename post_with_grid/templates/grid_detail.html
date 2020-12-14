@@ -182,7 +182,7 @@
     grid = CrosswordNexus.createCrossword($('div.crossword'), params1);
 
     // Add onunload save call
-    window.onbeforeunload = function(){
+    window.onunload = window.onbeforeunload = function(){
         grid.savePuzzle()
     }
 
