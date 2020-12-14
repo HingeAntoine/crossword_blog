@@ -1,8 +1,24 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block social_meta %}
+    <!-- Open Graph (Facebook) -->
+    <meta property="og:title" content="{{project.title}}">
+    <meta property="og:description" content="Grille de mots croisés">
+    <meta property="og:image" content="https://casevide.fr/static/img/logo.png">
+    <meta property="og:url" content="https://casevide.fr/grilles/{{ project.pk }}">
+
+    <!-- Specific (Twitter) -->
+    <meta name="twitter:title" content="{{project.title}}">
+    <meta name="twitter:description" content="Grille de mots croisés">
+    <meta name="twitter:image" content="https://casevide.fr/static/img/logo.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:creator" content="AntoineHinge">
+{% endblock %}
+
 {% block page_content %}
 
+<!-- Import scripts -->
 <script type="text/javascript" src="{% static 'js/misc.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/cluesgroup.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/word.js' %}"></script>
