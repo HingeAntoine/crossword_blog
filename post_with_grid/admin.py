@@ -5,6 +5,7 @@ from post_with_grid.models import Project
 from post_with_grid.models import Edito
 
 from PIL import Image, ImageDraw
+from itertools import product
 import puz
 
 
@@ -32,7 +33,12 @@ class ProjectAdmin(admin.ModelAdmin):
 
             # Draw on image
             d = ImageDraw.Draw(img)
-            d.rectangle([0, 0, 5, 5], fill="black")
+            for i, j in product(list(range(p.width)), list(range(p.height))):
+                cell = p.solution[i * p.width + j]
+                if cell == ".":
+                    d.rectangle(
+                        [5 * i, 5 * j, 5 * (i + 1) - 1, 5 * (j + 1) - 1], fill="black"
+                    )
 
             # Save image
             img_path = f"/preview/{obj.pk}.png"
