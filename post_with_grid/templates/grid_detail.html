@@ -2,10 +2,12 @@
 {% load static %}
 
 {% block social_meta %}
+    <!-- SOCIAL MEDIA META -->
+
     <!-- Specific (Twitter) -->
     <meta name="twitter:title" content="{{project.title}}">
     <meta name="twitter:description" content="{{ project.twitter_card_clue }}">
-    <meta name="twitter:image" content="https://casevide.fr/static/img/logo.png">
+    <meta name="twitter:image" content="{{ project.preview_path }}">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:creator" content="AntoineHinge">
 {% endblock %}

@@ -1,3 +1,7 @@
+import os
+
+from django.conf import settings
+
 from django.db import models
 from enum import IntEnum
 
@@ -48,6 +52,13 @@ class Project(models.Model):
     @property
     def is_new(self):
         return datetime.today().date() - self.date_created < timedelta(weeks=1)
+
+    @property
+    def preview_path(self):
+        preview_path = "preview/" + str(self.pk) + ".png"
+        if os.path.isfile(settings.MEDIA_ROOT + "/" + preview_path):
+            return settings.MEDIA_URL + preview_path
+        return settings.STATIC_URL + "img/logo.png"
 
 
 class Edito(models.Model):
