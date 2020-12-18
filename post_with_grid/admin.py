@@ -8,6 +8,8 @@ from PIL import Image, ImageDraw
 from itertools import product
 import puz
 
+CELL_SIZE = 10
+
 
 class ProjectAdmin(admin.ModelAdmin):
     fields = (
@@ -29,15 +31,23 @@ class ProjectAdmin(admin.ModelAdmin):
             p = puz.read(settings.MEDIA_ROOT + "/" + str(obj.grid_file))
 
             # Init image with the right size
-            img = Image.new("RGB", (5 * p.width, 5 * p.height), color="white")
+            img = Image.new(
+                "RGB", (CELL_SIZE * p.width, CELL_SIZE * p.height), color="white"
+            )
 
             # Draw on image
             d = ImageDraw.Draw(img)
             for i, j in product(list(range(p.width)), list(range(p.height))):
-                cell = p.solution[i * p.width + j]
+                cell = p.solution[i + j * p.height]
                 if cell == ".":
                     d.rectangle(
-                        [5 * i, 5 * j, 5 * (i + 1) - 1, 5 * (j + 1) - 1], fill="black"
+                        [
+                            CELL_SIZE * i,
+                            CELL_SIZE * j,
+                            CELL_SIZE * (i + 1) - 1,
+                            CELL_SIZE * (j + 1) - 1,
+                        ],
+                        fill="black",
                     )
 
             # Save image
