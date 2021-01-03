@@ -15,19 +15,6 @@ from django.db.models.functions import Rank
 PAGINATOR_ARCHIVE_SIZE = 15
 
 
-#################
-# Project Index #
-#################
-
-
-def project_index(request):
-    projects = Project.objects.all().order_by("-date_created", "-title")[:6]
-    edito = Edito.objects.last()
-    context = {"projects": projects, "edito": edito}
-
-    return render(request, "grid_index.html", context)
-
-
 ##################
 # Project Detail #
 ##################

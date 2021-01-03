@@ -21,11 +21,11 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include("post_with_grid.urls")),
-    path('grilles/', include("post_with_grid.urls")),
+    path("admin/", admin.site.urls),
+    path("", views.project_index, name=""),
+    path("grilles/", include("post_with_grid.urls")),
     path("about/", views.about, name="about"),
-    path('contact/', include('contact_email.urls')),
+    path("contact/", include("contact_email.urls")),
 ]
 
 if settings.DEBUG:
