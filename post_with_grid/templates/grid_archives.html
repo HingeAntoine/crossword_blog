@@ -39,7 +39,7 @@
         {% for grid in grids %}
         <tr>
             <td><a href="{% url 'project_detail' grid.pk %}">{{ grid.title }}</a></td>
-            <td>{{ grid.author_key.display_name }}</td>
+            <td><a href="{% url 'author_page' grid.author_key.name %}">{{ grid.author_key.display_name }}</a></td>
             <td><i id="status-{{ grid.pk }}" class="em"></i></td>
             <td>{{ grid.date_created }}</td>
             <td><span class="badge badge-primary badge-pill">{{ grid.solve_count }}</span></td>
