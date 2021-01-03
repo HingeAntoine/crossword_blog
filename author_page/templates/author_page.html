@@ -5,6 +5,16 @@
 {% endblock %}
 
 {% block page_content %}
-Nom: {{ author.display_name }}
-Bio: {{ author.bio }}
+<h4 class="mt-4"> {{ author.display_name }} </h4>
+
+<h3 class="mt-4"> Bio </h3>
+<hr>
+
+{{ author.bio }}
+
+<h3 class="mt-4"> Les dernières grilles </h3>
+<hr>
+
+Rien pour l'instant...
+
 {% endblock %}
