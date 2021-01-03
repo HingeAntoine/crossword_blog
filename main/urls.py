@@ -23,6 +23,7 @@ from . import views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.project_index, name=""),
+    path("author/", include("author_page.urls")),
     path("grilles/", include("post_with_grid.urls")),
     path("about/", views.about, name="about"),
     path("contact/", include("contact_email.urls")),
