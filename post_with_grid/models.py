@@ -1,12 +1,13 @@
 import os
 
 from django.conf import settings
-
 from django.db import models
 from enum import IntEnum
 
 import time
 from datetime import datetime, timedelta
+
+from author_page.models import Author
 
 
 class CrosswordsType(IntEnum):
@@ -25,7 +26,7 @@ class CrosswordsSize(IntEnum):
 class Project(models.Model):
     title = models.CharField(max_length=100)
     grid_file = models.FileField(upload_to="puzzles/")
-    author = models.CharField(max_length=25)
+    author_key = models.ForeignKey(Author, default="antoine", on_delete=models.RESTRICT)
     date_created = models.DateField(auto_now_add=True)
     solve_count = models.IntegerField(default=0)
     crossword_type = models.IntegerField(

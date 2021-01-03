@@ -15,7 +15,7 @@ class ProjectAdmin(admin.ModelAdmin):
     fields = (
         "title",
         "grid_file",
-        "author",
+        "author_key",
         "crossword_type",
         "grid_size",
         "twitter_card_clue",
