@@ -1027,29 +1027,25 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
     };
 
-    CrossWord.prototype.toggleSaveTimer = function() {
-
+    CrossWord.prototype.startSaveTimer = function() {
         function add() {
-            xw_last_save_seconds = xw_last_save + 1;
+            xw_last_save_time = xw_last_save + 1;
 
-            if(xw_last_save_seconds % 300 == 0){
+            if(xw_last_save_time % 5 == 0){
                 savePuzzle();
-                xw_last_save_seconds = 0;
+                xw_last_save_time = 0;
             }
 
-            if(xw_last_save_seconds % 60 == 0){
-                var minute_nb = Math.floor(xw_last_save_seconds / 180);
-                $("#last-save-text").text(minute_nb);
-            }
+            $("#last-save-text").text(xw_last_save_time);
 
             timer();
         }
 
         function timer() {
-            xw_last_save = setTimeout(add, 1000);
+            xw_last_save = setTimeout(add, 60000);
         }
 
-
+        timer()
     }
 
     CrossWord.prototype.toggleTimer = function() {
