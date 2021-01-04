@@ -1027,7 +1027,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
     };
 
-    CrossWord.prototype.startSaveTimer = function() {
+    CrossWord.prototype.toggleSaveTimer = function() {
         function add() {
             xw_last_save_time = xw_last_save + 1;
 
@@ -1045,7 +1045,12 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             xw_last_save = setTimeout(add, 60000);
         }
 
-        timer()
+        if (xw_last_save == 0) {
+            timer()
+        } else {
+            clearTimeout(xw_last_save);
+            xw_last_save = 0;
+        }
     }
 
     CrossWord.prototype.toggleTimer = function() {
