@@ -57,7 +57,9 @@ var ERR_NO_SAVEGAME   = 'No saved game found';
 
 var load_error = false;
 
+// Timer variables
 var xw_timer, xw_timer_seconds = 0;
+var xw_last_save, xw_last_save_seconds = 0;
 
 // returns deferred object
 function loadFileFromServer(path, type) {
