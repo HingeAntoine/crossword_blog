@@ -1034,6 +1034,15 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         function add() {
             xw_timer_seconds = xw_timer_seconds + 1;
 
+            if(xw_timer_seconds % 300 == 0){
+                savePuzzle();
+            }
+
+            if(xw_timer_seconds % 60 == 0){
+                var minute_nb = Math.floor(xw_timer_seconds / 180);
+                $("#last-save-text").text(minute_nb);
+            }
+
             timer_btn.html(this.formatDisplayTime(xw_timer_seconds));
 
             timer();
