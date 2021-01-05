@@ -151,7 +151,10 @@ function toggleHideGrid(){
 
     } else {
         grid_blur = 0;
-        grid.addListeners();
+
+        if(!grid.is_finished) {
+            grid.addListeners();
+        }
 
         $("#timer-symbol").removeClass(PLAY_SYMBOL);
         $("#timer-symbol").addClass(PAUSE_SYMBOL);
