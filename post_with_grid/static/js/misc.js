@@ -59,7 +59,10 @@ var load_error = false;
 
 // Timer variables
 var xw_timer, xw_timer_seconds = 0;
-var xw_last_save, xw_last_save_time = 0;
+
+var xw_last_save;
+var xw_last_save_time = 0;
+var xw_last_save_running = false;
 
 // returns deferred object
 function loadFileFromServer(path, type) {

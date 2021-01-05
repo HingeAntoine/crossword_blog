@@ -285,6 +285,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             this.changeActiveClues();
             this.addListeners();
             this.toggleTimer();
+            this.toggleSaveTimer();
         } else {
             this.timer_button.html(formatDisplayTime(xw_timer_seconds))
         }
@@ -747,6 +748,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             clearTimeout(xw_timer);
             this.timer_button.removeClass('running');
             this.timer_running = false;
+
+            clearTimeout(xw_last_save);
         }
 
         // Display success bar and hide warning bar if it was displayed
@@ -1029,10 +1032,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
     CrossWord.prototype.toggleSaveTimer = function() {
         function add() {
-            xw_last_save_time = xw_last_save + 1;
+            xw_last_save_time = xw_last_save_time + 1;
 
-            if(xw_last_save_time % 5 == 0){
-                savePuzzle();
+            if(xw_last_save_time == 5){
+                grid.savePuzzle();
                 xw_last_save_time = 0;
             }
 
@@ -1045,11 +1048,12 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             xw_last_save = setTimeout(add, 60000);
         }
 
-        if (xw_last_save == 0) {
-            timer()
-        } else {
+        if (xw_last_save_running) {
             clearTimeout(xw_last_save);
-            xw_last_save = 0;
+            xw_last_save_running = false;
+        } else {
+            timer();
+            xw_last_save_running = true;
         }
     }
 
@@ -1060,7 +1064,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         function add() {
             xw_timer_seconds = xw_timer_seconds + 1;
 
-            timer_btn.html(this.formatDisplayTime(xw_timer_seconds));
+            timer_btn.html(formatDisplayTime(xw_timer_seconds));
 
             timer();
         }
