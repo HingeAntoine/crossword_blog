@@ -141,6 +141,7 @@ var grid_blur = 0
 function toggleHideGrid(){
     if(grid_blur == 0){
         grid_blur = 5;
+        grid.savePuzzle();
     } else {
         grid_blur = 0;
     }

@@ -994,6 +994,13 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
     // save cells of puzzle
     CrossWord.prototype.savePuzzle = function() {
+        // Reset last_save_time
+        xw_last_save_time = 0;
+        $("#last-save-text").text(xw_last_save_time);
+        this.toggleSaveTimer();
+        this.toggleSaveTimer();
+
+        // Create save file
         var savegame = {
             cells: this.cells,
             time: xw_timer_seconds,
@@ -1036,7 +1043,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
             if(xw_last_save_time == 5){
                 grid.savePuzzle();
-                xw_last_save_time = 0;
             }
 
             $("#last-save-text").text(xw_last_save_time);
