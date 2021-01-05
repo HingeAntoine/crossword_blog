@@ -287,7 +287,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             this.toggleTimer();
             this.toggleSaveTimer();
         } else {
-            this.timer_button.html(formatDisplayTime(xw_timer_seconds))
+            $("#timer-value").text(formatDisplayTime(xw_timer_seconds))
         }
 
         // If grid is finished and you can submit score
@@ -1074,7 +1074,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         function add() {
             xw_timer_seconds = xw_timer_seconds + 1;
 
-            timer_btn.html(formatDisplayTime(xw_timer_seconds));
+            $("#timer-value").text(formatDisplayTime(xw_timer_seconds))
 
             timer();
         }

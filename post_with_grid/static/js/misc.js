@@ -136,6 +136,8 @@ function formatDisplayTime(xw_timer_seconds) {
 
 // Grid blur when pausing the grid
 
+var PAUSE_SYMBOL = "em-double_vertical_bar"
+var PLAY_SYMBOL = "em-arrow_forward"
 var grid_blur = 0
 
 function toggleHideGrid(){
@@ -143,9 +145,16 @@ function toggleHideGrid(){
         grid_blur = 5;
         grid.savePuzzle();
         grid.deactivateCells();
+
+        $("#timer-symbol").removeClass(PAUSE_SYMBOL);
+        $("#timer-symbol").addClass(PLAY_SYMBOL);
+
     } else {
         grid_blur = 0;
         grid.addListeners();
+
+        $("#timer-symbol").removeClass(PLAY_SYMBOL);
+        $("#timer-symbol").addClass(PAUSE_SYMBOL);
     }
 
     grid.toggleTimer();
