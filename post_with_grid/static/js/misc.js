@@ -142,25 +142,39 @@ var grid_blur = 0
 
 function toggleHideGrid(){
     if(grid_blur == 0){
+        //Change grid blur value
         grid_blur = 5;
-        grid.savePuzzle();
+
+        // Save if grid is not finished
+        if(!grid.grid_is_finished) {
+            grid.savePuzzle();
+        }
+
+        // Deactivate listeners on grid
         grid.deactivateCells();
 
+        // Toggle pause symbol to play
         $("#timer-symbol").removeClass(PAUSE_SYMBOL);
         $("#timer-symbol").addClass(PLAY_SYMBOL);
 
     } else {
+        // Change grid blur value
         grid_blur = 0;
 
+        // If grid is not finish, add listeners back
         if(!grid.grid_is_finished) {
             grid.addListeners();
         }
 
+        // Toggle play symbol to pause
         $("#timer-symbol").removeClass(PLAY_SYMBOL);
         $("#timer-symbol").addClass(PAUSE_SYMBOL);
     }
 
+    // Start/stop timer
     grid.toggleTimer();
+
+    // Change the blur value of grid space and big clue
     document.getElementById("cw-top-text").style.filter = "blur(" + grid_blur + "px)"
     document.getElementById("cw-grid-and-clues").style.filter = "blur(" + grid_blur + "px)"
 }
