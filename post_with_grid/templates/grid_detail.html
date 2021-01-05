@@ -32,7 +32,7 @@
 
         Sauvegardé il y a <a id="last-save-text">0</a> minutes.
 
-        <button type="button" class="btn btn-primary" id="timer-button">00:00</button>
+        <button type="button" class="btn btn-primary ml-2" id="timer-button" onclick="toggleHideGrid()">00:00</button>
 
         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
 
@@ -162,7 +162,7 @@
 <h4 class="row mt-2 px-2" id="cw-top-text"></h4>
 
 <!-- GRID AND CLUE LIST -->
-<div class="crossword mt-2">
+<div class="crossword mt-2" id="cw-grid-and-clues">
     <div class="cw-main auto normal">
         <input type="text" id="hidden-input"
                style="opacity: 0; position: fixed; top: -100px; left: -100px; width: 0; height: 0; z-index: -1;">

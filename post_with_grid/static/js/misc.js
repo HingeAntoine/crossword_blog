@@ -133,3 +133,18 @@ function formatDisplayTime(xw_timer_seconds) {
 
     return display
 }
+
+// Grid blur when pausing the grid
+
+var grid_blur = 0
+
+function toggleHideGrid(){
+    if(grid_blur == 0){
+        grid_blur = 5;
+    } else {
+        grid_blur = 0;
+    }
+
+    grid.toggleTimer();
+    document.getElementById("cw-grid-and-clues").style.filter = "blur(" + grid_blur + "px)"
+}
