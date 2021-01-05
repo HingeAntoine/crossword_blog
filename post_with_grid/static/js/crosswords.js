@@ -720,6 +720,17 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.hidden_input.val('');
     };
 
+    CrossWord.prototype.deactivateCells = function() {
+        // Remove listeners
+        this.removeListeners();
+
+        // Remove highlights when finishing the grid
+        this.selected_word = null
+        this.selected_cell = null
+        this.hilited_word = null
+        this.renderCells()
+    }
+
     CrossWord.prototype.checkIfSolved = function() {
         var i, j, cell, is_finished=true;
         for(i in this.cells) {
@@ -756,15 +767,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.warning_bar.hide();
         this.success_bar.show();
 
-        // Remove listeners
-        this.removeListeners()
-
-        // Remove highlights when finishing the grid
-        this.selected_word = null
-        this.selected_cell = null
-        this.hilited_word = null
-        this.renderCells()
-
+        // Remove listeners on cells
+        this.deactivateCells();
 
         // Send POST when solved to increment solve count
         if(this.need_increment) {

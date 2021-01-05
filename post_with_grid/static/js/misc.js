@@ -142,8 +142,10 @@ function toggleHideGrid(){
     if(grid_blur == 0){
         grid_blur = 5;
         grid.savePuzzle();
+        grid.deactivateCells();
     } else {
         grid_blur = 0;
+        grid.addListeners();
     }
 
     grid.toggleTimer();
