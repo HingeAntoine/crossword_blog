@@ -146,5 +146,6 @@ function toggleHideGrid(){
     }
 
     grid.toggleTimer();
+    document.getElementById("cw-top-text").style.filter = "blur(" + grid_blur + "px)"
     document.getElementById("cw-grid-and-clues").style.filter = "blur(" + grid_blur + "px)"
 }
