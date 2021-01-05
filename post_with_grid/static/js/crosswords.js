@@ -759,8 +759,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             clearTimeout(xw_timer);
             this.timer_button.removeClass('running');
             this.timer_running = false;
-
-            clearTimeout(xw_last_save);
         }
 
         // Display success bar and hide warning bar if it was displayed
@@ -1045,7 +1043,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         function add() {
             xw_last_save_time = xw_last_save_time + 1;
 
-            if(xw_last_save_time == 5){
+            if(xw_last_save_time == 5 && !grid.grid_is_finished){
                 grid.savePuzzle();
             }
 

@@ -152,7 +152,7 @@ function toggleHideGrid(){
     } else {
         grid_blur = 0;
 
-        if(!grid.is_finished) {
+        if(!grid.grid_is_finished) {
             grid.addListeners();
         }
 
