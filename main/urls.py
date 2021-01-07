@@ -21,21 +21,21 @@ from django.contrib.sitemaps.views import sitemap
 
 from . import views
 
-from main.sitemap import GridSitemap
+from main.sitemap import GridSitemap, StaticViewSitemap
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path(
         "sitemap.xml",
         sitemap,
-        {"sitemaps": {"grilles": GridSitemap}},
+        {"sitemaps": {"static": StaticViewSitemap, "grilles": GridSitemap}},
         name="django.contrib.sitemaps.views.sitemap",
     ),
-    path("", views.project_index, name=""),
+    path("", views.project_index, name="homepage"),
     path("author/", include("author_page.urls")),
     path("grilles/", include("post_with_grid.urls")),
     path("about/", views.about, name="about"),
-    path("contact/", include("contact_email.urls")),
+    path("contact/", include("contact_email.urls"), name="contact"),
 ]
 
 if settings.DEBUG:
