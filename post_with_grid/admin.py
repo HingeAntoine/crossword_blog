@@ -38,14 +38,14 @@ class ProjectAdmin(admin.ModelAdmin):
             # Draw on image
             d = ImageDraw.Draw(img)
             for i, j in product(list(range(p.width)), list(range(p.height))):
-                cell = p.solution[i + j * p.height]
+                cell = p.solution[i * p.width + j]
                 if cell == ".":
                     d.rectangle(
                         [
-                            CELL_SIZE * i,
                             CELL_SIZE * j,
-                            CELL_SIZE * (i + 1) - 1,
+                            CELL_SIZE * i,
                             CELL_SIZE * (j + 1) - 1,
+                            CELL_SIZE * (i + 1) - 1,
                         ],
                         fill="black",
                     )
