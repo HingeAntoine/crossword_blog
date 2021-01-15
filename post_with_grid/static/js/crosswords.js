@@ -450,6 +450,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.context.fillRect(0, 0, this.canvas[0].width, this.canvas[0].height);
         this.context.fillStyle = this.config.color_block;
 
+        // Resize clues
+        $('#cw-clues-top-holder').css("height", heightDps + "px");
+        $('#cw-clues-bottom-holder').css("height", heightDps + "px");
+
         for(x in this.cells) {
             for (y in this.cells[x]) {
                 var cell = this.cells[x][y],
