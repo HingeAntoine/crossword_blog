@@ -451,8 +451,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.context.fillStyle = this.config.color_block;
 
         // Resize clues
-        $('#cw-clues-top-holder').css("height", heightDps + "px");
-        $('#cw-clues-bottom-holder').css("height", heightDps + "px");
+        $('#cw-clues-top-holder').css("height", (heightDps - 20) + "px");
+        $('#cw-clues-bottom-holder').css("height", (heightDps - 20) + "px");
 
         for(x in this.cells) {
             for (y in this.cells[x]) {
