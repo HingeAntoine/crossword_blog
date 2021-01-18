@@ -68,6 +68,7 @@ class Project(models.Model):
 
 
 class MetaGrid(Project):
+    meta_question = models.CharField(max_length=200, default="La réponse est simple!")
     meta_answers = ArrayField(models.CharField(max_length=50))
 
 

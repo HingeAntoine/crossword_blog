@@ -1,7 +1,11 @@
 {% extends "grid_detail.html" %}
 
+{% block meta_question %}
+<h3>{{ project.meta_question }}</h3>
+{% endblock %}
+
 {% block xword_buttons %}
-<h5>La réponse à ce méta est tonton.</h5>
+
 
 <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
     <button type="button" class="btn btn-secondary" id="open-modal-button" data-toggle="modal">
@@ -37,7 +41,7 @@
                         <!-- Answer field -->
                         <label for="inputPseudo" class="mt-4">Réponse</label>
                         <input type="string" class="form-control" id="inputAnswer" placeholder="Entrez votre réponse">
-                        <small id="answerHelp" class="form-text text-muted">La réponse au méta est tonton.</small>
+                        <small id="answerHelp" class="form-text text-muted">{{ project.meta_question }}</small>
                         <div class="invalid-feedback" id="answerFeedback">
                             Ce n'est pas la bonne réponse.
                         </div>

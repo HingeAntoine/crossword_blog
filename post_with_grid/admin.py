@@ -64,6 +64,7 @@ class MetaGridAdmin(ProjectAdmin):
         "crossword_type",
         "grid_size",
         "twitter_card_clue",
+        "meta_question",
         "meta_answers",
     )
 

@@ -32,7 +32,11 @@
 
 <!-- TOP BAR: Title and buttons-->
 <div class="row mt-2">
-    <h1 class="col-lg-6">{{ project.title }}</h1>
+    <div class="col-lg-6">
+        {% block meta_question %}
+        <h1>{{ project.title }}</h1>
+        {% endblock %}
+    </div>
 
     <div class="col-lg-6">
 
