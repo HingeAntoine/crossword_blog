@@ -32,15 +32,6 @@ def _compute_score(time, size):
 
 def project_detail(request, pk):
     project = Project.objects.get_subclass(pk=pk)
-    scores = (
-        Score.objects.filter(grid=pk)
-        .annotate(rank=Window(expression=Rank(), order_by=[F("time")]))
-        .order_by("time", "solved_at", "pseudo")[:5]
-    )
-    context = {"project": project, "scores": scores}
-
-    if isinstance(project, MetaGrid):
-        return render(request, "meta_detail.html", context)
 
     if request.method == "POST":
         if "increment" in request.POST:
@@ -73,7 +64,26 @@ def project_detail(request, pk):
             # Return an ajax call response
             return JsonResponse({"url": request.get_full_path() + "classement/"})
 
-    return render(request, "grid_detail.html", context)
+    # If the grid is a meta: display another page arrangement
+    if isinstance(project, MetaGrid):
+        # Scores are on a first come first serve basis
+        scores = (
+            Score.objects.filter(grid=pk)
+            .annotate(rank=Window(expression=Rank(), order_by=[F("solved_at")]))
+            .order_by("solved_at", "pseudo")[:5]
+        )
+        context = {"project": project, "scores": scores}
+        return render(request, "meta_detail.html", context)
+    else:
+        # Scores are ordered by best time
+        scores = (
+            Score.objects.filter(grid=pk)
+            .annotate(rank=Window(expression=Rank(), order_by=[F("time")]))
+            .order_by("time", "solved_at", "pseudo")[:5]
+        )
+        return render(
+            request, "grid_detail.html", {"project": project, "scores": scores}
+        )
 
 
 ####################

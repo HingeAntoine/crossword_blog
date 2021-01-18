@@ -54,7 +54,7 @@
                 <div class="container">
                     {% for score in scores %}
                     <div class="row mb-2">
-                        <div class="col-8">
+                        <div class="col-6">
                             {% if score.rank == 1 %}
                             <i class="em em-first_place_medal" aria-role="presentation"
                                aria-label="MEDAILLE D'OR"></i>
@@ -70,8 +70,8 @@
                             {% endif %}
                             {{ score.pseudo }}
                         </div>
-                        <div class="col-4 d-flex align-items-center justify-content-center">
-                            {{ score.get_minute_secs }}
+                        <div class="col-6 d-flex align-items-center justify-content-center">
+                            {{ score.solved_at }}
                         </div>
                     </div>
                     {% endfor %}
