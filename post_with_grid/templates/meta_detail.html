@@ -1,5 +1,17 @@
 {% extends "grid_detail.html" %}
 
 {% block xword_buttons %}
-<h1>THIS IS A METAAAAAAAAA!</h1>
+<h5>La réponse à ce méta est tonton.</h5>
+
+<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+    <button type="button" class="btn btn-secondary" id="open-modal-button" data-toggle="modal">
+        Poster ma réponse
+    </button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#best-scores-modal">
+        Voir les scores
+    </button>
+</div>
+{% endblock %}
+
+{% block alert_bars %}
 {% endblock %}

@@ -15,6 +15,7 @@ from author_page.models import Author
 class CrosswordsType(IntEnum):
     CLASSIC = 0
     CRYPTIC = 1
+    META = 2
 
 
 class CrosswordsSize(IntEnum):
@@ -24,7 +25,6 @@ class CrosswordsSize(IntEnum):
     BIG = 3
 
 
-# Create your models here.
 class Project(models.Model):
     title = models.CharField(max_length=100)
     grid_file = models.FileField(upload_to="puzzles/")
@@ -36,6 +36,7 @@ class Project(models.Model):
         choices=[
             (CrosswordsType.CLASSIC.value, "Classique"),
             (CrosswordsType.CRYPTIC.value, "Cryptique"),
+            (CrosswordsType.META.value, "Méta"),
         ],
     )
     grid_size = models.IntegerField(
