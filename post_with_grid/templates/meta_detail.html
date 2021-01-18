@@ -22,15 +22,24 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <!-- Submit form (pseudonym) -->
+                <!-- Submit form -->
                 <form id="submit-form">
                     <div class="form-group">
+                        <!-- Pseudo field -->
                         <label for="inputPseudo">Pseudo</label>
                         <input type="string" class="form-control" id="inputPseudo" placeholder="Entrez votre pseudo">
                         <small id="emailHelp" class="form-text text-muted">Gardez le même pseudo pour apparaître dans le
                             classement global.</small>
                         <div class="invalid-feedback" id="pseudo-feedback">
                             Ce pseudo correspond déjà à un score pour la grille.
+                        </div>
+
+                        <!-- Answer field -->
+                        <label for="inputPseudo" class="mt-4">Réponse</label>
+                        <input type="string" class="form-control" id="inputAnswer" placeholder="Entrez votre réponse">
+                        <small id="answerHelp" class="form-text text-muted">La réponse au méta est tonton.</small>
+                        <div class="invalid-feedback" id="answerFeedback">
+                            Ce n'est pas la bonne réponse.
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Soumettre
