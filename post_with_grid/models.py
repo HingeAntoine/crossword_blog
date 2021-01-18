@@ -2,6 +2,7 @@ import os
 
 from django.conf import settings
 from django.db import models
+from django.contrib.postgres.fields import ArrayField
 from enum import IntEnum
 
 import time
@@ -62,10 +63,24 @@ class Project(models.Model):
         return settings.STATIC_URL + "img/logo.png"
 
 
+class MetaGrid(Project):
+    meta_answers = ArrayField(models.CharField(max_length=50))
+
+
+###############
+# Edito Model #
+###############
+
+
 class Edito(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
     date_created = models.DateField(auto_now_add=True)
+
+
+###############
+# Score Model #
+###############
 
 
 class Score(models.Model):
