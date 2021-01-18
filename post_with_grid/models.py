@@ -1,5 +1,6 @@
 import os
 
+from model_utils.managers import InheritanceManager
 from django.conf import settings
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
@@ -50,6 +51,8 @@ class Project(models.Model):
     twitter_card_clue = models.CharField(
         default="Grille de mots croisés", max_length=200
     )
+
+    objects = InheritanceManager()
 
     @property
     def is_new(self):

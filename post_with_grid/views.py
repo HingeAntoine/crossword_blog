@@ -1,8 +1,7 @@
-import json
 from django.db.models import F
 from django.shortcuts import render
 from post_with_grid.models import Project
-from post_with_grid.models import Edito
+from post_with_grid.models import MetaGrid
 from post_with_grid.models import Score
 from post_with_grid.models import CrosswordsSize
 from .filters import GridFilter
@@ -32,13 +31,18 @@ def _compute_score(time, size):
 
 
 def project_detail(request, pk):
-    project = Project.objects.get(pk=pk)
+    project = Project.objects.get_subclass(pk=pk)
     scores = (
         Score.objects.filter(grid=pk)
         .annotate(rank=Window(expression=Rank(), order_by=[F("time")]))
         .order_by("time", "solved_at", "pseudo")[:5]
     )
     context = {"project": project, "scores": scores}
+
+    if isinstance(project, MetaGrid):
+        return render(request, "meta_detail.html", context)
+    else:
+        print("PROUT PROUT PROUT")
 
     if request.method == "POST":
         if "increment" in request.POST:

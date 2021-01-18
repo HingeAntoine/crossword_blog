@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block social_meta %}
+    <!-- TITLE -->
+    <title>Case vide - "{{ project.title}}" par {{ project.author_key.display_name}} </title>
+
+    <meta name="description" content="Case vide - Blog de mots croisés.
+        Grille du {{ project.date_created }} par {{ project.author_key.display_name}}: {{ project.title }}">
+
+    <!-- SOCIAL MEDIA META -->
+
+    <!-- OpenGraph (Facebook) -->
+    <meta property="og:image" content="https://casevide.fr{{ project.preview_path }}" />
+
+    <!-- Specific (Twitter) -->
+    <meta name="twitter:title" content="{{project.title}}">
+    <meta name="twitter:description" content="{{ project.twitter_card_clue }}">
+    <meta name="twitter:image" content="https://casevide.fr{{ project.preview_path }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:creator" content="AntoineHinge">
+{% endblock %}
+
+{% block page_content %}
+<h1>THIS IS A METAAAAAAAAA!</h1>
+{% endblock %}
