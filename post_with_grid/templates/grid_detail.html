@@ -35,7 +35,7 @@
     <h1 class="col-lg-6">{{ project.title }}</h1>
 
     <div class="col-lg-6">
-
+        {% block xword_buttons %}
         Sauvegardé il y a <a id="last-save-text">0</a> minutes.
 
         <button type="button" class="btn btn-primary ml-2" id="timer-button" onclick="toggleHideGrid()">
@@ -79,6 +79,7 @@
                 scores
             </button>
         </div>
+        {% endblock %}
 
     </div>
 </div>

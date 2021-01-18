@@ -41,8 +41,6 @@ def project_detail(request, pk):
 
     if isinstance(project, MetaGrid):
         return render(request, "meta_detail.html", context)
-    else:
-        print("PROUT PROUT PROUT")
 
     if request.method == "POST":
         if "increment" in request.POST:
