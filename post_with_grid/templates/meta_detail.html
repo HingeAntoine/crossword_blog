@@ -15,3 +15,69 @@
 
 {% block alert_bars %}
 {% endblock %}
+
+{% block grid_modals %}
+<div class="modal fade" id="submitModal" tabindex="-1" role="dialog"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <!-- Submit form (pseudonym) -->
+                <form id="submit-form">
+                    <div class="form-group">
+                        <label for="inputPseudo">Pseudo</label>
+                        <input type="string" class="form-control" id="inputPseudo" placeholder="Entrez votre pseudo">
+                        <small id="emailHelp" class="form-text text-muted">Gardez le même pseudo pour apparaître dans le
+                            classement global.</small>
+                        <div class="invalid-feedback" id="pseudo-feedback">
+                            Ce pseudo correspond déjà à un score pour la grille.
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Soumettre
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="best-scores-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header d-flex align-items-center justify-content-center">
+                <h5><i class="em em-classical_building" aria-role="presentation" aria-label=""></i> Panthéon <i
+                        class="em em-classical_building" aria-role="presentation" aria-label=""></i></h5>
+                <a href="{% url 'project_ranking' project.pk %}" class="stretched-link"></a>
+            </div>
+            <div class="modal-body  d-flex align-items-center justify-content-center">
+                <div class="container">
+                    {% for score in scores %}
+                    <div class="row mb-2">
+                        <div class="col-8">
+                            {% if score.rank == 1 %}
+                            <i class="em em-first_place_medal" aria-role="presentation"
+                               aria-label="MEDAILLE D'OR"></i>
+                            {% elif score.rank == 2 %}
+                            <i class="em em-second_place_medal" aria-role="presentation"
+                               aria-label="MEDAILLE D'ARGENT"></i>
+                            {% elif score.rank == 3 %}
+                            <i class="em em-third_place_medal" aria-role="presentation"
+                               aria-label="MEDAILLE DE BRONZE"></i>
+                            {% else %}
+                            <i class="em em-sports_medal" aria-role="presentation"
+                               aria-label="MEDAILLE"></i>
+                            {% endif %}
+                            {{ score.pseudo }}
+                        </div>
+                        <div class="col-4 d-flex align-items-center justify-content-center">
+                            {{ score.get_minute_secs }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
