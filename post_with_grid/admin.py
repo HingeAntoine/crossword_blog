@@ -2,6 +2,7 @@ from django.conf import settings
 
 from django.contrib import admin
 from post_with_grid.models import Project
+from post_with_grid.models import MetaGrid
 from post_with_grid.models import Edito
 
 from PIL import Image, ImageDraw
@@ -55,9 +56,22 @@ class ProjectAdmin(admin.ModelAdmin):
             img.save(settings.MEDIA_ROOT + img_path)
 
 
+class MetaGridAdmin(ProjectAdmin):
+    fields = (
+        "title",
+        "grid_file",
+        "author_key",
+        "crossword_type",
+        "grid_size",
+        "twitter_card_clue",
+        "meta_answers",
+    )
+
+
 class EditoAdmin(admin.ModelAdmin):
     fields = ("title", "content")
 
 
 admin.site.register(Project, ProjectAdmin)
+admin.site.register(MetaGrid, MetaGridAdmin)
 admin.site.register(Edito, EditoAdmin)
