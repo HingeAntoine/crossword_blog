@@ -65,10 +65,12 @@ function init_meta(pk, file_url){
             },
             success: function (data) {
                 // Change state of can_submit_score
-                grid.can_submit_score = false
+                grid.grid_is_finished = true
+                grid.savePuzzle()
 
-                // Redirect to score window
-                window.location.href = data.url;
+                // Toggle score modals
+                $('#answerModal').modal('hide');
+                $('#best-scores-modal').modal('show');
             },
             error: function (data) {
                 // Reset error form
