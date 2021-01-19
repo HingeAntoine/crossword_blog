@@ -79,6 +79,9 @@ def project_detail(request, pk):
                 score=0,
             ).save()
 
+            if isinstance(project, MetaGrid):
+                Project.objects.filter(pk=pk).update(solve_count=F("solve_count") + 1)
+
             # Return an ajax call response
             return JsonResponse({"url": request.get_full_path() + "classement/"})
 
