@@ -32,16 +32,16 @@
 
 <!-- TOP BAR: Title and buttons-->
 <div class="row mt-2">
-    <div class="col-lg-6">
+    <div class="col-xl-6 col-12">
         {% block meta_question %}
         <h2>{{ project.title }}</h2>
         {% endblock %}
     </div>
 
-    <div class="col-lg-6">
+    <div class="col-xl-6 col-12">
 
         {% block xword_buttons %}
-        Sauvegardé il y a <a id="last-save-text">0</a> minutes.
+<!--        Sauvegardé il y a <a id="last-save-text">0</a> minutes.-->
 
         <button type="button" class="btn btn-primary ml-2" id="timer-button" onclick="toggleHideGrid()">
             <a id="timer-value">00:00</a>
