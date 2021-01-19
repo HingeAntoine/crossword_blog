@@ -34,7 +34,7 @@
 <div class="row mt-2">
     <div class="col-lg-6">
         {% block meta_question %}
-        <h1>{{ project.title }}</h1>
+        <h2>{{ project.title }}</h2>
         {% endblock %}
     </div>
 
@@ -179,9 +179,9 @@
 
 <!-- CLUE ZOOM-->
 <div class="row mt-3 px-2 vertical-center">
-    <div class="col-lg-6 col-12 text-justify rounded" style="background-color: #ff7171;"> <h3 id="cw-top-text"></h3> </div>
-    <div class="col-lg-3 text-center d-none d-lg-block"> <h5><b>Horizontalement</b></h5> </div>
-    <div class="col-lg-3 text-center d-none d-lg-block"> <h5><b>Verticalement</b></h5> </div>
+    <div class="col-xl-6 text-justify rounded" style="background-color: #ff7171;"> <h3 id="cw-top-text"></h3> </div>
+    <div class="col-xl-3 text-center d-none d-xl-block"> <h5><b>Horizontalement</b></h5> </div>
+    <div class="col-xl-3 text-center d-none d-xl-block"> <h5><b>Verticalement</b></h5> </div>
 </div>
 
 <!-- GRID AND CLUE LIST -->
@@ -190,13 +190,13 @@
         <input type="text" id="hidden-input"
                style="opacity: 0; position: fixed; top: -100px; left: -100px; width: 0; height: 0; z-index: -1;">
         <div class="row">
-            <div class="col-lg-6" id="cw-canvas-holder">
+            <div class="col-xl-6" id="cw-canvas-holder">
                 <canvas id="cw-canvas" style="display: block; margin: 0 auto;"></canvas>
             </div>
-            <div class="cw-clues cw-clues-top d-none d-lg-block col-lg-3" id="cw-clues-top" >
+            <div class="cw-clues cw-clues-top d-none d-xl-block col-xl-3" id="cw-clues-top" >
                 <div id="cw-clues-top-holder" class="cw-clues-items overflow-auto"></div>
             </div>
-            <div class="cw-clues cw-clues-bottom d-none d-lg-block col-lg-3" id="cw-clues-bottom">
+            <div class="cw-clues cw-clues-bottom d-none d-xl-block col-xl-3" id="cw-clues-bottom">
                 <div id="cw-clues-bottom-holder" class="cw-clues-items overflow-auto"></div>
             </div>
             <div class="cw-clues-holder " id="cw-clues-holder"></div>
