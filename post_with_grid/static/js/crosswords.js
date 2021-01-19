@@ -288,17 +288,19 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             this.toggleSaveTimer();
         } else {
             $("#timer-value").text(formatDisplayTime(xw_timer_seconds))
+            $("#clue-bar").addClass("d-none")
         }
 
         // If grid is finished and you can submit score
-        if(this.can_submit_score && this.grid_is_finished){
-            $('#open-modal-button').removeClass('btn-secondary').addClass('btn-primary');
-            $('#open-modal-button').attr("data-target", "#submitModal");
+        if(!this.can_submit_score){
+            $('#open-modal-button').prop('disabled', 'disabled');
         }
 
-        var first_word = this.active_clues.getFirstWord();
-        this.setActiveWord(first_word);
-        this.setActiveCell(first_word.getFirstCell());
+        if (!this.grid_is_finished) {
+            var first_word = this.active_clues.getFirstWord();
+            this.setActiveWord(first_word);
+            this.setActiveCell(first_word.getFirstCell());
+        }
 
         this.renderCells();
     }

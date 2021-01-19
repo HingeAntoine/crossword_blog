@@ -66,7 +66,11 @@ function init_meta(pk, file_url){
             success: function (data) {
                 // Change state of can_submit_score
                 grid.grid_is_finished = true
+                grid.can_submit_score = false
                 grid.savePuzzle()
+
+                // Disable post button
+                $('#open-modal-button').prop('disabled', 'disabled');
 
                 // Toggle score modals
                 $('#answerModal').modal('hide');
