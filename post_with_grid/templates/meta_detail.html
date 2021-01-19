@@ -44,17 +44,13 @@
                         <!-- Pseudo field -->
                         <label for="inputPseudo">Pseudo</label>
                         <input type="string" class="form-control" id="inputPseudo" placeholder="Entrez votre pseudo">
-                        <div class="invalid-feedback" id="pseudo-feedback">
-                            Ce pseudo correspond déjà à un score pour la grille.
-                        </div>
+                        <div class="invalid-feedback" id="pseudo-feedback"></div>
 
                         <!-- Answer field -->
                         <label for="inputPseudo" class="mt-4">Réponse</label>
                         <input type="string" class="form-control" id="inputAnswer" placeholder="Entrez votre réponse">
                         <small id="answerHelp" class="form-text text-muted">{{ project.meta_question }}</small>
-                        <div class="invalid-feedback" id="answerFeedback">
-                            Ce n'est pas la bonne réponse.
-                        </div>
+                        <div class="invalid-feedback" id="answerFeedback"></div>
                     </div>
                     <button type="submit" class="btn btn-primary">
                         Soumettre
@@ -68,4 +64,8 @@
 
 {% block score_type %}
 {{ score.solved_at }}
+{% endblock %}
+
+{% block js_grid_init %}
+init_meta('{{ project.pk }}', '{{ project.grid_file.url }}');
 {% endblock %}

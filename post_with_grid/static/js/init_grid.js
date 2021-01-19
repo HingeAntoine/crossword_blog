@@ -71,8 +71,23 @@ function init_meta(pk, file_url){
                 window.location.href = data.url;
             },
             error: function (data) {
-                $('#pseudo-feedback').text(data.responseJSON.error);
-                $("#inputPseudo").addClass("is-invalid");
+                // Reset error form
+                $("#inputPseudo").removeClass("is-invalid");
+                $('#pseudo-feedback').text("");
+                $("#inputAnswer").removeClass("is-invalid");
+                $('#answerFeedback').text("");
+
+                // Display errors in the corresponding fields
+                if ('error' in data.responseJSON){
+                    $('#pseudo-feedback').text(data.responseJSON.error);
+                    $("#inputPseudo").addClass("is-invalid");
+                }
+
+                if ('error_answer' in data.responseJSON){
+                    $('#answerFeedback').text(data.responseJSON.error_answer);
+                    $("#inputAnswer").addClass("is-invalid");
+                }
+
             }
         });
         return false;

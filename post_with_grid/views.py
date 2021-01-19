@@ -26,40 +26,58 @@ CROSSWORD_SIZE_REF_TIME = {
 }
 
 
-def _compute_score(time, size):
-    return max(CROSSWORD_SIZE_REF_TIME[size] - time, 0)
-
-
 def project_detail(request, pk):
     project = Project.objects.get_subclass(pk=pk)
 
     if request.method == "POST":
+        # Increment grid solve counter
         if "increment" in request.POST:
             Project.objects.filter(pk=pk).update(solve_count=F("solve_count") + 1)
-        if "name" in request.POST:
-            name = request.POST["name"]
+        else:
+            # Create form error dict
+            error_dict = {}
 
-            if len(name) < 3:
-                return JsonResponse(
-                    {"error": "Le pseudo doit contenir au moins 3 caractères."},
-                    status=403,
-                )
+            if "answer" in request.POST:
+                # Read input variables
+                answer = request.POST["answer"]
 
-            if len(name) > 25:
-                return JsonResponse(
-                    {"error": "Le pseudo doit contenir au max. 25 caractères."},
-                    status=403,
-                )
+                # Check answer is not empty
+                if len(answer) == 0:
+                    error_dict["error_answer"] = "Champ obligatoire."
 
-            if len(Score.objects.filter(grid=pk, pseudo=name)) > 0:
-                return JsonResponse(
-                    {"error": "Ce pseudo correspond déjà à un score pour la grille."},
-                    status=403,
-                )
+                # Check if answer is correct
+                norm_answer = "".join(answer.split()).lower()
+                if norm_answer not in project.meta_answers:
+                    error_dict["error_answer"] = "Ce n'est pas la bonne réponse."
 
-            time = int(request.POST["score"])
-            points = _compute_score(time, project.grid_size)
-            Score(grid=pk, pseudo=name, time=time, score=points).save()
+            if "name" in request.POST:
+                name = request.POST["name"]
+
+                if len(name) < 3:
+                    error_dict[
+                        "error"
+                    ] = "Le pseudo doit contenir au moins 3 caractères."
+
+                if len(name) > 25:
+                    error_dict[
+                        "error"
+                    ] = "Le pseudo doit contenir au max. 25 caractères."
+
+                if len(Score.objects.filter(grid=pk, pseudo=name)) > 0:
+                    error_dict[
+                        "error"
+                    ] = "Ce pseudo correspond déjà à un score pour la grille."
+
+            if len(error_dict) > 0:
+                return JsonResponse(error_dict, status=403)
+
+            # Save the score
+            Score(
+                grid=pk,
+                pseudo=request.POST["name"],
+                time=int(request.POST["score"]),
+                score=0,
+            ).save()
 
             # Return an ajax call response
             return JsonResponse({"url": request.get_full_path() + "classement/"})

@@ -206,6 +206,8 @@
 </div>
 
 <script>
+    {% block js_grid_init %}
     init_grid('{{ project.pk }}', '{{ project.grid_file.url }}');
+    {% endblock %}
 </script>
 {% endblock %}
