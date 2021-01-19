@@ -32,13 +32,13 @@
 
 <!-- TOP BAR: Title and buttons-->
 <div class="row mt-2">
-    <div class="col-xl-6 col-12">
+    <div class="col-6">
         {% block meta_question %}
         <h2>{{ project.title }}</h2>
         {% endblock %}
     </div>
 
-    <div class="col-xl-6 col-12">
+    <div class="col-6">
 
         {% block xword_buttons %}
 
@@ -51,11 +51,11 @@
 
             <!-- REVEAL BUTTON -->
             <div class="btn-group" role="group">
-                <button id="dropdownReveal" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                    Révéler
+                <button id="dropdownReveal" type="button" class="btn btn-primary dropdown-toggle"
+                        data-toggle="dropdown">
+                    <div class="d-xl-inline d-none">Révéler</div><div class="em em-eye d-xl-none"></div>
                 </button>
-                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <div class="dropdown-menu">
                     <a class="dropdown-item" id="reveal-letter">Lettre</a>
                     <a class="dropdown-item" id="reveal-word">Mot</a>
                     <a class="dropdown-item" id="reveal-puzzle">Grille</a>
@@ -64,9 +64,8 @@
 
             <!-- CHECK BUTTON -->
             <div class="btn-group" role="group">
-                <button id="dropdownCheck" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                    Vérifier
+                <button id="dropdownCheck" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    <div class="d-xl-inline d-none">Vérifier</div><div class="em em-white_check_mark d-xl-none"></div>
                 </button>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" id="check-letter">Lettre</a>
@@ -76,13 +75,9 @@
             </div>
         </div>
 
-        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-            <button type="button" class="btn btn-secondary" id="open-modal-button" data-toggle="modal">Poster mon score
-            </button>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#best-scores-modal">Voir les
-                scores
-            </button>
-        </div>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#best-scores-modal">
+            <div class="d-xl-inline d-none">Voir les scores</div><div class="em em-sports_medal d-xl-none"></div>
+        </button>
         {% endblock %}
 
     </div>
@@ -140,11 +135,10 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header d-flex align-items-center justify-content-center">
-                <h5><i class="em em-classical_building" aria-role="presentation" aria-label=""></i> Panthéon <i
-                        class="em em-classical_building" aria-role="presentation" aria-label=""></i></h5>
+                <h5><i class="em em-classical_building"></i> Panthéon <i class="em em-classical_building"></i></h5>
                 <a href="{% url 'project_ranking' project.pk %}" class="stretched-link"></a>
             </div>
-            <div class="modal-body  d-flex align-items-center justify-content-center">
+            <div class="modal-body d-flex align-items-center justify-content-center">
                 <div class="container">
                     {% for score in scores %}
                     <div class="row mb-2">
@@ -253,6 +247,7 @@
     });
 
 })();
+
 
 
 </script>
