@@ -1,5 +1,4 @@
-function init_grid(pk, file_url){
-
+function load_grid(pk, file_url){
     //Create Grid from puz file
     var params1 = {
       hover_enabled: false,
@@ -16,6 +15,11 @@ function init_grid(pk, file_url){
     window.onunload = window.onbeforeunload = function(){
         grid.savePuzzle()
     }
+}
+
+function init_grid(pk, file_url){
+    // Load grid
+    load_grid(pk, file_url);
 
     // Listen to submit-form
     var frm = $('#submit-form');
@@ -26,6 +30,38 @@ function init_grid(pk, file_url){
             data: {
                 'score': grid.getTime(),
                 'name': $('#inputPseudo').val(),
+            },
+            success: function (data) {
+                // Change state of can_submit_score
+                grid.can_submit_score = false
+
+                // Redirect to score window
+                window.location.href = data.url;
+            },
+            error: function (data) {
+                $('#pseudo-feedback').text(data.responseJSON.error);
+                $("#inputPseudo").addClass("is-invalid");
+            }
+        });
+        return false;
+    });
+
+}
+
+function init_meta(pk, file_url){
+    // Load grid
+    load_grid(pk, file_url);
+
+    // Listen to submit-form
+    var frm = $('#submit-form');
+    frm.submit(function () {
+        $.ajax({
+            type: 'POST',
+            url: '',
+            data: {
+                'score': 0,
+                'name': $('#inputPseudo').val(),
+                'answer': $('#inputAnswer').val(),
             },
             success: function (data) {
                 // Change state of can_submit_score

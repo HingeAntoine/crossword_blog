@@ -33,16 +33,13 @@
 
 
 <!-- TOP BAR: Title and buttons-->
+{% block top_bar %}
 <div class="row mt-2">
     <div class="col-6">
-        {% block meta_question %}
         <h2>{{ project.title }}</h2>
-        {% endblock %}
     </div>
 
     <div class="col-6">
-
-        {% block xword_buttons %}
         <!-- SCORE BUTTON -->
         <button type="button" class="btn btn-primary float-right mx-1" data-toggle="modal" data-target="#best-scores-modal">
             <div class="d-xl-inline d-none">Voir les scores</div><div class="em em-sports_medal d-xl-none"></div>
@@ -83,10 +80,10 @@
             <a id="timer-value">00:00</a>
             <i id="timer-symbol" class="em em-double_vertical_bar"></i>
         </button>
-        {% endblock %}
 
     </div>
 </div>
+{% endblock %}
 
 <!-- ALERT BARS -->
 {% block alert_bars %}

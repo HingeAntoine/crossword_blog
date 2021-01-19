@@ -1,19 +1,31 @@
 {% extends "grid_detail.html" %}
 
-{% block meta_question %}
-<h2>{{ project.title}} </h2>
-<h4>{{ project.meta_question }}</h4>
-{% endblock %}
+{% block top_bar %}
+<div class="row mt-2">
 
-{% block xword_buttons %}
+    <!-- TITLE -->
+    <div class="col-6">
+        <h2>{{ project.title }}</h2>
+    </div>
 
-<div class="btn-group float-right mx-1" role="group" aria-label="Button group with nested dropdown">
-    <button type="button" class="btn btn-primary" id="open-modal-button" data-toggle="modal" data-target="#answerModal">
-        Poster ma réponse
-    </button>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#best-scores-modal">
-        Voir les scores
-    </button>
+    <!-- BUTTONS -->
+    <div class="col-6">
+        <!-- SCORE BUTTON -->
+        <button type="button" class="btn btn-primary float-right mx-1" data-toggle="modal" data-target="#best-scores-modal">
+            <div class="d-xl-inline d-none">Voir les scores</div><div class="em em-sports_medal d-xl-none"></div>
+        </button>
+
+        <!-- POST BUTTON -->
+        <button type="button" class="btn btn-primary float-right mx-1" id="open-modal-button" data-toggle="modal" data-target="#answerModal">
+            <div class="d-xl-inline d-none">Poster ma réponse</div><div class="em em-incoming_envelope d-xl-none"></div>
+        </button>
+    </div>
+
+</div>
+
+<!-- INSTRUCTIONS -->
+<div class="row mt-1">
+    <h4>{{ project.meta_question }}</h4>
 </div>
 
 {% endblock %}
