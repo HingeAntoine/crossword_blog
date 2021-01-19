@@ -41,13 +41,13 @@
     <div class="col-6">
 
         {% block xword_buttons %}
-
-        <button type="button" class="btn btn-primary ml-2" id="timer-button" onclick="toggleHideGrid()">
-            <a id="timer-value">00:00</a>
-            <i id="timer-symbol" class="em em-double_vertical_bar"></i>
+        <!-- SCORE BUTTON -->
+        <button type="button" class="btn btn-primary float-right mx-1" data-toggle="modal" data-target="#best-scores-modal">
+            <div class="d-xl-inline d-none">Voir les scores</div><div class="em em-sports_medal d-xl-none"></div>
         </button>
 
-        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+        <!-- REVEAL AND CHECK -->
+        <div class="btn-group float-right mx-1" role="group" aria-label="Button group with nested dropdown">
 
             <!-- REVEAL BUTTON -->
             <div class="btn-group" role="group">
@@ -64,7 +64,7 @@
 
             <!-- CHECK BUTTON -->
             <div class="btn-group" role="group">
-                <button id="dropdownCheck" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                <button id="dropdownCheck" type="button" class="btn btn-primary dropdown-toggle float-right" data-toggle="dropdown">
                     <div class="d-xl-inline d-none">Vérifier</div><div class="em em-white_check_mark d-xl-none"></div>
                 </button>
                 <div class="dropdown-menu">
@@ -73,10 +73,13 @@
                     <a class="dropdown-item" id="check-puzzle">Grille</a>
                 </div>
             </div>
+
         </div>
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#best-scores-modal">
-            <div class="d-xl-inline d-none">Voir les scores</div><div class="em em-sports_medal d-xl-none"></div>
+        <!-- TIMER BUTTON -->
+        <button type="button" class="btn btn-primary mx-1 float-right" id="timer-button" onclick="toggleHideGrid()">
+            <a id="timer-value">00:00</a>
+            <i id="timer-symbol" class="em em-double_vertical_bar"></i>
         </button>
         {% endblock %}
 
