@@ -24,3 +24,7 @@ def project_index(request):
 def about(request):
     context = {}
     return render(request, "about.html", context)
+
+
+def meta(request):
+    return render(request, "meta_rules.html", {})

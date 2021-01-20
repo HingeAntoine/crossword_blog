@@ -41,6 +41,7 @@ urlpatterns = [
     path("author/", include("author_page.urls")),
     path("grilles/", include("post_with_grid.urls")),
     path("about/", views.about, name="about"),
+    path("meta/", views.meta, name="meta_rules"),
     path("contact/", include("contact_email.urls"), name="contact"),
 ]
 
