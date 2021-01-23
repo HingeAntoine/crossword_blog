@@ -34,6 +34,8 @@
             </th>
             <th class="th-sm">Auteur - Autrice
             </th>
+            <th class="th-sm">Type
+            </th>
             <th class="th-sm">Statut
             </th>
             <th class="th-sm">Date
@@ -47,6 +49,7 @@
         <tr>
             <td><a href="{% url 'project_detail' grid.pk %}">{{ grid.title }}</a></td>
             <td><a href="{% url 'author_page' grid.author_key.name %}">{{ grid.author_key.display_name }}</a></td>
+            <td>{{ grid.grid_type_str }}</td>
             <td><i id="status-{{ grid.pk }}" class="em"></i></td>
             <td>{{ grid.date_created }}</td>
             <td><span class="badge badge-primary badge-pill">{{ grid.solve_count }}</span></td>

@@ -60,6 +60,16 @@ class Project(models.Model):
         return datetime.today().date() - self.date_created < timedelta(weeks=1)
 
     @property
+    def grid_type_str(self):
+        if self.crossword_type == 0:
+            return "Classique"
+        elif self.crossword_type == 1:
+            return "Cryptique"
+        elif self.crossword_type == 2:
+            return "Méta"
+        return "Classique"
+
+    @property
     def preview_path(self):
         preview_path = "preview/" + str(self.pk) + ".png"
         if os.path.isfile(settings.MEDIA_ROOT + "/" + preview_path):
