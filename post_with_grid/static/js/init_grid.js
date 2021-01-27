@@ -35,8 +35,12 @@ function init_grid(pk, file_url){
                 // Change state of can_submit_score
                 grid.can_submit_score = false
 
-                // Redirect to score window
-                window.location.href = data.url;
+                // Reload scores
+                $('#ranking-content').html('').load("/grilles/" + pk + "/classement/");
+
+                // Toggle score modals
+                $('#submitModal').modal('hide');
+                $('#best-scores-modal').modal('show');
             },
             error: function (data) {
                 $('#pseudo-feedback').text(data.responseJSON.error);

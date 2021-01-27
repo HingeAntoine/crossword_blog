@@ -133,42 +133,15 @@
 </div>
 {% endblock %}
 
-<div class="modal fade" id="best-scores-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="best-scores-modal" tabindex="-1"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header d-flex align-items-center justify-content-center">
                 <h5><i class="em em-classical_building"></i> Panthéon <i class="em em-classical_building"></i></h5>
-                <a href="{% url 'project_ranking' project.pk %}" class="stretched-link"></a>
             </div>
-            <div class="modal-body d-flex align-items-center justify-content-center">
-                <div class="container">
-                    {% for score in scores %}
-                    <div class="row mb-2">
-                        <div class="col-6">
-                            {% if score.rank == 1 %}
-                            <i class="em em-first_place_medal" aria-role="presentation"
-                               aria-label="MEDAILLE D'OR"></i>
-                            {% elif score.rank == 2 %}
-                            <i class="em em-second_place_medal" aria-role="presentation"
-                               aria-label="MEDAILLE D'ARGENT"></i>
-                            {% elif score.rank == 3 %}
-                            <i class="em em-third_place_medal" aria-role="presentation"
-                               aria-label="MEDAILLE DE BRONZE"></i>
-                            {% else %}
-                            <i class="em em-sports_medal" aria-role="presentation"
-                               aria-label="MEDAILLE"></i>
-                            {% endif %}
-                            {{ score.pseudo }}
-                        </div>
-                        <div class="col-6 d-flex align-items-center justify-content-center">
-                            {% block score_type %}
-                            {{ score.get_minute_secs }}
-                            {% endblock %}
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
+            <div class="modal-body d-flex align-items-center justify-content-center" id="ranking-content">
+                {% include "grid_scores.html" %}
             </div>
         </div>
     </div>
