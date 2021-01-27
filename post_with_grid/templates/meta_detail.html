@@ -62,10 +62,6 @@
 </div>
 {% endblock %}
 
-{% block score_type %}
-{{ score.solved_at }}
-{% endblock %}
-
 {% block js_grid_init %}
 init_meta('{{ project.pk }}', '{{ project.grid_file.url }}');
 {% endblock %}
