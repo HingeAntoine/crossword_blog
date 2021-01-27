@@ -91,7 +91,7 @@ def project_detail(request, pk):
         scores = (
             Score.objects.filter(grid=pk)
             .annotate(rank=Window(expression=Rank(), order_by=[F("solved_at")]))
-            .order_by("solved_at", "pseudo")[:5]
+            .order_by("solved_at", "pseudo")[:20]
         )
         context = {"project": project, "scores": scores}
         return render(request, "meta_detail.html", context)
