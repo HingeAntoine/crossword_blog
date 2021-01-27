@@ -99,14 +99,19 @@ def project_detail(request, pk):
             # Return an ajax call response
             return JsonResponse({"url": request.get_full_path() + "classement/"})
 
-    # Get scores
-    page_context = {"project": project, "scores": _get_scores(pk)}
-
     # If the grid is a meta: display another page arrangement
     if isinstance(project, MetaGrid):
-        return render(request, "meta_detail.html", page_context)
+        return render(
+            request,
+            "meta_detail.html",
+            {"project": project, "scores": _get_scores(pk), "type": "meta"},
+        )
     else:
-        return render(request, "grid_detail.html", page_context)
+        return render(
+            request,
+            "grid_detail.html",
+            {"project": project, "scores": _get_scores(pk), "type": "classique"},
+        )
 
 
 ####################
@@ -187,4 +192,15 @@ def project_archives(request):
 
 
 def project_ranking(request, pk):
-    return render(request, "grid_scores.html", {"scores": _get_scores(pk)})
+    project = Project.objects.get_subclass(pk=pk)
+
+    if isinstance(project, MetaGrid):
+        return render(
+            request, "grid_scores.html", {"scores": _get_scores(pk), "type": "meta"}
+        )
+    else:
+        return render(
+            request,
+            "grid_scores.html",
+            {"scores": _get_scores(pk), "type": "classique"},
+        )

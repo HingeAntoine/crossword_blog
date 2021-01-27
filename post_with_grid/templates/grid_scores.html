@@ -18,7 +18,11 @@
             {{ score.pseudo }}
         </div>
         <div class="col-6 d-flex align-items-center justify-content-center">
+            {% if type == "meta" %}
+            {{ score.solved_at }}
+            {% else %}
             {{ score.get_minute_secs }}
+            {% endif%}
         </div>
     </div>
     {% endfor %}
