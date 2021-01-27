@@ -36,7 +36,7 @@ function init_grid(pk, file_url){
                 grid.can_submit_score = false
 
                 // Reload scores
-                $('#ranking-content').html('').load("/grilles/" + pk + "/classement/");
+                $('#ranking-content').html('').load(data.url);
 
                 // Toggle score modals
                 $('#submitModal').modal('hide');
@@ -77,7 +77,7 @@ function init_meta(pk, file_url){
                 $('#open-modal-button').prop('disabled', 'disabled');
 
                 // Reload scores
-                $('#ranking-content').html('').load("/grilles/" + pk + "/classement/");
+                $('#ranking-content').html('').load(data.url);
 
                 // Toggle score modals
                 $('#answerModal').modal('hide');

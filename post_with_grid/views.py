@@ -97,7 +97,13 @@ def project_detail(request, pk):
                 Project.objects.filter(pk=pk).update(solve_count=F("solve_count") + 1)
 
             # Return an ajax call response
-            return JsonResponse({"url": request.get_full_path() + "classement/"})
+            return JsonResponse(
+                {
+                    "url": request.get_full_path()
+                    + "classement/?name="
+                    + request.POST["name"]
+                }
+            )
 
     # If the grid is a meta: display another page arrangement
     if isinstance(project, MetaGrid):
@@ -196,11 +202,17 @@ def project_ranking(request, pk):
 
     if isinstance(project, MetaGrid):
         return render(
-            request, "grid_scores.html", {"scores": _get_scores(pk), "type": "meta"}
+            request,
+            "grid_scores.html",
+            {"scores": _get_scores(pk), "name": request.GET["name"], "type": "meta"},
         )
     else:
         return render(
             request,
             "grid_scores.html",
-            {"scores": _get_scores(pk), "type": "classique"},
+            {
+                "scores": _get_scores(pk),
+                "name": request.GET["name"],
+                "type": "classique",
+            },
         )
