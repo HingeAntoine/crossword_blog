@@ -18,9 +18,7 @@
             {{ score.pseudo }}
         </div>
         <div class="col-6 d-flex align-items-center justify-content-center">
-            {% block score_type %}
             {{ score.get_minute_secs }}
-            {% endblock %}
         </div>
     </div>
     {% endfor %}

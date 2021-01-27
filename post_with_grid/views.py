@@ -14,16 +14,30 @@ from django.db.models.functions import Rank
 PAGINATOR_ARCHIVE_SIZE = 15
 
 
+def _get_scores(pk):
+    project = Project.objects.get_subclass(pk=pk)
+
+    # If the grid is a meta: display another page arrangement
+    if isinstance(project, MetaGrid):
+        # Scores are on a first come first serve basis
+        scores = (
+            Score.objects.filter(grid=pk)
+            .annotate(rank=Window(expression=Rank(), order_by=[F("solved_at")]))
+            .order_by("solved_at", "pseudo")[:20]
+        )
+    else:
+        # Scores are ordered by best time
+        scores = (
+            Score.objects.filter(grid=pk)
+            .annotate(rank=Window(expression=Rank(), order_by=[F("time")]))
+            .order_by("time", "solved_at", "pseudo")[:20]
+        )
+    return scores
+
+
 ##################
 # Project Detail #
 ##################
-
-CROSSWORD_SIZE_REF_TIME = {
-    CrosswordsSize.MINI.value: 5 * 60,
-    CrosswordsSize.MIDI.value: 15 * 60,
-    CrosswordsSize.NORMAL.value: 30 * 60,
-    CrosswordsSize.BIG.value: 60 * 60,
-}
 
 
 def project_detail(request, pk):
@@ -85,26 +99,14 @@ def project_detail(request, pk):
             # Return an ajax call response
             return JsonResponse({"url": request.get_full_path() + "classement/"})
 
+    # Get scores
+    page_context = {"project": project, "scores": _get_scores(pk)}
+
     # If the grid is a meta: display another page arrangement
     if isinstance(project, MetaGrid):
-        # Scores are on a first come first serve basis
-        scores = (
-            Score.objects.filter(grid=pk)
-            .annotate(rank=Window(expression=Rank(), order_by=[F("solved_at")]))
-            .order_by("solved_at", "pseudo")[:20]
-        )
-        context = {"project": project, "scores": scores}
-        return render(request, "meta_detail.html", context)
+        return render(request, "meta_detail.html", page_context)
     else:
-        # Scores are ordered by best time
-        scores = (
-            Score.objects.filter(grid=pk)
-            .annotate(rank=Window(expression=Rank(), order_by=[F("time")]))
-            .order_by("time", "solved_at", "pseudo")[:5]
-        )
-        return render(
-            request, "grid_detail.html", {"project": project, "scores": scores}
-        )
+        return render(request, "grid_detail.html", page_context)
 
 
 ####################
@@ -185,7 +187,4 @@ def project_archives(request):
 
 
 def project_ranking(request, pk):
-    scores = Score.objects.filter(grid=pk).order_by("time", "solved_at", "pseudo")
-    context = {"scores": scores}
-
-    return render(request, "grid_scores.html", context)
+    return render(request, "grid_scores.html", {"scores": _get_scores(pk)})

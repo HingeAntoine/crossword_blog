@@ -76,6 +76,9 @@ function init_meta(pk, file_url){
                 // Disable post button
                 $('#open-modal-button').prop('disabled', 'disabled');
 
+                // Reload scores
+                $('#ranking-content').html('').load("/grilles/" + pk + "/classement/");
+
                 // Toggle score modals
                 $('#answerModal').modal('hide');
                 $('#best-scores-modal').modal('show');
