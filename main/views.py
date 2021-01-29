@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from post_with_grid.models import Project, Edito
+from post_with_grid.views import get_scores, get_type
 
 
 #################
@@ -9,9 +10,21 @@ from post_with_grid.models import Project, Edito
 
 
 def project_index(request):
+    # Get grids and edito
     projects = Project.objects.all().order_by("-date_created", "-title")[:6]
     edito = Edito.objects.last()
-    context = {"projects": projects, "edito": edito}
+
+    # Retrieve scores
+    scores = get_scores(projects[0].pk)
+    grid_type = get_type(projects[0].pk)
+
+    # Create context
+    context = {
+        "projects": projects,
+        "edito": edito,
+        "scores": scores,
+        "type": grid_type,
+    }
 
     return render(request, "grid_index.html", context)
 

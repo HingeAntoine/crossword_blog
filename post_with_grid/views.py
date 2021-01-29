@@ -14,7 +14,7 @@ from django.db.models.functions import Rank
 PAGINATOR_ARCHIVE_SIZE = 15
 
 
-def _get_scores(pk):
+def get_scores(pk):
     project = Project.objects.get_subclass(pk=pk)
 
     # If the grid is a meta: display another page arrangement
@@ -33,6 +33,15 @@ def _get_scores(pk):
             .order_by("time", "solved_at", "pseudo")[:20]
         )
     return scores
+
+
+def get_type(pk):
+    project = Project.objects.get_subclass(pk=pk)
+
+    if isinstance(project, MetaGrid):
+        return "meta"
+    else:
+        return "classique"
 
 
 ##################
@@ -110,13 +119,13 @@ def project_detail(request, pk):
         return render(
             request,
             "meta_detail.html",
-            {"project": project, "scores": _get_scores(pk), "type": "meta"},
+            {"project": project, "scores": get_scores(pk), "type": "meta"},
         )
     else:
         return render(
             request,
             "grid_detail.html",
-            {"project": project, "scores": _get_scores(pk), "type": "classique"},
+            {"project": project, "scores": get_scores(pk), "type": "classique"},
         )
 
 
@@ -198,21 +207,8 @@ def project_archives(request):
 
 
 def project_ranking(request, pk):
-    project = Project.objects.get_subclass(pk=pk)
-
-    if isinstance(project, MetaGrid):
-        return render(
-            request,
-            "grid_scores.html",
-            {"scores": _get_scores(pk), "name": request.GET["name"], "type": "meta"},
-        )
-    else:
-        return render(
-            request,
-            "grid_scores.html",
-            {
-                "scores": _get_scores(pk),
-                "name": request.GET["name"],
-                "type": "classique",
-            },
-        )
+    return render(
+        request,
+        "grid_scores.html",
+        {"scores": get_scores(pk), "name": request.GET["name"], "type": get_type(pk)},
+    )

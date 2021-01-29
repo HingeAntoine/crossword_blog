@@ -2,10 +2,10 @@
 {% load static %}
 
 {% block social_meta %}
-    <!-- TITLE -->
-    <title>Case vide - Blog de mots croisés</title>
+<!-- TITLE -->
+<title>Case vide - Blog de mots croisés</title>
 
-    <meta name="description" content="Case vide - Blog de mots croisés. Nouvelles grilles tous les vendredis matin.">
+<meta name="description" content="Case vide - Blog de mots croisés. Nouvelles grilles tous les vendredis matin.">
 {% endblock %}
 
 {% block page_content %}
@@ -14,20 +14,30 @@
 
 <script type="text/javascript" src="{% static 'js/status.js' %}"></script>
 
-<!-- EDITO BLOCK -->
-<h3 class="mt-4"> Edito </h3>
-<hr>
 
-<div class="row no-gutters bg-light position-relative mt-4">
-    <div class="col-md-2 mb-md-0 p-md-4">
-        <a href="https://www.instagram.com/stc019_comix_boi/">
-            <img src="static/img/edito.png" class="w-100" alt="...">
-        </a>
+<div class="row mt-4">
+    <!-- EDITO BLOCK -->
+    <div class="col-8">
+        <h3 class=""> Edito </h3>
+        <hr>
+        <div>
+            <div class="col-md-2 mb-md-0 p-md-4">
+                <a href="https://www.instagram.com/stc019_comix_boi/">
+                    <img src="static/img/edito.png" class="w-100">
+                </a>
+            </div>
+            <div class="col-md-10 p-4 pl-md-0">
+                <h5 class="mt-0">{{ edito.title }}</h5>
+                <p> {{ edito.date_created }} </p>
+                <p>{{ edito.content|linebreaks }}</p>
+            </div>
+        </div>
     </div>
-    <div class="col-md-10 p-4 pl-md-0">
-        <h5 class="mt-0">{{ edito.title }}</h5>
-        <p> {{ edito.date_created }} </p>
-        <p>{{ edito.content|linebreaks }}</p>
+
+    <!-- LAST GRID RANKING -->
+    <div class="col-4">
+        <h3> Classement test </h3>
+        {% include "grid_scores.html" %}
     </div>
 </div>
 
@@ -57,6 +67,8 @@
 
                     <script>
                     get_status({{project.pk}}, '{{project.is_new}}')
+
+
                     </script>
 
                 </div>
