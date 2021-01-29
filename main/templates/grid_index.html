@@ -27,8 +27,7 @@
                 </a>
             </div>
             <div class="col-10 p-4 pl-0">
-                <h5 class="mt-0">{{ edito.title }}</h5>
-                <p> {{ edito.date_created }} </p>
+                <div class="h5"><strong class="mr-2">{{ edito.title }}</strong> {{ edito.date_created }}</div>
                 <p>{{ edito.content|linebreaks }}</p>
             </div>
         </div>
@@ -36,7 +35,8 @@
 
     <!-- LAST GRID RANKING -->
     <div class="col-4 border border-primary rounded pt-3">
-        <h3 class="mb-4"> Classement test </h3>
+
+        <h4 class="mb-4 text-center"> Dernière grille </h4>
         {% include "grid_scores.html" %}
     </div>
 </div>
@@ -67,6 +67,9 @@
 
                     <script>
                     get_status({{project.pk}}, '{{project.is_new}}')
+
+
+
 
 
                     </script>
