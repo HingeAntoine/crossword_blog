@@ -18,15 +18,15 @@
 <div class="row mt-4">
     <!-- EDITO BLOCK -->
     <div class="col-8">
-        <h3 class=""> Edito </h3>
+        <h3> Edito </h3>
         <hr>
-        <div>
-            <div class="col-md-2 mb-md-0 p-md-4">
+        <div class="row bg-light mx-2">
+            <div class="col-2 mb-0 p-4">
                 <a href="https://www.instagram.com/stc019_comix_boi/">
                     <img src="static/img/edito.png" class="w-100">
                 </a>
             </div>
-            <div class="col-md-10 p-4 pl-md-0">
+            <div class="col-10 p-4 pl-0">
                 <h5 class="mt-0">{{ edito.title }}</h5>
                 <p> {{ edito.date_created }} </p>
                 <p>{{ edito.content|linebreaks }}</p>
@@ -35,8 +35,8 @@
     </div>
 
     <!-- LAST GRID RANKING -->
-    <div class="col-4">
-        <h3> Classement test </h3>
+    <div class="col-4 border border-primary rounded pt-3">
+        <h3 class="mb-4"> Classement test </h3>
         {% include "grid_scores.html" %}
     </div>
 </div>
