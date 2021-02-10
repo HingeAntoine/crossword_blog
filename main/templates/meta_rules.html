@@ -1,29 +1,30 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block social_meta %}
-    <!-- TITLE -->
-    <title>Case vide - Méta, comment jouer?</title>
+<!-- TITLE -->
+<title>Case vide - Méta, comment jouer?</title>
 
-    <meta name="description" content="Case vide - Méta, comment jouer?">
+<meta name="description" content="Case vide - Méta, comment jouer?">
 
-    <!-- SOCIAL MEDIA META -->
+<!-- SOCIAL MEDIA META -->
 
-    <!-- OpenGraph (Facebook) -->
-    <meta property="og:image" content="https://casevide.fr/static/img/logo.png"/>
+<!-- OpenGraph (Facebook) -->
+<meta property="og:image" content="https://casevide.fr/static/img/logo.png"/>
 
-    <!-- Specific (Twitter) -->
-    <meta name="twitter:title" content="Méta, comment jouer?">
-    <meta name="twitter:description" content="Un tutoriel rapide pour jouer aux grilles méta.">
-    <meta name="twitter:image" content="https://casevide.fr/static/img/logo.png">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:creator" content="AntoineHinge">
+<!-- Specific (Twitter) -->
+<meta name="twitter:title" content="Méta, comment jouer?">
+<meta name="twitter:description" content="Un tutoriel rapide pour jouer aux grilles méta.">
+<meta name="twitter:image" content="https://casevide.fr/static/img/logo.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:creator" content="AntoineHinge">
 {% endblock %}
 
 {% block page_content %}
-<div class="row">
+<div class="row mt-3">
     <div class="col-xl-6">
         <!-- Explication rapide -->
-        <h3 class="mt-4">Une grille méta, c'est quoi? </h3>
+        <h3>Une grille méta, c'est quoi? </h3>
         <hr>
 
         <p>
@@ -66,12 +67,48 @@
         </ul>
         </p>
 
-        <div class="col-12 text-center">
-            <h5>N'hésitez pas à demander de l'aide grâce au <a href="https://casevide.fr/contact">formulaire de
-                contact</a>.</h5>
-            <h3>Bon jeu!</h3>
-        </div>
+    </div>
 
+    <div class="col-xl-6">
+        <h3>Exemple</h3>
+        <hr>
+        <div class="row">
+            <div class="col-7">
+                <img src="{% static 'img/meta_example.png' %}" alt="Grille d'exemple" class="img-fluid img-thumbnail">
+                <figcaption class="figure-caption">Grille méta remplie: <a href="https://casevide.fr/grilles/51/">Fais
+                    le pour elle</a></figcaption>
+            </div>
+            <div class="col-5 text-justify">
+                <p>
+                    On est à la recherche d'un personnage de série. Le titre "Fais le pour elle", n'est pas d'une grande
+                    aide dans cet exemple, à moins d'avoir la référence.
+                </p>
+                <p>
+                    A première vue, les définitions ne cachent rien (pas de répétition, pas de jeu sur les lettres). Il
+                    y a l'air d'avoir un thème policier dans certaines définitions. La seule série citée, indirectement,
+                    est Les Simpsons (cf. MOE). Cherche t'on un personnage des simpsons?
+                </p>
+                <p>
+                    On liste les mots les plus longs de la grille: FLUTE A BEC, REACTIVER, CALAMAR GEANT, NE CHOMERA
+                    PAS. Rien à première vue dans FLUTE A BEC ni dans REACTIVER, mais CALAMAR GEANT cache MARGE et NE
+                    CHOMERA PAS renferme HOMER.
+                </p>
+                <p>
+                    En regardant dans la grille, on trouve aussi SATELLISA (LISA) et BAR-TABACS (BART) dans des entrées
+                    symétriques.
+                </p>
+            </div>
+        </div>
+        <div class="row px-4 text-center mt-2">
+            Le membre de la famille qui reste, c'est MAGGIE! C'est confirmé par le titre, en référence à DO IT FOR HER
+            affiché par Homer sur sa station de travail.
+        </div>
+    </div>
+
+    <div class="mt-4 col-12 text-center">
+        <h5>Si vous êtes coincés, n'hésitez pas à demander de l'aide grâce au <a href="https://casevide.fr/contact">formulaire
+            de contact</a>.</h5>
+        <h3>Bon jeu!</h3>
     </div>
 </div>
 
