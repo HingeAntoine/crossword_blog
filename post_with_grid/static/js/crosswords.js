@@ -329,6 +329,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         this.hidden_input.off('input');
         this.hidden_input.off('keydown');
+
+        $("#pdfExport").off("click")
     };
 
     CrossWord.prototype.addListeners = function() {
