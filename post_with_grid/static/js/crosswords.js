@@ -357,6 +357,9 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.check_word.on('click', $.proxy(this.check_reveal, this, 'word', 'check'));
         this.check_puzzle.on('click', $.proxy(this.check_reveal, this, 'puzzle', 'check'));
 
+        //PDF
+        $("#pdfExport").on('click', $.proxy(this.printPuzzle, this))
+
         this.hidden_input.on('input', $.proxy(this.hiddenInputChanged, this, null));
         this.hidden_input.on('keydown', $.proxy(this.keyPressed, this));
     };
