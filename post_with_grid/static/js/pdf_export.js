@@ -329,6 +329,11 @@ function puzdata_to_pdf(puzdata,options) {
     var subheader_text = options.subheader_text;
     var subheader_align = options.subheader_align;
 
+    if (puzdata.notes.length > 0){
+        options.subheader = true;
+        subheader_text = puzdata.notes;
+    }
+
     if (options.subheader && subheader_text) {
 
         header_height += options.subheader_mt
@@ -375,7 +380,7 @@ function puzdata_to_pdf(puzdata,options) {
 
         if (i==0) {
             across_nums.push(num);
-            across_clues.push('ACROSS\n' + clue);
+            across_clues.push('HORIZONTAL\n' + clue);
         }
         else {
             across_nums.push(num);
@@ -393,7 +398,7 @@ function puzdata_to_pdf(puzdata,options) {
         var clue = puzdata.down_clues[num];
         if (i==0) {
             down_nums.push(num);
-            down_clues.push('DOWN\n' + clue);
+            down_clues.push('VERTICAL\n' + clue);
         }
         else {
             down_nums.push(num);
