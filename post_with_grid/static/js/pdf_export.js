@@ -703,11 +703,11 @@ function puzdata_to_pdf(puzdata,options) {
     }
 
     /* Render header */
-    if (options.my_font.length > 0) {
-        doc.addFileToVFS("MyFont.ttf", options.my_font);
-        doc.addFont("MyFont.ttf", "myFont","bold");
-        //console.log("Font Added");
-    }
+//    if (options.my_font.length > 0) {
+//        doc.addFileToVFS("MyFont.ttf", options.my_font);
+//        doc.addFont("MyFont.ttf", "myFont","bold");
+//        //console.log("Font Added");
+//    }
     doc.setFontSize(options.header_pt);
     doc.setFont(options.header_font,'bold');
     doc.text(title_xpos,title_ypos,title,{align: xalign, baseline: baseline});
