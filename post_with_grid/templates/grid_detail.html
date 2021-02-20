@@ -34,13 +34,14 @@
 
 
 <!-- TOP BAR: Title and buttons-->
-{% block top_bar %}
+
 <div class="row mt-2">
     <div class="col-6">
         <h2>{{ project.title }}</h2>
     </div>
 
     <div class="col-6">
+
         <!-- PDF BUTTON -->
         <button type="button" id="pdfExport" class="btn btn-primary float-right mx-1">
             <div class="d-xl-inline d-none">Exporter en PDF</div><div class="em em-page_with_curl d-xl-none"></div>
@@ -51,6 +52,7 @@
             <div class="d-xl-inline d-none">Voir les scores</div><div class="em em-sports_medal d-xl-none"></div>
         </button>
 
+        {% block button_bar %}
         <!-- REVEAL AND CHECK -->
         <div class="btn-group float-right mx-1" role="group" aria-label="Button group with nested dropdown">
 
@@ -86,9 +88,12 @@
             <a id="timer-value">00:00</a>
             <i id="timer-symbol" class="em em-double_vertical_bar"></i>
         </button>
+        {% endblock %}
 
     </div>
 </div>
+
+{% block meta_phrase %}
 {% endblock %}
 
 <!-- ALERT BARS -->
