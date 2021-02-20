@@ -791,5 +791,10 @@ function puzdata_to_pdf(puzdata,options) {
         doc.rect(grid_xpos-options.border_width/2,(margin + header_height + 3)-options.border_width/2,grid_width+options.border_width,(grid_width*puzdata.height/puzdata.width)+options.border_width);
     }
 
+    /* Add bottom link to website */
+    doc.setFont(options.grid_font,'bold');
+    doc.setFontSize(14);
+    doc.text(175, 775, "Retrouvez plus de grilles sur https://casevide.fr", null, null,'left');
+
     doc.save(options.outfile);
 }
