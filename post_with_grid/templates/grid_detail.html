@@ -23,13 +23,20 @@
 
 {% block page_content %}
 
-<!-- Import scripts -->
-<script type="text/javascript" src="{% static 'js/jspdf.min.js' %}"></script>
+<!-- IMPORT SCRIPTS -->
+
+<!-- Grid logic -->
 <script type="text/javascript" src="{% static 'js/misc.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/cluesgroup.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/word.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/crosswords.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/puz.js' %}"></script>
+
+<!-- Pdf export -->
+<script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+<script type="text/javascript" src="{% static 'js/pdf_export.js' %}"></script>
+
+<!-- Grid init -->
 <script type="text/javascript" src="{% static 'js/init_grid.js' %}"></script>
 
 
