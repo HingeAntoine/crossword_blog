@@ -123,22 +123,26 @@ function draw_crossword_grid(doc,puzdata,options)
 
 function puzdata_to_pdf(puzdata,options) {
     var DEFAULT_OPTIONS = {
-        margin: 20
-    ,   side_margin: 20
-    ,   bottom_margin: 140
+        margin: 36
+    ,   side_margin: 36
+    ,   bottom_margin: 36
+    ,   my_font: ""
+    ,   bold_font: ""
     ,   copyright_pt: 8
     ,   columns: "auto"
     ,   num_columns : null
     ,   num_full_columns: null
     ,   column_padding: 10
-    ,   gray: 1
-    ,   under_title_spacing : 20
+    ,   gray: 0
+    ,   under_title_spacing : 12
     ,   max_clue_pt : 14
     ,   min_clue_pt : 8
-    ,   grid_padding : 12
+    ,   grid_padding : 20
     ,   outfile : null
+    ,   heading_style: "bold"
     ,   header_text : null
-    ,   header2_text : null
+    ,   header2_text : ""
+    ,   subheader: false
     ,   subheader_text : null
     ,   header_align : 'left'
     ,   header2_align: 'right'
@@ -149,18 +153,19 @@ function puzdata_to_pdf(puzdata,options) {
     ,   header_pt : 20
     ,   header2_pt : 16
     ,   subheader_pt : 14
-    ,   y_align : 'top'
-    ,   right_header : false
+    ,   y_align : 'alphabetic'
+    ,   right_header : true
     ,   subheader : false
     ,   line_width : 0.4
     ,   border_width : 0.4
     ,   subheader_mt : 4
-    ,   shade: true
+    ,   shade: false
     ,   letter_pct: 62
     ,   number_pct: 30
+    ,   number_style: "bold"
     ,   copyright: true
-    ,   copyright_text: null
-    ,   header_width: 67
+    ,   copyright_text: ""
+    ,   header_width: 0.67
     ,   clue_spacing: 0.3
     ,   grid_placement: 'top'
     ,   solution: false
