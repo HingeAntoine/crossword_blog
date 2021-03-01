@@ -53,13 +53,17 @@
     <div class="col-6">
 
         <!-- PDF BUTTON -->
-        <button type="button" class="btn btn-primary float-right mx-1" onclick="puzdata_to_pdf(PUZAPP.puzdata, {outfile: 'CaseVide_{{ project.title|cut:" "|cut:"'" }}'})">
-            <div class="d-xl-inline d-none">Exporter en PDF</div><div class="em em-page_with_curl d-xl-none"></div>
+        <button type="button" class="btn btn-primary float-right mx-1"
+                onclick="puzdata_to_pdf(PUZAPP.puzdata, {outfile: 'CaseVide_{{ project.title|cut:" "|cut:"'" }}'})">
+        <div class="d-xl-inline d-none">Exporter en PDF</div>
+        <div class="em em-page_with_curl d-xl-none"></div>
         </button>
 
         <!-- SCORE BUTTON -->
-        <button type="button" class="btn btn-primary float-right mx-1" data-toggle="modal" data-target="#best-scores-modal">
-            <div class="d-xl-inline d-none">Voir les scores</div><div class="em em-sports_medal d-xl-none"></div>
+        <button type="button" class="btn btn-primary float-right mx-1" data-toggle="modal"
+                data-target="#best-scores-modal">
+            <div class="d-xl-inline d-none">Voir les scores</div>
+            <div class="em em-sports_medal d-xl-none"></div>
         </button>
 
         {% block button_bar %}
@@ -70,7 +74,8 @@
             <div class="btn-group" role="group">
                 <button id="dropdownReveal" type="button" class="btn btn-primary dropdown-toggle"
                         data-toggle="dropdown">
-                    <div class="d-xl-inline d-none">Révéler</div><div class="em em-eye d-xl-none"></div>
+                    <div class="d-xl-inline d-none">Révéler</div>
+                    <div class="em em-eye d-xl-none"></div>
                 </button>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" id="reveal-letter">Lettre</a>
@@ -81,8 +86,10 @@
 
             <!-- CHECK BUTTON -->
             <div class="btn-group" role="group">
-                <button id="dropdownCheck" type="button" class="btn btn-primary dropdown-toggle float-right" data-toggle="dropdown">
-                    <div class="d-xl-inline d-none">Vérifier</div><div class="em em-white_check_mark d-xl-none"></div>
+                <button id="dropdownCheck" type="button" class="btn btn-primary dropdown-toggle float-right"
+                        data-toggle="dropdown">
+                    <div class="d-xl-inline d-none">Vérifier</div>
+                    <div class="em em-white_check_mark d-xl-none"></div>
                 </button>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" id="check-letter">Lettre</a>
@@ -178,7 +185,8 @@
     <div class="row auto normal">
         <!-- CANVAS HOLDER -->
         <div class="col-xl-6" id="cw-canvas-holder">
-            <div class="row pl-3 pt-2 rounded" id="clue-bar" style="background-color: #ff7171;"><h3 id="cw-top-text"></h3></div>
+            <div class="row pl-3 pt-2 rounded" id="clue-bar" style="background-color: #ff7171;"><h3
+                    id="cw-top-text"></h3></div>
             <canvas class="mt-2" id="cw-canvas" style="display: block; margin: 0 auto;"></canvas>
         </div>
 
@@ -203,5 +211,6 @@
     {% block js_grid_init %}
     init_grid('{{ project.pk }}', '{{ project.grid_file.url }}');
     {% endblock %}
+
 </script>
 {% endblock %}
