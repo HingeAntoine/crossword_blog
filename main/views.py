@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
+from author_page.models import Author
 from post_with_grid.models import Project, Edito
 from post_with_grid.views import get_scores, get_type
 
@@ -35,7 +36,10 @@ def project_index(request):
 
 
 def about(request):
-    context = {}
+    # Get authors
+    authors = Author.objects.all()
+
+    context = {"authors": authors}
     return render(request, "about.html", context)
 
 

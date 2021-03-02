@@ -1,34 +1,47 @@
 {% extends "base.html" %}
 
 {% block social_meta %}
-    <!-- TITLE -->
-    <title>Case vide - A propos </title>
+<!-- TITLE -->
+<title>Case vide - A propos </title>
 
-    <meta name="description" content="Case vide - A propos">
+<meta name="description" content="Case vide - A propos">
 {% endblock %}
 
 {% block page_content %}
-<div class="mt-2">
-    <h3>Présentation</h3>
-    Bienvenu sur Case vide, un blog de mots croisés indépendants. Nous proposons des grilles:
-    <ul>
-        <li> Thématiques avec une grille symétrique (à l'américaine): parution hebdomadaire</li>
-        <li> Cryptiques (à l'anglaise) qui mêlent dans les indices une définition et un jeu de mots</li>
-    </ul>
-</div>
+<div class="row mt-2">
+    <div class="col-xl-6">
+        <h3>Présentation</h3>
 
-<div>
-    <h3>Autrices et auteurs</h3>
-    <ul>
-        <li>Antoine HINGE</li>
-    </ul>
-</div>
+        <p>
+            Bienvenu sur Case vide, un blog de mots croisés indépendants. J'ai développé ce blog pendant le premier
+            confinement. Il est ouvert au public depuis fin Mai 2020. Nous proposons des grilles:
+        </p>
 
-<div>
-    <h3>Illustrations</h3>
-    <ul>
-        <li><a href="https://www.instagram.com/stc019_comix_boi/">stc019</a></li>
-    </ul>
-</div>
+        <ul>
+            <li><b>Classique</b> Celle que les cruciverbistes connaissent bien</li>
+            <li><b>Méta</b> Une grille classique qui renferme une énigme</li>
+            <li><b>Cryptiques</b> Elles mêlent dans les indices une définition et un jeu de mots</li>
+        </ul>
 
+        <p>
+            N'hésitez pas à me contacter via le <a href="{% url 'contact' %}">formulaire de contact</a> pour toute demande (bugs, fotes d'ortograf...)
+        </p>
+
+    </div>
+
+    <div class="col-xl-6">
+        <h3>Autrices et auteurs</h3>
+        {% for author in authors %}
+        <ul>
+            <li><a href="{% url 'author_page' author.name %}">{{ author.display_name }}</a></li>
+        </ul>
+        {% endfor %}
+
+        <h3>Illustrations</h3>
+        <ul>
+            <li><a href="https://www.instagram.com/stc019_comix_boi/">stc019</a></li>
+        </ul>
+    </div>
+
+</div>
 {% endblock %}
