@@ -10,7 +10,19 @@
 
 <script type="text/javascript" src="{% static 'js/status.js' %}"></script>
 
-<h4 class="mt-4"> {{ author.display_name }} </h4>
+<div class="row mt-4">
+    <div>
+        <h4> {{ author.display_name }} </h4>
+    </div>
+    <div class="ml-3">
+        {% if author.twitter_handle|length > 0 %}
+        <a class="btn" style="background-color: #55acee" href="https://twitter.com/{{ author.twitter_handle }}"
+           role="button">
+            <i class="bi-twitter"></i>
+        </a>
+        {% endif %}
+    </div>
+</div>
 
 <h3 class="mt-4"> Bio </h3>
 <hr>
@@ -42,6 +54,8 @@
 
                     <script>
                     get_status({{project.pk}}, '{{project.is_new}}')
+
+
                     </script>
 
                 </div>
