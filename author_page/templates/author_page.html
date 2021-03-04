@@ -6,10 +6,6 @@
 
 {% block page_content %}
 
-<!-- JAVASCRIPT BLOCK -->
-
-<script type="text/javascript" src="{% static 'js/status.js' %}"></script>
-
 <div class="row mt-4">
     <div>
         <h4> {{ author.display_name }} </h4>
@@ -32,38 +28,6 @@
 <h3 class="mt-4"> Les dernières grilles </h3>
 <hr>
 
-<div class="row">
-    {% for project in grids %}
-    <div class="col-sm-6 col-lg-4 col-xl-2 mt-3">
-        <div class="card">
-            <img class="card-img-top" src="https://casevide.fr/static/img/logo.png" alt="Solving the grid">
-            <div style="height:100%; width: 100%; position:absolute; background-color:#ffffff; opacity:.95;"></div>
-            <div class="card-img-overlay card-body">
-                <div class="text-center">
-                    <h5 class="mt-2">
-                        {{ project.title }}
-                    </h5>
-
-                    <h6 style="margin-top: 10%;"> {{ project.author_key.display_name }} </h6>
-                    <h6>{{ project.date_created }}</h6>
-
-
-                    <h1 class="mt-4">
-                        <i id="status-{{ project.pk }}" class="em"></i>
-                    </h1>
-
-                    <script>
-                    get_status({{project.pk}}, '{{project.is_new}}')
-
-
-                    </script>
-
-                </div>
-                <a href="{% url 'project_detail' project.pk %}" class="stretched-link"></a>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-</div>
+{% include "grid_view.html" %}
 
 {% endblock %}
