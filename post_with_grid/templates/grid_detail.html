@@ -44,8 +44,23 @@
 
 
 <!-- TOP BAR: Title and buttons-->
+<style>
+    .float-button{
+        position:fixed;
+        /* width:60px; */
+        /* height:60px; */
+        top:100px;
+        right:40px;
+        text-align:center;
+        z-index: 5;
+    }
 
-<div class="row mt-2">
+    .my-float{
+        margin-top:22px;
+    }
+</style>
+
+<div class="float-button row">
     <div class="col-6">
         <h2>{{ project.title }}</h2>
     </div>
