@@ -47,82 +47,81 @@
 <style>
     .float-button{
         position:fixed;
-        /* width:60px; */
-        /* height:60px; */
+        top:100px;
+        right:90px;
+        text-align:center;
+        z-index: 5;
+    }
+
+    .float-reveal-button{
+        position:fixed;
         top:100px;
         right:40px;
         text-align:center;
         z-index: 5;
     }
-
-    .my-float{
-        margin-top:22px;
-    }
 </style>
 
-<div class="float-button row">
-    <div class="col-6">
-        <h2>{{ project.title }}</h2>
-    </div>
+<button type="button" class="btn btn-primary float-reveal-button" data-toggle="collapse" data-target="#collapseButtonBar">
+    <div class="d-xl-inline d-none">Exporter en PDF</div>
+    <div class="em em-ab d-xl-none"></div>
+</button>
 
-    <div class="col-6">
+<div class="float-button collapse" id="collapseButtonBar">
+    <!-- PDF BUTTON -->
+    <button type="button" class="btn btn-primary float-right mx-1"
+            onclick="puzdata_to_pdf(PUZAPP.puzdata, {outfile: 'CaseVide_{{ project.title|cut:" "|cut:"'" }}'})">
+    <div class="d-xl-inline d-none">Exporter en PDF</div>
+    <div class="em em-page_with_curl d-xl-none"></div>
+    </button>
 
-        <!-- PDF BUTTON -->
-        <button type="button" class="btn btn-primary float-right mx-1"
-                onclick="puzdata_to_pdf(PUZAPP.puzdata, {outfile: 'CaseVide_{{ project.title|cut:" "|cut:"'" }}'})">
-        <div class="d-xl-inline d-none">Exporter en PDF</div>
-        <div class="em em-page_with_curl d-xl-none"></div>
-        </button>
+    <!-- SCORE BUTTON -->
+    <button type="button" class="btn btn-primary float-right mx-1" data-toggle="modal"
+            data-target="#best-scores-modal">
+        <div class="d-xl-inline d-none">Voir les scores</div>
+        <div class="em em-sports_medal d-xl-none"></div>
+    </button>
 
-        <!-- SCORE BUTTON -->
-        <button type="button" class="btn btn-primary float-right mx-1" data-toggle="modal"
-                data-target="#best-scores-modal">
-            <div class="d-xl-inline d-none">Voir les scores</div>
-            <div class="em em-sports_medal d-xl-none"></div>
-        </button>
+    {% block button_bar %}
+    <!-- REVEAL AND CHECK -->
+    <div class="btn-group float-right mx-1" role="group" aria-label="Button group with nested dropdown">
 
-        {% block button_bar %}
-        <!-- REVEAL AND CHECK -->
-        <div class="btn-group float-right mx-1" role="group" aria-label="Button group with nested dropdown">
-
-            <!-- REVEAL BUTTON -->
-            <div class="btn-group" role="group">
-                <button id="dropdownReveal" type="button" class="btn btn-primary dropdown-toggle"
-                        data-toggle="dropdown">
-                    <div class="d-xl-inline d-none">Révéler</div>
-                    <div class="em em-eye d-xl-none"></div>
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" id="reveal-letter">Lettre</a>
-                    <a class="dropdown-item" id="reveal-word">Mot</a>
-                    <a class="dropdown-item" id="reveal-puzzle">Grille</a>
-                </div>
+        <!-- REVEAL BUTTON -->
+        <div class="btn-group" role="group">
+            <button id="dropdownReveal" type="button" class="btn btn-primary dropdown-toggle"
+                    data-toggle="dropdown">
+                <div class="d-xl-inline d-none">Révéler</div>
+                <div class="em em-eye d-xl-none"></div>
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" id="reveal-letter">Lettre</a>
+                <a class="dropdown-item" id="reveal-word">Mot</a>
+                <a class="dropdown-item" id="reveal-puzzle">Grille</a>
             </div>
-
-            <!-- CHECK BUTTON -->
-            <div class="btn-group" role="group">
-                <button id="dropdownCheck" type="button" class="btn btn-primary dropdown-toggle float-right"
-                        data-toggle="dropdown">
-                    <div class="d-xl-inline d-none">Vérifier</div>
-                    <div class="em em-white_check_mark d-xl-none"></div>
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" id="check-letter">Lettre</a>
-                    <a class="dropdown-item" id="check-word">Mot</a>
-                    <a class="dropdown-item" id="check-puzzle">Grille</a>
-                </div>
-            </div>
-
         </div>
 
-        <!-- TIMER BUTTON -->
-        <button type="button" class="btn btn-primary mx-1 float-right" id="timer-button" onclick="toggleHideGrid()">
-            <a id="timer-value">00:00</a>
-            <i id="timer-symbol" class="em em-double_vertical_bar"></i>
-        </button>
-        {% endblock %}
+        <!-- CHECK BUTTON -->
+        <div class="btn-group" role="group">
+            <button id="dropdownCheck" type="button" class="btn btn-primary dropdown-toggle float-right"
+                    data-toggle="dropdown">
+                <div class="d-xl-inline d-none">Vérifier</div>
+                <div class="em em-white_check_mark d-xl-none"></div>
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" id="check-letter">Lettre</a>
+                <a class="dropdown-item" id="check-word">Mot</a>
+                <a class="dropdown-item" id="check-puzzle">Grille</a>
+            </div>
+        </div>
 
     </div>
+
+    <!-- TIMER BUTTON -->
+    <button type="button" class="btn btn-primary mx-1 float-right" id="timer-button" onclick="toggleHideGrid()">
+        <a id="timer-value">00:00</a>
+        <i id="timer-symbol" class="em em-double_vertical_bar"></i>
+    </button>
+    {% endblock %}
 </div>
 
 {% block meta_phrase %}
