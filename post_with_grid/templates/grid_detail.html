@@ -48,35 +48,28 @@
     .float-button{
         position:fixed;
         top:100px;
-        right:90px;
-        text-align:center;
-        z-index: 5;
-    }
-
-    .float-reveal-button{
-        position:fixed;
-        top:100px;
-        right:40px;
+        right:30px;
         text-align:center;
         z-index: 5;
     }
 </style>
 
-<button type="button" class="btn btn-primary float-reveal-button" data-toggle="collapse" data-target="#collapseButtonBar">
+<div class="float-button">
+    <!-- OPEN & CLOSE BUTTON BAR -->
+    <button type="button" class="btn btn-primary mx-1 float-reveal-button" data-toggle="collapse" data-target=".collapseButtonBar">
     <div class="d-xl-inline d-none">Exporter en PDF</div>
     <div class="em em-ab d-xl-none"></div>
-</button>
+    </button>
 
-<div class="float-button collapse" id="collapseButtonBar">
     <!-- PDF BUTTON -->
-    <button type="button" class="btn btn-primary float-right mx-1"
+    <button type="button" class="btn btn-primary mx-1 collapse collapseButtonBar"
             onclick="puzdata_to_pdf(PUZAPP.puzdata, {outfile: 'CaseVide_{{ project.title|cut:" "|cut:"'" }}'})">
     <div class="d-xl-inline d-none">Exporter en PDF</div>
     <div class="em em-page_with_curl d-xl-none"></div>
     </button>
 
     <!-- SCORE BUTTON -->
-    <button type="button" class="btn btn-primary float-right mx-1" data-toggle="modal"
+    <button type="button" class="btn btn-primary mx-1 collapse collapseButtonBar" data-toggle="modal"
             data-target="#best-scores-modal">
         <div class="d-xl-inline d-none">Voir les scores</div>
         <div class="em em-sports_medal d-xl-none"></div>
@@ -84,7 +77,7 @@
 
     {% block button_bar %}
     <!-- REVEAL AND CHECK -->
-    <div class="btn-group float-right mx-1" role="group" aria-label="Button group with nested dropdown">
+    <div class="btn-group mx-1 collapse collapseButtonBar" role="group" aria-label="Button group with nested dropdown">
 
         <!-- REVEAL BUTTON -->
         <div class="btn-group" role="group">
@@ -117,7 +110,7 @@
     </div>
 
     <!-- TIMER BUTTON -->
-    <button type="button" class="btn btn-primary mx-1 float-right" id="timer-button" onclick="toggleHideGrid()">
+    <button type="button" class="btn btn-primary mx-1" id="timer-button" onclick="toggleHideGrid()">
         <a id="timer-value">00:00</a>
         <i id="timer-symbol" class="em em-double_vertical_bar"></i>
     </button>
