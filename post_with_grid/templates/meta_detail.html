@@ -4,8 +4,7 @@
 <!-- POST BUTTON -->
 <button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar" id="open-modal-button" data-toggle="modal"
         data-target="#answerModal">
-    <div class="d-xl-inline d-none">Poster ma réponse</div>
-    <div class="em em-incoming_envelope d-xl-none"></div>
+    <div class="em em-incoming_envelope"></div>
 </button>
 {% endblock %}
 
@@ -17,7 +16,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                {{ project.meta_question }}
+                <h4>{{ project.meta_question }}</h4>
             </div>
             <div class="modal-body">
                 <!-- Submit form -->
@@ -31,7 +30,6 @@
                         <!-- Answer field -->
                         <label for="inputPseudo" class="mt-4">Réponse</label>
                         <input type="string" class="form-control" id="inputAnswer" placeholder="Entrez votre réponse">
-                        <small id="answerHelp" class="form-text text-muted">{{ project.meta_question }}</small>
                         <div class="invalid-feedback" id="answerFeedback"></div>
                     </div>
                     <button type="submit" class="btn btn-primary">
