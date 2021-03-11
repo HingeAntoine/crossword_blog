@@ -57,7 +57,7 @@
 <div class="float-button">
     {% block button_bar %}
     <!-- TIMER BUTTON -->
-    <button type="button" class="btn btn-primary mx-1" id="timer-button" onclick="toggleHideGrid()">
+    <button type="button" class="btn btn-secondary mx-1" id="timer-button" onclick="toggleHideGrid()">
         <a id="timer-value">00:00</a>
         <i id="timer-symbol" class="em em-double_vertical_bar"></i>
     </button>
@@ -67,10 +67,9 @@
 
         <!-- REVEAL BUTTON -->
         <div class="btn-group" role="group">
-            <button id="dropdownReveal" type="button" class="btn btn-primary dropdown-toggle"
+            <button id="dropdownReveal" type="button" class="btn btn-secondary dropdown-toggle"
                     data-toggle="dropdown">
-                <div class="d-xl-inline d-none">Révéler</div>
-                <div class="em em-eye d-xl-none"></div>
+                <div class="em em-eye"></div>
             </button>
             <div class="dropdown-menu">
                 <a class="dropdown-item" id="reveal-letter">Lettre</a>
@@ -81,10 +80,9 @@
 
         <!-- CHECK BUTTON -->
         <div class="btn-group" role="group">
-            <button id="dropdownCheck" type="button" class="btn btn-primary dropdown-toggle float-right"
+            <button id="dropdownCheck" type="button" class="btn btn-secondary dropdown-toggle"
                     data-toggle="dropdown">
-                <div class="d-xl-inline d-none">Vérifier</div>
-                <div class="em em-white_check_mark d-xl-none"></div>
+                <div class="em em-white_check_mark"></div>
             </button>
             <div class="dropdown-menu">
                 <a class="dropdown-item" id="check-letter">Lettre</a>
@@ -97,29 +95,23 @@
     {% endblock %}
 
     <!-- SCORE BUTTON -->
-    <button type="button" class="btn btn-primary mx-1 collapse collapseButtonBar" data-toggle="modal"
+    <button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar" data-toggle="modal"
             data-target="#best-scores-modal">
-        <div class="d-xl-inline d-none">Voir les scores</div>
-        <div class="em em-sports_medal d-xl-none"></div>
+        <div class="em em-sports_medal"></div>
     </button>
 
     <!-- PDF BUTTON -->
-    <button type="button" class="btn btn-primary mx-1 collapse collapseButtonBar"
+    <button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar"
             onclick="puzdata_to_pdf(PUZAPP.puzdata, {outfile: 'CaseVide_{{ project.title|cut:" "|cut:"'" }}'})">
-    <div class="d-xl-inline d-none">Exporter en PDF</div>
-    <div class="em em-page_with_curl d-xl-none"></div>
+    <div class="em em-page_with_curl"></div>
     </button>
 
     <!-- OPEN & CLOSE BUTTON BAR -->
-    <button type="button" class="btn btn-primary mx-1 float-reveal-button" data-toggle="collapse" data-target=".collapseButtonBar">
-    <div class="d-xl-inline d-none">Exporter en PDF</div>
-    <div class="em em-heavy_plus_sign d-xl-none"></div>
+    <button type="button" class="btn btn-secondary mx-1 float-reveal-button" data-toggle="collapse" data-target=".collapseButtonBar">
+    <div class="em em-heavy_plus_sign"></div>
     </button>
 
 </div>
-
-{% block meta_phrase %}
-{% endblock %}
 
 <!-- ALERT BARS -->
 {% block alert_bars %}

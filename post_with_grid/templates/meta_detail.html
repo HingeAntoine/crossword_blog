@@ -2,18 +2,11 @@
 
 {% block button_bar %}
 <!-- POST BUTTON -->
-<button type="button" class="btn btn-primary mx-1 collapse collapseButtonBar" id="open-modal-button" data-toggle="modal"
+<button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar" id="open-modal-button" data-toggle="modal"
         data-target="#answerModal">
     <div class="d-xl-inline d-none">Poster ma réponse</div>
     <div class="em em-incoming_envelope d-xl-none"></div>
 </button>
-{% endblock %}
-
-{% block meta_phrase %}
-<!-- INSTRUCTIONS -->
-<div class="row mt-1">
-    <h4>{{ project.meta_question }}</h4>
-</div>
 {% endblock %}
 
 {% block alert_bars %}
@@ -23,6 +16,9 @@
 <div class="modal fade" id="answerModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+            <div class="modal-header">
+                {{ project.meta_question }}
+            </div>
             <div class="modal-body">
                 <!-- Submit form -->
                 <form id="submit-form">
