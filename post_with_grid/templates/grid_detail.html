@@ -48,7 +48,7 @@
     .float-button{
         position:fixed;
         top:100px;
-        left:30px;
+        left:1%;
         text-align:center;
         z-index: 5;
     }
@@ -62,7 +62,7 @@
 
     {% block button_bar %}
     <!-- TIMER BUTTON -->
-    <button type="button" class="btn btn-secondary mx-1" id="timer-button" onclick="toggleHideGrid()">
+    <button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar" id="timer-button" onclick="toggleHideGrid()">
         <a id="timer-value">00:00</a>
         <i id="timer-symbol" class="em em-double_vertical_bar"></i>
     </button>
