@@ -64,7 +64,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                 }
             }
         }
-        this.cell_size = 40;
+        this.cell_size = null;
         this.top_text_height = 0;
         this.bottom_text_height = 0;
         this.grid_width = 0;
@@ -431,9 +431,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         var x, y;
 
         if (Number(this.config.cell_size) === 0) {
-            var max_height = this.canvas_holder.height();
-            var max_width = this.canvas_holder.width();
-            this.cell_size = Math.min(Math.floor(max_width/this.grid_width), 75)
+            var max_height = this.canvas_holder.height() * 0.9 / this.grid_height;
+            var max_width = this.canvas_holder.width() / this.grid_width;
+            this.cell_size = Math.min(max_width, max_height);
+            this.cell_size = Math.min(this.cell_size, 75);
         } else {
             this.cell_size = Number(this.config.cell_size);
         }
