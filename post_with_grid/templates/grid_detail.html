@@ -43,76 +43,6 @@
 <script type="text/javascript" src="{% static 'js/init_grid.js' %}"></script>
 
 
-<!-- TOP BAR: Title and buttons-->
-<style>
-    .float-button{
-        position:fixed;
-        top:100px;
-        left:1%;
-        text-align:center;
-        z-index: 5;
-    }
-</style>
-
-<div class="float-button">
-    <!-- OPEN & CLOSE BUTTON BAR -->
-    <button type="button" class="btn btn-secondary mx-1 float-reveal-button" data-toggle="collapse" data-target=".collapseButtonBar">
-    <div class="em em-heavy_plus_sign"></div>
-    </button>
-
-    {% block button_bar %}
-    <!-- TIMER BUTTON -->
-    <button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar" id="timer-button" onclick="toggleHideGrid()">
-        <a id="timer-value">00:00</a>
-        <i id="timer-symbol" class="em em-double_vertical_bar"></i>
-    </button>
-
-    <!-- REVEAL AND CHECK -->
-    <div class="btn-group mx-1 collapse collapseButtonBar" role="group" aria-label="Button group with nested dropdown">
-
-        <!-- REVEAL BUTTON -->
-        <div class="btn-group" role="group">
-            <button id="dropdownReveal" type="button" class="btn btn-secondary dropdown-toggle"
-                    data-toggle="dropdown">
-                <div class="em em-eye"></div>
-            </button>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" id="reveal-letter">Lettre</a>
-                <a class="dropdown-item" id="reveal-word">Mot</a>
-                <a class="dropdown-item" id="reveal-puzzle">Grille</a>
-            </div>
-        </div>
-
-        <!-- CHECK BUTTON -->
-        <div class="btn-group" role="group">
-            <button id="dropdownCheck" type="button" class="btn btn-secondary dropdown-toggle"
-                    data-toggle="dropdown">
-                <div class="em em-white_check_mark"></div>
-            </button>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" id="check-letter">Lettre</a>
-                <a class="dropdown-item" id="check-word">Mot</a>
-                <a class="dropdown-item" id="check-puzzle">Grille</a>
-            </div>
-        </div>
-
-    </div>
-    {% endblock %}
-
-    <!-- SCORE BUTTON -->
-    <button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar" data-toggle="modal"
-            data-target="#best-scores-modal">
-        <div class="em em-sports_medal"></div>
-    </button>
-
-    <!-- PDF BUTTON -->
-    <button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar"
-            onclick="puzdata_to_pdf(PUZAPP.puzdata, {outfile: 'CaseVide_{{ project.title|cut:" "|cut:"'" }}'})">
-    <div class="em em-page_with_curl"></div>
-    </button>
-
-</div>
-
 <!-- ALERT BARS -->
 {% block alert_bars %}
 <div class="row alert alert-success alert-dismissible fade show h5 align-middle" id="finish-success" role="alert">
@@ -176,17 +106,78 @@
 </div>
 
 <!-- GRID AND CLUE LIST -->
-<div class="mt-3" id="cw-grid-and-clues">
+<div class="mt-1" id="cw-grid-and-clues">
+
+    <div class="row" style="position:relative;width:100%; height:50px">
+        <!-- TOP CLUE BAR -->
+        <div style="position:absolute;left:40px;width:85%;height:100px;">
+            <div class="row pt-1 pl-3 rounded" id="clue-bar" style="background-color: #ff7171;"><h3
+                    id="cw-top-text"></h3></div>
+        </div>
+
+        <!-- TOP BAR: Title and buttons-->
+        <div class="pt-1" style="position:absolute;right:0px;height:100px;">
+            {% block button_bar %}
+            <!-- TIMER BUTTON -->
+            <button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar" id="timer-button" onclick="toggleHideGrid()">
+                <a id="timer-value">00:00</a>
+                <i id="timer-symbol" class="em em-double_vertical_bar"></i>
+            </button>
+
+            <!-- REVEAL AND CHECK -->
+            <div class="btn-group mx-1 collapse collapseButtonBar" role="group" aria-label="Button group with nested dropdown">
+
+                <!-- REVEAL BUTTON -->
+                <div class="btn-group" role="group">
+                    <button id="dropdownReveal" type="button" class="btn btn-secondary dropdown-toggle"
+                            data-toggle="dropdown">
+                        <div class="em em-eye"></div>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" id="reveal-letter">Lettre</a>
+                        <a class="dropdown-item" id="reveal-word">Mot</a>
+                        <a class="dropdown-item" id="reveal-puzzle">Grille</a>
+                    </div>
+                </div>
+
+                <!-- CHECK BUTTON -->
+                <div class="btn-group" role="group">
+                    <button id="dropdownCheck" type="button" class="btn btn-secondary dropdown-toggle"
+                            data-toggle="dropdown">
+                        <div class="em em-white_check_mark"></div>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" id="check-letter">Lettre</a>
+                        <a class="dropdown-item" id="check-word">Mot</a>
+                        <a class="dropdown-item" id="check-puzzle">Grille</a>
+                    </div>
+                </div>
+
+            </div>
+            {% endblock %}
+
+            <!-- SCORE BUTTON -->
+            <button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar" data-toggle="modal"
+                    data-target="#best-scores-modal">
+                <div class="em em-sports_medal"></div>
+            </button>
+
+            <!-- PDF BUTTON -->
+            <button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar"
+                    onclick="puzdata_to_pdf(PUZAPP.puzdata, {outfile: 'CaseVide_{{ project.title|cut:" "|cut:"'" }}'})">
+            <div class="em em-page_with_curl"></div>
+            </button>
+
+            <!-- OPEN & CLOSE BUTTON BAR -->
+            <button type="button" class="btn btn-secondary mx-1 float-reveal-button" data-toggle="collapse" data-target=".collapseButtonBar">
+            <div class="em em-heavy_plus_sign"></div>
+            </button>
+        </div>
+    </div>
 
     <!-- HIDDEN INPUT -->
     <input type="text" id="hidden-input"
            style="opacity: 0; position: fixed; top: -100px; left: -100px; width: 0; height: 0; z-index: -1;">
-
-    <!-- TOP CLUE BAR -->
-    <div class="col-xl-6">
-        <div class="row pl-3 pt-2 rounded" id="clue-bar" style="background-color: #ff7171;"><h3
-                id="cw-top-text"></h3></div>
-    </div>
 
     <div class="row auto" style="height: 90vh;">
         <!-- CANVAS HOLDER -->
