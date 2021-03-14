@@ -431,8 +431,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         var x, y;
 
         if (Number(this.config.cell_size) === 0) {
-            var max_height = this.canvas_holder.height() * 0.85 / this.grid_height;
-            var max_width = this.canvas_holder.width() / this.grid_width;
+            var max_height = this.canvas_holder.height() / this.grid_height * 0.99;
+            var max_width = this.canvas_holder.width() / this.grid_width * 0.99;
             this.cell_size = Math.floor(Math.min(max_width, max_height));
             this.cell_size = Math.min(this.cell_size, 75);
         } else {
