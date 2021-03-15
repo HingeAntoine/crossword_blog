@@ -178,3 +178,14 @@ function toggleHideGrid(){
     document.getElementById("cw-top-text").style.filter = "blur(" + grid_blur + "px)"
     document.getElementById("cw-grid-and-clues").style.filter = "blur(" + grid_blur + "px)"
 }
+
+function togglePlusSign(){
+    var plusButton = $("#plusButton");
+    if( plusButton.hasClass("em-heavy_plus_sign")){
+        plusButton.removeClass("em-heavy_plus_sign");
+        plusButton.addClass("em-heavy_minus_sign");
+    } else {
+        plusButton.removeClass("em-heavy_minus_sign");
+        plusButton.addClass("em-heavy_plus_sign");
+    }
+}
