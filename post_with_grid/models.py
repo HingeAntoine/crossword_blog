@@ -74,6 +74,8 @@ class Project(models.Model):
 class MetaGrid(Project):
     meta_question = models.CharField(max_length=200, default="La réponse est simple!")
     meta_answers = ArrayField(models.CharField(max_length=50))
+    meta_explanation = models.TextField(default="")
+    meta_solution_picture = models.ImageField(upload_to="meta_img/", default="none.png")
 
 
 ###############

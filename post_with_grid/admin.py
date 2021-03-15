@@ -66,6 +66,8 @@ class MetaGridAdmin(ProjectAdmin):
         "twitter_card_clue",
         "meta_question",
         "meta_answers",
+        "meta_solution_picture",
+        "meta_explanation",
     )
 
 
