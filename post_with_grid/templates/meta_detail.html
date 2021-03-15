@@ -13,10 +13,10 @@
 
 {% block grid_modals %}
 <div class="modal fade" id="answerModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4>{{ project.meta_question }}</h4>
+            <div class="modal-header h5 font-weight-bold">
+                {{ project.meta_question }}
             </div>
             <div class="modal-body">
                 <!-- Submit form -->
@@ -43,5 +43,7 @@
 {% endblock %}
 
 {% block js_grid_init %}
+$('#answerModal').modal('show');
+
 init_meta('{{ project.pk }}', '{{ project.grid_file.url }}');
 {% endblock %}
