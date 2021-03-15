@@ -176,8 +176,10 @@ function toggleHideGrid(){
 
     // Change the blur value of grid space and big clue
     document.getElementById("cw-top-text").style.filter = "blur(" + grid_blur + "px)"
-    document.getElementById("cw-grid-and-clues").style.filter = "blur(" + grid_blur + "px)"
+    document.getElementById("canvasContainer").style.filter = "blur(" + grid_blur + "px)"
 }
+
+// Toggle between plus and minus sign in button toolbar
 
 function togglePlusSign(){
     var plusButton = $("#plusButton");
