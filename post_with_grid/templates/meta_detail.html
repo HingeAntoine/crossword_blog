@@ -15,7 +15,7 @@
 
 <!-- SOLUTION BUTTON -->
 <button type="button" class="btn btn-secondary  mx-1 collapse collapseButtonBar" id="solution-button" data-toggle="modal"
-        data-target="#solutionModal" disabled>
+        data-target="#solutionModal">
     <div class="em em-eye"></div>
 </button>
 {% endblock %}
@@ -50,6 +50,7 @@
                         <label for="inputPseudo" class="mt-4">Réponse</label>
                         <input type="string" class="form-control" id="inputAnswer" placeholder="Entrez votre réponse">
                         <div class="invalid-feedback" id="answerFeedback"></div>
+                        <small id="emailHelp" class="form-text text-muted">{{ project.meta_question }}</small>
                     </div>
                     <button type="submit" class="btn btn-primary">
                         Soumettre
