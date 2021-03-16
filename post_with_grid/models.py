@@ -109,3 +109,15 @@ class Score(models.Model):
 
     class Meta:
         unique_together = (("grid", "pseudo"),)
+
+
+##################
+# Comments model #
+##################
+
+
+class Comment(models.Model):
+    grid_key = models.IntegerField()
+    pseudo = models.CharField(max_length=25)
+    comment = models.CharField(max_length=480)
+    commented_at = models.DateTimeField(auto_now_add=True)

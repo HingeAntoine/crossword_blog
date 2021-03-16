@@ -105,6 +105,20 @@
     </div>
 </div>
 
+<div class="modal fade" id="commentModal" tabindex="-1"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Commentaires <i class="em em-speech_balloon"></i></h5>
+            </div>
+            <div class="modal-body d-flex align-items-center justify-content-center">
+                {% include "grid_comments.html" %}
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- GRID AND CLUE LIST -->
 <div class="mt-1" id="cw-grid-and-clues">
 
@@ -166,6 +180,12 @@
             <button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar"
                     onclick="puzdata_to_pdf(PUZAPP.puzdata, {outfile: 'CaseVide_{{ project.title|cut:" "|cut:"'" }}'})">
             <div class="em em-printer"></div>
+            </button>
+
+            <!-- COMMENT BUTTON -->
+            <button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar"
+                    data-toggle="modal" data-target="#commentModal">
+            <div class="em em-speech_balloon"></div>
             </button>
 
             <!-- OPEN & CLOSE BUTTON BAR -->
