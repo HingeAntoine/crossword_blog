@@ -64,17 +64,19 @@
 <div class="modal fade" id="solutionModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <div class="h4">
-                    Réponse : <b>{{ project.meta_answers|first|title }}</b>
-                </div>
-            </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-6">
-                        <img src="{{ project.meta_solution_picture.url }}" class="w-100">
+                <button class="btn btn-secondary" onclick="$('#solutionDiv').show();">Montrer la solution</button>
+                <div id="solutionDiv" class="mt-1" style="display: none;">
+                    <div class="h4">
+                        Réponse : <b>{{ project.meta_answers|first|title }}</b>
                     </div>
-                    <div class="col-6 text-justify"> {{ project.meta_explanation|linebreaks }}</div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <img src="{{ project.meta_solution_picture.url }}" class="w-100">
+                        </div>
+                        <div class="col-6 text-justify"> {{ project.meta_explanation|linebreaks }}</div>
+                    </div>
                 </div>
             </div>
         </div>
