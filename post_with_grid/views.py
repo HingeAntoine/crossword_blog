@@ -224,11 +224,32 @@ def project_ranking(request, pk):
 
 
 def grid_comments(request, pk):
-    print(request)
 
+    # Leaving a comment on the grid
     if request.method == "POST":
-        print(pk)
-        print(request)
+        # Create form error dict
+        error_dict = {}
+
+        # Name formatting check
+        if "name" in request.POST:
+            name = request.POST["name"]
+
+            if len(name) < 3:
+                error_dict[
+                    "error_name"
+                ] = "Le pseudo doit contenir au moins 3 caractères."
+
+            if len(name) > 25:
+                error_dict[
+                    "error_name"
+                ] = "Le pseudo doit contenir au max. 25 caractères."
+        else:
+            error_dict["error_name"] = "Champ obligatoire."
+
+        if len(error_dict) > 0:
+            return JsonResponse(error_dict, status=403)
+
+        # Return an ajax call response
         return JsonResponse({})
 
     return render(request, "grid_comments.html", {})

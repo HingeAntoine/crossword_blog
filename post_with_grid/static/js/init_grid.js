@@ -24,11 +24,26 @@ function comment_form_submit(){
             type: 'POST',
             url: 'comments/',
             data: {
-                'name': 'Genialos',
+                'name': $("#inputPseudoComment").val(),
                 'text': 'Houhou je suis là mon ami',
             },
             success: function(data) {
                 alert('BRAVOOOO!!!')
+            },
+            error: function (data) {
+                // Pseudo variables
+                var pseudoField = $("#inputPseudoComment");
+                var pseudoFeedback = $("#commentPseudoFeedback")
+
+                // Reset error form
+                pseudoField.removeClass("is-invalid");
+                pseudoFeedback.text("");
+
+                // Display errors in the corresponding fields
+                if ('error_name' in data.responseJSON){
+                    pseudoFeedback.text(data.responseJSON.error_name);
+                    pseudoField.addClass("is-invalid");
+                }
             }
         });
         return false;
