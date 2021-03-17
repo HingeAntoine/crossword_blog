@@ -17,6 +17,24 @@ function load_grid(pk, file_url){
     }
 }
 
+function comment_form_submit(){
+    var commentForm = $('#commentForm');
+    commentForm.submit(function () {
+        $.ajax({
+            type: 'POST',
+            url: 'comments/',
+            data: {
+                'name': 'Genialos',
+                'text': 'Houhou je suis là mon ami',
+            },
+            success: function(data) {
+                alert('BRAVOOOO!!!')
+            }
+        });
+        return false;
+    });
+}
+
 function init_grid(pk, file_url){
     // Load grid
     load_grid(pk, file_url);
@@ -49,6 +67,9 @@ function init_grid(pk, file_url){
         });
         return false;
     });
+
+    // Listen to comment form
+    comment_form_submit()
 
 }
 
@@ -105,5 +126,8 @@ function init_meta(pk, file_url){
         });
         return false;
     });
+
+    // Listen to comment form
+    comment_form_submit()
 
 }

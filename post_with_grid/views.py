@@ -216,3 +216,19 @@ def project_ranking(request, pk):
             "type": get_type(pk),
         },
     )
+
+
+############
+# Comments #
+############
+
+
+def grid_comments(request, pk):
+    print(request)
+
+    if request.method == "POST":
+        print(pk)
+        print(request)
+        return JsonResponse({})
+
+    return render(request, "grid_comments.html", {})
