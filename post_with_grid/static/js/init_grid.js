@@ -17,6 +17,18 @@ function load_grid(pk, file_url){
     }
 }
 
+function display_form_error(data, field, feedback, error_field){
+    // Reset error form
+    field.removeClass("is-invalid");
+    feedback.text("");
+
+    // Display errors in the corresponding fields
+    if (error_field in data.responseJSON){
+        feedback.text(data.responseJSON[error_field]);
+        field.addClass("is-invalid");
+    }
+}
+
 function comment_form_submit(){
     var commentForm = $('#commentForm');
     commentForm.submit(function () {
@@ -25,25 +37,17 @@ function comment_form_submit(){
             url: 'comments/',
             data: {
                 'name': $("#inputPseudoComment").val(),
-                'text': 'Houhou je suis là mon ami',
+                'text': $("#inputComment").val(),
             },
             success: function(data) {
                 alert('BRAVOOOO!!!')
             },
             error: function (data) {
-                // Pseudo variables
-                var pseudoField = $("#inputPseudoComment");
-                var pseudoFeedback = $("#commentPseudoFeedback")
+                // Display error in name field
+                display_form_error(data, $("#inputPseudoComment"), $("#commentPseudoFeedback"), 'error_name')
 
-                // Reset error form
-                pseudoField.removeClass("is-invalid");
-                pseudoFeedback.text("");
-
-                // Display errors in the corresponding fields
-                if ('error_name' in data.responseJSON){
-                    pseudoFeedback.text(data.responseJSON.error_name);
-                    pseudoField.addClass("is-invalid");
-                }
+                // Display error in text field
+                display_form_error(data, $("#inputComment"), $("#commentTextFeedback"), 'error_text')
             }
         });
         return false;

@@ -246,7 +246,25 @@ def grid_comments(request, pk):
         else:
             error_dict["error_name"] = "Champ obligatoire."
 
+        # Name formatting check
+        if "text" in request.POST:
+            text = request.POST["text"]
+            print(text)
+
+            if len(text) < 1:
+                error_dict[
+                    "error_text"
+                ] = "Le commentaire doit contenir au min. 1 caractère."
+
+            if len(text) > 480:
+                error_dict[
+                    "error_text"
+                ] = "Le commentaire doit contenir au max. 480 caractères."
+        else:
+            error_dict["error_text"] = "Champ obligatoire."
+
         if len(error_dict) > 0:
+            print(error_dict)
             return JsonResponse(error_dict, status=403)
 
         # Return an ajax call response
