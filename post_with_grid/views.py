@@ -260,7 +260,6 @@ def grid_comments(request, pk):
         # Name formatting check
         if "text" in request.POST:
             text = request.POST["text"]
-            print(text)
 
             if len(text) < 1:
                 error_dict[
