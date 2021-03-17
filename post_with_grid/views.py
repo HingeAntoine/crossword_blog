@@ -285,6 +285,6 @@ def grid_comments(request, pk):
         # Return an ajax call response
         return JsonResponse({})
 
-    comments = Project.objects.filter(grid_key=pk).order_by("commented_at")
+    comments = Comment.objects.filter(grid_key=pk).order_by("commented_at")
 
     return render(request, "grid_comments.html", {"comments": comments})

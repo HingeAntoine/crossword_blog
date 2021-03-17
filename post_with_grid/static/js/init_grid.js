@@ -40,7 +40,8 @@ function comment_form_submit(){
                 'text': $("#inputComment").val(),
             },
             success: function(data) {
-                alert('BRAVOOOO!!!')
+                // Reload comments
+                $('#commentDiv').html('').load("comments/")
             },
             error: function (data) {
                 // Display error in name field
