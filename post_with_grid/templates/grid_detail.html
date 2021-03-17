@@ -93,7 +93,7 @@
 
 <div class="modal fade" id="best-scores-modal" tabindex="-1"
      aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header d-flex align-items-center justify-content-center">
                 <h5><i class="em em-classical_building"></i> Panthéon <i class="em em-classical_building"></i></h5>
@@ -107,13 +107,36 @@
 
 <div class="modal fade" id="commentModal" tabindex="-1"
      aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5>Commentaires <i class="em em-speech_balloon"></i></h5>
             </div>
-            <div class="modal-body d-flex align-items-center justify-content-center">
+            <div class="modal-body">
                 {% include "grid_comments.html" %}
+
+                <hr>
+
+                <div>
+                    <form id="commentForm">
+                        <!-- COMMENT PSEUDONYM -->
+                        <div class="form-group">
+                            <label for="inputPseudoComment">Pseudo</label>
+                            <input type="string" class="form-control" id="inputPseudoComment" placeholder="Entrez votre pseudo">
+                        </div>
+
+                        <!-- COMMENT TEXT -->
+                        <div class="form-group">
+                            <label for="inputComment">Commentaire</label>
+                            <textarea class="form-control" id="inputComment" rows="3"></textarea>
+                        </div>
+
+                        <!-- SUBMIT BUTTON -->
+                        <button type="submit" class="btn btn-primary">Envoyer
+                        </button>
+                    </form>
+                </div>
+
             </div>
         </div>
     </div>
