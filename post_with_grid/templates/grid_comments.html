@@ -1,7 +1,6 @@
 {% for comment in comments %}
 <div>
-    <b>{{ comment.pseudo }}</b>
-    <p>{{ comment.commented_at }}</p>
-    <p>{{ comment.comment|linebreaks }}</p>
+    <div><b>{{ comment.pseudo }}</b> - {{ comment.commented_at }}</div>
+    <div class="mt-1">{{ comment.comment|linebreaks }}</div>
 </div>
 {% endfor %}
