@@ -3,7 +3,7 @@ from django.shortcuts import render
 from post_with_grid.models import Project
 from post_with_grid.models import MetaGrid
 from post_with_grid.models import Score
-from post_with_grid.models import CrosswordsSize
+from post_with_grid.models import Comment
 from .filters import GridFilter
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
@@ -51,6 +51,7 @@ def get_type(pk):
 
 def project_detail(request, pk):
     project = Project.objects.get_subclass(pk=pk)
+    comments = Comment.objects.filter(grid_key=pk).order_by("commented_at")
 
     if request.method == "POST":
         # Increment grid solve counter
@@ -119,13 +120,23 @@ def project_detail(request, pk):
         return render(
             request,
             "meta_detail.html",
-            {"project": project, "scores": get_scores(pk), "type": "meta"},
+            {
+                "project": project,
+                "scores": get_scores(pk),
+                "comments": comments,
+                "type": "meta",
+            },
         )
     else:
         return render(
             request,
             "grid_detail.html",
-            {"project": project, "scores": get_scores(pk), "type": "classique"},
+            {
+                "project": project,
+                "scores": get_scores(pk),
+                "comments": comments,
+                "type": "classique",
+            },
         )
 
 
@@ -267,7 +278,13 @@ def grid_comments(request, pk):
             print(error_dict)
             return JsonResponse(error_dict, status=403)
 
+        Comment(
+            grid_key=pk, pseudo=request.POST["name"], comment=request.POST["text"]
+        ).save()
+
         # Return an ajax call response
         return JsonResponse({})
 
-    return render(request, "grid_comments.html", {})
+    comments = Project.objects.filter(grid_key=pk).order_by("commented_at")
+
+    return render(request, "grid_comments.html", {"comments": comments})

@@ -1,6 +1,9 @@
 <div class="container">
+    {% for comment in comments %}
     <div>
-        <b>Antoine</b>
-        <p>Bonjours mes amis, comment allez vous!</p>
+        <b>{{ comment.pseudo }}</b>
+        <p>{{ comment.commented_at }}</p>
+        <p>{{ comment.comment|linebreaks }}</p>
     </div>
+    {% endfor %}
 </div>
