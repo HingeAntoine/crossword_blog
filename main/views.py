@@ -45,3 +45,7 @@ def about(request):
 
 def meta(request):
     return render(request, "meta_rules.html", {})
+
+
+def construction(request):
+    return render(request, "mini_tuto.html", {})
