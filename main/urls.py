@@ -42,7 +42,7 @@ urlpatterns = [
     path("grilles/", include("post_with_grid.urls")),
     path("about/", views.about, name="about"),
     path("meta/", views.meta, name="meta_rules"),
-    path("construction/", views.construction, name="tuto_construction"),
+    path("creation/", views.construction, name="tuto_construction"),
     path("contact/", include("contact_email.urls"), name="contact"),
 ]
 
