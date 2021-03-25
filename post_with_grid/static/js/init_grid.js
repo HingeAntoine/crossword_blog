@@ -42,7 +42,9 @@ function comment_form_submit(urlVal = 'comments/'){
             },
             success: function(data) {
                 // Reload comments
-                $('#commentDiv').html('').load(urlVal)
+                $('#commentDiv').html('').load(urlVal);
+                $("#inputPseudoComment").val("");
+                $("#inputComment").val("");
             },
             error: function (data) {
                 // Display error in name field
