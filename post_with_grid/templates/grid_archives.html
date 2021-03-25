@@ -13,11 +13,52 @@
 {% block page_content %}
 
 <!-- JAVASCRIPT BLOCK -->
-
 <script type="text/javascript" src="{% static 'js/status.js' %}"></script>
 
-<!-- TABLE BLOCK -->
 
+<!-- COMMENT MODAL -->
+<div class="modal fade" id="commentModal" tabindex="-1"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Commentaires <i class="em em-speech_balloon"></i></h5>
+            </div>
+            <div class="modal-body">
+                <div class="container" id="commentDiv">
+                    {% include "grid_comments.html" %}
+                </div>
+                <hr>
+
+                <div>
+                    <form id="commentForm">
+                        <!-- COMMENT PSEUDONYM -->
+                        <div class="form-group">
+                            <label for="inputPseudoComment">Pseudo</label>
+                            <input type="string" class="form-control" id="inputPseudoComment" placeholder="Entrez votre pseudo">
+                            <div class="invalid-feedback" id="commentPseudoFeedback">Champ obligatoire.</div>
+                        </div>
+
+                        <!-- COMMENT TEXT -->
+                        <div class="form-group">
+                            <label for="inputComment">Commentaire</label>
+                            <textarea class="form-control" id="inputComment" rows="3"></textarea>
+                            <div class="invalid-feedback" id="commentTextFeedback">Champ obligatoire.</div>
+                        </div>
+
+                        <!-- SUBMIT BUTTON -->
+                        <button type="submit" class="btn btn-primary">Envoyer
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- TABLE BLOCK -->
 <div class="row mt-4">
 
     <div class="col-xl-1"></div>
@@ -42,6 +83,8 @@
             </th>
             <th class="th-sm">Statut
             </th>
+            <th class="th-sm">Commentaires
+            </th>
             <th class="th-sm">Résolution
             </th>
         </tr>
@@ -55,6 +98,13 @@
             <td>{{ grid.grid_size_str }}</td>
             <td>{{ grid.date_created }}</td>
             <td><i id="status-{{ grid.pk }}" class="em"></i></td>
+            <td>
+                <!-- COMMENT BUTTON -->
+                <button type="button" class="btn" data-toggle="modal" data-target="#commentModal"
+                        onclick="$('#commentDiv').html('').load('{% url 'grid_comments' grid.pk %}')">
+                <div class="em em-speech_balloon"></div>
+                </button>
+            </td>
             <td><span class="badge badge-primary badge-pill">{{ grid.solve_count }}</span></td>
         </tr>
         <script>get_status({{grid.pk}}, '{{grid.is_new}}')</script>
