@@ -97,8 +97,8 @@
             <td>{{ grid.grid_type_str }}</td>
             <td>{{ grid.grid_size_str }}</td>
             <td>{{ grid.date_created }}</td>
-            <td><i id="status-{{ grid.pk }}" class="em"></i></td>
-            <td>
+            <td class="text-center"><i id="status-{{ grid.pk }}" class="em"></i></td>
+            <td class="text-center pr-4">
                 <!-- COMMENT BUTTON -->
                 <button type="button" class="btn" data-toggle="modal" data-target="#commentModal"
                         onclick="$('#commentDiv').html('').load('{% url 'grid_comments' grid.pk %}');
@@ -106,7 +106,7 @@
                 <div class="em em-speech_balloon"></div>
                 </button>
             </td>
-            <td><span class="badge badge-primary badge-pill">{{ grid.solve_count }}</span></td>
+            <td class="text-center"><span class="badge badge-primary badge-pill">{{ grid.solve_count }}</span></td>
         </tr>
         <script>get_status({{grid.pk}}, '{{grid.is_new}}')</script>
         {% endfor %}
