@@ -43,8 +43,13 @@ function comment_form_submit(urlVal = 'comments/'){
             success: function(data) {
                 // Reload comments
                 $('#commentDiv').html('').load(urlVal);
+
+                // Clear fields
                 $("#inputPseudoComment").val("");
                 $("#inputComment").val("");
+
+                // Hide form and show + button
+                $('#commentForm').collapse('hide');
             },
             error: function (data) {
                 // Display error in name field
