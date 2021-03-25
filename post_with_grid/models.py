@@ -64,6 +64,10 @@ class Project(models.Model):
         return ["Classique", "Cryptique", "Méta"][self.crossword_type]
 
     @property
+    def grid_size_str(self):
+        return ["Petite", "Moyenne", "Grande", "Très grande"][self.grid_size]
+
+    @property
     def preview_path(self):
         preview_path = "preview/" + str(self.pk) + ".png"
         if os.path.isfile(settings.MEDIA_ROOT + "/" + preview_path):
