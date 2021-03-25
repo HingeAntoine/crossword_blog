@@ -29,19 +29,20 @@ function display_form_error(data, field, feedback, error_field){
     }
 }
 
-function comment_form_submit(){
+function comment_form_submit(urlVal = 'comments/'){
     var commentForm = $('#commentForm');
+    commentForm.unbind();
     commentForm.submit(function () {
         $.ajax({
             type: 'POST',
-            url: 'comments/',
+            url: urlVal,
             data: {
                 'name': $("#inputPseudoComment").val(),
                 'text': $("#inputComment").val(),
             },
             success: function(data) {
                 // Reload comments
-                $('#commentDiv').html('').load("comments/")
+                $('#commentDiv').html('').load(urlVal)
             },
             error: function (data) {
                 // Display error in name field

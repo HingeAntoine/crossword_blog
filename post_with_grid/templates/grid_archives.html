@@ -14,7 +14,7 @@
 
 <!-- JAVASCRIPT BLOCK -->
 <script type="text/javascript" src="{% static 'js/status.js' %}"></script>
-
+<script type="text/javascript" src="{% static 'js/init_grid.js' %}"></script>
 
 <!-- COMMENT MODAL -->
 <div class="modal fade" id="commentModal" tabindex="-1"
@@ -101,7 +101,8 @@
             <td>
                 <!-- COMMENT BUTTON -->
                 <button type="button" class="btn" data-toggle="modal" data-target="#commentModal"
-                        onclick="$('#commentDiv').html('').load('{% url 'grid_comments' grid.pk %}')">
+                        onclick="$('#commentDiv').html('').load('{% url 'grid_comments' grid.pk %}');
+                            comment_form_submit('{% url 'grid_comments' grid.pk %}');">
                 <div class="em em-speech_balloon"></div>
                 </button>
             </td>
