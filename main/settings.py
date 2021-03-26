@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "post_with_grid",
     "author_page",
     "contact_email",
+    "grid_creation_tool",
     "crispy_forms",
 ]
 
