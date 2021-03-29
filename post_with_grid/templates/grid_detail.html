@@ -153,15 +153,14 @@
 <!-- GRID AND CLUE LIST -->
 <div class="mt-1" id="cw-grid-and-clues">
 
-    <div class="row" style="position:relative;width:100%; height:50px">
-        <!-- TOP CLUE BAR -->
-        <div style="position:absolute;left:40px;width:99%;height:100px;">
-            <div class="row pt-1 pl-3" id="clue-bar"><h3
-                    id="cw-top-text"></h3></div>
-        </div>
-
+    <div class="row pl-3 pt-1">
         <!-- TOP BAR: Title and buttons-->
-        <div class="pt-1" style="position:absolute;right:0px;height:100px;">
+        <div class="ml-4">
+            <!-- OPEN & CLOSE BUTTON BAR -->
+            <button type="button" class="btn btn-secondary mx-1 float-reveal-button" data-toggle="collapse" data-target=".collapseButtonBar" onclick="togglePlusSign()">
+            <div id="plusButton" class="em em-heavy_plus_sign"></div>
+            </button>
+
             {% block button_bar %}
             <!-- TIMER BUTTON -->
             <button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar" id="timer-button" onclick="toggleHideGrid()">
@@ -218,12 +217,10 @@
                     data-toggle="modal" data-target="#commentModal">
             <div class="em em-speech_balloon"></div>
             </button>
-
-            <!-- OPEN & CLOSE BUTTON BAR -->
-            <button type="button" class="btn btn-secondary mx-1 float-reveal-button" data-toggle="collapse" data-target=".collapseButtonBar" onclick="togglePlusSign()">
-            <div id="plusButton" class="em em-heavy_plus_sign"></div>
-            </button>
         </div>
+
+        <!-- TOP CLUE BAR -->
+        <div class="pl-3" id="clue-bar"><h3 id="cw-top-text"></h3></div>
     </div>
 
     <!-- HIDDEN INPUT -->
