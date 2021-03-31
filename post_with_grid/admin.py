@@ -4,6 +4,7 @@ from django.contrib import admin
 from post_with_grid.models import Project
 from post_with_grid.models import MetaGrid
 from post_with_grid.models import Edito
+from post_with_grid.models import Score
 
 from PIL import Image, ImageDraw
 from itertools import product
@@ -75,6 +76,11 @@ class EditoAdmin(admin.ModelAdmin):
     fields = ("title", "content")
 
 
+class ScoreAdmin(admin.ModelAdmin):
+    list_display = ("grid", "pseudo", "time", "solved_at")
+
+
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(MetaGrid, MetaGridAdmin)
 admin.site.register(Edito, EditoAdmin)
+admin.site.register(Score, ScoreAdmin)
