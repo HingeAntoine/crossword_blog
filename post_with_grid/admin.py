@@ -5,6 +5,7 @@ from post_with_grid.models import Project
 from post_with_grid.models import MetaGrid
 from post_with_grid.models import Edito
 from post_with_grid.models import Score
+from post_with_grid.models import Comment
 
 from PIL import Image, ImageDraw
 from itertools import product
@@ -80,7 +81,12 @@ class ScoreAdmin(admin.ModelAdmin):
     list_display = ("grid", "pseudo", "time", "solved_at")
 
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ("grid_key", "pseudo", "comment", "commented_at")
+
+
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(MetaGrid, MetaGridAdmin)
 admin.site.register(Edito, EditoAdmin)
 admin.site.register(Score, ScoreAdmin)
+admin.site.register(Comment, CommentAdmin)
