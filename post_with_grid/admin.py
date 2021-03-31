@@ -15,6 +15,8 @@ CELL_SIZE = 10
 
 
 class ProjectAdmin(admin.ModelAdmin):
+    list_display = ("title", "author_key", "crossword_type", "grid_size")
+
     fields = (
         "title",
         "grid_file",
