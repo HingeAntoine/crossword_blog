@@ -16,7 +16,6 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Helvetica", "Roboto", "Droid Sans", "Arial", sans-serif;
-  width: 885px;
   margin: 5px;
 }
 
@@ -24,44 +23,6 @@ h1 {
   font-size: 20pt;
   font-weight: 300;
   color: var(--med-grey);
-}
-
-#credits {
-  font-size: 9.5pt;
-  font-weight: 400;
-  color: var(--med-grey);
-  position: absolute;
-  right: 5px;
-  bottom: 5px;
-  /*float: right;*/
-  /*margin: 2px 0 0 0;*/
-}
-
-#credits a {
-  font-weight: 500;
-  color: var(--med-grey);
-  text-decoration: none;
-}
-
-#footer {
-  width: 573px;
-  margin: 0;
-  padding: 0;
-  margin-left: 38px;
-  margin-top: 3px;
-  font-size: 9.5pt;
-  line-height: 11pt;
-  clear: both;
-}
-
-#footer a {
-  color: var(--med-grey);
-  font-weight: 500;
-  text-decoration: none;
-}
-
-#footer a:hover {
-  color: var(--dk-grey);
 }
 
 #grid {
@@ -276,7 +237,6 @@ kbd {
 #sidebar ul.matches {
   margin: 0;
   height: 70%;
-  /*width: 160px;*/
   list-style-type: none;
   padding: 0;
   color: var(--med-grey);
@@ -290,7 +250,7 @@ kbd {
 }
 
 #sidebar ul.matches li:hover {
-  background: var(--lt-grey); /* For browsers that do not support gradients */
+  background: var(--lt-grey);
   color: var(--black);
   font-weight: 500;
 }
