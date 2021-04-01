@@ -33,9 +33,9 @@ const BLANK = " ";
 const ACROSS = "across";
 const DOWN = "down";
 const DEFAULT_SIZE = 15;
-const DEFAULT_TITLE = "Untitled";
-const DEFAULT_AUTHOR = "Anonymous";
-const DEFAULT_CLUE = "(blank clue)";
+const DEFAULT_TITLE = "Titre";
+const DEFAULT_AUTHOR = "Auteur";
+const DEFAULT_CLUE = "Définition (à remplir)";
 const DEFAULT_NOTIFICATION_LIFETIME = 10; // in seconds
 
 let history = [];
