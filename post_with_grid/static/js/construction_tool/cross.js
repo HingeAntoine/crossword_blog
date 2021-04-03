@@ -13,6 +13,8 @@
 // limitations under the License.
 // ------------------------------------------------------------------------
 
+// Changes for Case Vide Copyright 2021 Antoine HINGE
+
 const keyboard = {
   "a":      65, "b": 66, "c": 67, "d": 68, "e": 69, "f": 70, "g": 71, "h": 72,
   "i":      73, "j": 74, "k": 75, "l": 76, "m": 77, "n": 78, "o": 79, "p": 80,
@@ -249,8 +251,6 @@ class Interface {
     this.downStartIndex = 0;
     this.downEndIndex = rows;
     this.direction = ACROSS;
-
-    console.log("Grid UI created.")
   }
 
   toggleDirection() {
@@ -320,7 +320,6 @@ function createNewPuzzle(rows, cols) {
     square.addEventListener('click', mouseHandler);
   }
   grid.addEventListener('keydown', keyboardHandler);
-  console.log("New puzzle created.")
 }
 
 function mouseHandler(e) {
@@ -332,7 +331,6 @@ function mouseHandler(e) {
   }
   current.row = Number(activeCell.parentNode.dataset.row);
   current.col = Number(activeCell.dataset.col);
-  console.log("[" + current.row + "," + current.col + "]");
   activeCell.classList.add("active");
 
   isMutated = false;
@@ -426,7 +424,6 @@ function keyboardHandler(e) {
           current.direction = DOWN;
           break;
       }
-      console.log("[" + current.row + "," + current.col + "]");
       activeCell = grid.querySelector('[data-row="' + current.row + '"]').querySelector('[data-col="' + current.col + '"]');
       activeCell.classList.add("active");
   }
@@ -579,8 +576,6 @@ function updateActiveWords() {
   }
   document.getElementById("across-word").innerHTML = current.acrossWord;
   document.getElementById("down-word").innerHTML = current.downWord;
-  // console.log("Across:", current.acrossWord, "Down:", current.downWord);
-  // console.log(current.acrossWord.split(DASH).join("*"));
 }
 
 function getWordAt(row, col, direction, setCurrentWordIndices) {
@@ -658,8 +653,6 @@ function updateSidebarHighlights() {
 function setClues() {
     xw.clues[[current.row, current.acrossStartIndex, ACROSS]] = document.getElementById("across-clue-text").innerHTML;
     xw.clues[[current.downStartIndex, current.col, DOWN]] = document.getElementById("down-clue-text").innerHTML;
-    // console.log("Stored clue:", xw.clues[[current.row, current.acrossStartIndex, ACROSS]], "at [" + current.row + "," + current.acrossStartIndex + "]");
-    // console.log("Stored clue:", xw.clues[[current.downStartIndex, current.col, DOWN]], "at [" + current.downStartIndex + "," + current.col + "]");
 }
 
 function setTitle() {
@@ -673,7 +666,6 @@ function setAuthor() {
 function suppressEnterKey(e) {
   if (e.which == keyboard.enter) {
     e.preventDefault();
-    // console.log("Enter key behavior suppressed.");
   }
 }
 
@@ -698,7 +690,6 @@ function generatePattern() {
   }
   isMutated = true;
   updateUI();
-  console.log("Generated layout.")
 }
 
 function toggleSymmetry() {
@@ -711,10 +702,6 @@ function toggleSymmetry() {
   symButton.setAttribute("data-tooltip", "Turn " + buttonState + " symmetry");
 }
 
-// function toggleHelp() {
-//   document.getElementById("help").style.display = "none";
-// }
-
 function clearFill() {
   for (let i = 0; i < xw.rows; i++) {
     xw.fill[i] = xw.fill[i].replace(/\w/g, ' '); // replace letters with spaces
@@ -724,7 +711,6 @@ function clearFill() {
 }
 
 function autoFill(isQuick = false) {
-  console.log("Auto-filling...");
   forced = null;
   grid.classList.remove("sat", "unsat");
   if (!solveWorker) {
@@ -744,13 +730,11 @@ function runSolvePending() {
   solvePending = [];
   solveTimeout = window.setTimeout(cancelSolveWorker, 30000);
   if (solveWordlist == null) {
-    console.log('Rebuilding wordlist...');
     solveWordlist = '';
     for (let i = 3; i < wordlist.length; i++) {
       solveWordlist += wordlist[i].join('\n') + '\n';
     }
   }
-  //console.log(wordlist_str);
   let puz = xw.fill.join('\n') + '\n';
   solveWorker.postMessage(['run', solveWordlist, puz, isQuick]);
   solveWorkerState = 'running';
@@ -759,7 +743,6 @@ function runSolvePending() {
       case 'sat':
         if (solveWorkerState == 'running') {
           if (isQuick) {
-            console.log("Autofill: Solution found.");
             grid.classList.add("sat");
           } else {
             xw.fill = e.data[1].split('\n');
@@ -772,11 +755,8 @@ function runSolvePending() {
       case 'unsat':
         if (solveWorkerState == 'running') {
           if (isQuick) {
-            console.log("Autofill: No quick solution found.");
             grid.classList.add("unsat");
           } else {
-            console.log('Autofill: No solution found.');
-            // TODO: indicate on UI
           }
         }
         break;
@@ -788,15 +768,12 @@ function runSolvePending() {
         }
         break;
       case 'done':
-        console.log('Autofill: returning to ready, state was ', solveWorkerState);
         solveWorkerReady();
         break;
       case 'ack_cancel':
-        console.log('Autofill: Cancel acknowledged.');
         solveWorkerReady();
         break;
       default:
-        console.log('Autofill: Unexpected return,', e.data);
         break;
     }
   }
@@ -815,7 +792,6 @@ function cancelSolveWorker() {
   if (solveWorkerState == 'running') {
     solveWorker.postMessage(['cancel']);
     solveWorkerState = 'cancelwait';
-    console.log("Autofill: Cancel sent.");  // TODO: indicate on UI
     window.clearTimeout(solveTimeout);
     solveTimeout = null;
   }
