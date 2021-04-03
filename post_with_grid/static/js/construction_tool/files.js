@@ -13,6 +13,9 @@
 // limitations under the License.
 // ------------------------------------------------------------------------
 
+// Changes for Case Vide Copyright 2021 Antoine HINGE
+
+
 function ScrambledError() {
    this.message = 'Cannot open scrambled Across Lite files';
    this.name = 'ScrambledError';
@@ -411,23 +414,9 @@ function printPDF(style) {
   if (style) {
     style = style.toUpperCase();
   }
-  switch (style) {
-    case "NYT":
-      layoutPDFGrid(doc, 117, 210, true); // filled
-      doc.addPage();
-      layoutPDFGrid(doc, 117, 210); // unfilled
-      doc.addPage();
-      layoutPDFClues(doc, style);
-      if (!layoutPDFInfo(doc, style)) {
-        return;
-      }
-      break;
-    default:
-      layoutPDFGrid(doc, 50, 80);
-      layoutPDFClues(doc);
-      layoutPDFInfo(doc);
-      break;
-  }
+  layoutPDFGrid(doc, 50, 80);
+  layoutPDFClues(doc);
+  layoutPDFInfo(doc);
   doc.save(xw.title + ".pdf"); // Generate PDF and automatically download it
 }
 
@@ -515,35 +504,13 @@ function layoutPDFGrid(doc, x, y, isFilled) {
 
 function layoutPDFInfo(doc, style) {
   doc.setFont("helvetica");
-  switch (style) {
-    case "NYT":
-      let email = prompt("NYT submissions require an email address. \nLeave blank to omit.");
-      if (email == null) {
-        return null;
-      }
-      let address = prompt("NYT submissions also require a mailing address. \nLeave blank to omit.");
-      if (address == null) {
-        return null;
-      }
-      doc.setFontSize(9);
-      for (let i = 1; i <= 5; i++) {
-        doc.setPage(i);
-        doc.text(doc.internal.pageSize.width / 2, 40,
-                 (xw.author + "\n\n" + email + (email ? "      " : "") + address),
-                 null, null, "center");
-        doc.setLineWidth(0.5);
-        doc.line(0 + 150, 48, doc.internal.pageSize.width - 150, 48);
-      }
-      break;
-    default:
-      doc.setFontSize(18);
-      doc.setFontType("normal");
-      doc.text(50, 50 + 8, xw.title);
-      doc.setFontSize(9);
-      doc.setFontType("bold");
-      doc.text(50, 50 + 20, xw.author.toUpperCase());
-      break;
-  }
+  doc.setFontSize(18);
+  doc.setFontType("normal");
+  doc.text(50, 50 + 8, xw.title);
+  doc.setFontSize(9);
+  doc.setFontType("bold");
+  doc.text(50, 50 + 20, xw.author.toUpperCase());
+
   return 1;
 }
 
