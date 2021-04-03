@@ -549,72 +549,42 @@ function layoutPDFInfo(doc, style) {
 
 function layoutPDFClues(doc, style) {
   const [acrossClues, downClues] = generatePDFClues();
-
-  switch (style) {
-    case "NYT":
-      let clueFormat =
-        { columnStyles: { label: { columnWidth: 20, halign: "right", overflow: "visible" },
-                          clue: { columnWidth: 320, overflow: "linebreak" },
-                          answer: { columnWidth: 120, font: "courier", overflow: "visible", fontSize: 11 }
-                        },
-          margin: { top: 75, left: 75 }
-        };
-      doc.autoTableSetDefaults({
-        headerStyles: {fillColor: false, textColor: 0, fontSize: 16, fontStyle: "normal", overflow: "visible"},
-        bodyStyles: { fillColor: false, textColor: 0, fontSize: 10, cellPadding: 6 },
-        alternateRowStyles: { fillColor: false }
-        });
-      // Print across clues
-      doc.autoTable([ { title: "Across", dataKey: "label"},
-                      { title: "", dataKey: "clue"},
-                      { title: "", dataKey: "answer"}
-                    ], acrossClues, clueFormat);
-      // Print down clues
-      clueFormat["startY"] = doc.autoTable.previous.finalY + 10;
-      doc.autoTable([ { title: "Down", dataKey: "label"},
-                      { title: "", dataKey: "clue"},
-                      { title: "", dataKey: "answer"}
-                    ], downClues, clueFormat);
-      break;
-    default:
-      const format = {
-        "font": "helvetica",
-        "fontSize": 9,
-        "labelWidth": 13,
-        "clueWidth": 94,
-        "columnSeparator": 18,
-        "marginTop": [465, 465, 465, 85],
-        "marginBottom": doc.internal.pageSize.height - 50,
-        "marginLeft": 50,
-        "marginRight": 0
-      };
-      doc.setFont(format.font);
-      doc.setFontSize(format.fontSize);
-      let currentColumn = 0;
-      let x = format.marginLeft;
-      let y = format.marginTop[currentColumn];
-      const acrossTitle = [{ "label": "ACROSS", "clue": " " }];
-      const downTitle = [{ "label": " ", "clue": " "}, {"label": "DOWN", "clue": " " }];
-      let allClues = acrossTitle.concat(acrossClues).concat(downTitle).concat(downClues);
-      for (let i = 0; i < allClues.length; i++) { // Position clue on page
-        const clueText = doc.splitTextToSize(allClues[i].clue, format.clueWidth);
-        let adjustY = clueText.length * (format.fontSize + 2);
-        if (y + adjustY > format.marginBottom) {
-          currentColumn++;
-          x += format.labelWidth + format.clueWidth + format.columnSeparator;
-          y = format.marginTop[currentColumn];
-        }
-        if (["across", "down"].includes(String(allClues[i].label).toLowerCase())) { // Make Across, Down headings bold
-          doc.setFontType("bold");
-        } else {
-          doc.setFontType("normal");
-        }
-        doc.text(x, y, String(allClues[i].label)); // Print clue on page
-        doc.text(x + format.labelWidth, y, clueText);
-        y += adjustY;
-      }
-      break;
+  const format = {
+    "font": "helvetica",
+    "fontSize": 9,
+    "labelWidth": 13,
+    "clueWidth": 94,
+    "columnSeparator": 18,
+    "marginTop": [465, 465, 465, 85],
+    "marginBottom": doc.internal.pageSize.height - 50,
+    "marginLeft": 50,
+    "marginRight": 0
+  };
+  doc.setFont(format.font);
+  doc.setFontSize(format.fontSize);
+  let currentColumn = 0;
+  let x = format.marginLeft;
+  let y = format.marginTop[currentColumn];
+  const acrossTitle = [{ "label": "ACROSS", "clue": " " }];
+  const downTitle = [{ "label": " ", "clue": " "}, {"label": "DOWN", "clue": " " }];
+  let allClues = acrossTitle.concat(acrossClues).concat(downTitle).concat(downClues);
+  for (let i = 0; i < allClues.length; i++) { // Position clue on page
+    const clueText = doc.splitTextToSize(allClues[i].clue, format.clueWidth);
+    let adjustY = clueText.length * (format.fontSize + 2);
+    if (y + adjustY > format.marginBottom) {
+      currentColumn++;
+      x += format.labelWidth + format.clueWidth + format.columnSeparator;
+      y = format.marginTop[currentColumn];
     }
+    if (["across", "down"].includes(String(allClues[i].label).toLowerCase())) { // Make Across, Down headings bold
+      doc.setFontType("bold");
+    } else {
+      doc.setFontType("normal");
+    }
+    doc.text(x, y, String(allClues[i].label)); // Print clue on page
+    doc.text(x + format.labelWidth, y, clueText);
+    y += adjustY;
+  }
 }
 
 let openPuzzleInput = document.getElementById('open-puzzle-input');
