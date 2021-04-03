@@ -1,16 +1,13 @@
 :root {
   --black: black;
-  /*--lt-grey: #f5f7f7;*/
   --lt-grey: #f8f8f8;
   --med-grey: #999;
   --dk-grey: #444;
-  /*--wh-blue: #f2f9ff;*/
-  --lt-blue: #def1ff;
-  --lt-blue-mono: #ededed;
-  --med-blue: #55b8fe;
-  --dk-blue: #0181dc;
-  --dk-blue-mono: #656565;
-  --green: #00ff00;
+  --lt-blue: #6c757d30;
+  --lt-blue-mono: #6c757d30;
+  --med-blue: #ffaa71;
+  --dk-blue: #ffaa71;
+  --dk-blue-mono: #ffaa71;
   --red: #ff3333;
 }
 
@@ -42,7 +39,6 @@ h1 {
 }
 
 #grid.sat:focus {
-  /*outline: 2px solid var(--green);*/
 }
 
 #grid.unsat:focus {
