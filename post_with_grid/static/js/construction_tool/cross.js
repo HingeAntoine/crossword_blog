@@ -140,7 +140,6 @@ class Button {
     this.id = id;
     this.dom = document.getElementById(id);
     this.tooltip = this.dom.getAttribute("data-tooltip");
-    // this.type = type; // "normal", "toggle", "menu", "submenu"
     this.state = this.dom.className; // "normal", "on", "open", "disabled"
   }
 
@@ -154,19 +153,6 @@ class Button {
     if (this.state == "disabled") {
       this.setState("normal");
     }
-  }
-
-  press() {
-    // switch (this.type) {
-    //   case "toggle":
-    //   case "submenu":
-    //     this.setState((this.state == "on") ? "normal" : "on");
-    //     break;
-    //   case "menu":
-    //     this.setState((this.state == "open") ? "normal" : "open");
-    //     break;
-    //   default:
-    //     break;
   }
 }
 
@@ -195,7 +181,6 @@ class Toolbar {
       "exportPDF": new Button("print-puzzle"),
       "exportNYT": new Button("print-NYT-submission"),
       "export": new Button("export"),
-      "quickLayout": new Button("quick-layout"),
       "freezeLayout": new Button("toggle-freeze-layout"),
       "clearFill": new Button("clear-fill"),
       "toggleSymmetry": new Button("toggle-symmetry"),
@@ -667,29 +652,6 @@ function suppressEnterKey(e) {
   if (e.which == keyboard.enter) {
     e.preventDefault();
   }
-}
-
-function generatePattern() {
-  let title = xw.title;
-  let author = xw.author;
-  createNewPuzzle();
-  xw.title = title;
-  xw.author = author;
-
-  const pattern = patterns[randomNumber(0, patterns.length)]; // select random pattern
-  if (!isSymmetrical) { // patterns are encoded as only one half of the grid...
-    toggleSymmetry();   // so symmetry needs to be on to populate correctly
-  }
-  for (let i = 0; i < pattern.length; i++) {
-    const row = pattern[i][0];
-    const col = pattern[i][1];
-    const symRow = xw.rows - 1 - row;
-    const symCol = xw.cols - 1 - col;
-    xw.fill[row] = xw.fill[row].slice(0, col) + BLACK + xw.fill[row].slice(col + 1);
-    xw.fill[symRow] = xw.fill[symRow].slice(0, symCol) + BLACK + xw.fill[symRow].slice(symCol + 1);
-  }
-  isMutated = true;
-  updateUI();
 }
 
 function toggleSymmetry() {
