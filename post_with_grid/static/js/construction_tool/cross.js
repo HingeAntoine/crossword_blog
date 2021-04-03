@@ -271,15 +271,15 @@ function createNewPuzzle(rows, cols) {
   createGrid(xw.rows, xw.cols);
 
   current = {
-    "row":        0,
-    "col":        0,
+    "row": 0,
+    "col": 0,
     "acrossWord": '',
-    "downWord":   '',
-    "acrossStartIndex":0,
-    "acrossEndIndex":  DEFAULT_SIZE,
-    "downStartIndex":  0,
-    "downEndIndex":    DEFAULT_SIZE,
-    "direction":  ACROSS
+    "downWord": '',
+    "acrossStartIndex": 0,
+    "acrossEndIndex": cols,
+    "downStartIndex": 0,
+    "downEndIndex": rows,
+    "direction": ACROSS
   };
 
   grid = document.getElementById("grid");
@@ -544,7 +544,7 @@ function getWordAt(row, col, direction, setCurrentWordIndices) {
     }
   }
   text = text.split(BLANK).join(DASH);
-  [start, end] = getWordIndices(text, (direction == ACROSS) ? col : row);
+  [start, end] = getWordIndices(text, (direction == ACROSS) ? col : row, (direction == ACROSS) ? xw["cols"] : xw["rows"]);
   // Set global word indices if needed
   if (setCurrentWordIndices) {
     if (direction == ACROSS) {
@@ -556,11 +556,11 @@ function getWordAt(row, col, direction, setCurrentWordIndices) {
   return text.slice(start, end);
 }
 
-function getWordIndices(text, position) {
+function getWordIndices(text, position, max_index) {
   let start = text.slice(0, position).lastIndexOf(BLACK);
   start = (start == -1) ? 0 : start + 1;
-  let end = text.slice(position, DEFAULT_SIZE).indexOf(BLACK);
-  end = (end == -1) ? DEFAULT_SIZE : Number(position) + end;
+  let end = text.slice(position, max_index).indexOf(BLACK);
+  end = (end == -1) ? max_index : Number(position) + end;
   return [start, end];
 }
 
