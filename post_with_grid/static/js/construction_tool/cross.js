@@ -41,7 +41,6 @@ const DEFAULT_CLUE = "Définition (à remplir)";
 const DEFAULT_NOTIFICATION_LIFETIME = 10; // in seconds
 
 let history = [];
-let isSymmetrical = true;
 let grid = undefined;
 let squares = undefined;
 let forced = null;
@@ -179,8 +178,7 @@ class Toolbar {
       "exportPDF": new Button("print-puzzle"),
       "exportNYT": new Button("print-NYT-submission"),
       "export": new Button("export"),
-      "clearFill": new Button("clear-fill"),
-      "toggleSymmetry": new Button("toggle-symmetry")
+      "clearFill": new Button("clear-fill")
     }
   }
 }
@@ -221,7 +219,6 @@ class Interface {
     this.sidebar;
     this.toolbar = new Toolbar("toolbar");
 
-    this.isSymmetrical = true;
     this.row = 0;
     this.col = 0;
     this.acrossWord = '';
@@ -275,7 +272,6 @@ function createNewPuzzle(rows, cols) {
   document.getElementById("main").innerHTML = "";
   createGrid(xw.rows, xw.cols);
 
-  isSymmetrical = true;
   current = {
     "row":        0,
     "col":        0,
@@ -324,11 +320,7 @@ function keyboardHandler(e) {
   if ((e.which >= keyboard.a && e.which <= keyboard.z) || e.which == keyboard.space) {
     let oldContent = xw.fill[current.row][current.col];
     xw.fill[current.row] = xw.fill[current.row].slice(0, current.col) + String.fromCharCode(e.which) + xw.fill[current.row].slice(current.col + 1);
-    if (oldContent == BLACK) {
-      if (isSymmetrical) {
-        xw.fill[symRow] = xw.fill[symRow].slice(0, symCol) + BLANK + xw.fill[symRow].slice(symCol + 1);
-      }
-    }
+
     // move the cursor
     e = new Event('keydown');
     if (current.direction == ACROSS) {
@@ -343,9 +335,6 @@ function keyboardHandler(e) {
         e.which = keyboard.delete; // make it a white square
       } else {
         xw.fill[current.row] = xw.fill[current.row].slice(0, current.col) + BLACK + xw.fill[current.row].slice(current.col + 1);
-        if (isSymmetrical) {
-          xw.fill[symRow] = xw.fill[symRow].slice(0, symCol) + BLACK + xw.fill[symRow].slice(symCol + 1);
-        }
       }
   }
   if (e.which == keyboard.enter) {
@@ -355,18 +344,14 @@ function keyboardHandler(e) {
     e.preventDefault();
     let oldContent = xw.fill[current.row][current.col];
     xw.fill[current.row] = xw.fill[current.row].slice(0, current.col) + BLANK + xw.fill[current.row].slice(current.col + 1);
-      if (oldContent == BLACK) {
-        if (isSymmetrical) {
-          xw.fill[symRow] = xw.fill[symRow].slice(0, symCol) + BLANK + xw.fill[symRow].slice(symCol + 1);
-        }
-      } else { // move the cursor
-        e = new Event('keydown');
-        if (current.direction == ACROSS) {
-          e.which = keyboard.left;
-        } else {
-          e.which = keyboard.up;
-        }
-      }
+
+    // move the cursor
+    e = new Event('keydown');
+    if (current.direction == ACROSS) {
+      e.which = keyboard.left;
+    } else {
+      e.which = keyboard.up;
+    }
   }
   if (e.which >= keyboard.left && e.which <= keyboard.down) {
       e.preventDefault();
@@ -639,16 +624,6 @@ function suppressEnterKey(e) {
   if (e.which == keyboard.enter) {
     e.preventDefault();
   }
-}
-
-function toggleSymmetry() {
-  isSymmetrical = !isSymmetrical;
-  // Update UI button
-  let symButton = document.getElementById("toggle-symmetry");
-  symButton.classList.toggle("button-on");
-  buttonState = symButton.getAttribute("data-state");
-  symButton.setAttribute("data-state", (buttonState == "on") ? "off" : "on");
-  symButton.setAttribute("data-tooltip", "Turn " + buttonState + " symmetry");
 }
 
 function clearFill() {
