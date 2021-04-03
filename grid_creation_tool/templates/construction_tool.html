@@ -19,25 +19,25 @@
 
     <div class="col-xl-6">
         <div id="toolbar">
-            <button id="new-grid" type="button" data-tooltip="New puzzle" onclick="createNewPuzzle()">
+            <button id="new-grid" type="button" data-tooltip="Nouvelle grille" onclick="createNewPuzzle()">
                 <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
             </button>
-            <button id="open-JSON" type="button" data-tooltip="Open puzzle..." onmouseenter="showMenu(event)"
+            <button id="open-JSON" type="button" data-tooltip="Ouvrir une grille" onmouseenter="showMenu(event)"
                     onclick="openPuzzle()">
                 <i class="fa fa-folder-open-o fa-fw" aria-hidden="true"></i>
             </button>
             <input id="open-puzzle-input" class="hidden" type="file" accept=".json,.txt,.xw,.puz"/>
             <div id="export-menu" class="menu hidden" onmouseleave="hideMenu(event)">
-                <h4>Export as:</h4>
+                <h4>Exporter au format:</h4>
                 <button id="export-JSON" class="default" type="button" data-tooltip="Phil puzzle (.xw)"
                         onmouseup="setDefault(event)" onclick="writeFile('xw')">
                     <i class="fa fa-download fa-fw" aria-hidden="true"></i>
                 </button>
-                <button id="export-PUZ" type="button" data-tooltip="Across Lite puzzle (.puz)"
+                <button id="export-PUZ" type="button" data-tooltip="Grille Across Lite (.puz)"
                         onmouseup="setDefault(event)" onclick="writeFile('puz')">
                     <i class="fa fa-download fa-fw" aria-hidden="true"></i>
                 </button>
-                <button id="print-puzzle" type="button" data-tooltip="Printable puzzle (.pdf)"
+                <button id="print-puzzle" type="button" data-tooltip="Grille PDF (.pdf)"
                         onmouseup="setDefault(event)" onclick="printPDF()">
                     <i class="fa fa-print fa-fw" aria-hidden="true"></i>
                 </button>
@@ -46,7 +46,7 @@
                     <i class="fa fa-newspaper-o fa-fw" aria-hidden="true"></i>
                 </button>
             </div>
-            <button id="export" type="button" data-tooltip="Save puzzle" onmouseenter="showMenu(event)"
+            <button id="export" type="button" data-tooltip="Sauver" onmouseenter="showMenu(event)"
                     onclick="doDefault(event)">
                 <i class="fa fa-download fa-fw" aria-hidden="true"></i>
             </button>
