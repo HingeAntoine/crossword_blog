@@ -12,14 +12,46 @@
     <h1><span id="puzzle-title" class="editable" contenteditable="true"
               onkeydown="suppressEnterKey(event)" onfocusout="setTitle()">Titre</span>
         par <span id="puzzle-author" class="editable" contenteditable="true"
-                 onkeydown="suppressEnterKey(event)" onfocusout="setAuthor()">Auteur</span></h1>
+                  onkeydown="suppressEnterKey(event)" onfocusout="setAuthor()">Auteur</span></h1>
+</div>
+
+<!-- NEW GRID MODAL -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Format de la nouvelle grille</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="nbRowInput">Nb. lignes</label>
+                        <input class="form-control" id="nbRowInput" placeholder="15">
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="nbColInput">Nb. colonnes</label>
+                        <input class="form-control" id="nbColInput" placeholder="15">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        onclick="createNewPuzzle($('#nbRowInput').val(),$('#nbColInput').val());">
+                    Créer
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="row">
-
     <div class="col-xl-6">
         <div id="toolbar">
-            <button id="new-grid" type="button" data-tooltip="Nouvelle grille" onclick="createNewPuzzle()">
+            <button id="new-grid" type="button" data-tooltip="Nouvelle grille"
+                    data-toggle="modal" data-target="#exampleModal">
                 <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
             </button>
             <button id="open-JSON" type="button" data-tooltip="Ouvrir une grille" onmouseenter="showMenu(event)"
