@@ -44,9 +44,7 @@ let history = [];
 let isSymmetrical = true;
 let grid = undefined;
 let squares = undefined;
-let isMutated = false;
 let forced = null;
-// createNewPuzzle();
 let solveWorker = null;
 let solveWorkerState = null;
 let solveTimeout = null;
@@ -182,8 +180,7 @@ class Toolbar {
       "exportNYT": new Button("print-NYT-submission"),
       "export": new Button("export"),
       "clearFill": new Button("clear-fill"),
-      "toggleSymmetry": new Button("toggle-symmetry"),
-      "autoFill": new Button("auto-fill")
+      "toggleSymmetry": new Button("toggle-symmetry")
     }
   }
 }
@@ -316,12 +313,10 @@ function mouseHandler(e) {
   current.col = Number(activeCell.dataset.col);
   activeCell.classList.add("active");
 
-  isMutated = false;
   updateUI();
 }
 
 function keyboardHandler(e) {
-  isMutated = false;
   let activeCell = grid.querySelector('[data-row="' + current.row + '"]').querySelector('[data-col="' + current.col + '"]');
   const symRow = xw.rows - 1 - current.row;
   const symCol = xw.cols - 1 - current.col;
@@ -341,7 +336,6 @@ function keyboardHandler(e) {
     } else {
       e.which = keyboard.down;
     }
-    isMutated = true;
   }
   if (e.which == keyboard.black) {
       if (xw.fill[current.row][current.col] == BLACK) { // if already black...
@@ -353,7 +347,6 @@ function keyboardHandler(e) {
           xw.fill[symRow] = xw.fill[symRow].slice(0, symCol) + BLACK + xw.fill[symRow].slice(symCol + 1);
         }
       }
-      isMutated = true;
   }
   if (e.which == keyboard.enter) {
       current.direction = (current.direction == ACROSS) ? DOWN : ACROSS;
@@ -374,7 +367,6 @@ function keyboardHandler(e) {
           e.which = keyboard.up;
         }
       }
-      isMutated = true;
   }
   if (e.which >= keyboard.left && e.which <= keyboard.down) {
       e.preventDefault();
@@ -414,9 +406,6 @@ function keyboardHandler(e) {
 }
 
 function updateUI() {
-  if (isMutated) {
-    autoFill(true);  // quick fill
-  }
   updateGridUI();
   updateLabelsAndClues();
   updateActiveWords();
@@ -666,99 +655,7 @@ function clearFill() {
   for (let i = 0; i < xw.rows; i++) {
     xw.fill[i] = xw.fill[i].replace(/\w/g, ' '); // replace letters with spaces
   }
-  isMutated = true;
   updateUI();
-}
-
-function autoFill(isQuick = false) {
-  forced = null;
-  grid.classList.remove("sat", "unsat");
-  if (!solveWorker) {
-    solveWorker = new Worker('xw_worker.js');
-    solveWorkerState = 'ready';
-  }
-  if (solveWorkerState != 'ready') {
-    cancelSolveWorker();
-  }
-  solvePending = [isQuick];
-  runSolvePending();
-}
-
-function runSolvePending() {
-  if (solveWorkerState != 'ready' || solvePending.length == 0) return;
-  let isQuick = solvePending[0];
-  solvePending = [];
-  solveTimeout = window.setTimeout(cancelSolveWorker, 30000);
-  if (solveWordlist == null) {
-    solveWordlist = '';
-    for (let i = 3; i < wordlist.length; i++) {
-      solveWordlist += wordlist[i].join('\n') + '\n';
-    }
-  }
-  let puz = xw.fill.join('\n') + '\n';
-  solveWorker.postMessage(['run', solveWordlist, puz, isQuick]);
-  solveWorkerState = 'running';
-  solveWorker.onmessage = function(e) {
-    switch (e.data[0]) {
-      case 'sat':
-        if (solveWorkerState == 'running') {
-          if (isQuick) {
-            grid.classList.add("sat");
-          } else {
-            xw.fill = e.data[1].split('\n');
-            xw.fill.pop();  // strip empty last line
-            updateGridUI();
-            grid.focus();
-          }
-        }
-        break;
-      case 'unsat':
-        if (solveWorkerState == 'running') {
-          if (isQuick) {
-            grid.classList.add("unsat");
-          } else {
-          }
-        }
-        break;
-      case 'forced':
-        if (solveWorkerState == 'running') {
-          forced = e.data[1].split('\n');
-          forced.pop;  // strip empty last line
-          updateGridUI();
-        }
-        break;
-      case 'done':
-        solveWorkerReady();
-        break;
-      case 'ack_cancel':
-        solveWorkerReady();
-        break;
-      default:
-        break;
-    }
-  }
-}
-
-function solveWorkerReady() {
-  if (solveTimeout) {
-    window.clearTimeout(solveTimeout);
-    solveTimeout = null;
-  }
-  solveWorkerState = 'ready';
-  runSolvePending();
-}
-
-function cancelSolveWorker() {
-  if (solveWorkerState == 'running') {
-    solveWorker.postMessage(['cancel']);
-    solveWorkerState = 'cancelwait';
-    window.clearTimeout(solveTimeout);
-    solveTimeout = null;
-  }
-}
-
-function invalidateSolverWordlist() {
-  solveWordlist = null;
 }
 
 function showMenu(e) {
@@ -796,9 +693,4 @@ function doDefault(e) {
 
 function randomNumber(min, max) {
   return Math.floor(Math.random() * max) + min;
-}
-
-function randomLetter() {
-  let alphabet = "AAAAAAAAABBCCDDDDEEEEEEEEEEEEFFGGGHHIIIIIIIIIJKLLLLMMNNNNNNOOOOOOOOPPQRRRRRRSSSSSSTTTTTTUUUUVVWWXYYZ";
-  return alphabet[randomNumber(0, alphabet.length)];
 }
