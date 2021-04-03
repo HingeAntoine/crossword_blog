@@ -183,7 +183,6 @@ class Toolbar {
       "export": new Button("export"),
       "clearFill": new Button("clear-fill"),
       "toggleSymmetry": new Button("toggle-symmetry"),
-      "openWordlist": new Button("open-wordlist"),
       "autoFill": new Button("auto-fill")
     }
   }
