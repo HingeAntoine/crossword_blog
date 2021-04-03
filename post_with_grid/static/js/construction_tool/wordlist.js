@@ -19,7 +19,7 @@ let wordlist = [
   [], [], [], [], [], []
 ];
 
-openDefaultWordlist("https://raw.githubusercontent.com/keiranking/Phil/master/WL-SP.txt");
+openDefaultWordlist("https://raw.githubusercontent.com/HingeAntoine/ListesDeMots/main/ListeSansScore.TXT");
 
 //____________________
 // F U N C T I O N S
