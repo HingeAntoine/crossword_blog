@@ -181,7 +181,6 @@ class Toolbar {
       "exportPDF": new Button("print-puzzle"),
       "exportNYT": new Button("print-NYT-submission"),
       "export": new Button("export"),
-      "freezeLayout": new Button("toggle-freeze-layout"),
       "clearFill": new Button("clear-fill"),
       "toggleSymmetry": new Button("toggle-symmetry"),
       "openWordlist": new Button("open-wordlist"),
