@@ -64,7 +64,7 @@
                 <button id="export-PUZ" type="button" data-tooltip="Across Lite (.puz)" onclick="writeFile('puz')">
                     <i class="fa fa-download fa-fw" aria-hidden="true"></i>
                 </button>
-                <button id="print-puzzle" type="button" data-tooltip="PDF (.pdf)" onclick="printPDF()">
+                <button id="print-puzzle" type="button" data-tooltip="PDF (.pdf)" onclick="writeFile('pdf')">
                     <i class="fa fa-print fa-fw" aria-hidden="true"></i>
                 </button>
             </div>
@@ -111,9 +111,16 @@
 
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.2/jspdf.plugin.autotable.js"></script>
+<script src="{% static 'js/puz.js' %}"></script>
 <script src="{% static 'js/construction_tool/cross.js' %}"></script>
 <script src="{% static 'js/construction_tool/wordlist.js' %}"></script>
 <script src="{% static 'js/construction_tool/files.js' %}"></script>
+
+<!-- Pdf export -->
+<script src="https://unpkg.com/jspdf@2.1.1/dist/jspdf.umd.min.js"></script>
+<script type="text/javascript" src="{% static 'js/pdf/RobotoCondensed-normal.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/pdf/RobotoCondensed-bold.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/pdf/NunitoSans-Regular-bold.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/pdf/pdf_export.js' %}"></script>
+
 {% endblock %}

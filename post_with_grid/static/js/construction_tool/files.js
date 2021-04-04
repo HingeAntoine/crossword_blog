@@ -360,8 +360,11 @@ function writeFile(format) {
     case "puz":
       fileContents = new PuzWriter().toPuz(serialized);
       break;
-    case "xw":
-    case "json":
+    case "pdf":
+        fileContents = new PuzWriter().toPuz(serialized);
+        PUZAPP.parsepuz(String.fromCharCode.apply(null, fileContents));
+        puzdata_to_pdf(PUZAPP.puzdata, {outfile: 'CaseVide_Test.pdf'});
+        return;
     default:
       fileContents = JSON.stringify(serialized);  // Convert JS object to JSON text
       break;
@@ -409,150 +412,6 @@ function convertPuzzleToJSON() {
   return puz;
 }
 
-function printPDF(style) {
-  let doc = new jsPDF('p', 'pt');
-  if (style) {
-    style = style.toUpperCase();
-  }
-  layoutPDFGrid(doc, 50, 80);
-  layoutPDFClues(doc);
-  layoutPDFInfo(doc);
-  doc.save(xw.title + ".pdf"); // Generate PDF and automatically download it
-}
-
-function generatePDFClues() {
-  let acrossClues = [], downClues = [];
-  let byLabel = // this variable is a whole function...
-    function (a, b) { // that is called when sort() compares values
-      if (a["label"] > b["label"]) {
-        return 1;
-      } else if (a["label"] < b["label"]) {
-        return -1;
-      } else {
-        return 0;
-      }
-    };
-
-  for (const key in xw.clues) {
-    let [i, j, direction] = key.split(",");
-    const cell = grid.querySelector('[data-row="' + i + '"]').querySelector('[data-col="' + j + '"]');
-    let label = Number(cell.firstChild.innerHTML);
-    if (direction == ACROSS) {
-      // acrossClues.push([label, xw.clues[key], getWordAt(i, j, direction)]);
-      // acrossClues.sort(byLabel);
-      acrossClues.push({ "label": label, "clue": xw.clues[key], "answer": getWordAt(i, j, direction)});
-      acrossClues.sort(byLabel);
-    } else {
-      downClues.push({ "label": label, "clue": xw.clues[key], "answer": getWordAt(i, j, direction)});
-      downClues.sort(byLabel);
-    }
-  }
-  return [acrossClues, downClues];
-}
-
-function layoutPDFGrid(doc, x, y, isFilled) {
-  let format = {
-    "squareSize":     24,
-    // "pageOrigin":     { "x": 50, "y": 50 },
-    "gridOrigin":     { "x": x, "y": y },
-    "labelOffset":    { "x": 1, "y": 6 },
-    "fillOffset":     { "x": 12, "y": 17 },
-    "labelFontSize":  7,
-    "fillFontSize":   14,
-    "innerLineWidth": .5,
-    "outerLineWidth": 2
-  };
-  // Draw grid
-  doc.setDrawColor(0);
-  doc.setLineWidth(format.outerLineWidth);
-  doc.rect(format.gridOrigin.x, format.gridOrigin.y,
-           xw.rows * format.squareSize, xw.cols * format.squareSize, 'D');
-  doc.setLineWidth(format.innerLineWidth);
-  for (let i = 0; i < xw.rows; i++) {
-    for (let j = 0; j < xw.cols; j++) {
-      doc.setFillColor(xw.fill[i][j] == BLACK ? 0 : 255);
-      doc.rect(format.gridOrigin.x + (j * format.squareSize),
-               format.gridOrigin.y + (i * format.squareSize), format.squareSize, format.squareSize, 'FD');
-    }
-  }
-  // Label grid
-  doc.setFont("helvetica");
-  doc.setFontType("normal");
-  doc.setFontSize(format.labelFontSize);
-  for (let i = 0; i < xw.rows; i++) {
-    for (let j = 0; j < xw.cols; j++) {
-      const square = grid.querySelector('[data-row="' + i + '"]').querySelector('[data-col="' + j + '"]');
-      const label = square.firstChild.innerHTML;
-      if (label) {
-        doc.text(format.gridOrigin.x + (j * format.squareSize) + format.labelOffset.x,
-                 format.gridOrigin.y + (i * format.squareSize) + format.labelOffset.y, label);
-      }
-    }
-  }
-  // Fill grid
-  if (isFilled) {
-    doc.setFontSize(format.fillFontSize);
-    for (let i = 0; i < xw.rows; i++) {
-      for (let j = 0; j < xw.cols; j++) {
-        doc.text(format.gridOrigin.x + (j * format.squareSize) + format.fillOffset.x,
-                 format.gridOrigin.y + (i * format.squareSize) + format.fillOffset.y,
-                 xw.fill[i][j], null, null, "center");
-      }
-    }
-  }
-}
-
-function layoutPDFInfo(doc, style) {
-  doc.setFont("helvetica");
-  doc.setFontSize(18);
-  doc.setFontType("normal");
-  doc.text(50, 50 + 8, xw.title);
-  doc.setFontSize(9);
-  doc.setFontType("bold");
-  doc.text(50, 50 + 20, xw.author.toUpperCase());
-
-  return 1;
-}
-
-function layoutPDFClues(doc, style) {
-  const [acrossClues, downClues] = generatePDFClues();
-  const format = {
-    "font": "helvetica",
-    "fontSize": 9,
-    "labelWidth": 13,
-    "clueWidth": 94,
-    "columnSeparator": 18,
-    "marginTop": [465, 465, 465, 85],
-    "marginBottom": doc.internal.pageSize.height - 50,
-    "marginLeft": 50,
-    "marginRight": 0
-  };
-  doc.setFont(format.font);
-  doc.setFontSize(format.fontSize);
-  let currentColumn = 0;
-  let x = format.marginLeft;
-  let y = format.marginTop[currentColumn];
-  const acrossTitle = [{ "label": "ACROSS", "clue": " " }];
-  const downTitle = [{ "label": " ", "clue": " "}, {"label": "DOWN", "clue": " " }];
-  let allClues = acrossTitle.concat(acrossClues).concat(downTitle).concat(downClues);
-  for (let i = 0; i < allClues.length; i++) { // Position clue on page
-    const clueText = doc.splitTextToSize(allClues[i].clue, format.clueWidth);
-    let adjustY = clueText.length * (format.fontSize + 2);
-    if (y + adjustY > format.marginBottom) {
-      currentColumn++;
-      x += format.labelWidth + format.clueWidth + format.columnSeparator;
-      y = format.marginTop[currentColumn];
-    }
-    if (["across", "down"].includes(String(allClues[i].label).toLowerCase())) { // Make Across, Down headings bold
-      doc.setFontType("bold");
-    } else {
-      doc.setFontType("normal");
-    }
-    doc.text(x, y, String(allClues[i].label)); // Print clue on page
-    doc.text(x + format.labelWidth, y, clueText);
-    y += adjustY;
-  }
-}
 
 let openPuzzleInput = document.getElementById('open-puzzle-input');
 openPuzzleInput.addEventListener('change', openFile, false);
