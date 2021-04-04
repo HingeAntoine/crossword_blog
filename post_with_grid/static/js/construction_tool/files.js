@@ -16,70 +16,6 @@
 // Changes for Case Vide Copyright 2021 Antoine HINGE
 
 
-function ScrambledError() {
-   this.message = 'Cannot open scrambled Across Lite files';
-   this.name = 'ScrambledError';
-}
-
-class PuzReader {
-  constructor(buf) {
-    this.buf = buf;
-  }
-
-  readShort(ix) {
-    return this.buf[ix] | (this.buf[ix + 1] << 8);
-  }
-
-  readString() {
-    let result = [];
-    while (true) {
-      let c = this.buf[this.ix++];
-      if (c == 0) break;
-      result.push(String.fromCodePoint(c));
-    }
-    return result.join('');
-  }
-
-  toJson() {
-    let json = {};
-    let w = this.buf[0x2c];
-    let h = this.buf[0x2d];
-    let scrambled = this.readShort(0x32);
-    if (scrambled & 0x0004) {
-      throw new ScrambledError;
-    }
-    json.size = {cols: w, rows: h};
-    let grid = [];
-    for (var i = 0; i < w * h; i++) {
-      grid.push(String.fromCodePoint(this.buf[0x34 + i]));
-    }
-    json.grid = grid;
-    this.ix = 0x34 + 2 * w * h;
-    json.title = this.readString();
-    json.author = this.readString();
-    json.copyright = this.readString();
-    var across = [];
-    var down = [];
-    var label = 1;
-    for (var i = 0; i < w * h; i++) {
-      if (grid[i] == '.') continue;
-      var inc = 0;
-      if (i % w == 0 || grid[i - 1] == '.') {
-        across.push(label + ". " + this.readString());
-        inc = 1;
-      }
-      if (i < w || grid[i - w] == '.') {
-        down.push(label + ". " + this.readString());
-        inc = 1;
-      }
-      label += inc;
-    }
-    json.clues = {across: across, down: down};
-    // console.log(json);
-    return json;
-  }
-}
-
 class PuzWriter {
   constructor() {
     this.buf = []
@@ -242,140 +178,28 @@ class PuzWriter {
   }
 }
 
-function openPuzzle() {
-  document.getElementById("open-puzzle-input").click();
-}
-
-function isPuz(bytes) {
-  const magic = 'ACROSS&DOWN';
-  for (var i = 0; i < magic.length; i++) {
-    if (bytes[2 + i] != magic.charCodeAt(i)) return false;
-  }
-  return bytes[2 + magic.length] == 0;
-}
-
-function openFile(e) {
-  const file = e.target.files[0];
-  if (!file) {
-    return;
-  }
-  let reader = new FileReader();
-  try {
-    switch (file.name.slice(file.name.lastIndexOf("."))) {
-      case ".json":
-      case ".xw":
-      case ".txt":
-        reader.onload = function(e) {
-          convertJSONToPuzzle(JSON.parse(e.target.result));
-        };
-        reader.readAsText(file); // removing this line breaks the JSON import
-        break;
-      case ".puz":
-        reader.onload = function(e) {
-          const bytes = new Uint8Array(e.target.result);
-          let puz;
-          if (isPuz(bytes)) {
-            puz = new PuzReader(bytes).toJson();
-          } else {
-            puz = JSON.parse(new TextDecoder().decode(bytes)); // TextDecoder doesn't work in Edge 16
-          }
-          convertJSONToPuzzle(puz);
-        };
-        reader.readAsArrayBuffer(file);
-        break;
-      default:
-        break;
-    }
-    console.log("Loaded", file.name);
-  }
-  catch (err) {
-    switch (err.name) {
-      case "SyntaxError":
-        new Notification("Invalid file. PUZ and JSON puzzle files only.", 10);
-        break;
-      case "ScrambledError":
-        new Notification("Cannot open scrambled PUZ file.", 10);
-        break;
-      default:
-        console.log("Error:", err);
-    }
-  }
-}
-
-function convertJSONToPuzzle(puz) {
-  createNewPuzzle();
-  if (puz.size.rows != DEFAULT_SIZE || puz.size.cols != DEFAULT_SIZE) {
-    new Notification("Oops. Can only open 15 x 15 puzzles.", 10);
-    return;
-  }
-  xw.rows = DEFAULT_SIZE;
-  xw.cols = DEFAULT_SIZE;
-  // Update puzzle title, author
-  xw.title = puz.title || DEFAULT_TITLE;
-  if (puz.title.slice(0,8).toUpperCase() == "NY TIMES") {
-    xw.title = "NYT Crossword";
-  }
-  xw.author = puz.author || DEFAULT_AUTHOR;
-  // Update fill
-  new_fill = [];
-  for (let i = 0; i < xw.rows; i++) {
-    new_fill.push("");
-    for (let j = 0; j < xw.cols; j++) {
-      const k = (i * xw.rows) + j;
-      new_fill[i] += (puz.grid[k].length > 1) ? puz.grid[k][0].toUpperCase() : puz.grid[k].toUpperCase(); // Strip rebus answers to their first letter
-    }
-  }
-  xw.fill = new_fill;
-  isMutated = true;
-
-  updateGridUI();
-  updateLabelsAndClues();
-  // Load in clues and display current clues
-  for (let i = 0; i < xw.rows; i++) {
-    for (let j = 0; j < xw.cols; j++) {
-      const activeCell = grid.querySelector('[data-row="' + i + '"]').querySelector('[data-col="' + j + '"]');
-      if (activeCell.firstChild.innerHTML) {
-        const label = activeCell.firstChild.innerHTML + ".";
-        for (let k = 0; k < puz.clues.across.length; k++) {
-          if (label == puz.clues.across[k].slice(0, label.length)) {
-            xw.clues[[i, j, ACROSS]] = puz.clues.across[k].slice(label.length).trim();
-          }
-        }
-        for (let l = 0; l < puz.clues.down.length; l++) {
-          if (label == puz.clues.down[l].slice(0, label.length)) {
-            xw.clues[[i, j, DOWN]] = puz.clues.down[l].slice(label.length).trim();
-          }
-        }
-      }
-    }
-  }
-  updateUI();
-}
-
 function writeFile(format) {
   let filename = xw.title + "." + format;
   let serialized = convertPuzzleToJSON();
-  let fileContents;
+  let fileContents = new PuzWriter().toPuz(serialized);
   switch (format) {
     case "puz":
-      fileContents = new PuzWriter().toPuz(serialized);
-      break;
+        let file = new File([fileContents], filename);
+        let puzzleURL = window.URL.createObjectURL(file);
+
+        let puzzleLink = document.getElementById("download-puzzle-link");
+        puzzleLink.setAttribute("href", puzzleURL);
+        puzzleLink.setAttribute("download", filename);
+        puzzleLink.click();
+        break;
     case "pdf":
-        fileContents = new PuzWriter().toPuz(serialized);
         PUZAPP.parsepuz(String.fromCharCode.apply(null, fileContents));
         puzdata_to_pdf(PUZAPP.puzdata, {outfile: 'CaseVide_Test.pdf'});
-        return;
+        break;
     default:
-      fileContents = JSON.stringify(serialized);  // Convert JS object to JSON text
       break;
   }
-  let file = new File([fileContents], filename);
-  let puzzleURL = window.URL.createObjectURL(file);
-
-  let puzzleLink = document.getElementById("download-puzzle-link");
-  puzzleLink.setAttribute("href", puzzleURL);
-  puzzleLink.setAttribute("download", filename);
-  puzzleLink.click();
+  return;
 }
 
 function convertPuzzleToJSON() {
@@ -411,10 +235,3 @@ function convertPuzzleToJSON() {
   }
   return puz;
 }
-
-
-let openPuzzleInput = document.getElementById('open-puzzle-input');
-openPuzzleInput.addEventListener('change', openFile, false);
-openPuzzleInput.onclick = function () {
-    this.value = null;
-};

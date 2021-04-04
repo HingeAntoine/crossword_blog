@@ -172,7 +172,6 @@ class Toolbar {
     this.id = id;
     this.buttons = { // rewrite this programmatically
       "newPuzzle": new Button("new-grid"),
-      "openPuzzle": new Button("open-JSON"),
       "exportPUZ": new Button("export-PUZ"),
       "exportPDF": new Button("print-puzzle"),
       "export": new Button("export"),
