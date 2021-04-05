@@ -180,36 +180,6 @@ class Toolbar {
   }
 }
 
-class Notification {
-  constructor(message, lifetime = undefined) {
-    this.message = message;
-    this.id = String(randomNumber(1,10000));
-    this.post();
-    if (lifetime) {
-      this.dismiss(lifetime);
-    }
-  }
-
-  post() {
-    let div = document.createElement("DIV");
-    div.setAttribute("id", this.id);
-    div.setAttribute("class", "notification");
-    div.innerHTML = this.message;
-    div.addEventListener('click', this.dismiss);
-    document.getElementById("footer").appendChild(div);
-  }
-
-  update(message) {
-    document.getElementById(this.id).innerHTML = message;
-  }
-
-  dismiss(seconds = 0) {
-    let div = document.getElementById(this.id);
-    // seconds = (seconds === true) ? 10 : seconds;
-    setTimeout(function() { div.remove(); }, seconds * 1000);
-  }
-}
-
 class Interface {
   constructor(rows, cols) {
     this.grid = new Grid(rows, cols);
@@ -240,10 +210,6 @@ class Interface {
     updateCluesUI();
   }
 }
-
-//new Notification(document.getElementById("shortcuts").innerHTML, 300);
-// new Notification("Tip: <kbd>.</kbd> makes a black square.", 300);
-// new Notification("Tip: <kbd>Enter</kbd> toggles direction.", 300);
 
 let xw = new Crossword(); // model
 let current = new Interface(xw.rows, xw.cols); // view-controller
