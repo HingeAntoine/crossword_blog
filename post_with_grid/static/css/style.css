@@ -144,13 +144,6 @@ kbd {
   color: var(--black);
 }
 
-#sidebar {
-  width: 260px;
-  height: 550px;
-  float: left;
-  margin-left: 8px;
-}
-
 .current-word {
   margin:0;
   font-size: 21pt;

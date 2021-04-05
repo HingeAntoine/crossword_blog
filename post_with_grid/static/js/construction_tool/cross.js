@@ -183,7 +183,6 @@ class Toolbar {
 class Interface {
   constructor(rows, cols) {
     this.grid = new Grid(rows, cols);
-    //this.sidebar;
     this.toolbar = new Toolbar("toolbar");
 
     this.row = 0;
