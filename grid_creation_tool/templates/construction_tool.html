@@ -9,32 +9,12 @@
 
 {% block page_content %}
 
-<div class="row mb-2">
-
-    <!-- TITLE AND AUTHOR -->
-    <div class="col-6">
-        <h1><span id="puzzle-title" class="editable" contenteditable="true"
-                  onkeydown="suppressEnterKey(event)" onfocusout="setTitle()">Titre</span>
-            par <span id="puzzle-author" class="editable" contenteditable="true"
-                      onkeydown="suppressEnterKey(event)" onfocusout="setAuthor()">Auteur</span></h1>
-    </div>
-
-    <!-- DEFINITIONS SUGGESTIONS TOGGLE -->
-    <div class="col-6">
-        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-secondary active"
-                   onclick="$('.suggestions').collapse('show');
-                   $('.clues').collapse('hide');" >
-                <input type="radio" name="options" autocomplete="off" checked> Suggestions
-            </label>
-            <label class="btn btn-secondary"
-                   onclick="$('.suggestions').collapse('hide');
-                   $('.clues').collapse('show');">
-                <input type="radio" name="options" autocomplete="off"> Définitions
-            </label>
-        </div>
-    </div>
-
+<!-- ALERT FOR ADDING BLACK SQUARES -->
+<div class="alert alert-success" role="alert">
+    Appuyez sur <span class="font-weight-bold">"!"</span> pour ajouter une case noire.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
 </div>
 
 <!-- NEW GRID MODAL -->
@@ -67,6 +47,34 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="row mb-2">
+
+    <!-- TITLE AND AUTHOR -->
+    <div class="col-6">
+        <h1><span id="puzzle-title" class="editable" contenteditable="true"
+                  onkeydown="suppressEnterKey(event)" onfocusout="setTitle()">Titre</span>
+            par <span id="puzzle-author" class="editable" contenteditable="true"
+                      onkeydown="suppressEnterKey(event)" onfocusout="setAuthor()">Auteur</span></h1>
+    </div>
+
+    <!-- DEFINITIONS SUGGESTIONS TOGGLE -->
+    <div class="col-6">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary active"
+                   onclick="$('.suggestions').collapse('show');
+                   $('.clues').collapse('hide');">
+                <input type="radio" name="options" autocomplete="off" checked> Suggestions
+            </label>
+            <label class="btn btn-secondary"
+                   onclick="$('.suggestions').collapse('hide');
+                   $('.clues').collapse('show');">
+                <input type="radio" name="options" autocomplete="off"> Définitions
+            </label>
+        </div>
+    </div>
+
 </div>
 
 <div class="row">
