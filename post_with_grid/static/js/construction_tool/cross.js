@@ -428,9 +428,9 @@ function updateCluesUI() {
 
     function clueHtml(index){
         return '<div class="clue">' +
-            '<span class="clue-number"></span>' +
-            '<span id="' + index + '" class="editable" contenteditable="true"' +
-                'onkeydown="suppressEnterKey(event)" onfocusout="setClues(\'' + index + '\')">Test</span>' +
+            '<span class="clue-number">1. </span>' +
+            '<span id="' + index + '" class="editable" contenteditable="true" onkeydown="suppressEnterKey(event)"' +
+                'onfocusout="setClues(\'' + index + '\')">' + xw.clues[index] + '</span>' +
             '</div>'
     }
 
