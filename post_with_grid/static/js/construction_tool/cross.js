@@ -395,9 +395,9 @@ function updateCluesUI() {
     function clueHtml(index, number, word){
         return '<div class="clue">' +
             '<span class="font-weight-bold">' + number + '. </span>' +
-            '<span id="' + index + '" class="editable font-italic" contenteditable="true" onkeydown="suppressEnterKey(event)"' +
+            '<span id="' + index + '" class="editable" contenteditable="true" onkeydown="suppressEnterKey(event)"' +
                 'onfocusout="setClues(\'' + index + '\')">' + xw.clues[index] + '</span>' +
-            '<br><span class="ml-4">' + word + '</span>' +
+            '<br><span class="ml-4 font-italic">' + word + '</span>' +
             '</div>'
     }
 
