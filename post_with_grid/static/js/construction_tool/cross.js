@@ -428,8 +428,8 @@ function updateCluesUI() {
 
     function clueHtml(index, number){
         return '<div class="clue">' +
-            '<span class="clue-number">' + number + '. </span>' +
-            '<span id="' + index + '" class="editable" contenteditable="true" onkeydown="suppressEnterKey(event)"' +
+            '<span class="font-weight-bold">' + number + '. </span>' +
+            '<span id="' + index + '" class="editable font-italic" contenteditable="true" onkeydown="suppressEnterKey(event)"' +
                 'onfocusout="setClues(\'' + index + '\')">' + xw.clues[index] + '</span>' +
             '</div>'
     }

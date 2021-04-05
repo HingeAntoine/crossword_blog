@@ -25,7 +25,6 @@ h1 {
 #grid {
   border: 2px solid var(--black);
   border-collapse: collapse;
-  /*border-spacing: 0;*/
   text-align: center;
   font-size: 15pt;
   font-weight: 300;
@@ -49,7 +48,6 @@ h1 {
   width: 35px;
   height: 36px;
   position: relative;
-  /*border: 1px solid var(--black);*/
   border-left: 1px solid var(--black);
   border-top: 1px solid var(--black);
 }
@@ -377,28 +375,13 @@ kbd {
   background: var(--lt-blue);
 }
 
-.clue {
-  margin: 0;
-  padding: 0;
-  font-size: 12pt;
-  font-weight: 600;
-  letter-spacing: -0.03em;
-}
-
-.clue-number {
-}
-
 .editable:hover {
-  background-color: #def1ff;
+  background-color: #ffaa7130;
 }
 
 .editable:focus {
   outline: none;
-  border-bottom: 2px solid #55b8fe;
-}
-
-.half-sidebar {
-  height: 50%;
+  border-bottom: 2px solid #ffaa71;
 }
 
 .label {
