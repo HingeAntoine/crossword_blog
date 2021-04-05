@@ -392,11 +392,12 @@ function updateCluesUI() {
     acrossClueHolder.empty()
     downClueHolder.empty()
 
-    function clueHtml(index, number){
+    function clueHtml(index, number, word){
         return '<div class="clue">' +
             '<span class="font-weight-bold">' + number + '. </span>' +
             '<span id="' + index + '" class="editable font-italic" contenteditable="true" onkeydown="suppressEnterKey(event)"' +
                 'onfocusout="setClues(\'' + index + '\')">' + xw.clues[index] + '</span>' +
+            '<br><span class="ml-4">' + word + '</span>' +
             '</div>'
     }
 
@@ -405,11 +406,12 @@ function updateCluesUI() {
         var clue_number = grid.querySelector('[data-row="' + clue_array[0] + '"]').
             querySelector('[data-col="' + clue_array[1] + '"]').
             firstChild.innerHTML
+        var current_word = getWordAt(clue_array[0], clue_array[1], clue_array[2])
 
         if (clue_array[2] == "across"){
-            acrossClueHolder.append(clueHtml(i, clue_number));
+            acrossClueHolder.append(clueHtml(i, clue_number, current_word));
         } else {
-            downClueHolder.append(clueHtml(i, clue_number));
+            downClueHolder.append(clueHtml(i, clue_number, current_word));
         }
     }
 }
