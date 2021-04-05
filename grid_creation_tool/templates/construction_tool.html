@@ -8,11 +8,33 @@
 {% endblock %}
 
 {% block page_content %}
-<div id="header" class="mb-3">
-    <h1><span id="puzzle-title" class="editable" contenteditable="true"
-              onkeydown="suppressEnterKey(event)" onfocusout="setTitle()">Titre</span>
-        par <span id="puzzle-author" class="editable" contenteditable="true"
-                  onkeydown="suppressEnterKey(event)" onfocusout="setAuthor()">Auteur</span></h1>
+
+<div class="row mb-2">
+
+    <!-- TITLE AND AUTHOR -->
+    <div class="col-6">
+        <h1><span id="puzzle-title" class="editable" contenteditable="true"
+                  onkeydown="suppressEnterKey(event)" onfocusout="setTitle()">Titre</span>
+            par <span id="puzzle-author" class="editable" contenteditable="true"
+                      onkeydown="suppressEnterKey(event)" onfocusout="setAuthor()">Auteur</span></h1>
+    </div>
+
+    <!-- DEFINITIONS SUGGESTIONS TOGGLE -->
+    <div class="col-6">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary active"
+                   onclick="$('.suggestions').collapse('show');
+                   $('.clues').collapse('hide');" >
+                <input type="radio" name="options" autocomplete="off" checked> Suggestions
+            </label>
+            <label class="btn btn-secondary"
+                   onclick="$('.suggestions').collapse('hide');
+                   $('.clues').collapse('show');">
+                <input type="radio" name="options" autocomplete="off"> Définitions
+            </label>
+        </div>
+    </div>
+
 </div>
 
 <!-- NEW GRID MODAL -->
@@ -79,31 +101,34 @@
         <div id="main"></div>
     </div>
 
-    <div class="col-6 d-none d-xl-block">
-
+    <div class="col-3">
         <h5><b>Horizontalement</b></h5>
-        <div class="row">
-            <div class="col-6">
-                <div id="across-heading" class="direction-heading">
-                    <div id="across-word" class="current-word"></div>
-                </div>
-                <ul id="across-matches" class="matches" style="height:30vh;overflow:auto;"></ul>
+
+        <!-- ACROSS SUGGESTIONS -->
+        <div class="suggestions collapse show">
+            <div id="across-heading" class="direction-heading">
+                <div id="across-word" class="current-word"></div>
             </div>
-            <div id="acrossClues" class="col-6">
-            </div>
+            <ul id="across-matches" class="matches" style="height:60vh;overflow:auto;"></ul>
         </div>
 
+        <!-- ACROSS CLUES -->
+        <div id="acrossClues" class="clues collapse"></div>
+    </div>
+
+    <div class="col-3">
         <div><h5><b>Verticalement</b></h5></div>
-        <div class="row">
-            <div class="col-6">
-                <div id="down-heading" class="direction-heading">
-                    <div id="down-word" class="current-word"></div>
-                </div>
-                <ul id="down-matches" class="matches" style="height:30vh;overflow:auto;"></ul>
+
+        <!-- DOWN SUGGESTIONS -->
+        <div class="suggestions collapse show">
+            <div id="down-heading" class="direction-heading">
+                <div id="down-word" class="current-word"></div>
             </div>
-            <div id="downClues" class="col-6">
-            </div>
+            <ul id="down-matches" class="matches" style="height:60vh;overflow:auto;"></ul>
         </div>
+
+        <!-- DOWN CLUES -->
+        <div id="downClues" class="clues collapse"></div>
     </div>
 </div>
 
