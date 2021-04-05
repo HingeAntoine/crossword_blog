@@ -151,25 +151,25 @@ kbd {
   margin-left: 8px;
 }
 
-#sidebar .current-word {
+.current-word {
   margin:0;
   font-size: 21pt;
   font-weight: 300;
 }
 
-#sidebar .direction-heading {
+.direction-heading {
   padding: 3px 0 2px 0;
   border-top: 1px solid white;
   border-bottom: 1px solid white;
 
 }
 
-#sidebar .direction-heading.highlight {
+.direction-heading.highlight {
   border-top: 1px solid var(--med-blue);
   border-bottom: 1px solid var(--med-blue);
 }
 
-#sidebar ul.matches {
+ul.matches {
   margin: 0;
   height: 70%;
   list-style-type: none;
@@ -180,11 +180,11 @@ kbd {
   overflow-y: scroll;
 }
 
-#sidebar ul.matches li {
+ul.matches li {
   margin: 2px 0;
 }
 
-#sidebar ul.matches li:hover {
+ul.matches li:hover {
   background: var(--lt-grey);
   color: var(--black);
   font-weight: 500;
