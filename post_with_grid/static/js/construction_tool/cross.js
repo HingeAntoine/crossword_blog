@@ -420,27 +420,28 @@ function updateGridUI() {
 }
 
 function updateCluesUI() {
-  let acrossClueNumber = document.getElementById("across-clue-number");
-  let downClueNumber = document.getElementById("down-clue-number");
-  let acrossClueText = document.getElementById("across-clue-text");
-  let downClueText = document.getElementById("down-clue-text");
-  // const currentCell = grid.querySelector('[data-row="' + current.row + '"]').querySelector('[data-col="' + current.col + '"]');
+    var acrossClueHolder = $("#acrossClues")
+    var downClueHolder = $("#downClues")
 
-  // If the current cell is black, empty interface and get out
-  if (xw.fill[current.row][current.col] == BLACK) {
-    acrossClueNumber.innerHTML = "";
-    downClueNumber.innerHTML = "";
-    acrossClueText.innerHTML = "";
-    downClueText.innerHTML = "";
-    return;
-  }
-  // Otherwise, assign values
-  const acrossCell = grid.querySelector('[data-row="' + current.row + '"]').querySelector('[data-col="' + current.acrossStartIndex + '"]');
-  const downCell = grid.querySelector('[data-row="' + current.downStartIndex + '"]').querySelector('[data-col="' + current.col + '"]');
-  acrossClueNumber.innerHTML = acrossCell.firstChild.innerHTML + "a.";
-  downClueNumber.innerHTML = downCell.firstChild.innerHTML + "d.";
-  acrossClueText.innerHTML = xw.clues[[current.row, current.acrossStartIndex, ACROSS]];
-  downClueText.innerHTML = xw.clues[[current.downStartIndex, current.col, DOWN]];
+    acrossClueHolder.empty()
+    downClueHolder.empty()
+
+    function clueHtml(index){
+        return '<div class="clue">' +
+            '<span class="clue-number"></span>' +
+            '<span id="' + index + '" class="editable" contenteditable="true"' +
+                'onkeydown="suppressEnterKey(event)" onfocusout="setClues(\'' + index + '\')">Test</span>' +
+            '</div>'
+    }
+
+    for (i in xw.clues) {
+        clue_array = i.split(",")
+        if (clue_array[2] == "across"){
+            acrossClueHolder.append(clueHtml(i));
+        } else {
+            downClueHolder.append(clueHtml(i));
+        }
+    }
 }
 
 function updateInfoUI() {
@@ -604,9 +605,9 @@ function updateSidebarHighlights() {
   }
 }
 
-function setClues() {
-    xw.clues[[current.row, current.acrossStartIndex, ACROSS]] = document.getElementById("across-clue-text").innerHTML;
-    xw.clues[[current.downStartIndex, current.col, DOWN]] = document.getElementById("down-clue-text").innerHTML;
+function setClues(index) {
+    xw.clues[index] = document.getElementById(index).innerHTML;
+    //xw.clues[[current.downStartIndex, current.col, DOWN]] = document.getElementById("down-clue-text").innerHTML;
 }
 
 function setTitle() {
