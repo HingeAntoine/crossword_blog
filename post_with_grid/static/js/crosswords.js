@@ -605,6 +605,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
     CrossWord.prototype.keyPressed = function(e) {
         var prevent = [35, 36, 37, 38, 39, 40, 32, 46, 8, 9, 13].indexOf(e.keyCode) >= 0; // to prevent event propagation for specified keys
+        console.log(e.keyCode);
         switch (e.keyCode) {
             case 35: // end
                 this.moveToFirstCell(true);
@@ -693,6 +694,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                 break;
         }
         if (prevent) {
+            this.hidden_input.val('');
             e.preventDefault();
             e.stopPropagation();
         }
@@ -700,8 +702,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     
     // Detects user inputs to hidden input element
     CrossWord.prototype.hiddenInputChanged = function(rebus_string) {
-        var mychar = this.hidden_input.val().slice(0, 1).toUpperCase(),
-            next_cell;
+        var mychar = this.hidden_input.val().slice(0, 1).toUpperCase();
         if (this.selected_word && this.selected_cell) {
             if (mychar) {
                 this.selected_cell.letter = mychar;
@@ -714,10 +715,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             // find empty cell, then next cell
             // Change this depending on config
             if (this.config.skip_filled_letters) {
-                next_cell = this.selected_word.getFirstEmptyCell(this.selected_cell.x, this.selected_cell.y) || this.selected_word.getNextCell(this.selected_cell.x, this.selected_cell.y);
+                var next_cell = this.selected_word.getFirstEmptyCell(this.selected_cell.x, this.selected_cell.y) || this.selected_word.getNextCell(this.selected_cell.x, this.selected_cell.y);
             }
             else {
-                next_cell = this.selected_word.getNextCell(this.selected_cell.x, this.selected_cell.y);
+                var next_cell = this.selected_word.getNextCell(this.selected_cell.x, this.selected_cell.y);
             }
 
             this.setActiveCell(next_cell);
