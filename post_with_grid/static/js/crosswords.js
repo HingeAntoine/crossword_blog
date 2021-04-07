@@ -605,7 +605,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
     CrossWord.prototype.keyPressed = function(e) {
         var prevent = [35, 36, 37, 38, 39, 40, 32, 46, 8, 9, 13].indexOf(e.keyCode) >= 0; // to prevent event propagation for specified keys
-        console.log(e.keyCode);
         switch (e.keyCode) {
             case 35: // end
                 this.moveToFirstCell(true);
