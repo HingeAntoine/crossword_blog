@@ -121,7 +121,7 @@ function draw_crossword_grid(doc,puzdata,options)
 
 /** Create a PDF (requires jsPDF) **/
 
-function puzdata_to_pdf(puzdata,options) {
+function puzdata_to_pdf(puzdata,options,display_footer=true) {
     var DEFAULT_OPTIONS = {
         margin: 36
     ,   side_margin: 36
@@ -794,7 +794,9 @@ function puzdata_to_pdf(puzdata,options) {
     /* Add bottom link to website */
     doc.setFont(options.grid_font,'bold');
     doc.setFontSize(14);
-    doc.text(175, 775, "Retrouvez plus de grilles sur https://casevide.fr", null, null,'left');
+    if(display_footer) {
+        doc.text(175, 775, "Retrouvez plus de grilles sur https://casevide.fr", null, null,'left');
+    }
 
     doc.save(options.outfile);
 }

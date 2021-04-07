@@ -194,7 +194,7 @@ function writeFile(format) {
         break;
     case "pdf":
         PUZAPP.parsepuz(String.fromCharCode.apply(null, fileContents));
-        puzdata_to_pdf(PUZAPP.puzdata, {outfile: 'CaseVide_Test.pdf'});
+        puzdata_to_pdf(PUZAPP.puzdata, {outfile: 'CaseVide_Test.pdf'}, false);
         break;
     default:
       break;
