@@ -42,18 +42,20 @@ class ProjectAdmin(admin.ModelAdmin):
 
             # Draw on image
             d = ImageDraw.Draw(img)
-            for i, j in product(list(range(p.width)), list(range(p.height))):
-                cell = p.solution[i * p.width + j]
-                if cell == ".":
-                    d.rectangle(
-                        [
-                            CELL_SIZE * j,
-                            CELL_SIZE * i,
-                            CELL_SIZE * (j + 1) - 1,
-                            CELL_SIZE * (i + 1) - 1,
-                        ],
-                        fill="black",
-                    )
+            print(p.width, p.height)
+            for i in range(p.width):
+                for j in range(p.height):
+                    cell = p.solution[j * p.width + i]
+                    if cell == ".":
+                        d.rectangle(
+                            [
+                                CELL_SIZE * j,
+                                CELL_SIZE * i,
+                                CELL_SIZE * (j + 1) - 1,
+                                CELL_SIZE * (i + 1) - 1,
+                            ],
+                            fill="black",
+                        )
 
             # Save image
             img_path = f"/preview/{obj.pk}.png"
