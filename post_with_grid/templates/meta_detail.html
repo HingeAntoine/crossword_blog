@@ -1,22 +1,25 @@
 {% extends "grid_detail.html" %}
 
 {% block button_bar %}
-<!-- SOLUTION BUTTON -->
+<!-- QUESTION BUTTON -->
 <button type="button" class="btn btn-secondary  mx-1 collapse collapseButtonBar" id="question-button" data-toggle="modal"
         data-target="#questionModal">
-    <div class="em em-question"></div>
+    <div class="em em-question"
+         data-toggle="tooltip" data-placement="bottom" title="Voir la question"></div>
 </button>
 
 <!-- POST BUTTON -->
 <button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar" id="open-modal-button" data-toggle="modal"
         data-target="#answerModal">
-    <div class="em em-incoming_envelope"></div>
+    <div class="em em-incoming_envelope"
+         data-toggle="tooltip" data-placement="bottom" title="Soumettre ma réponse"></div>
 </button>
 
 <!-- SOLUTION BUTTON -->
 <button type="button" class="btn btn-secondary  mx-1 collapse collapseButtonBar" id="solution-button" data-toggle="modal"
         data-target="#solutionModal">
-    <div class="em em-eye"></div>
+    <div class="em em-eye"
+         data-toggle="tooltip" data-placement="bottom" title="Voir la solution"></div>
 </button>
 {% endblock %}
 
