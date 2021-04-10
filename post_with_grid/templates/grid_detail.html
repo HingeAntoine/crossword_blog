@@ -208,7 +208,8 @@
 
             <!-- PDF BUTTON -->
             <button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar"
-                    onclick="puzdata_to_pdf(PUZAPP.puzdata, {outfile: 'CaseVide_{{ project.title|cut:" "|cut:"'" }}'})">
+                    onclick="puzdata_to_pdf(PUZAPP.puzdata, {outfile: 'CaseVide_{{ project.title|cut:" "|cut:"'" }}'});
+                        $.ajax({type: 'POST', url: '', data: {'download': true}});">
             <div class="em em-printer"></div>
             </button>
 

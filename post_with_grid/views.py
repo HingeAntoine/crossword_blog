@@ -57,6 +57,8 @@ def project_detail(request, pk):
         # Increment grid solve counter
         if "increment" in request.POST:
             Project.objects.filter(pk=pk).update(solve_count=F("solve_count") + 1)
+        elif "download" in request.POST:
+            Project.objects.filter(pk=pk).update(download_count=F("download_count") + 1)
         else:
             # Create form error dict
             error_dict = {}
