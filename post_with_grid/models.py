@@ -31,6 +31,7 @@ class Project(models.Model):
     author_key = models.ForeignKey(Author, default="antoine", on_delete=models.RESTRICT)
     date_created = models.DateField(auto_now_add=True)
     solve_count = models.IntegerField(default=0)
+    download_count = models.IntegerField(default=0)
     crossword_type = models.IntegerField(
         default=0,
         choices=[

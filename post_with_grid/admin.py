@@ -8,14 +8,20 @@ from post_with_grid.models import Score
 from post_with_grid.models import Comment
 
 from PIL import Image, ImageDraw
-from itertools import product
 import puz
 
 CELL_SIZE = 10
 
 
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ("title", "author_key", "crossword_type", "grid_size", "solve_count")
+    list_display = (
+        "title",
+        "author_key",
+        "crossword_type",
+        "grid_size",
+        "solve_count",
+        "download_count",
+    )
 
     fields = (
         "title",
