@@ -102,7 +102,9 @@
 
             <div class="divider"></div>
 
-            <button id="add-square" type="button" data-tooltip="Ajouter une case noire" onclick="clearFill()">
+            <button id="add-square" type="button" data-tooltip="Ajouter une case noire"
+                    onclick="xw.fill[current.row] = xw.fill[current.row].slice(0, current.col) + BLACK + xw.fill[current.row].slice(current.col + 1);
+                             updateUI();">
                 <i class="fas fa-square-full"></i>
             </button>
 
