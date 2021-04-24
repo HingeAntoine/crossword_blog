@@ -55,10 +55,10 @@ class ProjectAdmin(admin.ModelAdmin):
                     if cell == ".":
                         d.rectangle(
                             [
-                                CELL_SIZE * j,
                                 CELL_SIZE * i,
-                                CELL_SIZE * (j + 1) - 1,
+                                CELL_SIZE * j,
                                 CELL_SIZE * (i + 1) - 1,
+                                CELL_SIZE * (j + 1) - 1,
                             ],
                             fill="black",
                         )
