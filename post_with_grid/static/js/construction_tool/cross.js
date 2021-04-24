@@ -175,7 +175,8 @@ class Toolbar {
       "exportPUZ": new Button("export-PUZ"),
       "exportPDF": new Button("print-puzzle"),
       "export": new Button("export"),
-      "clearFill": new Button("clear-fill")
+      "addSquare": new Button("add-square"),
+      "clearFill": new Button("clear-fill"),
     }
   }
 }
