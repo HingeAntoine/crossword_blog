@@ -20,7 +20,9 @@ const keyboard = {
   "i":      73, "j": 74, "k": 75, "l": 76, "m": 77, "n": 78, "o": 79, "p": 80,
   "q":      81, "r": 82, "s": 83, "t": 84, "u": 85, "v": 86, "w": 87, "x": 88, "y": 89,
   "z":      90,
-  "black":  161, ".": 190,
+  "black":  223,
+  "firefox_black":  161,
+  ".": 190,
   "delete": 8,
   "enter":  13,
   "space":  32,
@@ -292,7 +294,7 @@ function keyboardHandler(e) {
       e.which = keyboard.down;
     }
   }
-  if (e.which == keyboard.black) {
+  if (e.which == keyboard.black || e.which == keyboard.firefox_black) {
       if (xw.fill[current.row][current.col] == BLACK) { // if already black...
         e = new Event('keydown');
         e.which = keyboard.delete; // make it a white square
