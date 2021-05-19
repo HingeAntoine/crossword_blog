@@ -71,7 +71,7 @@ pseudonymes uniques** ayant enregistré au moins un score. Il est à noter que l
 2020  (6 mois après la date anniversaire du blog) et certains joueurs pourtant assidu n'ont donc pas enregistré un score
 pour toutes les grilles.
 
-### Nombre de grilles résolues
+### Nombre de grilles résolues (Top 20)
 
 Pseudo    | Compte | Temps moyen  
 --------------|-------|--------
@@ -122,3 +122,120 @@ Pseudo  | Médaille d'or | Médaille d'argent | Médaille de bronze | Total méd
  alf           |           1 |            0 |           0 |            1
  \_^\_         |           1 |            0 |           0 |            1
  cristo canyon |           1 |            0 |           0 |            1
+
+
+## Grilles
+
+Enfin, je vous propose une dernière analyse du contenu même des grilles pour voir un peut ce que j'ai pu griller pendant
+l'année. Je vous propose de regarder les mots les plus souvent utilisées dans mes grilles et la fréquence des 
+lettres utilisées. Une brève analyse des entrées les plus longues donnent la tonalité de cette année cloitrée. Cette 
+analyse a été effectuée sur 50 grilles (20 minis et 30 plus grandes). 
+
+### Statistiques sur les mots utilisés
+
+Le top 25 des mots les plus utilisés révèle les mots pratiques pour finir une grille. Ici, plétore de E, S, A, R ... Ce
+ne sont pas toujours les mots que l'on est le plus content de mettre dans une grille, mais ils sont quand même bien 
+pratique et donnent aussi aux joueuses et joueurs un point d'entrée.
+
+Mot | Répétition
+----|----
+ESE | 5
+ERE | 4
+ETE | 4
+AAA | 4
+ILE | 4
+TSE | 4
+IRE | 4
+ESTE | 4
+EST | 4
+ANE | 4
+ART | 4
+ERRE | 4
+REIN | 4
+EOLE | 3
+SAC | 3
+SES | 3
+LOL | 3
+DAN | 3
+NON | 3
+EUH | 3
+NIE | 3
+EPI | 3
+ADO | 3
+ESSE | 3
+OTAI | 3
+
+### Statistiques de répétitions des lettres
+
+En regardant le contenu des grilles, on peut aussi le comparer à la fréquence des lettres utilisées dans la langue 
+française (source: [Wikipedia](https://fr.wikipedia.org/wiki/Fr%C3%A9quence_d%27apparition_des_lettres_en_fran%C3%A7ais)).
+La répartition dans mes grilles conserve presque le Quinté dans l'orde, substituant le N pour un R en 5e position. 
+
+Le E est encore plus prépondérant que dans un article wikipedia moyen, ce qui s'explique par la propension des 
+verbicrucistes à s'appuyer dessus comme terminaison (j'imagine). 
+
+De la même manière, le Q est plus chaud que les autres lettres à mettre dans la grille. Dans la langue, on a plus 
+naturellement recours aux conjonctions alors que dans la grille, il est difficile à placer sur les bords ou prêt des 
+cases noires. Il force aussi presque systématiquement un U à sa suite, ce qui peut compliquer la construction d'une 
+grille déjà contrainte.
+
+Je suis loin de réaliser **un pangramme** (une grille contenant toutes les lettres de l'alphabet) à chaque grille. 
+La seule grille pangramme parmi les 50 est celle du nouvel an ([Pour ref](https://casevide.fr/grilles/46/)) moins 
+contrainte que les autres par son thème et disposant d'un peu plus de place.
+
+Lettre | Compte | Fréquence | Fréquence de référence
+---|---|---|---
+E | 785 | 16.99% | 12.10%
+A | 513 | 11.1% | 7.11%
+I | 372 | 8.05% | 6.59%
+S | 363 | 7.86% | 6.51%
+R | 342 | 7.4% | 6.07%
+O | 318 | 6.88% | 5.02%
+T | 304 | 6.58% | 5.92%
+N | 268 | 5.8% | 6.39%
+L | 226 | 4.89% | 4.96%
+U | 186 | 4.03% | 4.49%
+C | 172 | 3.72% | 3.18%
+M | 145 | 3.14% | 2.62%
+D | 135 | 2.92% | 3.67%
+P | 96 | 2.08% | 2.49%
+G | 88 | 1.9% | 1.23%
+B | 82 | 1.77% | 1.14%
+H | 60 | 1.3% | 1.11%
+F | 43 | 0.93% | 1.11%
+V | 35 | 0.76% | 1.11%
+X | 18 | 0.39% | 0.38%
+K | 17 | 0.37% | 0.29%
+Y | 16 | 0.35% | 0.46%
+Z | 15 | 0.32% | 0.15%
+J | 10 | 0.22% | 0.34%
+Q | 7 | 0.15% | 0.65%
+W | 4 | 0.09% | 0.17%
+
+### Entrées les plus longues (top 25)
+
+'TREIZEATABLE',
+'CHEWINGPUNCH',
+'FULGUROPOING',
+'CORNEDEBRUME',
+'COUPDEKLAXON',
+'MAITREDECONF',
+'RUBANADHESIF',
+'GUMMIBARCHEN',
+'DRAGIBUSBLEU',
+'MOUETTERIEUSE',
+'GASTONLAGAFFE',
+'MARRONSGLACES',
+'CHOCOLATCHAUD',
+'DEESSEHINDOUE',
+'DIVINECOMEDIE',
+'FRAISESTAGADA',
+'CESTBEAULAVIE',
+'POIGNEEDAMOUR',
+'HEUREDEGLOIRE',
+'GRAINDEBEAUTE',
+'RECONFINEMENTS',
+'MASQUESENTISSU',
+'LHOMMEINVISIBLE',
+'PANDEMIEDECOVID',
+'QUELLEANNEEMERDIQUE'
