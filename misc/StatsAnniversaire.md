@@ -271,3 +271,20 @@ anniversaire):
 
 * <details> <summary>Génie qu'on boit avec du tonic (5)</summary> DJINN</details>
 * <details> <summary>Génie qu'on mange avec du ketchup (5)</summary> EFRIT</details>
+
+## Conclusion
+
+Peut être que ces petites stats vous donnerons envie de jouer ([c'est ici pour
+mes grilles](https://casevide.fr)), peut être qu'elles vous donnerons envie de créer 
+([petit outil](https://casevide.fr/creation/outil/)) ou de partager ([subreddit](https://www.reddit.com/r/motscroises)).
+
+N'hésitez pas à me contacter ([Twitter](https://twitter.com/antoinehinge)) si :
+* vous avez aimé/détesté une grille 
+* vous n'avez pas compris une définition 
+* vous voulez vous lancer dans la création (SVP contactez-moi que je puisse vous aider !!)
+* le site fonctionne mal
+
+Je streame aussi des grilles (pas les miennes) sur [Twitch](https://www.twitch.tv/drdedalus) si vous voulez venir jouer 
+avec moi ou peut être même me voir construire ?  
+
+<3 Merci d'avoir joué <3
