@@ -1,13 +1,11 @@
 # Case Vide: Statistiques brutes 
 
-Ce vendredi 21 mai 2021, Case Vide fête ses 1 an. Après un an de fonctionnement, j'ai calculé quelques statistiques intéressantes pour l'anniversaire 
-du blog. J'ai à ma disposition un an de données à travers 70 grilles, leurs statistiques de résolution,
-des scores pour certains utilisateurs ... Je compile ici les données brutes dont une partie 
+Ce vendredi 21 mai 2021, Case Vide fête ses 1 an. Après un an de fonctionnement, j'ai calculé quelques statistiques 
+intéressantes pour l'anniversaire du blog. J'ai à ma disposition un an de données à travers 70 grilles, leurs 
+statistiques de résolution, des scores pour certains utilisateurs ... Je compile ici les données brutes dont une partie 
 a été extraite pour créer des infographies.
 
 ## Nombre de résolutions
-
----
 
 Lors de la résolution d'une grille, si l'Oedipe arrive à sa fin, une requête est postée vers le serveur
 pour incrémenter le compteur de résolution. En tout, sur l'année écoulée (2020-2021), **1157 résolutions** ont 
@@ -41,29 +39,29 @@ Très grande |     1 |  18 |  18.0 |  18 |  18
 
 ## Scores
 
----
+Si un Oedipe résout la grille sans aide (vérification des cases ou révélation de la solution), il a la possibilité
+de soumettre son temps avec un pseudonyme. Plus difficile qu'une résolution classique, puisqu'il ne faut pas recourir
+à une aide, ce système a permis d'enregistrer **429 scores**. En voici un aperçu en quelques données clés.
 
-### Number of scores
+### Temps moyen par taille de grille
 
-Number of scores = 429
-
-### Mean time per grid size
-
- grid_size | avg  | min |  max  
+Taille de grille | Temps moyen (sec)  | Temps min | Temps max  
 -----------|--------|-----|-------
-         0 |  214.3 |   7 |  1195
-         1 |  857.5 |  89 |  4126
-         2 | 1721.2 | 583 | 19725
-         3 | 2241.5 | 804 |  3233
+Petite |  214.3 |   7 |  1195
+Moyenne |  857.5 |  89 |  4126
+Grande | 1721.2 | 583 | 19725
+Très grande | 2241.5 | 804 |  3233
 
-### Mean time per author
+### Temps moyen par auteur
 
- author_key_id | avg  | min |  max  
+Auteur-ice | Temps moyen (sec)  | Temps min | Temps max   
 ---------------|--------|-----|-------
  marius        |  229.1 | 144 |   307
  Moma          |  406.7 | 372 |   475
  antoine       |  554.8 |   7 | 19725
  coladovesi    | 1255.5 |  89 |  2992
+
+N.B. : Parmi les auteurs, seuls deux on plus d'une grille publié, Coladovesi et moi-même (Antoine). 
 
 
 ## Best players
