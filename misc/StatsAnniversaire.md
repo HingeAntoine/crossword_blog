@@ -64,13 +64,16 @@ Auteur-ice | Temps moyen (sec)  | Temps min | Temps max
 N.B. : Parmi les auteurs, seuls deux on plus d'une grille publié, Coladovesi et moi-même (Antoine). 
 
 
-## Best players
+## Meilleurs joueurs
 
-Total number of players = 73
+En utilisant le pseudo comme clé d'entrée, on peut aussi analyser les scores par Oedipe. Au total, on dénombre **73 
+pseudonymes uniques** ayant enregistré au moins un score. Il est à noter que le système de score est arrivé fin octobre
+2020  (6 mois après la date anniversaire du blog) et certains joueurs pourtant assidu n'ont donc pas enregistré un score
+pour toutes les grilles.
 
-### Per max grid solved
+### Nombre de grilles résolues
 
-lower     | count | round  
+Pseudo    | Compte | Temps moyen  
 --------------|-------|--------
  skbo         |    42 |  487.0
  coladovesi   |    41 |  320.3
@@ -93,9 +96,12 @@ lower     | count | round
  pungouin     |     5 |  399.6
  s20          |     5 |  145.2
 
-### Per number one/two/three spots
+### Podium par médaille
 
-  lower_first  | first_place | second_place | third_place | total_medals 
+On peut aussi regarder quels Oedipes ont réalisé un temps meilleurs que les autres sur les grilles publiées. Cette
+analyse fournit un podium par grille et permet de comptabiliser les médailles (un peu comme aux JO).
+
+Pseudo  | Médaille d'or | Médaille d'argent | Médaille de bronze | Total médaille 
 ---------------|-------------|--------------|-------------|--------------
  coladovesi    |          22 |           10 |           5 |           37
  waann         |          10 |            5 |           3 |           18
