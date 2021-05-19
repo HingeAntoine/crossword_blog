@@ -212,30 +212,62 @@ J | 10 | 0.22% | 0.34%
 Q | 7 | 0.15% | 0.65%
 W | 4 | 0.09% | 0.17%
 
-### Entrées les plus longues (top 25)
+### Thématique des entrées les plus longues
 
-'TREIZEATABLE',
-'CHEWINGPUNCH',
-'FULGUROPOING',
-'CORNEDEBRUME',
-'COUPDEKLAXON',
-'MAITREDECONF',
-'RUBANADHESIF',
-'GUMMIBARCHEN',
-'DRAGIBUSBLEU',
-'MOUETTERIEUSE',
-'GASTONLAGAFFE',
-'MARRONSGLACES',
-'CHOCOLATCHAUD',
-'DEESSEHINDOUE',
-'DIVINECOMEDIE',
-'FRAISESTAGADA',
-'CESTBEAULAVIE',
-'POIGNEEDAMOUR',
-'HEUREDEGLOIRE',
-'GRAINDEBEAUTE',
-'RECONFINEMENTS',
-'MASQUESENTISSU',
-'LHOMMEINVISIBLE',
-'PANDEMIEDECOVID',
-'QUELLEANNEEMERDIQUE'
+Qu'est ce qu'on fait en confinement quand on ne peut rien faire d'autre ? On construit des mots croisés. Leur thème en 
+dit surement aussi long sur mes préoccupations que mes recherches Google :
+* on rêve à la fin du confinement,
+    * QUELLE ANNEE MERDIQUE 
+    * RECONFINEMENTS
+    * MASQUES EN TISSU
+    * PANDEMIE DE COVID 
+* on pense au prochain repas,
+  * GUMMIBARCHEN
+  * DRAGIBUS BLEU
+  * MARRONS GLACES
+  * CHOCOLAT CHAUD
+  * FRAISES TAGADA 
+  * DINDE FARCIE 
+  * EARL GREY
+* on continue de geeker...
+  * CHEWING PUNCH
+  * GASTON LAGAFFE 
+  * LOTUS NOIR
+  * DONJONS ET DRAGONS 
+  * LE HOBBIT
+  * SIMFLOUZ 
+  * OPEN SOURCE
+
+Autres entrées pas piquées des hanetons :
+* TREIZE A TABLE 
+* COUP DE KLAXON
+* MAITRE DE CONF
+* RUBAN ADHESIF
+* DIVINE COMEDIE (dans laquelle on retrouve la DINDE FARCIE de Noël) 
+* POIGNEE D'AMOUR
+
+### Quelques définitions donc je ne suis pas peu fier
+
+C'est peut être la partie la moins évidente : trouver sa voix pour écrire des définitions. Les cruciverbistes  adorent 
+les détester : voici celles que j'ai commises cette année. Entre parenthèse, le nombre de lettre et les espaces/signes 
+de ponctuations, s'il y en a dans l'entrée (exemple: BOITE A CAMEMBERT (5 1 9)).
+
+* <details> <summary>(Entre ici ?!) Jean moulant (4)</summary> SLIM</details>
+* <details> <summary>Organe qui joue des tours? (4)</summary> REIN</details>
+* <details> <summary>Instrument de chasse? (3)</summary> COR</details>
+* <details> <summary>Elle porte (trop) souvent un nom d'homme ? (3)</summary> RUE</details>
+* <details> <summary>Blanc ou rouge, plus rarement bleu (6)</summary> PINARD</details>
+* <details> <summary>Boite d'un Watson plus malin que Sherlock (3)</summary> IBM</details>
+* <details> <summary>Perdant de la présidentielle aux US (5)</summary> KANYE</details>
+* <details> <summary>Il répète (pète, pète ...) ce qu'on dit (dit, dit ...) (4)</summary> ECHO</details>
+* <details> <summary>Poêle et cathame, riz Bomba (se necesita un gros estomac) (6)</summary> PAELLA</details>
+* <details> <summary>Numéro à virer ? (3)</summary> RIB</details>
+* <details> <summary>Auxiliaire de vie ? (4)</summary> ETRE</details>
+* <details> <summary>Tragédien français, fanboy d'Antiquité grecque (6)</summary> RACINE</details>
+* <details> <summary>On la trouve dans le poisson mais pas dans le bifteck (5)</summary> ARETE</details>
+
+Et deux définitions inédites pour une grille que je ne publierai pas à cause de sa thématique (c'est pour un 
+anniversaire):
+
+* <details> <summary>Génie qu'on boit avec du tonic (5)</summary> DJINN</details>
+* <details> <summary>Génie qu'on mange avec du ketchup (5)</summary> EFRIT</details>
