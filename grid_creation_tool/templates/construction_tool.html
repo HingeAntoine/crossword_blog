@@ -62,7 +62,7 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    Qui aime la glace !!!
+                    <ul id="load-list"></ul>
                 </div>
             </div>
             <div class="modal-footer">
@@ -115,7 +115,8 @@
 
             <!-- OPEN PUZ FILE -->
             <button id="open-JSON" type="button" data-tooltip="Ouvrir"
-                    data-toggle="modal" data-target="#loadModal">
+                    data-toggle="modal" data-target="#loadModal"
+                    onclick="getSavedGrids();">
                 <i class="fa fa-folder-open fa-fw" aria-hidden="true"></i>
             </button>
             <input id="open-puzzle-input" class="hidden" type="file" accept=".puz"/>

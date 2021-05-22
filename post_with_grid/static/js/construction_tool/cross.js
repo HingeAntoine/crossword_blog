@@ -599,9 +599,8 @@ function hideMenu(e) {
   e.target.classList.add("hidden");
 }
 
-//__________________
-//- SAVE FUNCTIONS -
-//__________________
+//_________________
+//- SAVE FUNCTIONS
 
 var CONSTRUCTION_KEY = "creation_";
 
@@ -645,4 +644,19 @@ function loadGrid(savegame_name) {
     grid.addEventListener('keydown', keyboardHandler);
 
     updateUI();
+}
+
+function getSavedGrids() {
+    let loadList = document.getElementById("load-list");
+    loadList.innerHTML = "";
+
+    for (key of Object.keys(localStorage)){
+        if(key.startsWith(CONSTRUCTION_KEY)){
+            let li = document.createElement("LI");
+            li.innerHTML = key;
+            li.className = "";
+            //li.addEventListener('dblclick', fillGridWithMatch);
+            loadList.appendChild(li);
+        }
+    }
 }
