@@ -50,6 +50,31 @@
     </div>
 </div>
 
+<!-- LOAD GRID MODAL -->
+<div class="modal fade" id="loadModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Charger une grille</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    Qui aime la glace !!!
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        onclick="print('Bravo le veau')">
+                    Charger
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="row mb-2">
 
     <!-- TITLE AND AUTHOR -->
@@ -90,8 +115,8 @@
 
             <!-- OPEN PUZ FILE -->
             <button id="open-JSON" type="button" data-tooltip="Ouvrir"
-                    onclick="$('#open-puzzle-input').trigger('click');">
-                <i class="fa fa-upload fa-fw" aria-hidden="true"></i>
+                    data-toggle="modal" data-target="#loadModal">
+                <i class="fa fa-folder-open fa-fw" aria-hidden="true"></i>
             </button>
             <input id="open-puzzle-input" class="hidden" type="file" accept=".puz"/>
 
