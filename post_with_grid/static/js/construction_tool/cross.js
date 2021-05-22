@@ -134,27 +134,6 @@ class Grid {
   }
 }
 
-class Button {
-  constructor(id) {
-    this.id = id;
-    this.dom = document.getElementById(id);
-    this.tooltip = this.dom.getAttribute("data-tooltip");
-    this.state = this.dom.className; // "normal", "on", "open", "disabled"
-  }
-
-  setState(state) {
-    this.state = state;
-    this.dom.className = (this.state == "normal") ? "" : this.state;
-  }
-
-  addEvent(e, func) {
-    this.dom.addEventListener(e, func);
-    if (this.state == "disabled") {
-      this.setState("normal");
-    }
-  }
-}
-
 class Menu { // in dev
   constructor(id, buttons) {
     this.id = id;
@@ -169,24 +148,9 @@ class Menu { // in dev
   }
 }
 
-class Toolbar {
-  constructor(id) {
-    this.id = id;
-    this.buttons = { // rewrite this programmatically
-      "newPuzzle": new Button("new-grid"),
-      "exportPUZ": new Button("export-PUZ"),
-      "exportPDF": new Button("print-puzzle"),
-      "export": new Button("export"),
-      "addSquare": new Button("add-square"),
-      "clearFill": new Button("clear-fill"),
-    }
-  }
-}
-
 class Interface {
   constructor(rows, cols) {
     this.grid = new Grid(rows, cols);
-    this.toolbar = new Toolbar("toolbar");
 
     this.row = 0;
     this.col = 0;
@@ -633,17 +597,4 @@ function showMenu(e) {
 
 function hideMenu(e) {
   e.target.classList.add("hidden");
-}
-
-function doDefault(e) {
-  const id = e.target.parentNode.getAttribute("id");
-  let menu = document.getElementById(id + "-menu");
-  if (menu) {
-    let d = menu.querySelector(".default");
-    d.click();
-  }
-}
-
-function randomNumber(min, max) {
-  return Math.floor(Math.random() * max) + min;
 }
