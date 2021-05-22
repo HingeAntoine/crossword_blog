@@ -81,11 +81,21 @@
 <div class="row">
     <div class="col-xl-6">
         <div id="toolbar">
+
+            <!-- NEW GRID -->
             <button id="new-grid" type="button" data-tooltip="Nouvelle grille"
                     data-toggle="modal" data-target="#exampleModal">
                 <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
             </button>
-            <input id="open-puzzle-input" class="hidden" type="file" accept=".json,.txt,.xw,.puz"/>
+
+            <!-- OPEN PUZ FILE -->
+            <button id="open-JSON" type="button" data-tooltip="Ouvrir"
+                    onclick="$('#open-puzzle-input').trigger('click');">
+                <i class="fa fa-upload fa-fw" aria-hidden="true"></i>
+            </button>
+            <input id="open-puzzle-input" class="hidden" type="file" accept=".puz"/>
+
+            <!-- SAVE AS -->
             <div id="export-menu" class="menu hidden" onmouseleave="hideMenu(event)">
                 <h4>Exporter au format:</h4>
                 <button id="export-PUZ" type="button" data-tooltip="Across Lite (.puz)" onclick="writeFile('puz')">
@@ -102,12 +112,14 @@
 
             <div class="divider"></div>
 
+            <!-- ADD BLACK SQUARE -->
             <button id="add-square" type="button" data-tooltip="Ajouter une case noire"
                     onclick="xw.fill[current.row] = xw.fill[current.row].slice(0, current.col) + BLACK + xw.fill[current.row].slice(current.col + 1);
                              updateUI();">
                 <i class="fas fa-square-full"></i>
             </button>
 
+            <!-- EMPTY GRID -->
             <button id="clear-fill" type="button" data-tooltip="Vider la grille" onclick="clearFill()">
                 <i class="fa fa-eraser fa-fw" aria-hidden="true"></i>
             </button>
