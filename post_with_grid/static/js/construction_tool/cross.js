@@ -646,6 +646,11 @@ function loadGrid(savegame_name) {
     updateUI();
 }
 
+function loadSelectedGrid(e) {
+    $("#loadModal").modal('hide');
+    loadGrid(CONSTRUCTION_KEY + e.currentTarget.innerHTML);
+}
+
 function getSavedGrids() {
     let loadList = document.getElementById("load-list");
     loadList.innerHTML = "";
@@ -653,9 +658,9 @@ function getSavedGrids() {
     for (key of Object.keys(localStorage)){
         if(key.startsWith(CONSTRUCTION_KEY)){
             let li = document.createElement("LI");
-            li.innerHTML = key;
+            li.innerHTML = key.substring(CONSTRUCTION_KEY.length);
             li.className = "";
-            //li.addEventListener('dblclick', fillGridWithMatch);
+            li.addEventListener('dblclick', loadSelectedGrid);
             loadList.appendChild(li);
         }
     }
