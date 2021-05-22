@@ -107,13 +107,17 @@
                 <i class="fa fa-plus fa-fw" aria-hidden="true"></i>
             </button>
 
-            <!-- OPEN PUZ FILE -->
+            <!--SAVE GRID -->
+            <button type="button" data-tooltip="Sauver" onclick="saveGrid(); window.alert('Sauvegarde effectuée !');">
+                <i class="fa fa-save fa-fw" aria-hidden="true"></i>
+            </button>
+
+            <!-- LOAD GRID -->
             <button id="open-JSON" type="button" data-tooltip="Ouvrir"
                     data-toggle="modal" data-target="#loadModal"
                     onclick="getSavedGrids();">
                 <i class="fa fa-folder-open fa-fw" aria-hidden="true"></i>
             </button>
-            <input id="open-puzzle-input" class="hidden" type="file" accept=".puz"/>
 
             <!-- SAVE AS -->
             <div id="export-menu" class="menu hidden" onmouseleave="hideMenu(event)">
