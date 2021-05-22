@@ -609,3 +609,40 @@ function saveGrid() {
     var savegame_name = CONSTRUCTION_KEY + (xw["title"] || '');
     localStorage.setItem(savegame_name, JSON.stringify(xw));
 }
+
+function loadGrid(savegame_name) {
+    xw = JSON.parse(localStorage.getItem(savegame_name));
+
+    for (let i = 0; i < xw.rows; i++) {
+        xw.fill.push("");
+        for (let j = 0; j < xw.cols; j++) {
+            xw.fill[i] += BLANK;
+        }
+    }
+
+    document.getElementById("main").innerHTML = "";
+    createGrid(xw.rows, xw.cols);
+
+    current = {
+    "row": 0,
+    "col": 0,
+    "acrossWord": '',
+    "downWord": '',
+    "acrossStartIndex": 0,
+    "acrossEndIndex": xw["rows"],
+    "downStartIndex": 0,
+    "downEndIndex": xw["cols"],
+    "direction": ACROSS
+    };
+
+    grid = document.getElementById("grid");
+    squares = grid.querySelectorAll('td');
+
+
+    for (const square of squares) {
+        square.addEventListener('click', mouseHandler);
+    }
+    grid.addEventListener('keydown', keyboardHandler);
+
+    updateUI();
+}
