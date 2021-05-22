@@ -183,6 +183,23 @@ ul.matches li:hover {
   font-weight: 500;
 }
 
+ul.loadList {
+    margin: 0;
+    list-style-type: none;
+    width: 100%;
+    padding: 0;
+}
+
+ul.loadList li {
+  margin: 2px 0;
+}
+
+ul.loadList li:hover {
+  background: var(--dk-blue);
+  color: var(--black);
+  font-weight: 600;
+}
+
 #toolbar {
   clear: both;
   width: 32px;
