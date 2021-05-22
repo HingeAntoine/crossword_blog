@@ -598,3 +598,14 @@ function showMenu(e) {
 function hideMenu(e) {
   e.target.classList.add("hidden");
 }
+
+//__________________
+//- SAVE FUNCTIONS -
+//__________________
+
+var CONSTRUCTION_KEY = "creation_";
+
+function saveGrid() {
+    var savegame_name = CONSTRUCTION_KEY + (xw["title"] || '');
+    localStorage.setItem(savegame_name, JSON.stringify(xw));
+}
