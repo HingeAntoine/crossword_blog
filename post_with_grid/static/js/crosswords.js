@@ -449,137 +449,38 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.canvas[0].style.height = heightDps + "px";
         this.context.scale(devicePixelRatio, devicePixelRatio);
 
-        this.context.clearRect(0, 0, this.canvas[0].width, this.canvas[0].height);
-        this.context.fillRect(0, 0, this.canvas[0].width, this.canvas[0].height);
+//        this.context.clearRect(0, 0, this.canvas[0].width, this.canvas[0].height);
+//        this.context.fillRect(0, 0, this.canvas[0].width, this.canvas[0].height);
         this.context.fillStyle = this.config.color_block;
 
         // Resize clues
         $('#cw-clues-top-holder').css("height", (heightDps - 20) + "px");
         $('#cw-clues-bottom-holder').css("height", (heightDps - 20) + "px");
 
-        for(x in this.cells) {
-            for (y in this.cells[x]) {
-                var cell = this.cells[x][y],
-                    cell_x = (x-1)*this.cell_size +3,
-                    cell_y = (y-1)*this.cell_size +3;
-
-                if (!cell.empty) {
-                    // detect cell color
-                    var color = cell.color || this.config.color_none;
-                    if (this.hilited_word && this.hilited_word.hasCell(cell.x, cell.y)) {color = this.config.color_hilite;}
-                    if (this.selected_word && this.selected_word.hasCell(cell.x, cell.y)) {color = this.config.color_word;}
-                    if (this.selected_cell && x == this.selected_cell.x && y == this.selected_cell.y) {color = this.config.color_selected;}
-                    this.context.fillRect(cell_x, cell_y, this.cell_size, this.cell_size);
-                    
-                    this.context.fillStyle = color;
-                    this.context.fillRect(cell_x, cell_y, this.cell_size-1, this.cell_size-1);
-                    this.context.fillStyle = this.config.color_block;
-                    
-                    // Draw a line on the left and top
-                    if (x > 0 && y > 0) {
-                        this.context.beginPath();
-                        this.context.lineWidth = 1;
-                        this.context.moveTo(cell_x, cell_y);
-                        this.context.lineTo(cell_x, cell_y + this.cell_size);
-                        this.context.stroke();
-                        this.context.beginPath();
-                        this.context.moveTo(cell_x, cell_y);
-                        this.context.lineTo(cell_x + this.cell_size, cell_y);
-                        this.context.stroke();
-                    }
-                    
-                } else {
-                    if (cell.is_void || cell.clue) {
-                        this.context.fillStyle = this.config.color_none;
-                    }
-                    else {
-                        // respect cell coloring, even for blocks
-                        this.context.fillStyle = cell.color || this.config.color_block;
-                    }
-                    this.context.fillRect(cell_x, cell_y, this.cell_size, this.cell_size);
-                    this.context.fillStyle = this.config.color_block;
-                }
-
-                if (cell.shape === 'circle') {
-                    var centerX = cell_x + (this.cell_size - 1)/2;
-                    var centerY = cell_y + (this.cell_size - 1)/2;
-                    var radius = (this.cell_size - 1)/2;
-                    this.context.beginPath();
-                    this.context.arc(centerX,centerY,radius,0,2 * Math.PI,false);
-                    this.context.stroke();
-                }
-
-                if (cell.bar) {
-                    var bar_start = {
-                        top : [cell_x, cell_y]
-                    ,    left : [cell_x, cell_y]
-                    ,    right : [cell_x + this.cell_size, cell_y + this.cell_size]
-                    ,    bottom : [cell_x + this.cell_size, cell_y + this.cell_size]
-                    };
-                    var bar_end = {
-                        top : [cell_x + this.cell_size, cell_y]
-                    ,    left : [cell_x, cell_y + this.cell_size]
-                    ,    right : [cell_x + this.cell_size, cell_y]
-                    ,    bottom : [cell_x, cell_y + this.cell_size]
-                    };
-                    for (var key in cell.bar) {
-                        if (cell.bar.hasOwnProperty(key)) {
-                            // key is top, bottom, etc.
-                            // cell.bar[key] is true or false
-                            if (cell.bar[key]) {
-                                this.context.beginPath();
-                                this.context.moveTo(bar_start[key][0],bar_start[key][1]);
-                                this.context.lineTo(bar_end[key][0],bar_end[key][1]);
-                                this.context.lineWidth = 5;
-                                this.context.stroke();
-                                this.context.lineWidth = 1;
-                            }
-                        }
-                    }
-                }
-
-
-                if (cell.number) {
-                    this.context.font = Math.ceil(this.cell_size/4)+"px sans-serif";
-                    this.context.textAlign = "left";
-                    this.context.textBaseline = "top";
-                    this.context.fillText(
-                      cell.number,
-                      Math.floor(cell_x+this.cell_size*0.1),
-                      Math.floor(cell_y+this.cell_size*0.1)
-                    );
-                }
-                
-                if (cell.top_right_number) {
-                    this.context.font = Math.ceil(this.cell_size/4)+"px sans-serif";
-                    this.context.textAlign = "right";
-                    this.context.textBaseline = "top";
-                    this.context.fillText(
-                      cell.top_right_number,
-                      Math.floor(cell_x+this.cell_size*0.9),
-                      Math.floor(cell_y+this.cell_size*0.1)
-                    );
-                }
-               
-                if (cell.letter) {
-                    var cell_letter_length = cell.letter.length;
-                    this.context.font = this.cell_size/(1.5 + 0.5 * cell_letter_length) +"px sans-serif";
-                    if (cell.revealed) {
-                        this.context.font = 'bold italic ' + this.context.font;
-                    }
-                    if (cell.checked) {
-                        this.context.beginPath();
-                        this.context.moveTo(cell_x, cell_y);
-                        this.context.lineTo(cell_x + this.cell_size, cell_y + this.cell_size);
-                        //this.context.lineWidth = 5;
-                        this.context.stroke();
-                    }
-                    this.context.textAlign = "center";
-                    this.context.textBaseline = "middle";
-                    this.context.fillText(cell.letter, cell_x+this.cell_size/2, cell_y+ 2 * this.cell_size/3);
-                }
-            }
+        for (var i = 0; i < 10; i++ ) {
+            this.context.beginPath();
+            this.context.lineWidth = 1;
+            this.context.moveTo(0, i * 50);
+            this.context.lineTo(5000, i * 50);
+            this.context.stroke();
         }
+
+        for (var i = 0; i < 10; i++ ) {
+            this.context.beginPath();
+            this.context.lineWidth = 1;
+            this.context.moveTo(0, i * 50);
+            this.context.lineTo((i * 50) / Math.sqrt(3), 0);
+            this.context.stroke();
+        }
+
+        for (var i = 0; i < 10; i++ ) {
+            this.context.beginPath();
+            this.context.lineWidth = 1;
+            this.context.moveTo(i * 50, 0);
+            this.context.lineTo((this.canvas[0].height + (i*50))/ Math.sqrt(3), this.canvas[0].height);
+            this.context.stroke();
+        }
+
     };
 
     CrossWord.prototype.mouseClicked = function(e) {
