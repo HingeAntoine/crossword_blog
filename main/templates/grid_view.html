@@ -6,31 +6,47 @@
 <!-- GRID DISPLAY BLOCK -->
 <div class="row">
     {% for project in projects %}
-    <div class="col-sm-6 col-lg-4 col-xl-2 mt-3">
-        <div class="card">
-            <img class="card-img-top" src="{% static 'img/logo.png' %}">
-            <div style="height:100%; width: 100%; position:absolute; background-color:#ffffff; opacity:.95;"></div>
-            <div class="card-img-overlay card-body">
-                <div class="text-center">
-                    <h5 class="mt-2">
-                        {{ project.title }}
-                    </h5>
-
-                    <h6 style="margin-top: 10%;"> {{ project.author_key.display_name }} </h6>
-                    <h6>{{ project.date_created }}</h6>
-
-                    <h1 class="mt-4">
-                        <i id="status-{{ project.pk }}" class="em"></i>
-                    </h1>
-
-                    <script>
-                    get_status({{project.pk}}, '{{project.is_new}}')
-                    </script>
-
+    <div class="card m-3" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{% static 'img/logo.png' %}" alt="Grille de mots croisés" style="max-width: 200px;">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                        additional content. This content is a little bit longer.</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                 </div>
-                <a href="{% url 'project_detail' project.pk %}" class="stretched-link"></a>
             </div>
         </div>
     </div>
+
+<!--    <div class="col-sm-6 col-lg-4 col-xl-2 mt-3">-->
+<!--        <div class="card">-->
+<!--            <img class="card-img-top" src="{% static 'img/logo.png' %}">-->
+<!--            <div style="height:100%; width: 100%; position:absolute; background-color:#ffffff; opacity:.95;"></div>-->
+<!--            <div class="card-img-overlay card-body">-->
+<!--                <div class="text-center">-->
+<!--                    <h5 class="mt-2">-->
+<!--                        {{ project.title }}-->
+<!--                    </h5>-->
+
+<!--                    <h6 style="margin-top: 10%;"> {{ project.author_key.display_name }} </h6>-->
+<!--                    <h6>{{ project.date_created }}</h6>-->
+
+<!--                    <h1 class="mt-4">-->
+<!--                        <i id="status-{{ project.pk }}" class="em"></i>-->
+<!--                    </h1>-->
+
+<!--                    <script>-->
+<!--                    get_status({{project.pk}}, '{{project.is_new}}')-->
+<!--                    </script>-->
+
+<!--                </div>-->
+<!--                <a href="{% url 'project_detail' project.pk %}" class="stretched-link"></a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
     {% endfor %}
 </div>
