@@ -603,6 +603,13 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         this.renderCells();
     };
 
+    CrossWord.prototype.rebusEntry = function() {
+        if (this.selected_cell && this.selected_word) {
+            var rebus_entry = prompt("Entrer plusieurs lettres", "");
+            this.hiddenInputChanged(rebus_entry);
+        }
+    }
+
     CrossWord.prototype.keyPressed = function(e) {
         var prevent = [35, 36, 37, 38, 39, 40, 32, 46, 8, 9, 13].indexOf(e.keyCode) >= 0; // to prevent event propagation for specified keys
         switch (e.keyCode) {
@@ -650,16 +657,10 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                 this.renderCells();
                 break;
             case 27: // escape -- pulls up a rebus entry
-                if (this.selected_cell && this.selected_word) {
-                    var rebus_entry = prompt("Rebus entry", "");
-                    this.hiddenInputChanged(rebus_entry);
-                }
+                this.rebusEntry();
                 break;
             case 45: // insert -- same as escape
-                if (this.selected_cell && this.selected_word) {
-                    var rebus_entry = prompt("Rebus entry", "");
-                    this.hiddenInputChanged(rebus_entry);
-                }
+                this.rebusEntry();
                 break;
             case 46: // delete
                 if (this.selected_cell) {

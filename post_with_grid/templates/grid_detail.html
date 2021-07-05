@@ -203,6 +203,13 @@
             </div>
             {% endblock %}
 
+            <!-- REBUS BUTTON -->
+            <button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar">
+                <div class="em em-abc"
+                     data-toggle="tooltip" data-placement="bottom" title="Ajouter plusieurs lettres"
+                     onclick="grid.rebusEntry();"></div>
+            </button>
+
             <!-- SCORE BUTTON -->
             <button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar" data-toggle="modal"
                     data-target="#best-scores-modal">
@@ -261,6 +268,5 @@
     {% block js_grid_init %}
     init_grid('{{ project.pk }}', '{{ project.grid_file.url }}');
     {% endblock %}
-
 </script>
 {% endblock %}
