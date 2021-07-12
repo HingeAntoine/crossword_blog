@@ -91,6 +91,16 @@
 </div>
 {% endblock %}
 
+<div class="modal fade" id="questionModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body h5 font-weight-bold">
+                {{ project.grid_information|safe }}
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="best-scores-modal" tabindex="-1"
      aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -203,6 +213,13 @@
             </div>
             {% endblock %}
 
+            <!-- INFORMATION BUTTON -->
+            <button type="button" class="btn btn-secondary  mx-1 collapse collapseButtonBar" id="question-button" data-toggle="modal"
+                    data-target="#questionModal">
+                <div class="em em-question"
+                     data-toggle="tooltip" data-placement="bottom" title="Voir la question"></div>
+            </button>
+
             <!-- REBUS BUTTON -->
             <button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar">
                 <div class="em em-abc"
@@ -265,6 +282,7 @@
 </div>
 
 <script>
+    $('#questionModal').modal('show');
     {% block js_grid_init %}
     init_grid('{{ project.pk }}', '{{ project.grid_file.url }}');
     {% endblock %}

@@ -1,13 +1,6 @@
 {% extends "grid_detail.html" %}
 
 {% block button_bar %}
-<!-- QUESTION BUTTON -->
-<button type="button" class="btn btn-secondary  mx-1 collapse collapseButtonBar" id="question-button" data-toggle="modal"
-        data-target="#questionModal">
-    <div class="em em-question"
-         data-toggle="tooltip" data-placement="bottom" title="Voir la question"></div>
-</button>
-
 <!-- POST BUTTON -->
 <button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar" id="open-modal-button" data-toggle="modal"
         data-target="#answerModal">
@@ -27,16 +20,6 @@
 {% endblock %}
 
 {% block grid_modals %}
-<div class="modal fade" id="questionModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-body h5 font-weight-bold">
-                {{ project.meta_question }}
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="modal fade" id="answerModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -89,7 +72,5 @@
 {% endblock %}
 
 {% block js_grid_init %}
-$('#questionModal').modal('show');
-
 init_meta('{{ project.pk }}', '{{ project.grid_file.url }}');
 {% endblock %}
