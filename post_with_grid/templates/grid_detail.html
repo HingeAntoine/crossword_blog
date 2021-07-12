@@ -213,12 +213,14 @@
             </div>
             {% endblock %}
 
+            {% if project.grid_information|length > 0 %}
             <!-- INFORMATION BUTTON -->
             <button type="button" class="btn btn-secondary  mx-1 collapse collapseButtonBar" id="question-button" data-toggle="modal"
                     data-target="#questionModal">
                 <div class="em em-question"
                      data-toggle="tooltip" data-placement="bottom" title="Voir la question"></div>
             </button>
+            {% endif %}
 
             <!-- REBUS BUTTON -->
             <button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar">
@@ -282,7 +284,9 @@
 </div>
 
 <script>
+    {% if project.grid_information|length > 0 %}
     $('#questionModal').modal('show');
+    {% endif %}
     {% block js_grid_init %}
     init_grid('{{ project.pk }}', '{{ project.grid_file.url }}');
     {% endblock %}
