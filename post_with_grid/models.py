@@ -30,8 +30,7 @@ class Project(models.Model):
     grid_file = models.FileField(upload_to="puzzles/")
     author_key = models.ForeignKey(Author, default="antoine", on_delete=models.RESTRICT)
     date_created = models.DateField(auto_now_add=True)
-    solve_count = models.IntegerField(default=0)
-    download_count = models.IntegerField(default=0)
+    grid_information = models.TextField(default="")
     crossword_type = models.IntegerField(
         default=0,
         choices=[
@@ -49,10 +48,13 @@ class Project(models.Model):
             (CrosswordsSize.BIG.value, "Très grande"),
         ],
     )
-
     twitter_card_clue = models.CharField(
         default="Grille de mots croisés", max_length=200
     )
+
+    # Count of solve and downloads
+    solve_count = models.IntegerField(default=0)
+    download_count = models.IntegerField(default=0)
 
     objects = InheritanceManager()
 

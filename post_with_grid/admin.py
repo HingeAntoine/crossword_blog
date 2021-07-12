@@ -29,6 +29,7 @@ class ProjectAdmin(admin.ModelAdmin):
         "author_key",
         "crossword_type",
         "grid_size",
+        "grid_information",
         "twitter_card_clue",
     )
 
