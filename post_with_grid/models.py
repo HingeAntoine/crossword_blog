@@ -30,7 +30,7 @@ class Project(models.Model):
     grid_file = models.FileField(upload_to="puzzles/")
     author_key = models.ForeignKey(Author, default="antoine", on_delete=models.RESTRICT)
     date_created = models.DateField(auto_now_add=True)
-    grid_information = models.TextField(default="")
+    grid_information = models.TextField(blank=True, default="")
     crossword_type = models.IntegerField(
         default=0,
         choices=[
