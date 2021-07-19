@@ -6,21 +6,14 @@
 
 {% block page_content %}
 
-<div class="row mt-4">
-    <div>
-        <h4> {{ author.display_name }} </h4>
-    </div>
-    <div class="ml-3">
-        {% if author.twitter_handle|length > 0 %}
-        <a class="btn" style="background-color: #55acee" href="https://twitter.com/{{ author.twitter_handle }}"
-           role="button">
-            <i class="bi-twitter"></i>
-        </a>
-        {% endif %}
-    </div>
-</div>
-
-<h3 class="mt-4"> Bio </h3>
+<h3> Bio de {{ author.display_name }}
+    {% if author.twitter_handle|length > 0 %}
+    <a class="btn ml-3" style="background-color: #55acee" href="https://twitter.com/{{ author.twitter_handle }}"
+       role="button">
+        <i class="bi-twitter"></i>
+    </a>
+    {% endif %}
+</h3>
 <hr>
 
 {{ author.bio|linebreaks }}
