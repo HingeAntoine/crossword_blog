@@ -10,14 +10,15 @@
 
         <div style="position: relative;">
             <img class="img-thumbnail flex-shrink-0 me-2 rounded" src="{% static 'img/logo.png' %}"
-                 width="128" height="128">
-            <div style="height:100%; width: 100%; background-color:#ffffff; opacity:.95;"></div>
-            <div class="h2" style="position: absolute; bottom: 40px; left: 40px;">
+                 width="150" height="150">
+            <div style="height:100%; width: 100%; position: absolute; top: 0px; left: 0px;
+                background-color:#ffffff; opacity:.85;"></div>
+            <div class="h2" style="position: absolute; bottom: 50px; left: 50px;">
                 <i id="status-{{ project.pk }}" class="em"></i>
             </div>
         </div>
 
-        <p class="pb-3 mb-0">
+        <p class="pt-2 pb-3 mb-0">
             <strong class="d-block h5">{{ project.title }}</strong>
             Par {{ project.author_key.display_name }} le {{ project.date_created }}
         </p>
