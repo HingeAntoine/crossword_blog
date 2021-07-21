@@ -160,97 +160,87 @@
     </div>
 </div>
 
-<!-- GRID AND CLUE LIST -->
+<!-- BUTTONS -->
+<div class="ml-4 pl-3 pt-1">
+    {% block button_bar %}
+    <!-- TIMER BUTTON -->
+    <button type="button" class="btn btn-secondary mx-1" id="timer-button" onclick="toggleHideGrid()">
+        <a id="timer-value">00:00</a>
+        <i id="timer-symbol" class="em em-double_vertical_bar"
+           data-toggle="tooltip" data-placement="bottom" title="Mettre en pause"></i>
+    </button>
 
-<div class="pl-3 pt-1">
-    <!-- TOP BAR: Title and buttons-->
-    <div class="ml-4">
-        <!-- OPEN & CLOSE BUTTON BAR -->
-        <button type="button" class="btn btn-secondary mx-1 float-reveal-button" data-bs-toggle="collapse"
-                data-bs-target=".collapseButtonBar" onclick="togglePlusSign()">
-            <div id="plusButton" class="em em-heavy_plus_sign"></div>
-        </button>
+    <!-- REVEAL AND CHECK -->
+    <div class="btn-group mx-1" role="group" aria-label="Button group with nested dropdown">
 
-        {% block button_bar %}
-        <!-- TIMER BUTTON -->
-        <button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar" id="timer-button" onclick="toggleHideGrid()">
-            <a id="timer-value">00:00</a>
-            <i id="timer-symbol" class="em em-double_vertical_bar"
-               data-toggle="tooltip" data-placement="bottom" title="Mettre en pause"></i>
-        </button>
-
-        <!-- REVEAL AND CHECK -->
-        <div class="btn-group mx-1 collapse collapseButtonBar" role="group" aria-label="Button group with nested dropdown">
-
-            <!-- REVEAL BUTTON -->
-            <div class="btn-group" role="group">
-                <button id="dropdownReveal" type="button" class="btn btn-secondary dropdown-toggle"
-                        data-bs-toggle="dropdown">
-                    <div class="em em-eye"
-                         data-bs-toggle="tooltip" data-bs-placement="bottom" title="Révéler"></div>
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" id="reveal-letter">Lettre</a>
-                    <a class="dropdown-item" id="reveal-word">Mot</a>
-                    <a class="dropdown-item" id="reveal-puzzle">Grille</a>
-                </div>
+        <!-- REVEAL BUTTON -->
+        <div class="btn-group" role="group">
+            <button id="dropdownReveal" type="button" class="btn btn-secondary dropdown-toggle"
+                    data-bs-toggle="dropdown">
+                <div class="em em-eye"
+                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Révéler"></div>
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" id="reveal-letter">Lettre</a>
+                <a class="dropdown-item" id="reveal-word">Mot</a>
+                <a class="dropdown-item" id="reveal-puzzle">Grille</a>
             </div>
-
-            <!-- CHECK BUTTON -->
-            <div class="btn-group" role="group">
-                <button id="dropdownCheck" type="button" class="btn btn-secondary dropdown-toggle"
-                        data-bs-toggle="dropdown">
-                    <div class="em em-white_check_mark"
-                         data-bs-toggle="tooltip" data-bs-placement="bottom" title="Vérifier"></div>
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" id="check-letter">Lettre</a>
-                    <a class="dropdown-item" id="check-word">Mot</a>
-                    <a class="dropdown-item" id="check-puzzle">Grille</a>
-                </div>
-            </div>
-
         </div>
-        {% endblock %}
 
-        {% if project.grid_information|length > 0 %}
-        <!-- INFORMATION BUTTON -->
-        <button type="button" class="btn btn-secondary  mx-1 collapse collapseButtonBar" id="question-button" data-bs-toggle="modal"
-                data-target="#questionModal">
-            <div class="em em-question"
-                 data-toggle="tooltip" data-placement="bottom" title="Voir la question"></div>
-        </button>
-        {% endif %}
+        <!-- CHECK BUTTON -->
+        <div class="btn-group" role="group">
+            <button id="dropdownCheck" type="button" class="btn btn-secondary dropdown-toggle"
+                    data-bs-toggle="dropdown">
+                <div class="em em-white_check_mark"
+                     data-bs-toggle="tooltip" data-bs-placement="bottom" title="Vérifier"></div>
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" id="check-letter">Lettre</a>
+                <a class="dropdown-item" id="check-word">Mot</a>
+                <a class="dropdown-item" id="check-puzzle">Grille</a>
+            </div>
+        </div>
 
-        <!-- REBUS BUTTON -->
-        <button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar">
-            <div class="em em-abc"
-                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ajouter plusieurs lettres"
-                 onclick="grid.rebusEntry();"></div>
-        </button>
-
-        <!-- SCORE BUTTON -->
-        <button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar" data-bs-toggle="modal"
-                data-bs-target="#best-scores-modal">
-            <div class="em em-sports_medal"
-                 data-toggle="tooltip" data-placement="bottom" title="Voir les scores"></div>
-        </button>
-
-        <!-- PDF BUTTON -->
-        <button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar"
-                onclick="puzdata_to_pdf(PUZAPP.puzdata, {outfile: 'CaseVide_{{ project.title|cut:" "|cut:"'" }}'});
-        $.ajax({type: 'POST', url: '', data: {'download': true}});">
-        <div class="em em-printer"
-             data-toggle="tooltip" data-placement="bottom" title="Télécharger la grille (.pdf)"></div>
-        </button>
-
-        <!-- COMMENT BUTTON -->
-        <button type="button" class="btn btn-secondary mx-1 collapse collapseButtonBar"
-                data-bs-toggle="modal" data-bs-target="#commentModal">
-            <div class="em em-speech_balloon"
-                 data-toggle="tooltip" data-placement="bottom" title="Voir les commentaires"></div>
-        </button>
     </div>
+    {% endblock %}
+
+    {% if project.grid_information|length > 0 %}
+    <!-- INFORMATION BUTTON -->
+    <button type="button" class="btn btn-secondary mx-1" id="question-button" data-bs-toggle="modal"
+            data-target="#questionModal">
+        <div class="em em-question"
+             data-toggle="tooltip" data-placement="bottom" title="Voir la question"></div>
+    </button>
+    {% endif %}
+
+    <!-- REBUS BUTTON -->
+    <button type="button" class="btn btn-secondary mx-1">
+        <div class="em em-abc"
+             data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ajouter plusieurs lettres"
+             onclick="grid.rebusEntry();"></div>
+    </button>
+
+    <!-- SCORE BUTTON -->
+    <button type="button" class="btn btn-secondary" data-bs-toggle="modal"
+            data-bs-target="#best-scores-modal">
+        <div class="em em-sports_medal"
+             data-toggle="tooltip" data-placement="bottom" title="Voir les scores"></div>
+    </button>
+
+    <!-- PDF BUTTON -->
+    <button type="button" class="btn btn-secondary mx-1"
+            onclick="puzdata_to_pdf(PUZAPP.puzdata, {outfile: 'CaseVide_{{ project.title|cut:" "|cut:"'" }}'});
+    $.ajax({type: 'POST', url: '', data: {'download': true}});">
+    <div class="em em-printer"
+         data-toggle="tooltip" data-placement="bottom" title="Télécharger la grille (.pdf)"></div>
+    </button>
+
+    <!-- COMMENT BUTTON -->
+    <button type="button" class="btn btn-secondary mx-1"
+            data-bs-toggle="modal" data-bs-target="#commentModal">
+        <div class="em em-speech_balloon"
+             data-toggle="tooltip" data-placement="bottom" title="Voir les commentaires"></div>
+    </button>
 </div>
 
 <!-- TOP CLUE BAR -->
