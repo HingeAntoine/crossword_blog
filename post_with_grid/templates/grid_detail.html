@@ -282,7 +282,7 @@
 
 <script>
     {% if project.grid_information|length > 0 %}
-    $('#questionModal').modal('show');
+    $('#questionModal').show();
     {% endif %}
     {% block js_grid_init %}
     init_grid('{{ project.pk }}', '{{ project.grid_file.url }}');
