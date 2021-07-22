@@ -91,8 +91,8 @@
             {% for grid in grids %}
             <tr>
                 <td>
-                    <i id="status-{{ grid.pk }}" class="em pr-4"></i>
-                    <a href="{% url 'project_detail' grid.pk %}">{{ grid.title }}</a> par
+                    <i id="status-{{ grid.pk }}" class="em"></i>
+                    <a class="ps-2" href="{% url 'project_detail' grid.pk %}">{{ grid.title }}</a> par
                     <a href="{% url 'author_page' grid.author_key.name %}">{{ grid.author_key.display_name }}</a>
                 </td>
                 <td>{{ grid.date_created }}</td>
