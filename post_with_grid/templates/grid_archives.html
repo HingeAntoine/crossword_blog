@@ -79,36 +79,34 @@
             </th>
             <th class="th-sm">Date
             </th>
-            <th class="th-sm">Type
-            </th>
-            <th class="th-sm">Taille
-            </th>
             <th class="th-sm">Commentaires
-            </th>
-            <th class="th-sm">Résolution
             </th>
         </tr>
         </thead>
         <tbody>
         {% for grid in grids %}
         <tr>
-            <td><i id="status-{{ grid.pk }}" class="em pr-4"></i>
+            <td>
+                <i id="status-{{ grid.pk }}" class="em pr-4"></i>
                 <a href="{% url 'project_detail' grid.pk %}">{{ grid.title }}</a> par
                 <a href="{% url 'author_page' grid.author_key.name %}">{{ grid.author_key.display_name }}</a>
+                <a tabindex="0" class="btn em em-information_source" role="button" data-bs-toggle="popover"
+                   data-bs-trigger="focus" data-bs-html=true
+                   title="Informations supplémentaires"
+                   data-bs-content="Type : {{ grid.grid_type_str }} <br>
+                                    Taille : {{ grid.grid_size_str }} <br>
+                                    Résolutions : <span class='badge badge-primary badge-pill'>{{ grid.solve_count }}</span>">
+                </a>
             </td>
             <td>{{ grid.date_created }}</td>
-            <td>{{ grid.grid_type_str }}</td>
-            <td>{{ grid.grid_size_str }}</td>
 
             <td class="text-center pr-4">
                 <!-- COMMENT BUTTON -->
-                <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#commentModal"
+                <a type="button" class="btn em em-speech_balloon" data-bs-toggle="modal" data-bs-target="#commentModal"
                         onclick="$('#commentDiv').html('').load('{% url 'grid_comments' grid.pk %}');
                             comment_form_submit('{% url 'grid_comments' grid.pk %}');">
-                <div class="em em-speech_balloon"></div>
-                </button>
+                </a>
             </td>
-            <td class="text-center"><span class="badge badge-primary badge-pill">{{ grid.solve_count }}</span></td>
         </tr>
         <script>get_status({{grid.pk}}, '{{grid.is_new}}')</script>
         {% endfor %}
@@ -137,5 +135,12 @@
         </ul>
     </nav>
 </div>
+
+<script>
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl)
+    });
+</script>
 
 {% endblock %}
