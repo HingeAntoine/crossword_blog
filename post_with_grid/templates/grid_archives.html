@@ -65,53 +65,59 @@
 
 
 <!-- TABLE BLOCK -->
-<div class="row mt-4">
+<div class="row mt-3">
+    <div class="col-3">
+        <form method="get">
+            {{ form | crispy }}
+            <button class="btn btn-primary mt-4" type="submit">Rechercher</button>
+        </form>
+    </div>
 
-    <form class="col-md-2" method="get">
-        {{ form | crispy }}
-        <button class="btn btn-primary" type="submit">Rechercher</button>
-    </form>
-
-    <table class="col-md-8 table ">
-        <thead>
-        <tr>
-            <th class="th-sm">Grille
-            </th>
-            <th class="th-sm">Date
-            </th>
-            <th class="th-sm">Commentaires
-            </th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for grid in grids %}
-        <tr>
-            <td>
-                <i id="status-{{ grid.pk }}" class="em pr-4"></i>
-                <a href="{% url 'project_detail' grid.pk %}">{{ grid.title }}</a> par
-                <a href="{% url 'author_page' grid.author_key.name %}">{{ grid.author_key.display_name }}</a>
-                <a tabindex="0" class="btn em em-information_source" role="button" data-bs-toggle="popover"
-                   data-bs-trigger="focus" data-bs-html=true
-                   title="Informations supplémentaires"
-                   data-bs-content="Type : {{ grid.grid_type_str }} <br>
+    <div class="col-9">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="th-sm">Grille
+                </th>
+                <th class="th-sm">Date
+                </th>
+                <th class="th-sm">Infos
+                </th>
+                <th class="th-sm">Commentaires
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for grid in grids %}
+            <tr>
+                <td>
+                    <i id="status-{{ grid.pk }}" class="em pr-4"></i>
+                    <a href="{% url 'project_detail' grid.pk %}">{{ grid.title }}</a> par
+                    <a href="{% url 'author_page' grid.author_key.name %}">{{ grid.author_key.display_name }}</a>
+                </td>
+                <td>{{ grid.date_created }}</td>
+                <td>
+                    <a tabindex="0" class="btn em em-information_source" role="button" data-bs-toggle="popover"
+                       data-bs-trigger="focus" data-bs-html=true
+                       data-bs-content="Type : {{ grid.grid_type_str }} <br>
                                     Taille : {{ grid.grid_size_str }} <br>
-                                    Résolutions : <span class='badge badge-primary badge-pill'>{{ grid.solve_count }}</span>">
-                </a>
-            </td>
-            <td>{{ grid.date_created }}</td>
+                                    Résolutions : <span class='badge bg-primary badge-pill'>{{ grid.solve_count }}</span>">
+                    </a>
+                </td>
 
-            <td class="text-center pr-4">
-                <!-- COMMENT BUTTON -->
-                <a type="button" class="btn em em-speech_balloon" data-bs-toggle="modal" data-bs-target="#commentModal"
-                        onclick="$('#commentDiv').html('').load('{% url 'grid_comments' grid.pk %}');
+                <td>
+                    <!-- COMMENT BUTTON -->
+                    <a type="button" class="btn em em-speech_balloon" data-bs-toggle="modal" data-bs-target="#commentModal"
+                       onclick="$('#commentDiv').html('').load('{% url 'grid_comments' grid.pk %}');
                             comment_form_submit('{% url 'grid_comments' grid.pk %}');">
-                </a>
-            </td>
-        </tr>
-        <script>get_status({{grid.pk}}, '{{grid.is_new}}')</script>
-        {% endfor %}
-        </tbody>
-    </table>
+                    </a>
+                </td>
+            </tr>
+            <script>get_status({{grid.pk}}, '{{grid.is_new}}')</script>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <div class="row mt-1">
