@@ -45,22 +45,14 @@
 
 <!-- ALERT BARS -->
 {% block alert_bars %}
-<div class="row alert alert-success alert-dismissible fade show h5 align-middle" id="finish-success" role="alert">
-    <i class="em em-sparkles"></i>
-    <strong>Bravo!</strong> Vous avez fini la grille.
-    <i class="em em-sparkles"></i>
-    <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-    </button>
+<div class="alert alert-success alert-dismissible fade show h5 align-middle" id="finish-success" role="alert">
+    <i class="em em-sparkles"></i> <strong>Bravo!</strong> Vous avez fini la grille. <i class="em em-sparkles"></i>
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
 </div>
 
-<div class="row alert alert-danger alert-dismissible fade show h5 align-middle" id="finish-warning" role="alert">
-    <i class="em em-warning"></i>️
-    <strong>Attention!</strong>️La grille est pleine mais il reste des erreurs.
-    <i class="em em-warning"></i>
-    <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-    </button>
+<div class="alert alert-danger alert-dismissible fade show h5 align-middle" id="finish-warning" role="alert">
+    <i class="em em-warning"></i>️<strong>Attention!</strong>️La grille est pleine mais il reste des erreurs. <i class="em em-warning"></i>
+    <button type="button" class="btn-close" data-bs-dismiss="alert"> </button>
 </div>
 {% endblock %}
 
