@@ -195,6 +195,7 @@ def project_archives(request):
     # Return render dict #
     ######################
 
+    grid_filter.form.fields["author"].label = "Autrice ou auteur"
     grid_filter.form.fields["crossword_type"].label = "Type de grille"
     grid_filter.form.fields["grid_size"].label = "Taille de grille"
 
