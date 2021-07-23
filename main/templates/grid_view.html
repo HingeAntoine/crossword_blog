@@ -9,7 +9,7 @@
     <div class="d-flex position-relative col-6 col-lg-4 pt-3">
 
         <div class="position-relative">
-            <img class="img-thumbnail flex-shrink-0 me-2 rounded" src="{% static 'img/logo.png' %}"
+            <img class="img-thumbnail rounded" src="{% static 'img/logo.png' %}"
                  width="160" height="160">
             <div class="position-absolute top-0 left-0 w-100 h-100" style="background-color:#ffffff; opacity:.85;"></div>
             <div class="position-absolute top-50 start-50 translate-middle h1">
@@ -17,7 +17,7 @@
             </div>
         </div>
 
-        <p class="pt-2 ps-1">
+        <p class="pt-2 ps-2">
             <strong class="d-block h5">{{ project.title }}</strong>
             Par {{ project.author_key.display_name }} le {{ project.date_created }}
         </p>
