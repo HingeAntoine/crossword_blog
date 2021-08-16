@@ -11,11 +11,9 @@
 {% block page_content %}
 
 <!-- ALERT FOR ADDING BLACK SQUARES -->
-<div class="alert alert-success" role="alert">
+<div class="alert alert-success alert-dismissible fade show h5 align-middle" id="finish-success" role="alert">
     Appuyez sur <span class="font-weight-bold">"!"</span> pour ajouter une case noire.
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
 </div>
 
 <!-- NEW GRID MODAL -->
@@ -24,9 +22,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Format de la nouvelle grille</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
             <div class="modal-body">
                 <div class="row">
@@ -56,9 +51,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Charger une grille</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
             <div class="modal-body">
                 <div class="row">
