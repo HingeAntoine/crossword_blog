@@ -12,8 +12,8 @@ function load_grid(pk, file_url){
     grid = CrosswordNexus.createCrossword($('div.crossword'), params1);
 
     // Add onunload save call
-    window.onunload = window.onbeforeunload = function(){
-        grid.savePuzzle()
+    window.onpagehide = window.onunload = window.onbeforeunload = function(){
+        grid.savePuzzle();
     }
 }
 
