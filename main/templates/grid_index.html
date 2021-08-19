@@ -27,9 +27,13 @@
     </div>
 
     <!-- LAST GRID RANKING -->
-    <div class="col-xl-4 d-none d-xl-block border border-primary rounded pt-3">
-
-        <h4 class="mb-4 text-center"> Dernière grille </h4>
+    <div class="col-xl-4 d-none d-xl-block border rounded pt-3">
+        <h4 class="mb-4 text-center">
+            <a href="{% with projects|first as first_grid %}{% url 'project_detail' first_grid.pk %}{% endwith %}"
+               class="link-secondary" style="text-decoration: none;">
+                Dernière grille
+            </a>
+        </h4>
         {% include "grid_scores.html" %}
     </div>
 </div>
