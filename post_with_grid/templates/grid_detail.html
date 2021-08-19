@@ -159,8 +159,8 @@
 
 <!-- BUTTONS -->
 <div class="nav bg-light d-flex">
-    <div class="ms-3 pt-1 d-flex align-items-center h5 me-auto">
-        {{ project.title}} par {{ project.author_key.display_name}}
+    <div class="ms-3 pt-1 d-flex align-items-center me-auto h5">
+        <b class="pe-2">{{ project.title}}</b> par <i class="ps-2">{{ project.author_key.display_name}}</i>
     </div>
 
     {% block button_bar %}
