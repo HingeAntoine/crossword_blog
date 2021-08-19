@@ -155,8 +155,14 @@
     </div>
 </div>
 
+
+
 <!-- BUTTONS -->
-<nav class="nav bg-light">
+<div class="nav bg-light d-flex">
+    <div class="ms-3 pt-1 d-flex align-items-center h5 me-auto">
+        {{ project.title}} par {{ project.author_key.display_name}}
+    </div>
+
     {% block button_bar %}
     <!-- TIMER BUTTON -->
     <button type="button" class="nav-link btn" id="timer-button" onclick="toggleHideGrid()">
@@ -229,7 +235,7 @@
         <div class="em em-speech_balloon"
              data-toggle="tooltip" data-placement="bottom" title="Voir les commentaires"></div>
     </button>
-</nav>
+</div>
 
 <!-- TOP CLUE BAR -->
 <div class="mt-3 ps-4" id="clue-bar"><h3 id="cw-top-text"></h3></div>
