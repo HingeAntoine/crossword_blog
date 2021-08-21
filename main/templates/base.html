@@ -43,6 +43,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto">
+                <!-- ARCHIVES -->
+                <li class="nav-item">
+                    <a class="nav-link" href="/grilles/archives">Grilles</a>
+                </li>
+
+                <!-- TUTORIELS -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
                         Tutoriels
@@ -52,11 +58,10 @@
                         <a class="dropdown-item" href="/meta/">Méta</a>
                     </div>
                 </li>
+
+                <!-- CONSTRUCTION -->
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'construction_tool' %}">Construction</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/grilles/archives">Archives</a>
                 </li>
             </ul>
         </div>
@@ -78,13 +83,12 @@
 <footer class="page-footer font-small pt-2 pl-3 pb-1 mt-2" style="background-color: #ffaa71;">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-4">
+            <div class="col-4 ps-4">
                 <!-- TITLE -->
                 <h6 class="text-uppercase mb-1 fw-bold">Case vide</h6>
 
                 <!-- FOOTER TEXT -->
                 <p class="text-justify ms-2">
-                    Case vide est un blog de mots croisés indépendants, développé pendant le confinement de mars 2020.
                     Nouvelles grilles tous les vendredis.
                 </p>
             </div>
