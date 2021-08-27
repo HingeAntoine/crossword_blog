@@ -18,7 +18,6 @@ def project_index(request):
     edito = Edito.objects.last()
 
     # Retrieve scores
-
     grilles_vector = [
         {
             "grille": projects[i],

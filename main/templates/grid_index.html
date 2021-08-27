@@ -30,35 +30,31 @@
     <div class="col-xl-4 d-none d-xl-block border rounded pt-3">
         <div id="carouselExampleDark" class="carousel carousel-dark slide w-100 h-100"
              data-bs-ride="carousel" data-bs-interval="false">
-<!--            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
-                        aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
-                        aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
-                        aria-label="Slide 3"></button>
-            </div>-->
-            <div class="carousel-inner">
+
+            <!-- CAROUSEL INDICATOR -->
+            <div class="carousel-indicators">
                 {% for scores in scores_vector %}
-                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                        <h4 class="mb-3 text-center">
-                            <a href="{% url 'project_detail' scores.grille.pk %}"
-                               class="link-secondary" style="text-decoration: none;">
-                                {{ scores.grille.title }}
-                            </a>
-                        </h4>
-                        {% include "grid_scores.html" with scores=scores.scores type=scores.type %}
-                    </div>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="{{ forloop.counter0 }}"
+                        {% if forloop.first %}class="active"{% endif %}>
+                </button>
                 {% endfor %}
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
-                    data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
-                    data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            </button>
+
+            <!-- CAROUSEL CONTENT -->
+            <div class="carousel-inner">
+                {% for scores in scores_vector %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <h4 class="mb-3 text-center">
+                        <a href="{% url 'project_detail' scores.grille.pk %}"
+                           class="link-secondary" style="text-decoration: none;">
+                            {{ scores.grille.title }}
+                        </a>
+                    </h4>
+                    {% include "grid_scores.html" with scores=scores.scores type=scores.type %}
+                </div>
+                {% endfor %}
+            </div>
+
         </div>
     </div>
 </div>
