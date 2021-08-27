@@ -21,6 +21,6 @@
 <h3 class="mt-4"> Les dernières grilles </h3>
 <hr>
 
-{% include "grid_view.html" %}
+{% include "grid_view.html" with page_link="?author="|add:author.display_name %}
 
 {% endblock %}
