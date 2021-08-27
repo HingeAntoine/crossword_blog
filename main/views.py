@@ -16,24 +16,18 @@ def project_index(request):
     edito = Edito.objects.last()
 
     # Retrieve scores
-    scores_vector = [
-        get_scores(projects[0].pk),
-        get_scores(projects[1].pk),
-        get_scores(projects[2].pk),
-    ]
-    grid_type_vector = [
-        get_type(projects[0].pk),
-        get_type(projects[1].pk),
-        get_type(projects[2].pk),
+    max_index = 4
+    grilles_vector = [
+        {
+            "grille": projects[i],
+            "scores": get_scores(projects[i].pk),
+            "type": get_type(projects[i].pk),
+        }
+        for i in range(max_index)
     ]
 
     # Create context
-    context = {
-        "projects": projects,
-        "edito": edito,
-        "scores_vector": scores_vector,
-        "type_vector": grid_type_vector,
-    }
+    context = {"projects": projects, "edito": edito, "scores_vector": grilles_vector}
 
     return render(request, "grid_index.html", context)
 

@@ -30,42 +30,26 @@
     <div class="col-xl-4 d-none d-xl-block border rounded pt-3">
         <div id="carouselExampleDark" class="carousel carousel-dark slide w-100 h-100"
              data-bs-ride="carousel" data-bs-interval="false">
-            <div class="carousel-indicators">
+<!--            <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
                         aria-current="true" aria-label="Slide 1"></button>
                 <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
                         aria-label="Slide 2"></button>
                 <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
                         aria-label="Slide 3"></button>
-            </div>
+            </div>-->
             <div class="carousel-inner">
-                <div class="carousel-item text-center active">
-                    <h4 class="mb-3">
-                        <a href="{% url 'project_detail' projects.0.pk %}"
-                           class="link-secondary" style="text-decoration: none;">
-                            {{ projects.0.title }}
-                        </a>
-                    </h4>
-                    {% include "grid_scores.html" with scores=scores_vector.0 type=type_vector.0 %}
-                </div>
-                <div class="carousel-item text-center">
-                    <h4 class="mb-3">
-                        <a href="{% url 'project_detail' projects.1.pk %}"
-                           class="link-secondary" style="text-decoration: none;">
-                            {{ projects.1.title }}
-                        </a>
-                    </h4>
-                    {% include "grid_scores.html" with scores=scores_vector.1 type=type_vector.1 %}
-                </div>
-                <div class="carousel-item text-center">
-                    <h4 class="mb-3">
-                        <a href="{% url 'project_detail' projects.2.pk %}"
-                           class="link-secondary" style="text-decoration: none;">
-                            {{ projects.2.title }}
-                        </a>
-                    </h4>
-                    {% include "grid_scores.html" with scores=scores_vector.2 type=type_vector.2 %}
-                </div>
+                {% for scores in scores_vector %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <h4 class="mb-3 text-center">
+                            <a href="{% url 'project_detail' scores.grille.pk %}"
+                               class="link-secondary" style="text-decoration: none;">
+                                {{ scores.grille.title }}
+                            </a>
+                        </h4>
+                        {% include "grid_scores.html" with scores=scores.scores type=scores.type %}
+                    </div>
+                {% endfor %}
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
                     data-bs-slide="prev">
