@@ -12,18 +12,20 @@ from post_with_grid.views import get_scores, get_type
 
 def project_index(request):
     # Get grids and edito
-    projects = Project.objects.all().order_by("-date_created", "-title")[:6]
+    max_index = 6
+
+    projects = Project.objects.all().order_by("-date_created", "-title")[:max_index]
     edito = Edito.objects.last()
 
     # Retrieve scores
-    max_index = 4
+
     grilles_vector = [
         {
             "grille": projects[i],
             "scores": get_scores(projects[i].pk),
             "type": get_type(projects[i].pk),
         }
-        for i in range(max_index)
+        for i in range(len(projects))
     ]
 
     # Create context
