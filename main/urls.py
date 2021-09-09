@@ -40,6 +40,7 @@ urlpatterns = [
     path("", views.project_index, name="homepage"),
     path("author/", include("author_page.urls")),
     path("grilles/", include("post_with_grid.urls")),
+    path("scrabeille/", include("scrabeille.urls")),
     path("about/", views.about, name="about"),
     path("meta/", views.meta, name="meta_rules"),
     path("creation/", include("grid_creation_tool.urls")),

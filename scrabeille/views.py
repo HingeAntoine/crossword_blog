@@ -1,3 +1,5 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def show_game(request):
+    return render(request, "scrabeille_jeu.html", {})

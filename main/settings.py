@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "author_page",
     "contact_email",
     "grid_creation_tool",
+    "scrabeille",
     "crispy_forms",
 ]
 
