@@ -30,34 +30,35 @@
         <p id="miss-center" class="notifications">Lettre centrale manquante</p>
     </div>
 
-    <!-- INPUT WORD -->
-    <div class="cursor">
-        <p id="inputword" class="text-uppercase"><span id="testword"></span><span id="cursor">|</span></p>
-    </div>
+    <div id="canvasContainer" class="row auto mt-2">
+        <!-- HEXAGON GRID -->
+        <div id="divHexGrid" class="col-xl-6">
+            <!-- INPUT WORD -->
+            <div class="cursor">
+                <p id="inputword" class="text-uppercase"><span id="testword"></span><span id="cursor">|</span></p>
+            </div>
 
-    <!-- HEXAGON GRID -->
-    <div id="divHexGrid">
-        <ul id="hexGrid"></ul>
+            <ul id="hexGrid"></ul>
 
-        <div class="button_container">
-            <button id="submit_button" type="button" class="button" onclick="submitWord()">Enter</button>
-            <button id="shuffle_button" type="button" class="button" onclick="shuffleLetters()">
-                <img src="{% static "scrabeille/shuffle_icon.png" %}" style="width:1.2em">
-
-            </button>
-            <button id="delete_button" type="button" class="button" onclick="deleteLetter()">Delete</button>
+            <div class="button_container">
+                <button id="submit_button" type="button" class="button" onclick="submitWord()">Entrée</button>
+                <button id="shuffle_button" type="button" class="button" onclick="shuffleLetters()">
+                    <img src="{% static "scrabeille/shuffle_icon.png" %}" style="width:1.2em">
+                </button>
+                <button id="delete_button" type="button" class="button" onclick="deleteLetter()">Supprimer</button>
+            </div>
         </div>
-    </div>
-    <div class="container" style="height:400px; justify-content:normal;" id="scoreboard">
-        <div class="scoreText" style="margin-bottom:8px;">You have found <span id="numfound">0</span>/<span
-                id="totalWords">0</span> word(s).
-        </div>
-        <div class="scoreText" style="margin-bottom:8px;">Score: <span id="score">0</span>/<span id="maxscore">0</span>.
-        </div>
-        <div style=" font-family: 'Open Sans', sans-serif; align-self:center; font-size: 15px; font-style:bold;  text-decoration: underline;">
-            Words Discovered
-        </div>
-        <div id="discoveredText">
+        <div class="container col-xl-6" style="height:400px; justify-content:normal;" id="scoreboard">
+            <div class="scoreText" style="margin-bottom:8px;">You have found <span id="numfound">0</span>/<span
+                    id="totalWords">0</span> word(s).
+            </div>
+            <div class="scoreText" style="margin-bottom:8px;">Score: <span id="score">0</span>/<span id="maxscore">0</span>.
+            </div>
+            <div style=" font-family: 'Open Sans', sans-serif; align-self:center; font-size: 15px; font-style:bold;  text-decoration: underline;">
+                Mots trouvés
+            </div>
+            <div id="discoveredText">
+            </div>
         </div>
     </div>
 
