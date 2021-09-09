@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    {% load static %}
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <title>Hexagon Lexicon</title>
-        <link rel="stylesheet" href = "spelling_bee.css">
-        <link rel="stylesheet" href = "spelling_bee2.css">
+        <link rel="stylesheet" href = "{% static "scrabeille/spelling_bee.css" %}">
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
@@ -16,9 +16,6 @@
     </head>
     <body onkeydown="input_from_keyboard(event)">
         <h1>Hexagon Lexicon</h1>
-        <p id="build_it">
-          <a href="build_your_own.html">[Make your own!]</a>
-        </p>
 
         <!-- NOTIFICATIONS -->
         <div class="container" style="height:40px; align-items:center;">
@@ -49,7 +46,7 @@
             <div class="button_container">
               <button id="submit_button" type="button" class="button" onclick="submitWord()">Enter</button>
               <button id="shuffle_button" type="button" class="button" onclick="shuffleLetters()">
-                <img src="shuffle_icon.png" style="width:1.2em">
+                <img src="{% static "scrabeille/shuffle_icon.png" %}" style="width:1.2em">
 
               </button>
               <button id="delete_button" type="button" class="button" onclick="deleteLetter()">Delete</button>
@@ -65,7 +62,7 @@
               </div>
         </div>
 
-    <script type="text/javascript" src="spelling_bee.js"></script>
+    <script type="text/javascript" src="{% static "scrabeille/spelling_bee.js" %}"></script>
     <script type="text/javascript">
 
         var QueryString = function () {
@@ -92,12 +89,9 @@
         }();
 
         $(document).ready(function () {
-        // hide and show relevant sections
-        //$('#divHexGrid').hide();
-        //$('#loading').show();
         // fetch the data
         if(typeof window.fetch === "function") {
-          fetch('words2.json.zip')
+          fetch('{% static "scrabeille/words2.json.zip" %}')
           .then(function (response) {
             if (response.status === 200 || response.status === 0) {
               return Promise.resolve(response.arrayBuffer())
@@ -113,16 +107,13 @@
             // populate dictionary
             var words_json = JSON.parse(data);
             initialize_game(words_json, QueryString.required, QueryString.optional, QueryString.excl);
-            // hide and show
-            //$('#divHexGrid').show();
-            //$('#loading').hide();
-
           }, function error(e) {
             alert(e);
           });
         } else {
           $('#loading').text('This browser does not support the Fetch API.  Please use Firefox or Chrome to use this page.');
         }
+
         // Set up cursor blinking
         var cursor = true;
         setInterval(() => {
