@@ -20,48 +20,49 @@
 
     <!-- NOTIFICATIONS -->
     <div class="container" style="height:40px; align-items:center;">
-        <p id="too-short" class="notifications">Too Short</p>
-        <p id="good" class="notifications">Good! <span class="points"></span></p>
-        <p id="great" class="notifications">Great! <span class="points"></span></p>
-        <p id="amazing" class="notifications">Amazing! <span class="points"></span></p>
-        <p id="pangram" class="notifications">Pangram! <span class="points"></span></p>
-        <p id="already-found" class="notifications">Already Found</p>
-        <p id="invalid-word" class="notifications">Invalid Word</p>
-        <p id="miss-center" class="notifications">Missing Center Letter</p>
+        <p id="too-short" class="notifications">Trop court</p>
+        <p id="good" class="notifications">Bien ! <span class="points"></span></p>
+        <p id="great" class="notifications">Super ! <span class="points"></span></p>
+        <p id="amazing" class="notifications">Génial ! <span class="points"></span></p>
+        <p id="pangram" class="notifications">Pangramme !! <span class="points"></span></p>
+        <p id="already-found" class="notifications">Déjà trouvé</p>
+        <p id="invalid-word" class="notifications">Mot non valide</p>
+        <p id="miss-center" class="notifications">Lettre centrale manquante</p>
     </div>
 
     <!-- INPUT WORD -->
     <div class="cursor">
-        <p id="inputword" style="display:flex;"> <span id="testword"></span><span id="cursor">|</span></p>
+        <p id="inputword" class="text-uppercase"><span id="testword"></span><span id="cursor">|</span></p>
     </div>
 
     <!-- HEXAGON GRID -->
-      <!--<div id="loading">Loading ...</div>-->
-      <div id="divHexGrid">
+    <div id="divHexGrid">
         <ul id="hexGrid"></ul>
 
         <div class="button_container">
-          <button id="submit_button" type="button" class="button" onclick="submitWord()">Enter</button>
-          <button id="shuffle_button" type="button" class="button" onclick="shuffleLetters()">
-            <img src="{% static "scrabeille/shuffle_icon.png" %}" style="width:1.2em">
+            <button id="submit_button" type="button" class="button" onclick="submitWord()">Enter</button>
+            <button id="shuffle_button" type="button" class="button" onclick="shuffleLetters()">
+                <img src="{% static "scrabeille/shuffle_icon.png" %}" style="width:1.2em">
 
-          </button>
-          <button id="delete_button" type="button" class="button" onclick="deleteLetter()">Delete</button>
-            <!--<i style="align-self:center;"></i>-->
-
+            </button>
+            <button id="delete_button" type="button" class="button" onclick="deleteLetter()">Delete</button>
         </div>
     </div>
     <div class="container" style="height:400px; justify-content:normal;" id="scoreboard">
-          <div class="scoreText" style="margin-bottom:8px;">You have found <span id="numfound">0</span>/<span id="totalWords">0</span> word(s).</div>
-          <div class="scoreText" style="margin-bottom:8px;">Score: <span id="score">0</span>/<span id="maxscore">0</span>.</div>
-          <div style=" font-family: 'Open Sans', sans-serif; align-self:center; font-size: 15px; font-style:bold;  text-decoration: underline;">Words Discovered</div>
-          <div id="discoveredText" >
-          </div>
+        <div class="scoreText" style="margin-bottom:8px;">You have found <span id="numfound">0</span>/<span
+                id="totalWords">0</span> word(s).
+        </div>
+        <div class="scoreText" style="margin-bottom:8px;">Score: <span id="score">0</span>/<span id="maxscore">0</span>.
+        </div>
+        <div style=" font-family: 'Open Sans', sans-serif; align-self:center; font-size: 15px; font-style:bold;  text-decoration: underline;">
+            Words Discovered
+        </div>
+        <div id="discoveredText">
+        </div>
     </div>
 
 <script type="text/javascript" src="{% static "scrabeille/spelling_bee.js" %}"></script>
 <script type="text/javascript">
-
     var QueryString = function () {
         // This function is anonymous, is executed immediately and
         // the return value is assigned to QueryString!
