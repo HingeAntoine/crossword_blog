@@ -379,7 +379,7 @@ function submitWord(){
 function showDiscoveredWord(input){
 
     var discText = document.getElementById("discoveredText");
-    discoveredWords.push(input.toUpperCase());
+    discoveredWords.push(input.toLowerCase());
     discoveredWords.sort()
     while(discText.firstChild){
       discText.removeChild(discText.firstChild);
@@ -391,7 +391,6 @@ function showDiscoveredWord(input){
     for(var c=0; c<numCol; c++){
       var list = document.createElement("UL");
       list.id= "discovered-words"+c;
-      //list.style.cssText = "padding:5px 10px; font-weight:100; ";
       discText.appendChild(list);
       var n = 6;
       if(c == numCol-1){
@@ -407,6 +406,7 @@ function showDiscoveredWord(input){
       }
       for(var i=0; i<n; i++){
         var listword = document.createElement("LI");
+        listword.classList.add("text-uppercase")
         listword.style = "list-style-type: none;";
         listword.innerHTML = discoveredWords[w];
         list.appendChild(listword);
