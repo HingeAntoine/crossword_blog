@@ -1,5 +1,4 @@
 /*** INPUT & CURSOR ********************************************************************/
-
 #testword {
     height:50px;
     text-align: center;
@@ -22,48 +21,8 @@
     margin-bottom:10px;
 }
 
-/*** TEXT **********************************************************************/
-#build_it {
-    text-align: center;
-    font-size: 0.8em;
-}
-
-.scoreText {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 15px;
-  font-weight:100;
-  align-self:center;
-}
-
-#discoveredText {
-  font-family: 'Open Sans',  sans-serif;
-  font-size: 15px;
-  align-self:center;
-  display:flex;
-  flex-direction:row;
-  flex-wrap:wrap;
-}
-
-.dwords{
-  font-weight:100;
-  padding:0
-}
-
 /*** NOTIFICATIONS AND SHAKE EFFECT ****************************************************************/
-
-#too-short{
-  display:none;
-}
-
-#invalid-word{
-  display:none;
-}
-
-#already-found{
-  display:none;
-}
-
-#miss-center{
+#too-short, #invalid-word, #already-found, #miss-center{
   display:none;
 }
 
