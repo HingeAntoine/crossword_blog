@@ -301,11 +301,8 @@ function wrongInput(selector){
   $(selector).fadeIn(1000);
   $(selector).fadeOut(500);
   $("#cursor").hide();
-  $( "#testword" ).effect("shake", {times:2.5}, 450, function(){
-      clearInput();
-      $("#cursor").show();
-    } );
 
+  clearInput();
 }
 
 function rightInput(selector){
