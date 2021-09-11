@@ -140,7 +140,6 @@ input[type="text"]
 }
 
 /*** HEXAGON SIZING AND EVEN ROW INDENTATION *********************************/
-
 #hexGrid{
     grid-template-columns: repeat(6,2fr);
     padding-bottom: 5.4%;

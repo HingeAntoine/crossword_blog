@@ -219,6 +219,7 @@ function initialize_score(){
   // Initialize the number of words
   document.getElementById("totalWords").innerHTML = String(validWords.length);
 }
+
 //Creates the hexagon grid of 7 letters with middle letter as special color
 function initialize_letters(){
 
@@ -276,28 +277,7 @@ function shuffleLetters() {
       hexgrid.removeChild(hexgrid.firstChild);
     }
     initialize_letters()
-
-    /*
-    //fill in shuffled letters into hex grid
-    for(var i=0; i<letters.length; i++) {
-        var char = letters[i];
-        var hexLetterElement = document.getElementsByClassName("hexLink");
-        hexLetterElement[i].removeChild(hexLetterElement[i].firstChild);
-
-        var pElement = document.createElement("P");
-        pElement.innerHTML = char;
-        hexLetterElement[i].appendChild(pElement);
-    }*/
 }
-
-//Validate whether letter typed into input box was from one of 7 available letters
-// document.getElementById("testword").addEventListener("keydown", function(event){
-//     if(!letters.includes(event.key.toUpperCase())){
-//         alert('Invalid Letter Typed')
-//         event.preventDefault();
-//     }
-//   }
-//   )
 
 //When letter is clicked add it to input box
 var clickLetter = function(letter){
@@ -342,6 +322,7 @@ function showPoints(pts){
   $(".points").html("+" + pts);
 
 }
+
 //check if the word is valid and clear the input box
 //word must be at least 4 letters
 //word must contain center letter
@@ -426,15 +407,14 @@ function showDiscoveredWord(input){
       }
       for(var i=0; i<n; i++){
         var listword = document.createElement("LI");
-        var pword = document.createElement("P");
-        pword.innerHTML = discoveredWords[w];
-        listword.appendChild(pword);
+        listword.style = "list-style-type: none;";
+        listword.innerHTML = discoveredWords[w];
         list.appendChild(listword);
         w++;
       }
     }
     if (numFound == validWords.length){
-      alert("You have found all of the possible words! Thanks for playing");
+      alert("Vous avez trouvé tous les mots! Merci d'avoir joué");
     }
 }
 
