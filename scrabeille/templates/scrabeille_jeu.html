@@ -40,9 +40,11 @@
                 <p id="inputword" class="text-uppercase"><span id="testword"></span><span id="cursor">|</span></p>
             </div>
 
+            <!-- HEX GRID -->
             <ul id="hexGrid"></ul>
 
-            <div class="button_container">
+            <!-- BUTTON BAR -->
+            <div>
                 <button id="submit_button" type="button" class="btn btn-light mx-1" onclick="submitWord()">Entrée</button>
                 <button id="shuffle_button" type="button" class="btn btn-light mx-1" onclick="shuffleLetters()">
                     <img src="{% static "scrabeille/shuffle_icon.png" %}" style="width:1.2em">
@@ -50,7 +52,8 @@
                 <button id="delete_button" type="button" class="btn btn-light mx-1" onclick="deleteLetter()">Supprimer</button>
             </div>
         </div>
-        <div class="container col-xl-6" style="height:400px; justify-content:normal;" id="scoreboard">
+
+        <div class="container col-xl-6" id="scoreboard">
             <div class="scoreText">Vous avez trouvé <span id="numfound">0</span>/<span
                     id="totalWords">0</span> mot(s).
             </div>

@@ -187,9 +187,11 @@ input[type="text"]
     padding-bottom: 5.4%;
     margin-bottom:2vh;
 }
+
 .hex:nth-child(5n+1){ /* first hexagon of odd rows */
     grid-column-start: 2;
 }
+
 .hex:nth-child(5n+3){ /* first hexagon of even rows */
   grid-column-start: 1;
 }
