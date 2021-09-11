@@ -18,21 +18,23 @@
 {% block page_content %}
 <body onkeydown="input_from_keyboard(event)">
 
-    <!-- NOTIFICATIONS -->
-    <div class="container" style="height:40px; align-items:center;">
-        <p id="too-short" class="notifications">Trop court</p>
-        <p id="good" class="notifications">Bien ! <span class="points"></span></p>
-        <p id="great" class="notifications">Super ! <span class="points"></span></p>
-        <p id="amazing" class="notifications">Génial ! <span class="points"></span></p>
-        <p id="pangram" class="notifications">Pangramme !! <span class="points"></span></p>
-        <p id="already-found" class="notifications">Déjà trouvé</p>
-        <p id="invalid-word" class="notifications">Mot non valide</p>
-        <p id="miss-center" class="notifications">Lettre centrale manquante</p>
-    </div>
-
     <div id="canvasContainer" class="row auto mt-2">
+
         <!-- HEXAGON GRID -->
         <div id="divHexGrid" class="col-xl-6">
+
+            <!-- NOTIFICATIONS -->
+            <div class="container" style="height:40px; align-items:center;">
+                <p id="too-short" class="notifications">Trop court</p>
+                <p id="good" class="notifications">Bien ! <span class="points"></span></p>
+                <p id="great" class="notifications">Super ! <span class="points"></span></p>
+                <p id="amazing" class="notifications">Génial ! <span class="points"></span></p>
+                <p id="pangram" class="notifications">Pangramme !! <span class="points"></span></p>
+                <p id="already-found" class="notifications">Déjà trouvé</p>
+                <p id="invalid-word" class="notifications">Mot non valide</p>
+                <p id="miss-center" class="notifications">Lettre centrale manquante</p>
+            </div>
+
             <!-- INPUT WORD -->
             <div class="cursor">
                 <p id="inputword" class="text-uppercase"><span id="testword"></span><span id="cursor">|</span></p>
@@ -41,11 +43,11 @@
             <ul id="hexGrid"></ul>
 
             <div class="button_container">
-                <button id="submit_button" type="button" class="button" onclick="submitWord()">Entrée</button>
-                <button id="shuffle_button" type="button" class="button" onclick="shuffleLetters()">
+                <button id="submit_button" type="button" class="btn btn-light mx-1" onclick="submitWord()">Entrée</button>
+                <button id="shuffle_button" type="button" class="btn btn-light mx-1" onclick="shuffleLetters()">
                     <img src="{% static "scrabeille/shuffle_icon.png" %}" style="width:1.2em">
                 </button>
-                <button id="delete_button" type="button" class="button" onclick="deleteLetter()">Supprimer</button>
+                <button id="delete_button" type="button" class="btn btn-light mx-1" onclick="deleteLetter()">Supprimer</button>
             </div>
         </div>
         <div class="container col-xl-6" style="height:400px; justify-content:normal;" id="scoreboard">

@@ -75,35 +75,11 @@ h1 {
 }
 
 /*** BUTTONS *******************************************************************/
-#shuffle_button {
-  padding: 10px 10px;
-}
-
 .button_container {
- display:-webkit-inline-flex;
- margin-bottom:5vh;
- width: 300px;
- height: 10%;
-
-}
-.button {
-  background-color: white;
-  border: 2px solid #e7e7e7;
-  margin: 0 auto;
-  color: black;
-  padding: 0px 15px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: .8em;
-  border-radius:30px;
-  cursor: pointer;
-}
-
-.button:hover {
-  background-color: #e7e7e7;
-  color: black;
-  border: 2px solid #e7e7e7;
+    display:-webkit-inline-flex;
+    margin-bottom:5vh;
+    width: 300px;
+    height: 10%;
 }
 
 /*** NOTIFICATIONS AND SHAKE EFFECT ****************************************************************/
