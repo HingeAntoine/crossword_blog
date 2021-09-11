@@ -1,20 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    align-content:center;
-    vertical-align:center;
-    display:flex;
-    flex-direction: column;
-    justify-content:center;
-}
-
-#scoreboard{
-    flex-direction:column;
-}
-
 /*** INPUT & CURSOR ********************************************************************/
 
 #testword {
@@ -40,14 +23,6 @@ body {
 }
 
 /*** TEXT **********************************************************************/
-h1 {
-  text-align: center;
-  margin-top:2vh;
-  margin-bottom:1vhpx;
-  font-size: 1.5rem;
-  font-family: 'Roboto Slab', serif;
-}
-
 #build_it {
     text-align: center;
     font-size: 0.8em;
@@ -72,14 +47,6 @@ h1 {
 .dwords{
   font-weight:100;
   padding:0
-}
-
-/*** BUTTONS *******************************************************************/
-.button_container {
-    display:-webkit-inline-flex;
-    margin-bottom:5vh;
-    width: 300px;
-    height: 10%;
 }
 
 /*** NOTIFICATIONS AND SHAKE EFFECT ****************************************************************/
