@@ -300,7 +300,6 @@ function deleteLetter(){
 function wrongInput(selector){
   $(selector).fadeIn(1000);
   $(selector).fadeOut(500);
-  $("#cursor").hide();
 
   clearInput();
 }
@@ -344,7 +343,6 @@ function submitWord(){
     var isPangram = checkPangram(tryword.innerHTML);
     score = calculateWordScore(tryword.innerHTML, isPangram);
     addToTotalScore(score);
-    console.log("totalscore: " + totalScore);
 
     showDiscoveredWord(tryword.innerHTML);
     numFound++;
@@ -432,7 +430,6 @@ function calculateWordScore(input, isPangram) {
       returnScore = len;
     }
   }
-  console.log('score ' + returnScore)
   return returnScore;
 }
 
@@ -450,7 +447,6 @@ function checkPangram(input) {
   if(containsCount == 7) {
     containsAllLetters = true;
   }
-  console.log("isPangram?: " + containsAllLetters);
   return containsAllLetters;
 }
 
