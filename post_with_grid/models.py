@@ -16,6 +16,7 @@ class CrosswordsType(IntEnum):
     CLASSIC = 0
     CRYPTIC = 1
     META = 2
+    SCRABEILLE = 3
 
 
 class CrosswordsSize(IntEnum):
@@ -37,6 +38,7 @@ class Project(models.Model):
             (CrosswordsType.CLASSIC.value, "Classique"),
             (CrosswordsType.CRYPTIC.value, "Cryptique"),
             (CrosswordsType.META.value, "Méta"),
+            (CrosswordsType.SCRABEILLE.value, "Scrabeille"),
         ],
     )
     grid_size = models.IntegerField(
