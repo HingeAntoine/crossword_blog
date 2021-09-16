@@ -9,7 +9,11 @@
     <div class="d-flex position-relative col-6 col-xl-4 pt-3">
 
         <div class="position-relative">
+            {% if project.crossword_type == 3 %}
+            <img src="{% static 'img/logo_scrabeille.png' %}" width="160" height="160">
+            {% else %}
             <img src="{% static 'img/logo.png' %}" width="160" height="160">
+            {% endif %}
             <div class="position-absolute top-0 left-0 w-100 h-100" style="background-color:#ffffff; opacity:.85;"></div>
             <div class="position-absolute top-50 start-50 translate-middle h1">
                 <i id="status-{{ project.pk }}" class="em"></i>
