@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block social_meta %}
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Hexagon Lexicon</title>
+<link rel="stylesheet" href = "{% static "scrabeille/spelling_bee.css" %}">
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto+Slab:300,400,500,600,700&display=swap" rel="stylesheet">
+
+<!-- JSZip -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js" integrity="sha512-xQBQYt9UcgblF6aCMrwU1NkVA7HCXaSN2oq0so80KO+y68M+n64FOcqgav4igHe6D5ObBLIf68DWv+gfBowczg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+
+{% block page_content %}
+<body onkeydown="input_from_keyboard(event)">
+
+    <div id="canvasContainer" class="row auto mt-2">
+
+        <!-- HEXAGON GRID -->
+        <div id="divHexGrid" class="col-xl-6">
+
+            <!-- NOTIFICATIONS -->
+            <div class="container" style="height:40px; align-items:center;">
+                <p id="too-short" class="notifications">Trop court</p>
+                <p id="good" class="notifications">Bien ! <span class="points"></span></p>
+                <p id="great" class="notifications">Super ! <span class="points"></span></p>
+                <p id="amazing" class="notifications">Génial ! <span class="points"></span></p>
+                <p id="pangram" class="notifications">Pangramme !! <span class="points"></span></p>
+                <p id="already-found" class="notifications">Déjà trouvé</p>
+                <p id="invalid-word" class="notifications">Mot non valide</p>
+                <p id="miss-center" class="notifications">Lettre centrale manquante</p>
+            </div>
+
+            <!-- INPUT WORD -->
+            <div class="cursor">
+                <p id="inputword" class="text-uppercase"><span id="testword"></span><span id="cursor">|</span></p>
+            </div>
+
+            <!-- HEX GRID -->
+            <ul id="hexGrid"></ul>
+
+            <!-- BUTTON BAR -->
+            <div>
+                <button id="submit_button" type="button" class="btn btn-light mx-1" onclick="submitWord()">Entrée</button>
+                <button id="shuffle_button" type="button" class="btn btn-light mx-1" onclick="shuffleLetters()">
+                    <img src="{% static "scrabeille/shuffle_icon.png" %}" style="width:1.2em">
+                </button>
+                <button id="delete_button" type="button" class="btn btn-light mx-1" onclick="deleteLetter()">Supprimer</button>
+            </div>
+        </div>
+
+        <div class="container col-xl-6" id="scoreboard">
+
+            <h4>Mots trouvés</h4>
+            <div id="discoveredText">
+            </div>
+
+            <h4>Score</h4>
+            <div>Vous avez trouvé <span id="numfound">0</span>/<span
+                    id="totalWords">0</span> mot(s).
+            </div>
+
+            <div>Score : <span id="score">0</span>/<span id="maxscore">0</span>.
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript" src="{% static "scrabeille/spelling_bee.js" %}"></script>
+<script type="text/javascript">
+    var QueryString = function () {
+        // This function is anonymous, is executed immediately and
+        // the return value is assigned to QueryString!
+        var query_string = {};
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+                // If first entry with this name
+            if (typeof query_string[pair[0]] === "undefined") {
+              query_string[pair[0]] = decodeURIComponent(pair[1]);
+                // If second entry with this name
+            } else if (typeof query_string[pair[0]] === "string") {
+              var arr = [ query_string[pair[0]],decodeURIComponent(pair[1]) ];
+              query_string[pair[0]] = arr;
+                // If third or later entry with this name
+            } else {
+              query_string[pair[0]].push(decodeURIComponent(pair[1]));
+            }
+        }
+        return query_string;
+    }();
+
+    $(document).ready(function () {
+    // fetch the data
+    if(typeof window.fetch === "function") {
+      fetch('{% static "scrabeille/words2.json.zip" %}')
+      .then(function (response) {
+        if (response.status === 200 || response.status === 0) {
+          return Promise.resolve(response.arrayBuffer())
+        } else {
+          return Promise.reject(new Error(response.statusText))
+        }
+      })
+      .then(JSZip.loadAsync)
+      .then(function (zip) {
+        return zip.file("words2.json").async("string");
+      })
+      .then(function success(data) {
+        // populate dictionary
+        var words_json = JSON.parse(data);
+        initialize_game(words_json, QueryString.required, QueryString.optional, QueryString.excl);
+      }, function error(e) {
+        alert(e);
+      });
+    } else {
+      $('#loading').text('This browser does not support the Fetch API.  Please use Firefox or Chrome to use this page.');
+    }
+
+    // Set up cursor blinking
+    var cursor = true;
+    setInterval(() => {
+      if(cursor) {
+        document.getElementById('cursor').style.opacity = 0;
+        cursor = false;
+      }else {
+        document.getElementById('cursor').style.opacity = 1;
+        cursor = true;
+      }
+    }, 600);
+    });
+</script>
+
+</body>
+{% endblock %}

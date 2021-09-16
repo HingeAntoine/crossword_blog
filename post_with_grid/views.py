@@ -4,6 +4,7 @@ from post_with_grid.models import Project
 from post_with_grid.models import MetaGrid
 from post_with_grid.models import Score
 from post_with_grid.models import Comment
+from .models import CrosswordsType
 from .filters import GridFilter
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
@@ -49,9 +50,18 @@ def get_type(pk):
 ##################
 
 
+def scrabeille_detail(request, project):
+    return render(
+        request, "scrabeille_jeu.html", {"project": project, "type": "scrabeille"}
+    )
+
+
 def project_detail(request, pk):
     project = Project.objects.get_subclass(pk=pk)
     comments = Comment.objects.filter(grid_key=pk).order_by("commented_at")
+
+    if project.crossword_type == CrosswordsType.SCRABEILLE.value:
+        return scrabeille_detail(request, project)
 
     if request.method == "POST":
         # Increment grid solve counter
