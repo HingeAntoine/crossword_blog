@@ -6,6 +6,7 @@ from post_with_grid.models import MetaGrid
 from post_with_grid.models import Edito
 from post_with_grid.models import Score
 from post_with_grid.models import Comment
+from post_with_grid.models import CrosswordsType
 
 from PIL import Image, ImageDraw
 import puz
@@ -38,7 +39,10 @@ class ProjectAdmin(admin.ModelAdmin):
         super(ProjectAdmin, self).save_model(request, obj, form, change)
 
         # Create constant grid preview
-        if "grid_file" in form.changed_data:
+        if (
+            "grid_file" in form.changed_data
+            and int(request.POST["crossword_type"]) != CrosswordsType.SCRABEILLE.value
+        ):
             # Read puzzle
             p = puz.read(settings.MEDIA_ROOT + "/" + str(obj.grid_file))
 
