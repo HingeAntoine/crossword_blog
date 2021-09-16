@@ -66,7 +66,7 @@ class Project(models.Model):
 
     @property
     def grid_type_str(self):
-        return ["Classique", "Cryptique", "Méta"][self.crossword_type]
+        return ["Classique", "Cryptique", "Méta", "Scrabeille"][self.crossword_type]
 
     @property
     def grid_size_str(self):
