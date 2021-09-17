@@ -8,12 +8,6 @@ var numFound = 0;
 var maxscore = 0;
 
 
-// Adapted from https://stackoverflow.com/a/19303725
-function kindaRandom(seed) {
-    var x = Math.sin(seed) * 10000;
-    return x - Math.floor(x);
-}
-
 // Function to test if a word works with our letters
 function isGoodWord(required, optional, word) {
     const regex = new RegExp(`^[${required}${optional}]+$`);
@@ -31,17 +25,6 @@ function isGoodWord(required, optional, word) {
 // function to test if a word is a "pangram"
 function is_pangram(word) {
     return (new Set(word).size == 7);
-}
-
-function get_todays_starter(starters) {
-    // Get today's date as an integer
-    const todaysDate = new Date().toJSON().slice(0,10).replace(/-/g,'');
-    const todayAsInt = Number(todaysDate);
-    // Create a pseudo-random number from this date
-    const rnd = kindaRandom(todayAsInt);
-    // Grab a random starter from this
-    var starter = starters[Math.floor(rnd*starters.length)];
-    return starter;
 }
 
 function makeURL() {
@@ -155,25 +138,21 @@ function get_valid_words(words_json, required='', optional='', excl=new Set()) {
     // Start a game
     const starters = words_json['starters'];
     const words = words_json['words'];
+
     // Reset all the global variables
     letters = [];
     validWords = [];
     maxScore = 0;
-    // TODO: read from query parameters to get these values
-    if (required && optional) {
-        required = required.toLowerCase();
-        optional = optional.toLowerCase();
-        var ret = validate_parameters(required, optional);
-        if (ret) {
-            alert(ret);
-            return false;
-        }
+
+    // Read parameters provided
+    required = required.toLowerCase();
+    optional = optional.toLowerCase();
+    var ret = validate_parameters(required, optional);
+    if (ret) {
+        alert(ret);
+        return false;
     }
-    else {
-        var starter = get_todays_starter(starters);
-        required = starter[0];
-        optional = starter[1];
-    }
+
     // populate the "letters" global variable
     for (var i=0; i<6; i++) {
         letters.push(optional.charAt(i));
