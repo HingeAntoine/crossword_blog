@@ -27,97 +27,6 @@ function is_pangram(word) {
     return (new Set(word).size == 7);
 }
 
-function makeURL() {
-    var thisURL = document.URL;
-    var required = window.thisObject.required;
-    var optional = window.thisObject.optional;
-    var excl = window.thisObject.excl || '';
-    var lastSlash = thisURL.lastIndexOf('/');
-    var indexURL = thisURL.substring(0, lastSlash) + '/index.html';
-    var newURL = `${indexURL}?required=${required}&optional=${optional}&excl=${excl}`;
-    document.getElementById('url').innerHTML = `<a href="${newURL}" target="_blank">${newURL}</a>`;
-}
-
-function makeExcl() {
-    // Add to the excluded words based on checkboxes
-    var checkboxes = document.getElementsByClassName('hex-checkbox');
-    var excl = [];
-    for (var i=0; i < checkboxes.length; i++) {
-        if (checkboxes[i].checked) {
-            excl.push(checkboxes[i].name);
-        }
-    }
-    console.log(excl);
-    window.thisObject.excl = btoa(JSON.stringify(excl));
-    makeURL();
-}
-
-function makeValidWords() {
-    // Make six columns with checkboxes for all the words
-    var ctr = 0;
-    var html = '';
-    validWords.sort().forEach( function (word) {
-        if (ctr == 0) {
-            html += '<div class="row">\n';
-        }
-        html += `
-        <div class="two columns">
-            <label class="example">
-              <input type="checkbox" id="${word}" name="${word}" class="hex-checkbox">
-              <span class="label-body">${word}</span>
-            </label>
-        </div>`;
-        if (ctr == 5) {
-            html += '</div>\n';
-        }
-        ctr += 1;
-        if (ctr == 6) {
-            ctr = 0;
-        }
-    });
-    document.getElementById('validWords').innerHTML = html;
-    // Add a listener to the checkboxes
-    var checkboxes = document.getElementsByClassName('hex-checkbox');
-    for (var i=0; i < checkboxes.length; i++) {
-      checkboxes[i].addEventListener('change', function() {
-          makeExcl();
-      });
-    }
-}
-
-function create_results(words_json, required='', optional='') {
-    // reset the global variables
-    validWords = [];
-    maxscore = 0;
-    letters = [];
-    // Get the valid words
-    var ret = get_valid_words(words_json, required, optional);
-    if (!ret) {
-        return false;
-    }
-
-    required = required.toLowerCase();
-    optional = optional.toLowerCase();
-
-    window.thisObject = {'required': required, 'optional': optional};
-    var numberPangrams = validWords.filter(word => is_pangram(word)).length;
-    var html = `
-        <div class="row">
-            <span id="url">
-            </span>
-        </div>
-        <div class="row">Total words: ${validWords.length}</div>
-        <div class="row">Total pangrams: <span id="numPangrams">${numberPangrams}</span></div>
-        <div class="row">Max score: <span id="numPangrams">${maxscore}</span></div>
-        <div class="row">Allowable words (check a box to exclude a word)</div>
-        <div id="validWords">
-        </div>
-    `;
-    document.getElementById('results').innerHTML = html;
-    makeURL();
-    initialize_letters();
-    makeValidWords();
-}
 
 function validate_parameters(required, optional) {
     var combined = required + optional;
@@ -136,7 +45,6 @@ function validate_parameters(required, optional) {
 
 function get_valid_words(words_json, required='', optional='', excl=new Set()) {
     // Start a game
-    const starters = words_json['starters'];
     const words = words_json['words'];
 
     // Reset all the global variables
@@ -160,7 +68,7 @@ function get_valid_words(words_json, required='', optional='', excl=new Set()) {
             letters.push(required);
         }
     }
-    console.log(excl);
+
     // Go through the words to populate validWords, pangram, maxScore
     words.forEach( function(w) {
         if (isGoodWord(required, optional, w) && !excl.has(w)) {
@@ -178,7 +86,6 @@ function get_valid_words(words_json, required='', optional='', excl=new Set()) {
         }
     });
 
-    console.log(validWords);
     return true;
 }
 
@@ -186,6 +93,7 @@ function initialize_game(words_json, required='', optional='') {
     get_valid_words(words_json, required=required, optional=optional);
     initialize_letters();
     initialize_score();
+    shuffleLetters();
 }
 
 function initialize_score(){
