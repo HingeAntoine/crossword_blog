@@ -281,6 +281,10 @@ function showDiscoveredWord(input){
         var listword = document.createElement("LI");
         listword.classList.add("text-uppercase")
         listword.style = "list-style-type: none;";
+        if(is_pangram(discoveredWords[w])) {
+            listword.classList.add("fw-bolder");
+            listword.classList.add("text-warning");
+        }
         listword.innerHTML = discoveredWords[w];
         list.appendChild(listword);
         w++;
