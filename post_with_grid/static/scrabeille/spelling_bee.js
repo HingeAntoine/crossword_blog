@@ -2,7 +2,6 @@ var validWords=[];
 var letters = [];
 var discoveredWords =[];
 var totalScore = 0;
-var pangram = "";
 var centerLetter = "";
 var numFound = 0;
 var maxscore = 0;
@@ -78,7 +77,6 @@ function get_valid_words(words_json, required='', optional='', excl=new Set()) {
             }
             else if (is_pangram(w)) {
                 maxscore += w.length + 7;
-                pangram = w;
             }
             else if (w.length > 4) {
                 maxscore += w.length;
