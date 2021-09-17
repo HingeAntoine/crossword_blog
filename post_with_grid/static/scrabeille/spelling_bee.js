@@ -44,7 +44,7 @@ function validate_parameters(required, optional) {
 
 function get_valid_words(words_json, required='', optional='') {
     // Start a game
-    const words = words_json['words'];
+    const words = words_json;
 
     // Reset all the global variables
     letters = [];
@@ -365,3 +365,15 @@ function input_from_keyboard(event) {
     }
   }
 }
+
+// Set up cursor blinking
+var cursor = true;
+setInterval(() => {
+  if(cursor) {
+    document.getElementById('cursor').style.opacity = 0;
+    cursor = false;
+  }else {
+    document.getElementById('cursor').style.opacity = 1;
+    cursor = true;
+  }
+}, 600);

@@ -92,45 +92,9 @@
 <script type="text/javascript">
     var qsRequired = 'q';
     var qsOptional = 'perout';
+    var wordList = ['perroquet', 'tuque'];
 
-    $(document).ready(function () {
-    // fetch the data
-    if(typeof window.fetch === "function") {
-      fetch('{% static "scrabeille/words2.json.zip" %}')
-      .then(function (response) {
-        if (response.status === 200 || response.status === 0) {
-          return Promise.resolve(response.arrayBuffer())
-        } else {
-          return Promise.reject(new Error(response.statusText))
-        }
-      })
-      .then(JSZip.loadAsync)
-      .then(function (zip) {
-        return zip.file("words2.json").async("string");
-      })
-      .then(function success(data) {
-        // populate dictionary
-        var words_json = JSON.parse(data);
-        initialize_game(words_json, qsRequired, qsOptional);
-      }, function error(e) {
-        alert(e);
-      });
-    } else {
-      $('#loading').text('This browser does not support the Fetch API.  Please use Firefox or Chrome to use this page.');
-    }
-
-    // Set up cursor blinking
-    var cursor = true;
-    setInterval(() => {
-      if(cursor) {
-        document.getElementById('cursor').style.opacity = 0;
-        cursor = false;
-      }else {
-        document.getElementById('cursor').style.opacity = 1;
-        cursor = true;
-      }
-    }, 600);
-    });
+    initialize_game(wordList, qsRequired, qsOptional);
 </script>
 
 </body>
