@@ -70,7 +70,7 @@ function get_valid_words(words_json, required='', optional='') {
 
     // Go through the words to populate validWords, pangram, maxScore
     words.forEach( function(w) {
-        validWords.push(w);
+        validWords.push(w.toLowerCase());
         if (w.length == 4) {
             maxscore += 1;
         }
