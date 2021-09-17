@@ -42,7 +42,7 @@ function validate_parameters(required, optional) {
     return '';
 }
 
-function get_valid_words(words_json, required='', optional='', excl=new Set()) {
+function get_valid_words(words_json, required='', optional='') {
     // Start a game
     const words = words_json['words'];
 
@@ -70,7 +70,7 @@ function get_valid_words(words_json, required='', optional='', excl=new Set()) {
 
     // Go through the words to populate validWords, pangram, maxScore
     words.forEach( function(w) {
-        if (isGoodWord(required, optional, w) && !excl.has(w)) {
+        if (isGoodWord(required, optional, w)) {
             validWords.push(w);
             if (w.length == 4) {
                 maxscore += 1;
