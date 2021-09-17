@@ -70,17 +70,15 @@ function get_valid_words(words_json, required='', optional='') {
 
     // Go through the words to populate validWords, pangram, maxScore
     words.forEach( function(w) {
-        if (isGoodWord(required, optional, w)) {
-            validWords.push(w);
-            if (w.length == 4) {
-                maxscore += 1;
-            }
-            else if (is_pangram(w)) {
-                maxscore += w.length + 7;
-            }
-            else if (w.length > 4) {
-                maxscore += w.length;
-            }
+        validWords.push(w);
+        if (w.length == 4) {
+            maxscore += 1;
+        }
+        else if (is_pangram(w)) {
+            maxscore += w.length + 7;
+        }
+        else if (w.length > 4) {
+            maxscore += w.length;
         }
     });
 
