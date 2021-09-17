@@ -182,13 +182,8 @@ function get_valid_words(words_json, required='', optional='', excl=new Set()) {
     return true;
 }
 
-function initialize_game(words_json, required='', optional='', excl='') {
-    if (excl) {
-        excl = new Set(JSON.parse(atob(excl)));
-    } else {
-        excl=new Set();
-    }
-    get_valid_words(words_json, required=required, optional=optional, excl=excl);
+function initialize_game(words_json, required='', optional='') {
+    get_valid_words(words_json, required=required, optional=optional);
     initialize_letters();
     initialize_score();
 }

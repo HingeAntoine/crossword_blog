@@ -92,7 +92,6 @@
 <script type="text/javascript">
     var qsRequired = 'q';
     var qsOptional = 'perout';
-    var qsExcluded = '';
 
     $(document).ready(function () {
     // fetch the data
@@ -112,7 +111,7 @@
       .then(function success(data) {
         // populate dictionary
         var words_json = JSON.parse(data);
-        initialize_game(words_json, qsRequired, qsOptional, qsExcluded);
+        initialize_game(words_json, qsRequired, qsOptional);
       }, function error(e) {
         alert(e);
       });
