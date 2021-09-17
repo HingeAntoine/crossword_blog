@@ -90,11 +90,9 @@
 
 <script type="text/javascript" src="{% static "scrabeille/spelling_bee.js" %}"></script>
 <script type="text/javascript">
-    var qsRequired = 'q';
-    var qsOptional = 'perout';
     var wordList = ['perroquet', 'tuque'];
 
-    initialize_game(wordList, qsRequired, qsOptional);
+    initialize_game(wordList, '{{puzzle.requiredLetter}}', '{{puzzle.optionalLetters}}');
 </script>
 
 </body>

@@ -1,3 +1,5 @@
+from django.conf import settings
+
 from django.db.models import F
 from django.shortcuts import render
 from post_with_grid.models import Project
@@ -11,6 +13,7 @@ from django.http import JsonResponse
 
 from django.db.models.expressions import Window
 from django.db.models.functions import Rank
+import yaml
 
 PAGINATOR_ARCHIVE_SIZE = 15
 
@@ -51,8 +54,13 @@ def get_type(pk):
 
 
 def scrabeille_detail(request, project):
+    with open(project.grid_file.path, "r") as stream:
+        puzzle = yaml.safe_load(stream)
+
     return render(
-        request, "scrabeille_jeu.html", {"project": project, "type": "scrabeille"}
+        request,
+        "scrabeille_jeu.html",
+        {"project": project, "type": "scrabeille", "puzzle": puzzle},
     )
 
 
