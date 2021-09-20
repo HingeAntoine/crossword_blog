@@ -96,6 +96,51 @@
     </div>
 </div>
 
+<div class="modal fade" id="commentModal" tabindex="-1"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Commentaires <i class="em em-speech_balloon"></i></h5>
+            </div>
+            <div class="modal-body">
+                <div class="container" id="commentDiv">
+                    {% include "grid_comments.html" %}
+                </div>
+                <hr>
+
+                <div>
+                    <button type="button" class="btn btn-secondary mx-1 float-reveal-button" data-bs-toggle="collapse"
+                            data-bs-target="#commentForm">
+                    <div class="em em-heavy_plus_sign"></div>
+                    </button>
+
+                    <form id="commentForm" class="collapse mt-4">
+                        <!-- COMMENT PSEUDONYM -->
+                        <div class="form-group">
+                            <label for="inputPseudoComment">Pseudo</label>
+                            <input type="string" class="form-control" id="inputPseudoComment" placeholder="Entrez votre pseudo">
+                            <div class="invalid-feedback" id="commentPseudoFeedback">Champ obligatoire.</div>
+                        </div>
+
+                        <!-- COMMENT TEXT -->
+                        <div class="form-group">
+                            <label for="inputComment">Commentaire</label>
+                            <textarea class="form-control" id="inputComment" rows="3"></textarea>
+                            <div class="invalid-feedback" id="commentTextFeedback">Champ obligatoire.</div>
+                        </div>
+
+                        <!-- SUBMIT BUTTON -->
+                        <button type="submit" class="btn btn-primary mt-1">Envoyer
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- BUTTONS -->
 <div class="nav bg-light d-flex">
     <div class="ms-3 pt-1 d-flex align-items-center me-auto h5">
