@@ -53,7 +53,40 @@ def get_type(pk):
 ##################
 
 
-def scrabeille_detail(request, project):
+def scrabeille_detail(request, project, pk):
+    if request.method == "POST":
+        if "name" in request.POST:
+            name = request.POST["name"]
+
+            # CHECKING ACCEPTANCE CRITERIA
+            # RETURNING ERROR IF
+            # NICK IS TOO SHORT OR TOO LONG
+            # SCORE IS ALREADY THERE AND GREATER THAN EXISTING
+            error_dict = {}
+            if len(name) < 3:
+                error_dict["error"] = "Le pseudo doit contenir au moins 3 caractères."
+
+            if len(name) > 25:
+                error_dict["error"] = "Le pseudo doit contenir au max. 25 caractères."
+
+            if len(Score.objects.filter(grid=pk, pseudo=name)) > 0:
+                error_dict[
+                    "error"
+                ] = "Le score associé à ce pseudo est plus petit que celui déjà sauvegardé."
+
+            if len(error_dict) > 0:
+                return JsonResponse(error_dict, status=403)
+
+            # IF ALL IS OK, SAVE SCORE
+            if len(Score.objects.filter(grid=pk, pseudo=name)) == 0:
+                Score(grid=pk, pseudo=name, time=0, score=request.POST["score"]).save()
+            else:
+                pass
+
+        return JsonResponse(
+            {"url": request.get_full_path() + "classement/?name=" + name}
+        )
+
     with open(project.grid_file.path, "r") as stream:
         puzzle = yaml.safe_load(stream)
 
@@ -69,7 +102,7 @@ def project_detail(request, pk):
     comments = Comment.objects.filter(grid_key=pk).order_by("commented_at")
 
     if project.crossword_type == CrosswordsType.SCRABEILLE.value:
-        return scrabeille_detail(request, project)
+        return scrabeille_detail(request, project, pk)
 
     if request.method == "POST":
         # Increment grid solve counter

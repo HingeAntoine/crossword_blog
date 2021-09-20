@@ -78,11 +78,6 @@
                         <label for="inputPseudo">Pseudo</label>
                         <input type="string" class="form-control" id="inputPseudo" placeholder="Entrez votre pseudo">
                         <div class="invalid-feedback" id="pseudo-feedback"></div>
-
-                        <!-- Answer field -->
-                        <label for="inputPseudo" class="mt-4">Réponse</label>
-                        <input type="string" class="form-control" id="inputAnswer" placeholder="Entrez votre réponse">
-                        <div class="invalid-feedback" id="answerFeedback"></div>
                     </div>
                     <button type="submit" class="btn btn-primary mt-4">
                         Soumettre
@@ -196,7 +191,9 @@
     </div>
 
 <script type="text/javascript" src="{% static "scrabeille/spelling_bee.js" %}"></script>
+<script type="text/javascript" src="{% static 'js/init_grid.js' %}"></script>
 <script type="text/javascript">
+    init_scrabeille();
     initialize_game({{puzzle.wordList|safe}}, '{{puzzle.requiredLetter}}', '{{puzzle.optionalLetters}}');
 </script>
 

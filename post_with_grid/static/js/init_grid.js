@@ -159,3 +159,43 @@ function init_meta(pk, file_url){
     comment_form_submit()
 
 }
+
+function init_scrabeille(){
+    // Listen to submit-form
+    var frm = $('#submit-form');
+    frm.submit(function () {
+        $.ajax({
+            type: 'POST',
+            url: '',
+            data: {
+                'score': totalScore,
+                'name': $('#inputPseudo').val(),
+            },
+            success: function (data) {
+                // Reload scores
+                $('#ranking-content').html('').load(data.url);
+
+                // Toggle score modals
+                $('#answerModal').modal('hide');
+                $('#best-scores-modal').modal('show');
+            },
+            error: function (data) {
+                // Reset error form
+                $("#inputPseudo").removeClass("is-invalid");
+                $('#pseudo-feedback').text("");
+                $("#inputAnswer").removeClass("is-invalid");
+                $('#answerFeedback').text("");
+
+                // Display errors in the corresponding fields
+                if ('error' in data.responseJSON){
+                    $('#pseudo-feedback').text(data.responseJSON.error);
+                    $("#inputPseudo").addClass("is-invalid");
+                }
+            }
+        });
+        return false;
+    });
+
+    // Listen to comment form
+    comment_form_submit()
+}
