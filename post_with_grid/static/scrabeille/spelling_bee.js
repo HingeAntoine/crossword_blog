@@ -1,25 +1,9 @@
 var validWords=[];
 var letters = [];
 var discoveredWords =[];
-var totalScore = 0;
 var centerLetter = "";
-var numFound = 0;
 var maxscore = 0;
 
-
-// Function to test if a word works with our letters
-function isGoodWord(required, optional, word) {
-    const regex = new RegExp(`^[${required}${optional}]+$`);
-    ret = true;
-    if (word.length < 4) {
-        ret = false;
-    } else if (!word.includes(required)) {
-        ret = false;
-    } else if (!word.match(regex)) {
-        ret = false;
-    }
-    return ret;
-}
 
 // function to test if a word is a "pangram"
 function is_pangram(word) {
@@ -40,6 +24,25 @@ function validate_parameters(required, optional) {
         return 'Not all inputs are letters';
     }
     return '';
+}
+
+function computeScores(wordList) {
+    var totalScore = 0;
+
+    wordList.forEach(function(w) {
+        validWords.push(w.toLowerCase());
+        if (w.length == 4) {
+            totalScore += 1;
+        }
+        else if (is_pangram(w)) {
+            totalScore += w.length + 7;
+        }
+        else if (w.length > 4) {
+            totalScore += w.length;
+        }
+    });
+
+    return totalScore;
 }
 
 function get_valid_words(words_json, required='', optional='') {
@@ -69,38 +72,25 @@ function get_valid_words(words_json, required='', optional='') {
     }
 
     // Go through the words to populate validWords, pangram, maxScore
-    words.forEach( function(w) {
-        validWords.push(w.toLowerCase());
-        if (w.length == 4) {
-            maxscore += 1;
-        }
-        else if (is_pangram(w)) {
-            maxscore += w.length + 7;
-        }
-        else if (w.length > 4) {
-            maxscore += w.length;
-        }
-    });
-
+    maxscore = computeScores(words);
     return true;
 }
 
 function initialize_game(pk, words_json, required='', optional='') {
     // INIT PUZZLE
     get_valid_words(words_json, required=required, optional=optional);
-    initialize_letters();
-    initialize_score();
-    shuffleLetters();
 
     // LOAD ALREADY FOUND WORDS
     loadPuzzle(pk);
-    showDiscoveredWord()
-    //recomputeScore();
+    updateDisplay();
+
+    initialize_letters();
+    initialize_score();
+    shuffleLetters();
 }
 
 function initialize_score(){
   document.getElementById("maxscore").innerHTML = String(maxscore);
-  // Initialize the number of words
   document.getElementById("totalWords").innerHTML = String(validWords.length);
 }
 
@@ -203,6 +193,12 @@ function showPoints(pts){
 
 }
 
+function updateDisplay() {
+    showDiscoveredWord();
+    document.getElementById("numfound").innerHTML = discoveredWords.length;
+    document.getElementById("score").innerHTML = computeScores(discoveredWords);
+}
+
 //check if the word is valid and clear the input box
 //word must be at least 4 letters
 //word must contain center letter
@@ -224,15 +220,8 @@ function submitWord(){
 
   }else if(validWords.includes(tryword.innerHTML.toLowerCase())){
 
-    var isPangram = checkPangram(tryword.innerHTML);
-    score = calculateWordScore(tryword.innerHTML, isPangram);
-    addToTotalScore(score);
-
-    discoveredWords.push(input.toLowerCase());
-    showDiscoveredWord(tryword.innerHTML);
-    numFound++;
-    document.getElementById("numfound").innerHTML = numFound;
-    document.getElementById("score").innerHTML = totalScore;
+    discoveredWords.push(tryword.innerHTML);
+    updateDisplay();
 
     var l = tryword.innerHTML.length;
     if(isPangram){
@@ -302,11 +291,6 @@ function showDiscoveredWord(){
     if (numFound == validWords.length){
       alert("Vous avez trouvé tous les mots! Merci d'avoir joué");
     }
-}
-
-//adds input "score" to the total score of user
-function addToTotalScore(score) {
-  totalScore += score;
 }
 
 //calculates the score of input "input" and also adjusts if "input" is a pangram
