@@ -1,3 +1,4 @@
+var STORAGE_KEY = 'crossword_nexus_savegame';
 var validWords=[];
 var letters = [];
 var discoveredWords =[];
@@ -376,13 +377,13 @@ savePuzzle = function(savegame_name) {
         discoveredWords: discoveredWords,
     };
 
-    var savegame_name = 'scrabeille_' + (savegame_name || '');
+    var savegame_name = STORAGE_KEY + (savegame_name || '');
     localStorage.setItem(savegame_name, JSON.stringify(savegame));
 };
 
 // loads saved puzzle
 loadPuzzle = function(savegame_name) {
-    var savegame_name = 'scrabeille_' + (savegame_name || '');
+    var savegame_name = STORAGE_KEY + (savegame_name || '');
     var savegame = JSON.parse(localStorage.getItem(savegame_name));
 
     if (savegame && savegame.hasOwnProperty('discoveredWords'))
