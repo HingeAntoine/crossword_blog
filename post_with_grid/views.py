@@ -60,7 +60,7 @@ def get_type(pk):
 ##################
 
 
-def scrabeille_detail(request, project, pk):
+def scrabeille_detail(request, project, comments, pk):
     if request.method == "POST":
         if "name" in request.POST:
             # GET REQUEST VARIABLE
@@ -111,6 +111,7 @@ def scrabeille_detail(request, project, pk):
         {
             "project": project,
             "scores": get_scores(pk),
+            "comments": comments,
             "type": "scrabeille",
             "puzzle": puzzle,
         },
@@ -122,7 +123,7 @@ def project_detail(request, pk):
     comments = Comment.objects.filter(grid_key=pk).order_by("commented_at")
 
     if project.crossword_type == CrosswordsType.SCRABEILLE.value:
-        return scrabeille_detail(request, project, pk)
+        return scrabeille_detail(request, project, comments, pk)
 
     if request.method == "POST":
         # Increment grid solve counter
