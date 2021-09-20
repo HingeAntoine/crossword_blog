@@ -63,8 +63,12 @@ def get_type(pk):
 def scrabeille_detail(request, project, pk):
     if request.method == "POST":
         if "name" in request.POST:
+            # GET REQUEST VARIABLE
             name = request.POST["name"]
             score = request.POST["score"]
+
+            # GET SCORES ASSOCIATED TO NAME, IF EXISTS
+            scores_per_pseudo = Score.objects.filter(grid=pk, pseudo=name)
 
             # CHECKING ACCEPTANCE CRITERIA
             # RETURNING ERROR IF
@@ -77,16 +81,17 @@ def scrabeille_detail(request, project, pk):
             if len(name) > 25:
                 error_dict["error"] = "Le pseudo doit contenir au max. 25 caractères."
 
-            # if len(Score.objects.filter(grid=pk, pseudo=name)) > 0:
-            #     error_dict[
-            #         "error"
-            #     ] = "Le score associé à ce pseudo est plus petit que celui déjà sauvegardé."
+            if len(scores_per_pseudo) > 0:
+                if int(score) <= scores_per_pseudo[0].score:
+                    error_dict[
+                        "error"
+                    ] = "Le score associé à ce pseudo est plus petit que celui déjà sauvegardé."
 
             if len(error_dict) > 0:
                 return JsonResponse(error_dict, status=403)
 
             # IF ALL IS OK, SAVE SCORE
-            if len(Score.objects.filter(grid=pk, pseudo=name)) == 0:
+            if len(scores_per_pseudo) == 0:
                 Score(grid=pk, pseudo=name, time=0, score=score).save()
             else:
                 score_to_update = Score.objects.filter(grid=pk, pseudo=name)[0]
