@@ -1,5 +1,3 @@
-from django.conf import settings
-
 from django.db.models import F
 from django.shortcuts import render
 from post_with_grid.models import Project
@@ -29,6 +27,13 @@ def get_scores(pk):
             .annotate(rank=Window(expression=Rank(), order_by=[F("solved_at")]))
             .order_by("solved_at", "pseudo")[:20]
         )
+    elif project.crossword_type == CrosswordsType.SCRABEILLE.value:
+        # Scores are ordered by best time
+        scores = (
+            Score.objects.filter(grid=pk)
+            .annotate(rank=Window(expression=Rank(), order_by=[F("score").desc()]))
+            .order_by("-score")[:20]
+        )
     else:
         # Scores are ordered by best time
         scores = (
@@ -57,6 +62,7 @@ def scrabeille_detail(request, project, pk):
     if request.method == "POST":
         if "name" in request.POST:
             name = request.POST["name"]
+            score = request.POST["score"]
 
             # CHECKING ACCEPTANCE CRITERIA
             # RETURNING ERROR IF
@@ -69,19 +75,19 @@ def scrabeille_detail(request, project, pk):
             if len(name) > 25:
                 error_dict["error"] = "Le pseudo doit contenir au max. 25 caractères."
 
-            if len(Score.objects.filter(grid=pk, pseudo=name)) > 0:
-                error_dict[
-                    "error"
-                ] = "Le score associé à ce pseudo est plus petit que celui déjà sauvegardé."
+            # if len(Score.objects.filter(grid=pk, pseudo=name)) > 0:
+            #     error_dict[
+            #         "error"
+            #     ] = "Le score associé à ce pseudo est plus petit que celui déjà sauvegardé."
 
             if len(error_dict) > 0:
                 return JsonResponse(error_dict, status=403)
 
             # IF ALL IS OK, SAVE SCORE
             if len(Score.objects.filter(grid=pk, pseudo=name)) == 0:
-                Score(grid=pk, pseudo=name, time=0, score=request.POST["score"]).save()
+                Score(grid=pk, pseudo=name, time=0, score=score).save()
             else:
-                pass
+                Score.objects.filter(grid=pk, pseudo=name)[0].score = score
 
         return JsonResponse(
             {"url": request.get_full_path() + "classement/?name=" + name}
@@ -93,7 +99,12 @@ def scrabeille_detail(request, project, pk):
     return render(
         request,
         "scrabeille_jeu.html",
-        {"project": project, "type": "scrabeille", "puzzle": puzzle},
+        {
+            "project": project,
+            "scores": get_scores(pk),
+            "type": "scrabeille",
+            "puzzle": puzzle,
+        },
     )
 
 
