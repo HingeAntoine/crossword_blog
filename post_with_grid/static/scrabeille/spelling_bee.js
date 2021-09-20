@@ -30,7 +30,6 @@ function computeScores(wordList) {
     var totalScore = 0;
 
     wordList.forEach(function(w) {
-        validWords.push(w.toLowerCase());
         if (w.length == 4) {
             totalScore += 1;
         }
@@ -46,12 +45,9 @@ function computeScores(wordList) {
 }
 
 function get_valid_words(words_json, required='', optional='') {
-    // Start a game
-    const words = words_json;
-
     // Reset all the global variables
     letters = [];
-    validWords = [];
+    validWords = words_json;
     maxScore = 0;
 
     // Read parameters provided
@@ -72,7 +68,7 @@ function get_valid_words(words_json, required='', optional='') {
     }
 
     // Go through the words to populate validWords, pangram, maxScore
-    maxscore = computeScores(words);
+    maxscore = computeScores(validWords);
     return true;
 }
 
