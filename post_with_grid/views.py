@@ -49,6 +49,8 @@ def get_type(pk):
 
     if isinstance(project, MetaGrid):
         return "meta"
+    elif project.crossword_type == CrosswordsType.SCRABEILLE.value:
+        return "scrabeille"
     else:
         return "classique"
 
