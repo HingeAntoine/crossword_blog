@@ -35,6 +35,38 @@
 {% block page_content %}
 
 <!-- MODALS -->
+<div class="modal fade" id="questionModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h5>Règles</h5>
+                <ul style="list-style: none;">
+                    <li>Trouvez des anagrammes en utilisant les lettres des alvéoles.</li>
+                    <li>Une anagramme doit avoir au moins quatre lettres et contenir la lettre de l'alvéole centrale.
+                    </li>
+                    <li>Une des anagrammes est un pangramme (i.e. un mots contenant toutes les lettres du puzzle).
+                    </li>
+                </ul>
+
+                <h5>Liste de mots</h5>
+                <p>
+                    La liste de mots utilisée est le dernier dico francophone du Scrabble (ODS8).
+                </p>
+
+                <h5>Points</h5>
+                <p>
+                    Les points sont comptés de la manière suivante :
+                    <ul>
+                        <li>1 point pour les mots de 4 lettres</li>
+                        <li>N points pour les mots de 5 lettres ou plus (N étant la taille du mot)</li>
+                        <li>+7 points par mot pour le(s) pangramme(s)</li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="answerModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
