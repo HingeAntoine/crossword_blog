@@ -35,6 +35,68 @@
 {% endblock %}
 
 {% block page_content %}
+
+<div class="modal fade" id="answerModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <!-- Submit form -->
+                <form id="submit-form">
+                    <div class="form-group">
+                        <!-- Pseudo field -->
+                        <label for="inputPseudo">Pseudo</label>
+                        <input type="string" class="form-control" id="inputPseudo" placeholder="Entrez votre pseudo">
+                        <div class="invalid-feedback" id="pseudo-feedback"></div>
+
+                        <!-- Answer field -->
+                        <label for="inputPseudo" class="mt-4">Réponse</label>
+                        <input type="string" class="form-control" id="inputAnswer" placeholder="Entrez votre réponse">
+                        <div class="invalid-feedback" id="answerFeedback"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-4">
+                        Soumettre
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BUTTONS -->
+<div class="nav bg-light d-flex">
+    <div class="ms-3 pt-1 d-flex align-items-center me-auto h5">
+        <b class="pe-2">{{ project.title}}</b> par <i class="ps-2">{{ project.author_key.display_name}}</i>
+    </div>
+
+    <!-- INFORMATION BUTTON -->
+    <button type="button" class="nav-link btn" id="question-button" data-bs-toggle="modal"
+            data-bs-target="#questionModal">
+        <div class="em em-question"
+             data-toggle="tooltip" data-placement="bottom" title="Voir la question"></div>
+    </button>
+
+    <!-- POST BUTTON -->
+    <button type="button" class="nav-link btn" id="open-modal-button" data-bs-toggle="modal"
+            data-bs-target="#answerModal">
+        <div class="em em-incoming_envelope"
+             data-bs-toggle="tooltip" data-bs-placement="bottom" title="Soumettre ma réponse"></div>
+    </button>
+
+    <!-- SCORE BUTTON -->
+    <button type="button" class="nav-link btn" data-bs-toggle="modal"
+            data-bs-target="#best-scores-modal">
+        <div class="em em-sports_medal"
+             data-toggle="tooltip" data-placement="bottom" title="Voir les scores"></div>
+    </button>
+
+    <!-- COMMENT BUTTON -->
+    <button type="button" class="nav-link btn"
+            data-bs-toggle="modal" data-bs-target="#commentModal">
+        <div class="em em-speech_balloon"
+             data-toggle="tooltip" data-placement="bottom" title="Voir les commentaires"></div>
+    </button>
+</div>
+
 <body onkeydown="input_from_keyboard(event)">
 
     <div id="canvasContainer" class="row auto mt-2">
