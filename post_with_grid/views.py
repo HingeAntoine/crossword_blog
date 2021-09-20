@@ -89,7 +89,9 @@ def scrabeille_detail(request, project, pk):
             if len(Score.objects.filter(grid=pk, pseudo=name)) == 0:
                 Score(grid=pk, pseudo=name, time=0, score=score).save()
             else:
-                Score.objects.filter(grid=pk, pseudo=name)[0].score = score
+                score_to_update = Score.objects.filter(grid=pk, pseudo=name)[0]
+                score_to_update.score = score
+                score_to_update.save()
 
         return JsonResponse(
             {"url": request.get_full_path() + "classement/?name=" + name}
