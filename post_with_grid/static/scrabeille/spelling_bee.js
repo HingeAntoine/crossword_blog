@@ -4,6 +4,7 @@ var letters = [];
 var discoveredWords =[];
 var centerLetter = "";
 var maxscore = 0;
+var totalScore = 0;
 
 
 // function to test if a word is a "pangram"
@@ -193,7 +194,8 @@ function showPoints(pts){
 function updateDisplay() {
     showDiscoveredWord();
     document.getElementById("numfound").innerHTML = discoveredWords.length;
-    document.getElementById("score").innerHTML = computeScores(discoveredWords);
+    totalScore = computeScores(discoveredWords)
+    document.getElementById("score").innerHTML = totalScore;
 }
 
 //check if the word is valid and clear the input box
