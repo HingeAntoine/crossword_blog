@@ -194,7 +194,7 @@
 <script type="text/javascript" src="{% static 'js/init_grid.js' %}"></script>
 <script type="text/javascript">
     init_scrabeille();
-    initialize_game({{puzzle.wordList|safe}}, '{{puzzle.requiredLetter}}', '{{puzzle.optionalLetters}}');
+    initialize_game({{project.pk}}, {{puzzle.wordList|safe}}, '{{puzzle.requiredLetter}}', '{{puzzle.optionalLetters}}');
 </script>
 
 </body>

@@ -85,11 +85,17 @@ function get_valid_words(words_json, required='', optional='') {
     return true;
 }
 
-function initialize_game(words_json, required='', optional='') {
+function initialize_game(pk, words_json, required='', optional='') {
+    // INIT PUZZLE
     get_valid_words(words_json, required=required, optional=optional);
     initialize_letters();
     initialize_score();
     shuffleLetters();
+
+    // LOAD ALREADY FOUND WORDS
+    loadPuzzle(pk);
+    showDiscoveredWord()
+    //recomputeScore();
 }
 
 function initialize_score(){
@@ -222,6 +228,7 @@ function submitWord(){
     score = calculateWordScore(tryword.innerHTML, isPangram);
     addToTotalScore(score);
 
+    discoveredWords.push(input.toLowerCase());
     showDiscoveredWord(tryword.innerHTML);
     numFound++;
     document.getElementById("numfound").innerHTML = numFound;
@@ -249,11 +256,13 @@ function submitWord(){
 
 //if word was valid, display it
 //if all words are found end game.
-function showDiscoveredWord(input){
-
-    var discText = document.getElementById("discoveredText");
-    discoveredWords.push(input.toLowerCase());
+function showDiscoveredWord(){
+    // SORT DISCOVERED WORDS
     discoveredWords.sort()
+
+    // GET TEXT ZONE FOR NEW WORDS
+    var discText = document.getElementById("discoveredText");
+
     while(discText.firstChild){
       discText.removeChild(discText.firstChild);
     }
@@ -379,3 +388,25 @@ setInterval(() => {
     cursor = true;
   }
 }, 600);
+
+// save cells of puzzle
+savePuzzle = function(savegame_name) {
+    // Create save file
+    var savegame = {
+        discoveredWords: discoveredWords,
+    };
+
+    var savegame_name = 'scrabeille_' + (savegame_name || '');
+    localStorage.setItem(savegame_name, JSON.stringify(savegame));
+};
+
+// loads saved puzzle
+loadPuzzle = function(savegame_name) {
+    var savegame_name = 'scrabeille_' + (savegame_name || '');
+    var savegame = JSON.parse(localStorage.getItem(savegame_name));
+
+    if (savegame && savegame.hasOwnProperty('discoveredWords'))
+    {
+        discoveredWords = savegame.discoveredWords;
+    }
+};
