@@ -193,6 +193,7 @@ function showPoints(pts){
 
 function updateDisplay() {
     showDiscoveredWord();
+    showValidWords();
     document.getElementById("numfound").innerHTML = discoveredWords.length;
     totalScore = computeScores(discoveredWords)
     document.getElementById("score").innerHTML = totalScore;
@@ -289,6 +290,42 @@ function showDiscoveredWord(){
     }
     if (numFound == validWords.length){
       alert("Vous avez trouvé tous les mots! Merci d'avoir joué");
+    }
+}
+
+function showValidWords(){
+    // GET TEXT ZONE FOR NEW WORDS
+    var discText = document.getElementById("allWords");
+
+    while(discText.firstChild){
+      discText.removeChild(discText.firstChild);
+    }
+
+    const COLUMN_SIZE = 10
+    var list = null;
+
+    for(var w=0; w < validWords.length; w++){
+        // IF REACHED COLUMN SIZE, CREATE NEW COLUMN
+        if(w % COLUMN_SIZE == 0){
+            list = document.createElement("UL");
+            discText.appendChild(list);
+        }
+
+        // GENERATE STYLE
+        var listword = document.createElement("LI");
+        listword.classList.add("text-uppercase")
+        listword.style = "list-style-type: none;";
+        if(is_pangram(validWords[w])) {
+            listword.classList.add("fw-bolder");
+            listword.classList.add("text-warning");
+        }
+        if(discoveredWords.includes(validWords[w])){
+            listword.classList.add("text-decoration-line-through");
+        }
+
+        // APPEND WORD TO LIST
+        listword.innerHTML = validWords[w];
+        list.appendChild(listword);
     }
 }
 

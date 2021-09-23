@@ -99,6 +99,23 @@
     </div>
 </div>
 
+<div class="modal fade" id="solutionModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="mt-3 hiddenSolution" style="display:none;">
+                    <div id="allWords">
+                    </div>
+                </div>
+
+                <div class="mt-1">
+                    <button class="ml-4 btn btn-secondary" onclick="$('.hiddenSolution').show();">Solution</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="commentModal" tabindex="-1"
      aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -155,6 +172,12 @@
             data-bs-target="#questionModal">
         <div class="em em-question"
              data-toggle="tooltip" data-placement="bottom" title="Voir les règles"></div>
+    </button>
+
+    <button type="button" class="nav-link btn" id="solution-button" data-bs-toggle="modal"
+        data-bs-target="#solutionModal">
+    <div class="em em-eye"
+         data-bs-toggle="tooltip" data-bs-placement="bottom" title="Voir la solution"></div>
     </button>
 
     <!-- POST BUTTON -->
