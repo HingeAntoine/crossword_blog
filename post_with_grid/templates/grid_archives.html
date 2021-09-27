@@ -91,7 +91,12 @@
             {% for grid in grids %}
             <tr>
                 <td>
-                    <i id="status-{{ grid.pk }}" class="em"></i>
+                    {% if grid.crossword_type == 3 %}
+                    <img class="em" src="{% static 'img/ScrabeilleLogo.png' %}">
+                    {% else %}
+                    <i class="em em-question"></i>
+                    {% endif %}
+                    <i id="status-{{ grid.pk }}" class="em ms-1"></i>
                     <a class="ps-2" href="{% url 'project_detail' grid.pk %}">{{ grid.title }}</a> par
                     <a href="{% url 'author_page' grid.author_key.name %}">{{ grid.author_key.display_name }}</a>
                 </td>
