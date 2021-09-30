@@ -253,7 +253,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             })
 
             this.words[id] = new Word(this, {
-                id: id,
+                id: String(id),
                 cell_ranges:  cell_ranges,
                 clue: clue,
             });
