@@ -205,8 +205,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             id: CLUES_TOP,
             title: "<b>Horizontalement</b>",
             clues: acrossClueList,
-            words_ids: Object.keys(clues[0]["clue"]).map(function(key) {
-                return (acrossClueWordIdBase + parseInt(key)).toString();
+            words_ids: clues[0]["clue"].map(function(key) {
+                return (acrossClueWordIdBase + parseInt(key["number"])).toString();
             }),
         });
 
@@ -222,8 +222,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             id: CLUES_BOTTOM,
             title: "<b>Verticalement</b>",
             clues: downClueList,
-            words_ids: Object.keys(clues[1]["clue"]).map(function(key) {
-                return (downClueWordIdBase + parseInt(key)).toString();
+            words_ids: clues[1]["clue"].map(function(key) {
+                return (downClueWordIdBase + parseInt(key["number"])).toString();
             }),
         });
 
@@ -251,7 +251,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             this.words[id] = new Word(this, {
                 id: id,
                 cell_ranges:  cell_ranges,
-                clue: "",
+                clue: "TEST TEST",
             });
         }
 
