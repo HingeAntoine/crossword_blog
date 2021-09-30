@@ -15,6 +15,7 @@ var default_config = {
 
 // constants
 var FILE_PUZ = 'puz';
+var FILE_IPUZ = 'ipuz';
 var CLUES_TOP = "clues_top";
 var CLUES_BOTTOM = "clues_bottom";
 var MIN_SIZE = 10;

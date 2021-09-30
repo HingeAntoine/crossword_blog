@@ -93,8 +93,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     };
 
     CrossWord.prototype.init = function() {
-        var parsePUZ_callback = $.proxy(this.parsePUZPuzzle, this);
-        var error_callback = $.proxy(this.error, this);
 
         // build structures
         this.top_text = $('#cw-top-text');
@@ -130,11 +128,14 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         // preload one puzzle
         if (this.config.puzzle_file && this.config.puzzle_file.hasOwnProperty('url') && this.config.puzzle_file.hasOwnProperty('type')) {
-            var loaded_callback;
-            switch (this.config.puzzle_file.type) {
-                case FILE_PUZ:
-                    loaded_callback = parsePUZ_callback;
+            var error_callback = $.proxy(this.error, this);
+            if ((this.config.puzzle_file.url).split('.')[1] == "ipuz") {
+                var loaded_callback = $.proxy(this.parseIPUZPuzzle, this);
             }
+            else {
+                var loaded_callback = $.proxy(this.parsePUZPuzzle, this);
+            }
+
             loadFileFromServer(this.config.puzzle_file.url, this.config.puzzle_file.type).then(loaded_callback, error_callback);
         }
     };
@@ -142,6 +143,132 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     CrossWord.prototype.error = function(message) {
         alert(message);
     };
+
+    CrossWord.prototype.parseIPUZPuzzle = function(string) {
+        var puzzle = xw_read_ipuz(string);
+
+        //************
+        //* METADATA *
+        //************
+        var metadata = puzzle[0];
+
+        this.title = metadata["title"];
+        this.author = metadata["author"];
+        this.copyright = metadata["copyright"];
+        this.grid_width = metadata["width"];
+        this.grid_height = metadata["height"];
+
+
+        //*********
+        //* CELLS *
+        //*********
+        var cells = puzzle[1];
+//        this.cells = {};
+//        for (var x = 0; x < puzzle.width; x++) {
+//            for (var y = 0; y < puzzle.height; y++) {
+//                if (!this.cells[x + 1]) {
+//                    this.cells[x + 1] = {};
+//                }
+//                var thisIndex = y * puzzle.width + x;
+//                var solutionLetter = puzzle.solution.charAt(thisIndex);
+//                var myShape = puzzle.circles[thisIndex] ? 'circle' : null;
+//                this.cells[x + 1][y + 1] = {
+//                    x: x + 1,
+//                    y: y + 1,
+//                    solution: solutionLetter != '.' ? solutionLetter : null,
+//                    number: puzzle.sqNbrs[thisIndex],
+//                    color: null,
+//                    shape: myShape,
+//                    empty: solutionLetter == '.',
+//                    letter: null,
+//                };
+//            }
+//        }
+//
+
+//        var clues = puzzle[2];
+//        var acrossClueWordIdBase = 1000;
+//        var downClueWordIdBase = 2000;
+//
+//        var acrossClueList = Object.entries(puzzle.across_clues).map(function(entry) {
+//            return {
+//                word: (acrossClueWordIdBase + parseInt(entry[0])).toString(),
+//                number: entry[0].toString(),
+//                text: entry[1],
+//            };
+//        });
+//        this.clues_top = new CluesGroup(this, {
+//            id: CLUES_TOP,
+//            title: "<b>Horizontalement</b>",
+//            clues: acrossClueList,
+//            words_ids: Object.keys(puzzle.across_clues).map(function(key) {
+//                return (acrossClueWordIdBase + parseInt(key)).toString();
+//            }),
+//        });
+//        var downClueList = Object.entries(puzzle.down_clues).map(function(entry) {
+//            return {
+//                word: (downClueWordIdBase + parseInt(entry[0])).toString(),
+//                number: entry[0].toString(),
+//                text: entry[1],
+//            };
+//        });
+//        this.clues_bottom = new CluesGroup(this, {
+//            id: CLUES_BOTTOM,
+//            title: "<b>Verticalement</b>",
+//            clues: downClueList,
+//            words_ids: Object.keys(puzzle.down_clues).map(function(key) {
+//                return (downClueWordIdBase + parseInt(key)).toString();
+//            }),
+//        });
+//
+//        var wordCellRanges = {};
+//        for (var x = 0; x < puzzle.width; x++) {
+//            for (var y = 0; y < puzzle.height; y++) {
+//                var acrossWordNumber = puzzle.acrossWordNbrs[y * puzzle.width + x];
+//                if (acrossWordNumber != 0) {
+//                    if (!wordCellRanges[acrossClueWordIdBase + acrossWordNumber]) {
+//                        wordCellRanges[acrossClueWordIdBase + acrossWordNumber] = [];
+//                    }
+//                    wordCellRanges[acrossClueWordIdBase + acrossWordNumber].push({
+//                        x: (x + 1).toString(),
+//                        y: (y + 1).toString(),
+//                    });
+//                }
+//
+//                var downWordNumber = puzzle.downWordNbrs[y * puzzle.width + x];
+//                if (downWordNumber != 0) {
+//                    if (!wordCellRanges[downClueWordIdBase + downWordNumber]) {
+//                        wordCellRanges[downClueWordIdBase + downWordNumber] = [];
+//                    }
+//                    wordCellRanges[downClueWordIdBase + downWordNumber].push({
+//                        x: (x + 1).toString(),
+//                        y: (y + 1).toString(),
+//                    });
+//                }
+//            }
+//        }
+//        this.words = {};
+//        for (var i = 0; i < puzzle.acrossSqNbrs.length; i++) {
+//            var id = (acrossClueWordIdBase + puzzle.acrossSqNbrs[i]).toString();
+//            this.words[id] = new Word(this, {
+//                id: id,
+//                cell_ranges: wordCellRanges[id],
+//                clue: acrossClueList[i],
+//            });
+//        }
+//        for (var i = 0; i < puzzle.downSqNbrs.length; i++) {
+//            var id = (downClueWordIdBase + puzzle.downSqNbrs[i]).toString();
+//            this.words[id] = new Word(this, {
+//                id: id,
+//                cell_ranges: wordCellRanges[id],
+//                clue: downClueList[i],
+//            });
+//        }
+//
+//        this.loadPuzzle();
+//
+//        this.completeLoad();
+    }
 
     CrossWord.prototype.parsePUZPuzzle = function(string) {
         var puzzle = PUZAPP.parsepuz(string);
