@@ -240,8 +240,12 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
             if(is_horizontal) {
                 var id = acrossClueWordIdBase + parseInt(this.cells[cell_x][cell_y].number);
+                var clue_index = this.clues_top.words_ids.indexOf(String(id));
+                var clue = acrossClueList[clue_index]
             } else {
                 var id = downClueWordIdBase + parseInt(this.cells[cell_x][cell_y].number);
+                var clue_index = this.clues_bottom.words_ids.indexOf(String(id));
+                var clue = downClueList[clue_index]
             }
 
             const cell_ranges = word["cells"].map(function(value) {
@@ -251,7 +255,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             this.words[id] = new Word(this, {
                 id: id,
                 cell_ranges:  cell_ranges,
-                clue: "TEST TEST",
+                clue: clue,
             });
         }
 
