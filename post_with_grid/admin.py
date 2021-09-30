@@ -9,6 +9,7 @@ from post_with_grid.models import Comment
 from post_with_grid.models import CrosswordsType
 
 from PIL import Image, ImageDraw
+from os import path
 import puz
 
 CELL_SIZE = 10
@@ -41,7 +42,7 @@ class ProjectAdmin(admin.ModelAdmin):
         # Create constant grid preview
         if (
             "grid_file" in form.changed_data
-            and int(request.POST["crossword_type"]) != CrosswordsType.SCRABEILLE.value
+            and path.splitext(str(obj.grid_file))[1] == ".puz"
         ):
             # Read puzzle
             p = puz.read(settings.MEDIA_ROOT + "/" + str(obj.grid_file))
