@@ -177,7 +177,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         }
 
         for (const cell of cells) {
-            console.log(cell)
             var cell_x = cell.x + 1;
             var cell_y = cell.y + 1;
 
@@ -188,41 +187,49 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             this.cells[cell_x][cell_y].letter = null;
         }
 
-//        var clues = puzzle[2];
-//        var acrossClueWordIdBase = 1000;
-//        var downClueWordIdBase = 2000;
-//
-//        var acrossClueList = Object.entries(puzzle.across_clues).map(function(entry) {
-//            return {
-//                word: (acrossClueWordIdBase + parseInt(entry[0])).toString(),
-//                number: entry[0].toString(),
-//                text: entry[1],
-//            };
-//        });
-//        this.clues_top = new CluesGroup(this, {
-//            id: CLUES_TOP,
-//            title: "<b>Horizontalement</b>",
-//            clues: acrossClueList,
-//            words_ids: Object.keys(puzzle.across_clues).map(function(key) {
-//                return (acrossClueWordIdBase + parseInt(key)).toString();
-//            }),
-//        });
-//        var downClueList = Object.entries(puzzle.down_clues).map(function(entry) {
-//            return {
-//                word: (downClueWordIdBase + parseInt(entry[0])).toString(),
-//                number: entry[0].toString(),
-//                text: entry[1],
-//            };
-//        });
-//        this.clues_bottom = new CluesGroup(this, {
-//            id: CLUES_BOTTOM,
-//            title: "<b>Verticalement</b>",
-//            clues: downClueList,
-//            words_ids: Object.keys(puzzle.down_clues).map(function(key) {
-//                return (downClueWordIdBase + parseInt(key)).toString();
-//            }),
-//        });
-//
+        //*********
+        //* CLUES *
+        //*********
+        var clues = puzzle[2];
+        const acrossClueWordIdBase = 1000;
+        const downClueWordIdBase = 2000;
+
+        var acrossClueList = Object.entries(clues[0]["clue"]).map(function(entry) {
+            return {
+                word: (acrossClueWordIdBase + parseInt(entry[1]["number"])).toString(),
+                number: entry[1]["number"].toString(),
+                text: entry[1]["text"],
+            };
+        });
+        this.clues_top = new CluesGroup(this, {
+            id: CLUES_TOP,
+            title: "<b>Horizontalement</b>",
+            clues: acrossClueList,
+            words_ids: Object.keys(clues[0]["clue"]).map(function(key) {
+                return (acrossClueWordIdBase + parseInt(key)).toString();
+            }),
+        });
+
+
+        var downClueList = Object.entries(clues[1]["clue"]).map(function(entry) {
+            return {
+                word: (downClueWordIdBase + parseInt(entry[1]["number"])).toString(),
+                number: entry[1]["number"].toString(),
+                text: entry[1]["text"],
+            };
+        });
+        this.clues_bottom = new CluesGroup(this, {
+            id: CLUES_BOTTOM,
+            title: "<b>Verticalement</b>",
+            clues: downClueList,
+            words_ids: Object.keys(clues[1]["clue"]).map(function(key) {
+                return (downClueWordIdBase + parseInt(key)).toString();
+            }),
+        });
+
+        //*********
+        //* WORDS *
+        //*********
 //        var wordCellRanges = {};
 //        for (var x = 0; x < puzzle.width; x++) {
 //            for (var y = 0; y < puzzle.height; y++) {
@@ -313,8 +320,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             }
         }
 
-        var acrossClueWordIdBase = 1000;
-        var downClueWordIdBase = 2000;
+        const acrossClueWordIdBase = 1000;
+        const downClueWordIdBase = 2000;
 
         var acrossClueList = Object.entries(puzzle.across_clues).map(function(entry) {
             return {
