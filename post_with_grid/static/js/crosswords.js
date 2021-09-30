@@ -163,28 +163,30 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         //* CELLS *
         //*********
         var cells = puzzle[1];
-//        this.cells = {};
-//        for (var x = 0; x < puzzle.width; x++) {
-//            for (var y = 0; y < puzzle.height; y++) {
-//                if (!this.cells[x + 1]) {
-//                    this.cells[x + 1] = {};
-//                }
-//                var thisIndex = y * puzzle.width + x;
-//                var solutionLetter = puzzle.solution.charAt(thisIndex);
-//                var myShape = puzzle.circles[thisIndex] ? 'circle' : null;
-//                this.cells[x + 1][y + 1] = {
-//                    x: x + 1,
-//                    y: y + 1,
-//                    solution: solutionLetter != '.' ? solutionLetter : null,
-//                    number: puzzle.sqNbrs[thisIndex],
-//                    color: null,
-//                    shape: myShape,
-//                    empty: solutionLetter == '.',
-//                    letter: null,
-//                };
-//            }
-//        }
-//
+        this.cells = {};
+        for (var x = 0; x < this.grid_width; x++) {
+            for (var y = 0; y < this.grid_height; y++) {
+                if (!this.cells[x + 1]) {
+                    this.cells[x + 1] = {};
+                }
+                this.cells[x + 1][y + 1] = {
+                    x: x + 1,
+                    y: y + 1,
+                };
+            }
+        }
+
+        for (const cell of cells) {
+            console.log(cell)
+            var cell_x = cell.x + 1;
+            var cell_y = cell.y + 1;
+
+            this.cells[cell_x][cell_y].solution = cell.solution;
+            this.cells[cell_x][cell_y].empty = cell.type == "block";
+            this.cells[cell_x][cell_y].number = cell.number;
+            this.cells[cell_x][cell_y].color = cell["background-color"];
+            this.cells[cell_x][cell_y].letter = null;
+        }
 
 //        var clues = puzzle[2];
 //        var acrossClueWordIdBase = 1000;
@@ -265,9 +267,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 //            });
 //        }
 //
-//        this.loadPuzzle();
-//
-//        this.completeLoad();
+        this.loadPuzzle();
+        this.completeLoad();
     }
 
     CrossWord.prototype.parsePUZPuzzle = function(string) {
