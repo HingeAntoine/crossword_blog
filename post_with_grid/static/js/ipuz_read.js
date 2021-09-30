@@ -5,6 +5,99 @@
 **/
 
 /**
+* Class for a crossword grid
+**/
+class xwGrid {
+    constructor(soln_arr, block='.') {
+        this.solution = soln_arr;
+        this.block = block;
+        // width and height
+        this.height = soln_arr.length;
+        this.width = soln_arr[0].length;
+        // Grid numbering
+        this.numbers = this.gridNumbering();
+    }
+    isBlack(x, y) {
+        return this.solution[y][x] === this.block;
+    }
+    startAcrossWord(x, y) {
+        return (x === 0 || this.isBlack(x - 1, y)) && x < this.width - 1 && !this.isBlack(x, y) && !this.isBlack(x + 1, y);
+    }
+    startDownWord(x, y) {
+        return (y === 0 || this.isBlack(x, y - 1)) && y < this.height - 1 && !this.isBlack(x, y) && !this.isBlack(x, y + 1);
+    }
+    letterAt(x, y) {
+        return this.solution[y][x];
+    }
+    gridNumbering() {
+        var numbers = [];
+        var thisNumber = 1;
+        for (var y=0; y < this.height; y++) {
+            var thisNumbers = [];
+            for (var x=0; x < this.width; x++) {
+                if (this.startAcrossWord(x, y) || this.startDownWord(x, y)) {
+                    thisNumbers.push(thisNumber);
+                    thisNumber += 1;
+                }
+                else {
+                    thisNumbers.push(0);
+                }
+            }
+            numbers.push(thisNumbers);
+        }
+        return numbers;
+    }
+
+    acrossEntries() {
+        var acrossEntries = {}, x, y, thisNum;
+        for (y = 0; y < this.height; y++) {
+            for (x = 0; x < this.width; x++) {
+                if (this.startAcrossWord(x, y)) {
+                    thisNum = this.numbers[y][x];
+                    if (!acrossEntries[thisNum] && thisNum) {
+                        acrossEntries[thisNum] = {'word': '', 'cells': []};
+                    }
+                }
+                if (!this.isBlack(x, y) && thisNum) {
+                    var letter = this.letterAt(x, y);
+                    acrossEntries[thisNum]['word'] += letter;
+                    acrossEntries[thisNum]['cells'].push([x, y]);
+                }
+                // end the across entry if we hit the edge
+                if (x === this.width - 1) {
+                    thisNum = null;
+                }
+            }
+        }
+        return acrossEntries;
+    }
+
+    downEntries() {
+        var downEntries = {}, x, y, thisNum;
+        for (x = 0; x < this.width; x++) {
+            for (y = 0; y < this.height; y++) {
+                if (this.startDownWord(x, y)) {
+                    thisNum = this.numbers[y][x];
+                    if (!downEntries[thisNum] && thisNum) {
+                        downEntries[thisNum] = {'word': '', 'cells': []};
+                    }
+                }
+                if (!this.isBlack(x, y) && thisNum) {
+                    var letter = this.letterAt(x, y);
+                    downEntries[thisNum]['word'] += letter;
+                    downEntries[thisNum]['cells'].push([x, y]);
+                }
+                // end the down entry if we hit the bottom
+                if (y === this.height - 1) {
+                    thisNum = null;
+                }
+            }
+        }
+        return downEntries;
+    }
+}
+
+/**
 * Since we're reading everything in as a binary string
 * we need a function to convert to a UTF-8 string
 * Note that if .readAsBinaryString() goes away,
@@ -196,20 +289,20 @@ function xw_read_ipuz(data) {
       "cells" is an array of objects giving the x and y values, in order
     */
     // We only do this if we haven't already populated `words`
-//    if (!words.length) {
-//        var thisGrid = new xwGrid(data['solution'], block=BLOCK);
-//        var word_id = 1;
-//        var acrossEntries = thisGrid.acrossEntries();
-//        Object.keys(acrossEntries).forEach(function(i) {
-//            var thisWord = {'id': word_id++, 'cells': acrossEntries[i]['cells']};
-//            words.push(thisWord);
-//        });
-//        var downEntries = thisGrid.downEntries();
-//        Object.keys(downEntries).forEach(function(i) {
-//            var thisWord = {'id': word_id++, 'cells': downEntries[i]['cells']};
-//            words.push(thisWord);
-//        });
-//    }
+    if (!words.length) {
+        var thisGrid = new xwGrid(data['solution'], block=BLOCK);
+        var word_id = 1;
+        var acrossEntries = thisGrid.acrossEntries();
+        Object.keys(acrossEntries).forEach(function(i) {
+            var thisWord = {'id': word_id++, 'cells': acrossEntries[i]['cells']};
+            words.push(thisWord);
+        });
+        var downEntries = thisGrid.downEntries();
+        Object.keys(downEntries).forEach(function(i) {
+            var thisWord = {'id': word_id++, 'cells': downEntries[i]['cells']};
+            words.push(thisWord);
+        });
+    }
 
-    return [metadata, cells, clues];
+    return [metadata, cells, clues, words];
 }

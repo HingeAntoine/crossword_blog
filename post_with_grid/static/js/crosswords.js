@@ -230,50 +230,34 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         //*********
         //* WORDS *
         //*********
-//        var wordCellRanges = {};
-//        for (var x = 0; x < puzzle.width; x++) {
-//            for (var y = 0; y < puzzle.height; y++) {
-//                var acrossWordNumber = puzzle.acrossWordNbrs[y * puzzle.width + x];
-//                if (acrossWordNumber != 0) {
-//                    if (!wordCellRanges[acrossClueWordIdBase + acrossWordNumber]) {
-//                        wordCellRanges[acrossClueWordIdBase + acrossWordNumber] = [];
-//                    }
-//                    wordCellRanges[acrossClueWordIdBase + acrossWordNumber].push({
-//                        x: (x + 1).toString(),
-//                        y: (y + 1).toString(),
-//                    });
-//                }
-//
-//                var downWordNumber = puzzle.downWordNbrs[y * puzzle.width + x];
-//                if (downWordNumber != 0) {
-//                    if (!wordCellRanges[downClueWordIdBase + downWordNumber]) {
-//                        wordCellRanges[downClueWordIdBase + downWordNumber] = [];
-//                    }
-//                    wordCellRanges[downClueWordIdBase + downWordNumber].push({
-//                        x: (x + 1).toString(),
-//                        y: (y + 1).toString(),
-//                    });
-//                }
-//            }
-//        }
-//        this.words = {};
-//        for (var i = 0; i < puzzle.acrossSqNbrs.length; i++) {
-//            var id = (acrossClueWordIdBase + puzzle.acrossSqNbrs[i]).toString();
-//            this.words[id] = new Word(this, {
-//                id: id,
-//                cell_ranges: wordCellRanges[id],
-//                clue: acrossClueList[i],
-//            });
-//        }
-//        for (var i = 0; i < puzzle.downSqNbrs.length; i++) {
-//            var id = (downClueWordIdBase + puzzle.downSqNbrs[i]).toString();
-//            this.words[id] = new Word(this, {
-//                id: id,
-//                cell_ranges: wordCellRanges[id],
-//                clue: downClueList[i],
-//            });
-//        }
-//
+        var words = puzzle[3];
+        this.words = {};
+
+        for (const word of words){
+            const cell_x = word["cells"][0][0] + 1;
+            const cell_y = word["cells"][0][1] + 1;
+            const is_horizontal = ((word["cells"][1][0] + 1) - cell_x > 0);
+
+            if(is_horizontal) {
+                var id = acrossClueWordIdBase + parseInt(this.cells[cell_x][cell_y].number);
+            } else {
+                var id = downClueWordIdBase + parseInt(this.cells[cell_x][cell_y].number);
+            }
+
+            const cell_ranges = word["cells"].map(function(value) {
+                return {x: String(value[0] + 1), y: String(value[1] + 1)}
+            })
+
+            this.words[id] = new Word(this, {
+                id: id,
+                cell_ranges:  cell_ranges,
+                clue: "",
+            });
+        }
+
+        //*************
+        //* LOAD GRID *
+        //*************
         this.loadPuzzle();
         this.completeLoad();
     }
@@ -399,7 +383,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         }
 
         this.loadPuzzle();
-
         this.completeLoad();
     }
 
