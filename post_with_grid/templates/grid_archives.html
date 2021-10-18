@@ -81,8 +81,6 @@
                 </th>
                 <th class="th-sm">Date
                 </th>
-                <th class="th-sm">Infos
-                </th>
                 <th class="th-sm">Comm.
                 </th>
             </tr>
@@ -91,6 +89,7 @@
             {% for grid in grids %}
             <tr>
                 <td>
+                    <!-- GRID TYPE EMOJI -->
                     {% if grid.crossword_type == 3 %}
                     <i class="em em-bee"></i>
                     {% elif grid.crossword_type == 2 %}
@@ -98,20 +97,25 @@
                     {% else %}
                     <i class="em em-checkered_flag"></i>
                     {% endif %}
+
+                    <!-- GRID SIZE EMOJI -->
+                    {% if grid.grid_size == 0 %}
+                    <i class="em em-waning_crescent_moon"></i>
+                    {% elif grid.grid_size == 1 %}
+                    <i class="em em-last_quarter_moon"></i>
+                    {% elif grid.grid_size == 2 %}
+                    <i class="em em-waning_gibbous_moon"></i>
+                    {% else %}
+                    <i class="em em-full_moon"></i>
+                    {% endif %}
+
+                    <!-- GRID COMPLETION EMOJI -->
                     <i id="status-{{ grid.pk }}" class="em ms-1"></i>
+
                     <a class="ps-2" href="{% url 'project_detail' grid.pk %}">{{ grid.title }}</a> par
                     <a href="{% url 'author_page' grid.author_key.name %}">{{ grid.author_key.display_name }}</a>
                 </td>
                 <td>{{ grid.date_created }}</td>
-                <td>
-                    <a tabindex="0" class="btn em em-information_source" role="button" data-bs-toggle="popover"
-                       data-bs-trigger="focus" data-bs-html=true
-                       data-bs-content="Type : {{ grid.grid_type_str }} <br>
-                                    Taille : {{ grid.grid_size_str }} <br>
-                                    Résolutions : <span class='badge bg-primary badge-pill'>{{ grid.solve_count }}</span>">
-                    </a>
-                </td>
-
                 <td>
                     <!-- COMMENT BUTTON -->
                     <a type="button" class="btn em em-speech_balloon" data-bs-toggle="modal" data-bs-target="#commentModal"
@@ -145,18 +149,5 @@
 
     </div>
 </div>
-
-<div class="row mt-1">
-    <div class="col-3"></div>
-
-
-</div>
-
-<script>
-    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-        return new bootstrap.Popover(popoverTriggerEl)
-    });
-</script>
 
 {% endblock %}
