@@ -186,7 +186,7 @@ function xw_read_ipuz(data) {
             } catch {}
             // type
             var type = null;
-            if (solution === BLOCK) {
+            if (solution === '#' || solution['block']) {
                 type = 'block';
             } else if (data['puzzle'][y][x] === null) {
                 type = 'void';
