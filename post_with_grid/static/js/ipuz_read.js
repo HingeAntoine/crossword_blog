@@ -8,8 +8,9 @@
 * Class for a crossword grid
 **/
 class xwGrid {
-    constructor(soln_arr, block='.') {
+    constructor(soln_arr, clues_arr, block='.') {
         this.solution = soln_arr;
+        this.clues = clues_arr,
         this.block = block;
         // width and height
         this.height = soln_arr.length;
@@ -17,18 +18,39 @@ class xwGrid {
         // Grid numbering
         this.numbers = this.gridNumbering();
     }
+
+    isBar(x,y){
+        if (!this.clues[y][x].hasOwnProperty("style")){
+            return false
+        }
+
+        if (!this.clues[y][x]["style"].hasOwnProperty("barred")) {
+            return false
+        }
+
+        return true
+    }
+
     isBlack(x, y) {
         return this.solution[y][x] === this.block;
     }
+
     startAcrossWord(x, y) {
-        return (x === 0 || this.isBlack(x - 1, y)) && x < this.width - 1 && !this.isBlack(x, y) && !this.isBlack(x + 1, y);
+        return (x === 0 || this.isBlack(x - 1, y) || this.isBar(x, y))
+            && x < this.width - 1
+            && !this.isBlack(x, y)
+            && !this.isBlack(x + 1, y)
+            && !this.isBar(x + 1, y);
     }
+
     startDownWord(x, y) {
         return (y === 0 || this.isBlack(x, y - 1)) && y < this.height - 1 && !this.isBlack(x, y) && !this.isBlack(x, y + 1);
     }
+
     letterAt(x, y) {
         return this.solution[y][x];
     }
+
     gridNumbering() {
         var numbers = [];
         var thisNumber = 1;
@@ -64,7 +86,7 @@ class xwGrid {
                     acrossEntries[thisNum]['cells'].push([x, y]);
                 }
                 // end the across entry if we hit the edge
-                if (x === this.width - 1) {
+                if (x === this.width - 1 || this.isBlack(x, y)) {
                     thisNum = null;
                 }
             }
@@ -290,7 +312,7 @@ function xw_read_ipuz(data) {
     */
     // We only do this if we haven't already populated `words`
     if (!words.length) {
-        var thisGrid = new xwGrid(data['solution'], block=BLOCK);
+        var thisGrid = new xwGrid(data['solution'], data['puzzle'], block=BLOCK);
         var word_id = 1;
         var acrossEntries = thisGrid.acrossEntries();
         Object.keys(acrossEntries).forEach(function(i) {
