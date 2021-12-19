@@ -21,6 +21,14 @@
 {% endblock %}
 
 {% block page_content %}
+<h1>
+    {{title}}
+</h1>
 
+<h3>
+    {{ author }} - {{ date }}
+</h3>
+
+{{ content|safe }}
 
 {% endblock %}
