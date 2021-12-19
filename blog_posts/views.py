@@ -29,8 +29,7 @@ def display_blog_archives(request):
     #####################################
 
     projects = BlogPost.objects.all().order_by("-date_created", "-title")
-    grid_filter = BlogPostFilter(request.GET, queryset=projects)
-    paginator = Paginator(grid_filter.qs, PAGINATOR_ARCHIVE_SIZE)
+    paginator = Paginator(projects, PAGINATOR_ARCHIVE_SIZE)
 
     page = request.GET.get("page")
     try:
@@ -70,14 +69,11 @@ def display_blog_archives(request):
     # Return render dict #
     ######################
 
-    grid_filter.form.fields["author"].label = "Autrice ou auteur"
-
     return render(
         request,
         "blog_archives.html",
         {
             "grids": response,
-            "form": grid_filter.form,
             "pagnav": {
                 "first": url_first,
                 "previous": url_previous,
