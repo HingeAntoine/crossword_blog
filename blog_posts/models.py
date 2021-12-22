@@ -10,3 +10,8 @@ class BlogPost(models.Model):
         post_with_grid.models.Author, default="antoine", on_delete=models.RESTRICT
     )
     date_created = models.DateField(auto_now_add=True)
+
+
+class ImageBlogPost(models.Model):
+    post = models.ForeignKey(BlogPost, on_delete=models.RESTRICT)
+    image = models.ImageField(upload_to="blog_pics/")
