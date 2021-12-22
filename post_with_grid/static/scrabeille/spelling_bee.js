@@ -76,6 +76,7 @@ function get_valid_words(words_json, required='', optional='') {
 
 function initialize_game(pk, words_json, required='', optional='') {
     // INIT PUZZLE
+    savestate_name = pk
     get_valid_words(words_json, required=required, optional=optional);
 
     // LOAD ALREADY FOUND WORDS
@@ -188,7 +189,6 @@ function clearInput(){
 
 function showPoints(pts){
   $(".points").html("+" + pts);
-
 }
 
 function updateDisplay() {
@@ -223,6 +223,7 @@ function submitWord(){
     discoveredWords.push(tryword.innerHTML);
     updateDisplay();
 
+
     var l = tryword.innerHTML.length;
     if(isPangram){
       rightInput("#pangram");
@@ -237,6 +238,8 @@ function submitWord(){
       rightInput("#amazing");
       showPoints(l);
     }
+
+    savePuzzle(savestate_name);
 
   }else{
     wrongInput("#invalid-word");
