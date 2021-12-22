@@ -261,11 +261,6 @@
 <script type="text/javascript">
     init_scrabeille();
     initialize_game({{project.pk}}, {{puzzle.wordList|safe}}, '{{puzzle.requiredLetter}}', '{{puzzle.optionalLetters}}');
-
-    // Add onunload save call
-    window.onpagehide = window.onunload = window.onbeforeunload = function(){
-        savePuzzle({{project.pk}});
-    }
 </script>
 
 </body>
