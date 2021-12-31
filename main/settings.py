@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "contact_email",
     "grid_creation_tool",
     "blog_posts",
+    "django_quill",
     "crispy_forms",
 ]
 
@@ -79,6 +80,30 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "main.wsgi.application"
 
+QUILL_CONFIGS = {
+    "default": {
+        "theme": "snow",
+        "modules": {
+            "syntax": True,
+            "toolbar": [
+                [
+                    {"font": []},
+                    {"header": []},
+                    {"align": []},
+                    "bold",
+                    "italic",
+                    "underline",
+                    "strike",
+                    "blockquote",
+                    {"color": []},
+                    {"background": []},
+                ],
+                ["code-block", "link"],
+                ["clean"],
+            ],
+        },
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases

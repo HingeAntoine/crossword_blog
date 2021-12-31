@@ -1,9 +1,6 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import BlogPost
-from .filters import BlogPostFilter
-
-from markdown import markdown
 
 PAGINATOR_ARCHIVE_SIZE = 20
 
@@ -18,7 +15,7 @@ def display_blog_post(request, url_blog):
             "title": blog_post.title,
             "author": blog_post.post_author.display_name,
             "date": blog_post.date_created,
-            "content": markdown(blog_post.post_content, extensions=["tables"]),
+            "content": blog_post.post_content.html,
         },
     )
 
