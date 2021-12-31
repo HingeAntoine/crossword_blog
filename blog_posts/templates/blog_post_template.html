@@ -18,6 +18,8 @@
 <meta name="twitter:image" content="https://casevide.fr/static/img/logo.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:creator" content="AntoineHinge">
+
+<link href="{% static 'css/blog_post_style.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block page_content %}
@@ -31,7 +33,7 @@
 
 <!-- CONTENT -->
 <div class="d-flex justify-content-center">
-    <div style="max-width: 80em">
+    <div style="max-width: 80em" class="blog_post_content">
         {{ content|safe }}
     </div>
 </div>
