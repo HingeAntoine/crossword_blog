@@ -12,52 +12,40 @@
 
 {% block page_content %}
 
-<!-- TABLE BLOCK -->
-<div class="row mt-3">
+<div class="row">
+    {% for post in grids %}
+    <div class="card m-2" style="width: 23rem;">
+        <div class="card-body">
+            <h5 class="card-title text-uppercase">{{ post.title }}</h5>
+            <p class="h6 text-muted mb-3">
+                <span class="me-4"><i class="bi bi-pen-fill"></i> {{ post.post_author.display_name }} </span>
+                <span><i class="bi bi-calendar-fill"></i> {{ post.date_created }} </span>
+            </p>
+            <h6 class="card-subtitle mb-2">{{ post.subtitle }}</h6>
 
-    <div class="col-xl-9">
-        <table class="table">
-            <thead>
-            <tr>
-                <th class="th-sm">Post
-                </th>
-                <th class="th-sm">Date
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for grid in grids %}
-            <tr>
-                <td>
-                    <a class="ps-2" href="{% url 'blog_post' grid.pk %}">{{ grid.title }}</a> par
-                    <a href="{% url 'author_page' grid.post_author.name %}">{{ grid.post_author.display_name }}</a>
-
-                </td>
-                <td>{{ grid.date_created }}</td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-
-        <nav aria-label="Page navigation" class="mt-3">
-            <ul class="pagination">
-                {% if grids.has_previous %}
-                <li class="page-item"><a class="page-link" href="?{{ pagnav.first }}">&laquo;</a></li>
-                <li class="page-item"><a class="page-link" href="?{{ pagnav.previous }}"><</a></li>
-                {% endif %}
-
-                <li class="page-item"><a class="page-link">Page {{ grids.number }} sur {{ grids.paginator.num_pages }}.</a>
-                </li>
-
-                {% if grids.has_next %}
-                <li class="page-item"><a class="page-link" href="?{{ pagnav.next }}">></a></li>
-                <li class="page-item"><a class="page-link" href="?{{ pagnav.last }}">&raquo;</a></li>
-                {% endif %}
-
-            </ul>
-        </nav>
-
+            <a href="{% url 'blog_post' post.pk %}" class="card-link">Lire</a>
+        </div>
     </div>
+    {% endfor %}
 </div>
+
+
+<nav aria-label="Page navigation" class="mt-3">
+    <ul class="pagination">
+        {% if grids.has_previous %}
+        <li class="page-item"><a class="page-link" href="?{{ pagnav.first }}">&laquo;</a></li>
+        <li class="page-item"><a class="page-link" href="?{{ pagnav.previous }}"><</a></li>
+        {% endif %}
+
+        <li class="page-item"><a class="page-link">Page {{ grids.number }} sur {{ grids.paginator.num_pages }}.</a>
+        </li>
+
+        {% if grids.has_next %}
+        <li class="page-item"><a class="page-link" href="?{{ pagnav.next }}">></a></li>
+        <li class="page-item"><a class="page-link" href="?{{ pagnav.last }}">&raquo;</a></li>
+        {% endif %}
+
+    </ul>
+</nav>
 
 {% endblock %}
