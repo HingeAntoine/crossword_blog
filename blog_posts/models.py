@@ -5,6 +5,7 @@ import post_with_grid.models
 class BlogPost(models.Model):
     url = models.CharField(max_length=30, primary_key=True)
     title = models.CharField(max_length=500)
+    subtitle = models.CharField(max_length=500)
     post_content = models.TextField()
     post_author = models.ForeignKey(
         post_with_grid.models.Author, default="antoine", on_delete=models.RESTRICT

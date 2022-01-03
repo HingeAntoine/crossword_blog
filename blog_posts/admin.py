@@ -3,7 +3,7 @@ from .models import BlogPost, ImageBlogPost
 
 
 class BlogPostAdmin(admin.ModelAdmin):
-    fields = ("url", "title", "post_content", "post_author")
+    fields = ("url", "title", "subtitle", "post_content", "post_author")
 
 
 class ImageBlogPostAdmin(admin.ModelAdmin):

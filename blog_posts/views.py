@@ -16,6 +16,7 @@ def display_blog_post(request, url_blog):
         "blog_post_template.html",
         {
             "title": blog_post.title,
+            "subtitle": blog_post.subtitle,
             "author": blog_post.post_author.display_name,
             "date": blog_post.date_created,
             "content": markdown(blog_post.post_content, extensions=["tables"]),
