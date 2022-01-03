@@ -1,3 +1,7 @@
+.blog_post_content {
+    text-align: justify;
+}
+
 .blog_post_content img {
   display:block;
   margin-left:auto;
@@ -10,7 +14,30 @@
   margin-right:auto;
 }
 
+/* TABLES */
 .blog_post_content table {
   margin-left:auto;
   margin-right:auto;
+  width: 80%;
+}
+
+.blog_post_content td, .blog_post_content th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.blog_post_content tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.blog_post_content tr:hover {
+    background-color: #ddd;
+}
+
+.blog_post_content th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-weight: bold;
+  background-color: FF7171;
+  color: white;
 }
