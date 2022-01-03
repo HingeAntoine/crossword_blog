@@ -12,16 +12,21 @@
 <div class="row mt-4">
     <!-- EDITO BLOCK -->
     <div class="col-xl-8">
-        <h3 class="pb-2 border-bottom"> Edito </h3>
+        <h3 class="pb-2 border-bottom"> Le blog </h3>
         <div class="row bg-light mx-2">
             <div class="col-3 p-2">
-                <a href="https://www.instagram.com/stc019_comix_boi/">
+                <a href="https://www.instagram.com/stc019_comix/">
                     <img src="static/img/edito.png" class="w-100">
                 </a>
             </div>
             <div class="col-9 p-4">
-                <div class="h5"><strong class="mr-2">{{ edito.title }}</strong> {{ edito.date_created }}</div>
-                <p>{{ edito.content|linebreaks }}</p>
+                <div class="h5"><strong class="mr-2">{{ blog_post.title }}</strong> </div>
+                <p>{{ blog_post.post_author.display_name }} - {{ blog_post.date_created }}</p>
+                <p>{{ blog_post.subtitle }}</p>
+
+                <a href="{% url 'blog_post' blog_post.pk %}" class="card-link">Lire</a>
+                <a href="{% url 'blog_archives' %}" class="card-link">Voir plus de posts</a>
+
             </div>
         </div>
     </div>

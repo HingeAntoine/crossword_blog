@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
 from author_page.models import Author
+from blog_posts.models import BlogPost
 from post_with_grid.models import Project, Edito
 from post_with_grid.views import get_scores, get_type
 
@@ -15,7 +16,7 @@ def project_index(request):
     max_index = 6
 
     projects = Project.objects.all().order_by("-date_created", "-title")[:max_index]
-    edito = Edito.objects.last()
+    blog_post = BlogPost.objects.last()
 
     # Retrieve scores
     grilles_vector = [
@@ -28,7 +29,11 @@ def project_index(request):
     ]
 
     # Create context
-    context = {"projects": projects, "edito": edito, "scores_vector": grilles_vector}
+    context = {
+        "projects": projects,
+        "blog_post": blog_post,
+        "scores_vector": grilles_vector,
+    }
 
     return render(request, "grid_index.html", context)
 
