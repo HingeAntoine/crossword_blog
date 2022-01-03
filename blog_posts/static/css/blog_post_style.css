@@ -41,3 +41,18 @@
   background-color: FF7171;
   color: white;
 }
+
+/* BLOCKQUOTE */
+.blog_post_content blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin-left:auto;
+  margin-right:auto;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+  width: 80%;
+}
+
+.blog_post_content blockquote p {
+  display: inline;
+}
