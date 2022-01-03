@@ -1,3 +1,16 @@
+/* TITLE STYLE */
+.blog_title {
+    text-transform: uppercase;
+    font-family: Helvetica, "Trebuchet MS", Verdana, sans-serif;
+}
+
+.blog_subtitle {
+    text-transform: uppercase;
+    color: #A0A0A0;
+}
+
+
+/* BODY STYLE */
 .blog_post_content {
     text-align: justify;
 }

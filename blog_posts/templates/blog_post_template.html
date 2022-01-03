@@ -24,17 +24,22 @@
 
 {% block page_content %}
 
-<!-- TITLE AND INFO -->
-<div class="d-flex justify-content-center">
-    <h1>
-    {{title}} par {{ author }} - {{ date }}
-    </h1>
-</div>
 
-<!-- CONTENT -->
 <div class="d-flex justify-content-center">
-    <div style="max-width: 80em" class="blog_post_content">
-        {{ content|safe }}
+    <div style="max-width: 80em" >
+        <!-- TITLE AND INFO -->
+        <div>
+            <h2 class="blog_title"> {{title}} </h2>
+            <h4 class="blog_subtitle"> subtitles and other things </h4>
+            <p>
+                {{ author }} - {{ date }}
+            </p>
+        </div>
+
+        <!-- CONTENT -->
+        <div class="blog_post_content">
+            {{ content|safe }}
+        </div>
     </div>
 </div>
 
