@@ -46,11 +46,17 @@ def project_index(request):
 ##########
 
 
-def monthly_score_summary(
-    request,
-    year_filter=datetime.date.today().year,
-    month_filter=datetime.date.today().month,
-):
+def monthly_score_summary(request):
+    # Get parameters from URL
+    if "annee" in request.GET:
+        year_filter = int(request.GET.get("annee"))
+    else:
+        year_filter = datetime.date.today().year
+
+    if "mois" in request.GET:
+        month_filter = int(request.GET.get("mois"))
+    else:
+        month_filter = datetime.date.today().month
 
     # Get all scores in September
     grid_list = Project.objects.filter(
