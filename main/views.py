@@ -46,13 +46,18 @@ def project_index(request):
 ##########
 
 
-def monthly_score_summary(request):
+def monthly_score_summary(
+    request,
+    year_filter=datetime.date.today().year,
+    month_filter=datetime.date.today().month,
+):
 
     # Get all scores in September
-    start_date = datetime.date(year=2021, month=9, day=1)
-    end_date = datetime.date(year=2021, month=9, day=30)
     grid_list = Project.objects.filter(
-        date_created__gte=start_date, date_created__lte=end_date
+        date_created__year__gte=year_filter,
+        date_created__year__lte=year_filter,
+        date_created__month__gte=month_filter,
+        date_created__month__lte=month_filter,
     ).values_list("id", flat=True)
 
     scores = (
@@ -62,7 +67,7 @@ def monthly_score_summary(request):
     )
 
     # Create context
-    context = {"scores": scores}
+    context = {"year": year_filter, "month": month_filter, "scores": scores}
 
     return render(request, "monthly_pantheon.html", context)
 
