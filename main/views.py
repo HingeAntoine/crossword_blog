@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.db.models import Count
 
 from author_page.models import Author
 from blog_posts.models import BlogPost
@@ -53,13 +54,15 @@ def monthly_score_summary(request):
     grid_list = Project.objects.filter(
         date_created__gte=start_date, date_created__lte=end_date
     ).values_list("id", flat=True)
-    print(grid_list)
 
-    scores = Score.objects.filter(grid__in=grid_list)
-    print(scores)
+    scores = (
+        Score.objects.filter(grid__in=grid_list)
+        .values("pseudo")
+        .annotate(scores_this_month=Count("pseudo"))
+    )
 
     # Create context
-    context = {}
+    context = {"scores": scores}
 
     return render(request, "monthly_pantheon.html", context)
 

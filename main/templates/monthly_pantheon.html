@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+
+<h3>Nombre de scores laissés sur les grilles ce mois-ci</h3>
+
+{% for score in scores %}
+<p>{{ score.pseudo }} - {{ score.scores_this_month }}</p>
+{% endfor %}
+
+{% endblock %}
