@@ -70,6 +70,7 @@ def monthly_score_summary(request):
     for grid in grid_list:
         scores = get_scores(grid, max_list=None)
         for score in scores:
+            # Initialize dict
             if score.pseudo not in aggregated_result:
                 aggregated_result[score.pseudo] = {
                     "pseudo": score.pseudo,
@@ -77,8 +78,10 @@ def monthly_score_summary(request):
                     "silver": 0,
                     "bronze": 0,
                     "finished": 0,
+                    "total": 0,
                 }
 
+            # Count once per applicable category
             if score.rank == 1:
                 aggregated_result[score.pseudo]["gold"] += 1
             elif score.rank == 2:
@@ -87,6 +90,9 @@ def monthly_score_summary(request):
                 aggregated_result[score.pseudo]["bronze"] += 1
             else:
                 aggregated_result[score.pseudo]["finished"] += 1
+
+            # Total
+            aggregated_result[score.pseudo]["total"] += 1
 
     # Create context
     context = {
