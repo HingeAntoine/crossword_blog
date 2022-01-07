@@ -14,9 +14,10 @@ from django.db.models.functions import Rank
 import yaml
 
 PAGINATOR_ARCHIVE_SIZE = 15
+MAX_SCORE_LIST = 20
 
 
-def get_scores(pk):
+def get_scores(pk, max_list=MAX_SCORE_LIST):
     project = Project.objects.get_subclass(pk=pk)
 
     # If the grid is a meta: display another page arrangement
@@ -25,21 +26,21 @@ def get_scores(pk):
         scores = (
             Score.objects.filter(grid=pk)
             .annotate(rank=Window(expression=Rank(), order_by=[F("solved_at")]))
-            .order_by("solved_at", "pseudo")[:20]
+            .order_by("solved_at", "pseudo")[:max_list]
         )
     elif project.crossword_type == CrosswordsType.SCRABEILLE.value:
         # Scores are ordered by best time
         scores = (
             Score.objects.filter(grid=pk)
             .annotate(rank=Window(expression=Rank(), order_by=[F("score").desc()]))
-            .order_by("-score")[:20]
+            .order_by("-score")[:max_list]
         )
     else:
         # Scores are ordered by best time
         scores = (
             Score.objects.filter(grid=pk)
             .annotate(rank=Window(expression=Rank(), order_by=[F("time")]))
-            .order_by("time", "solved_at", "pseudo")[:20]
+            .order_by("time", "solved_at", "pseudo")[:max_list]
         )
     return scores
 

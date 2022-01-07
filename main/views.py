@@ -66,14 +66,34 @@ def monthly_score_summary(request):
         date_created__month__lte=month_filter,
     ).values_list("id", flat=True)
 
-    scores = (
-        Score.objects.filter(grid__in=grid_list)
-        .values("pseudo")
-        .annotate(scores_this_month=Count("pseudo"))
-    )
+    aggregated_result = {}
+    for grid in grid_list:
+        scores = get_scores(grid, max_list=None)
+        for score in scores:
+            if score.pseudo not in aggregated_result:
+                aggregated_result[score.pseudo] = {
+                    "pseudo": score.pseudo,
+                    "gold": 0,
+                    "silver": 0,
+                    "bronze": 0,
+                    "finished": 0,
+                }
+
+            if score.rank == 1:
+                aggregated_result[score.pseudo]["gold"] += 1
+            elif score.rank == 2:
+                aggregated_result[score.pseudo]["silver"] += 1
+            elif score.rank == 3:
+                aggregated_result[score.pseudo]["bronze"] += 1
+            else:
+                aggregated_result[score.pseudo]["finished"] += 1
 
     # Create context
-    context = {"year": year_filter, "month": month_filter, "scores": scores}
+    context = {
+        "year": year_filter,
+        "month": month_filter,
+        "scores": aggregated_result.values,
+    }
 
     return render(request, "monthly_pantheon.html", context)
 

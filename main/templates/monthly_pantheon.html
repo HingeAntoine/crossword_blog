@@ -4,10 +4,33 @@
 
 <h2>{{ year }} - {{ month }}</h2>
 
-<h3>Nombre de scores laissés sur les grilles ce mois-ci</h3>
+<table class="table">
+    <thead>
+    <tr>
+        <th class="th-sm">Pseudo
+        </th>
+        <th class="th-sm">Or
+        </th>
+        <th class="th-sm">Argent
+        </th>
+        <th class="th-sm">Bronze
+        </th>
+        <th class="th-sm">Finies
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for score in scores %}
+        <tr>
+            <td>{{ score.pseudo }}</td>
+            <td>{{ score.gold }}</td>
+            <td>{{ score.silver }}</td>
+            <td>{{ score.bronze }}</td>
+            <td>{{ score.finished }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 
-{% for score in scores %}
-<p>{{ score.pseudo }} - {{ score.scores_this_month }}</p>
-{% endfor %}
 
 {% endblock %}
