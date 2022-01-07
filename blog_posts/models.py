@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.db import models
 import post_with_grid.models
 
@@ -10,7 +11,7 @@ class BlogPost(models.Model):
     post_author = models.ForeignKey(
         post_with_grid.models.Author, default="antoine", on_delete=models.RESTRICT
     )
-    date_created = models.DateField(auto_now_add=True)
+    date_created = models.DateField(default=timezone.now)
 
 
 class ImageBlogPost(models.Model):
