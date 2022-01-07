@@ -94,12 +94,15 @@ def monthly_score_summary(request):
             # Total
             aggregated_result[score.pseudo]["total"] += 1
 
+    # Sorted result list before displaying result
+    result = sorted(
+        aggregated_result.values(),
+        key=lambda i: (i["gold"], i["silver"], i["bronze"], i["finished"]),
+        reverse=True,
+    )
+
     # Create context
-    context = {
-        "year": year_filter,
-        "month": month_filter,
-        "scores": aggregated_result.values,
-    }
+    context = {"year": year_filter, "month": month_filter, "scores": result}
 
     return render(request, "monthly_pantheon.html", context)
 
