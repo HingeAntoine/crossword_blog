@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.db.models import Count
 
 from author_page.models import Author
 from blog_posts.models import BlogPost
@@ -101,8 +100,33 @@ def monthly_score_summary(request):
         reverse=True,
     )
 
+    # Previous month stats url
+    if month_filter == 1:
+        previous_month_filter = 12
+        previous_year_filter = year_filter - 1
+    else:
+        previous_month_filter = month_filter - 1
+        previous_year_filter = year_filter
+    previous_month_link = f"?annee={previous_year_filter}&mois={previous_month_filter}"
+
+    # Previous month stats url
+    if month_filter == 12:
+        next_month_filter = 1
+        next_year_filter = year_filter + 1
+    else:
+        next_month_filter = month_filter + 1
+        next_year_filter = year_filter
+    next_month_link = f"?annee={next_year_filter}&mois={next_month_filter}"
+
     # Create context
-    context = {"year": year_filter, "month": month_filter, "scores": result}
+    context = {
+        "date_format": datetime.date(
+            year=year_filter, month=month_filter, day=1
+        ).strftime("%B %Y"),
+        "scores": result,
+        "previous_month": previous_month_link,
+        "next_month": next_month_link,
+    }
 
     return render(request, "monthly_pantheon.html", context)
 
