@@ -4,7 +4,7 @@ gunicorn==20.0.4
 psycopg2-binary==2.7.7
 whitenoise==5.1.0
 django-crispy-forms==1.9.1
-django-filter==2.3.0
+django-filter==2.4.0
 pillow>=8.3.2
 puzpy==0.2.5
 django-model-utils==4.1.1
