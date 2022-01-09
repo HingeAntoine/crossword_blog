@@ -7,6 +7,8 @@ from post_with_grid.views import get_scores, get_type
 
 import datetime
 
+MAX_INDEX = 6
+
 
 #################
 # PROJECT INDEX #
@@ -15,25 +17,23 @@ import datetime
 
 def project_index(request):
     # Get grids and edito
-    max_index = 6
-
-    projects = Project.objects.all().order_by("-date_created", "-title")[:max_index]
-    blog_post = BlogPost.objects.order_by("-date_created", "-title")[0]
+    grids = Project.objects.all().order_by("-date_created", "-title")[:MAX_INDEX]
+    blog_posts = BlogPost.objects.order_by("-date_created", "-title")[:MAX_INDEX]
 
     # Retrieve scores
     grilles_vector = [
         {
-            "grille": projects[i],
-            "scores": get_scores(projects[i].pk),
-            "type": get_type(projects[i].pk),
+            "grille": grids[i],
+            "scores": get_scores(grids[i].pk),
+            "type": get_type(grids[i].pk),
         }
-        for i in range(len(projects))
+        for i in range(len(grids))
     ]
 
     # Create context
     context = {
-        "projects": projects,
-        "blog_post": blog_post,
+        "projects": grids,
+        "blog_posts": blog_posts,
         "scores_vector": grilles_vector,
     }
 

@@ -20,11 +20,18 @@
                 </a>
             </div>
             <div class="col-9 p-4">
-                <div class="h5"><strong class="mr-2">{{ blog_post.title }}</strong> </div>
-                <p>{{ blog_post.post_author.display_name }} - {{ blog_post.date_created }}</p>
-                <p>{{ blog_post.subtitle }}</p>
+                {% for blog_post in blog_posts %}
+                <div class="h5">
+                    <a href="{% url 'blog_post' blog_post.pk %}" style="color: #000000;text-decoration: none;">
+                        <span class="text-uppercase fontweight-bold">{{ blog_post.title }}</span> par {{ blog_post.post_author.display_name }} - {{ blog_post.date_created }}
+                        <br>
+                        <span class="text-uppercase text-muted">{{ blog_post.subtitle }}</span>
+                    </a>
+                </div>
+                <p></p>
 
-                <a href="{% url 'blog_post' blog_post.pk %}" class="card-link">Lire</a>
+                {% endfor %}
+
                 <a href="{% url 'blog_archives' %}" class="card-link">Voir plus de posts</a>
 
             </div>
