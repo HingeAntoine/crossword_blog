@@ -25,7 +25,7 @@
                     <a href="{% url 'blog_post' blog_post.pk %}" style="color: #000000;text-decoration: none;">
                         <span class="text-uppercase fontweight-bold">{{ blog_post.title }}</span> par {{ blog_post.post_author.display_name }} - {{ blog_post.date_created }}
                         <br>
-                        <span class="text-uppercase text-muted">{{ blog_post.subtitle }}</span>
+                        <small class="text-uppercase text-muted">{{ blog_post.subtitle }}</small>
                     </a>
                 </div>
                 <p></p>
