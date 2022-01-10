@@ -21,7 +21,7 @@ from django.contrib.sitemaps.views import sitemap
 
 from . import views
 
-from main.sitemap import GridSitemap, StaticViewSitemap, AuthorSitemap
+from main.sitemap import GridSitemap, StaticViewSitemap, AuthorSitemap, BlogSitemap
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -32,6 +32,7 @@ urlpatterns = [
             "sitemaps": {
                 "static": StaticViewSitemap,
                 "grilles": GridSitemap,
+                "blog": BlogSitemap,
                 "author": AuthorSitemap,
             }
         },
