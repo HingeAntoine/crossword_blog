@@ -50,9 +50,7 @@ class Project(models.Model):
             (CrosswordsSize.BIG.value, "Très grande"),
         ],
     )
-    twitter_card_clue = models.CharField(
-        default="Grille de mots croisés", max_length=200
-    )
+    twitter_card_clue = models.CharField(max_length=200, blank=True)
 
     # Count of solve and downloads
     solve_count = models.IntegerField(default=0)
