@@ -43,7 +43,6 @@ urlpatterns = [
     path("grilles/", include("post_with_grid.urls")),
     path("blog/", include("blog_posts.urls")),
     path("about/", views.about, name="about"),
-    path("meta/", views.meta, name="meta_rules"),
     path("creation/", include("grid_creation_tool.urls")),
     path("contact/", include("contact_email.urls"), name="contact"),
 ]

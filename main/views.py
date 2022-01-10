@@ -142,7 +142,3 @@ def about(request):
 
     context = {"authors": authors}
     return render(request, "about.html", context)
-
-
-def meta(request):
-    return render(request, "meta_rules.html", {})
