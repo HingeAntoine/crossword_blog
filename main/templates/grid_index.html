@@ -9,30 +9,29 @@
 {% endblock %}
 
 {% block page_content %}
-<div class="row mt-4">
+<div class="row">
     <!-- EDITO BLOCK -->
     <div class="col-xl-8">
         <h3 class="pb-2 border-bottom"> Le blog </h3>
-        <div class="row bg-light mx-2">
-            <div class="col-3 p-2">
-                <a href="https://www.instagram.com/stc019_comix/">
+        <div class="row mx-2">
+            <div class="col-3 d-flex">
+                <a href="https://www.instagram.com/stc019_comix/" class="align-middle">
                     <img src="static/img/edito.png" class="w-100">
                 </a>
             </div>
             <div class="col-9 p-4">
                 {% for blog_post in blog_posts %}
-                <div class="h5">
+                <div {% if not forloop.first %}class="mt-4"{% endif %}>
                     <a href="{% url 'blog_post' blog_post.pk %}" style="color: #000000;text-decoration: none;">
-                        <span class="text-uppercase fontweight-bold">{{ blog_post.title }}</span> par {{ blog_post.post_author.display_name }} - {{ blog_post.date_created }}
+                        <span class="text-uppercase fw-bold">{{ blog_post.title }}</span> par {{ blog_post.post_author.display_name }} - {{ blog_post.date_created }}
                         <br>
-                        <small class="text-uppercase text-muted">{{ blog_post.subtitle }}</small>
+                        <span class="text-uppercase text-muted mt-1">{{ blog_post.subtitle }}</span>
                     </a>
                 </div>
-                <p></p>
-
                 {% endfor %}
-
-                <a href="{% url 'blog_archives' %}" class="card-link">Voir plus de posts</a>
+                <div class="mt-3 d-flex flex-row-reverse" style="margin-right: auto;">
+                    <a href="{% url 'blog_archives' %}" class="link-dark">Voir plus de posts</a>
+                </div>
 
             </div>
         </div>
