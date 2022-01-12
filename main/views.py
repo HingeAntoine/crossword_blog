@@ -18,7 +18,9 @@ MAX_INDEX = 6
 def project_index(request):
     # Get grids and edito
     grids = Project.objects.all().order_by("-date_created", "-title")[:MAX_INDEX]
-    blog_posts = BlogPost.objects.order_by("-date_created", "-title")[:MAX_INDEX]
+    blog_posts = BlogPost.objects.filter(
+        date_created__lte=datetime.date.today()
+    ).order_by("-date_created", "-title")[:MAX_INDEX]
 
     # Retrieve scores
     grilles_vector = [

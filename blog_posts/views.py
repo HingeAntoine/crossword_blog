@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import BlogPost
-from .filters import BlogPostFilter
+from datetime import date
 
 from markdown import markdown
 
@@ -10,6 +10,10 @@ PAGINATOR_ARCHIVE_SIZE = 20
 
 def display_blog_post(request, url_blog):
     blog_post = BlogPost.objects.filter(url=url_blog)[0]
+
+    print(blog_post.date_created > date.today())
+    if blog_post.date_created > date.today():
+        return redirect("homepage")
 
     return render(
         request,
@@ -29,7 +33,11 @@ def display_blog_archives(request):
     # Get grids, filtered and paginated #
     #####################################
 
-    projects = BlogPost.objects.all().order_by("-date_created", "-title")
+    projects = (
+        BlogPost.objects.all()
+        .filter(date_created__lte=date.today())
+        .order_by("-date_created", "-title")
+    )
     paginator = Paginator(projects, PAGINATOR_ARCHIVE_SIZE)
 
     page = request.GET.get("page")
