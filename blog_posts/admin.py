@@ -4,6 +4,7 @@ from .models import BlogPost, ImageBlogPost
 
 class BlogPostAdmin(admin.ModelAdmin):
     fields = ("url", "title", "subtitle", "post_content", "post_author", "date_created")
+    ordering = ("-date_created",)
 
 
 class ImageBlogPostAdmin(admin.ModelAdmin):
