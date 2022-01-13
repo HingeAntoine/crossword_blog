@@ -1,5 +1,6 @@
+import datetime
 from django.db.models import F
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from post_with_grid.models import Project
 from post_with_grid.models import MetaGrid
 from post_with_grid.models import Score
@@ -121,6 +122,11 @@ def scrabeille_detail(request, project, comments, pk):
 
 def project_detail(request, pk):
     project = Project.objects.get_subclass(pk=pk)
+
+    # IF PUBLICATION DATE IS IN THE FUTURE, RETURN TO HOMEPAGE
+    if project.date_created > datetime.date.today():
+        return redirect("homepage")
+
     comments = Comment.objects.filter(grid_key=pk).order_by("commented_at")
 
     if project.crossword_type == CrosswordsType.SCRABEILLE.value:
@@ -226,7 +232,9 @@ def project_archives(request):
     # Get grids, filtered and paginated #
     #####################################
 
-    projects = Project.objects.all().order_by("-date_created", "-title")
+    projects = Project.objects.filter(date_created__lte=datetime.date.today()).order_by(
+        "-date_created", "-title"
+    )
     grid_filter = GridFilter(request.GET, queryset=projects)
     paginator = Paginator(grid_filter.qs, PAGINATOR_ARCHIVE_SIZE)
 

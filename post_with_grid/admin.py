@@ -6,7 +6,6 @@ from post_with_grid.models import MetaGrid
 from post_with_grid.models import Edito
 from post_with_grid.models import Score
 from post_with_grid.models import Comment
-from post_with_grid.models import CrosswordsType
 
 from PIL import Image, ImageDraw
 from os import path
@@ -33,7 +32,10 @@ class ProjectAdmin(admin.ModelAdmin):
         "grid_size",
         "grid_information",
         "twitter_card_clue",
+        "date_created",
     )
+
+    ordering = ("-date_created",)
 
     def save_model(self, request, obj, form, change):
         # Create new object

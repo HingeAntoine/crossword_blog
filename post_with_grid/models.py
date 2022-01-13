@@ -4,6 +4,7 @@ from model_utils.managers import InheritanceManager
 from django.conf import settings
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
+from django.utils import timezone
 from enum import IntEnum
 
 import time
@@ -30,7 +31,7 @@ class Project(models.Model):
     title = models.CharField(max_length=100)
     grid_file = models.FileField(upload_to="puzzles/")
     author_key = models.ForeignKey(Author, default="antoine", on_delete=models.RESTRICT)
-    date_created = models.DateField(auto_now_add=True)
+    date_created = models.DateField(default=timezone.now)
     grid_information = models.TextField(blank=True, default="")
     crossword_type = models.IntegerField(
         default=0,
