@@ -16,4 +16,4 @@ class BlogPost(models.Model):
 
 class ImageBlogPost(models.Model):
     post = models.ForeignKey(BlogPost, on_delete=models.RESTRICT)
-    image = models.ImageField(upload_to="blog_pics/")
+    image = models.FileField(upload_to="blog_pics/")
