@@ -21,6 +21,14 @@
   margin-right:auto;
 }
 
+/* IMAGES */
+
+.blog_post_content img{
+    width:100%;
+    max-width: min(1000px, 80vw);
+    margin-top: 10px;
+}
+
 /* TABLES */
 .blog_post_content table {
   margin-left:auto;
