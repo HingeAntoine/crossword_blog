@@ -1,3 +1,7 @@
+/* FONTS */
+
+@import url("/static/fonts/outward/fineprint.css")
+
 /* TITLE STYLE */
 .blog_header {
     font-family: Helvetica;
@@ -24,6 +28,22 @@
   margin-right:auto;
 }
 
+/* BLOG HEADERS */
+
+.blog_post_content h1, .blog_post_content h2, .blog_post_content h3 {
+  font-family: 'Outward';
+}
+
+.blog_post_content h1, .blog_post_content h2 {
+  font-size: 110px;
+  margin-bottom: -10px;
+}
+
+.blog_post_content h3 {
+  font-size: 75px;
+  font-style: italic;
+  margin-bottom: -10px;
+}
 
 /* TABLES */
 .blog_post_content table {
