@@ -180,7 +180,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             var cell_x = cell.x + 1;
             var cell_y = cell.y + 1;
 
-            this.cells[cell_x][cell_y].solution = cell.solution["value"];
+            this.cells[cell_x][cell_y].solution = cell["solution"];
             this.cells[cell_x][cell_y].empty = cell.type == "block";
             this.cells[cell_x][cell_y].number = cell.number;
             this.cells[cell_x][cell_y].color = cell["background-color"];

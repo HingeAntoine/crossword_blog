@@ -8,49 +8,55 @@
 * Class for a crossword grid
 **/
 class xwGrid {
-    constructor(soln_arr, clues_arr, block='.') {
-        this.solution = soln_arr;
-        this.clues = clues_arr,
-        this.block = block;
-        // width and height
-        this.height = soln_arr.length;
-        this.width = soln_arr[0].length;
-        // Grid numbering
+    constructor(cells) {
+        this.cells = cells;
+        this.height = Math.max.apply(null, cells.map(c => parseInt(c.y))) + 1;
+        this.width = Math.max.apply(null, cells.map(c => parseInt(c.x))) + 1;
         this.numbers = this.gridNumbering();
     }
-
-    isBar(x,y){
-        if (!this.clues[y][x].hasOwnProperty("style")){
-            return false
-        }
-
-        if (!this.clues[y][x]["style"].hasOwnProperty("barred")) {
-            return false
-        }
-
-        return true
+    /* return the cell at (x,y) */
+    cellAt(x, y) {
+        return this.cells.find((cell) => (cell.x == x && cell.y == y));
     }
-
-    isBlack(x, y) {
-        return this.solution[y][x] === this.block;
-    }
-
-    startAcrossWord(x, y) {
-        return (x === 0 || this.isBlack(x - 1, y) || this.isBar(x, y))
-            && x < this.width - 1
-            && !this.isBlack(x, y)
-            && !this.isBlack(x + 1, y)
-            && !this.isBar(x + 1, y);
-    }
-
-    startDownWord(x, y) {
-        return (y === 0 || this.isBlack(x, y - 1)) && y < this.height - 1 && !this.isBlack(x, y) && !this.isBlack(x, y + 1);
-    }
-
     letterAt(x, y) {
-        return this.solution[y][x];
+        return this.cellAt(x, y).solution;
+    }
+    isBlack(x, y) {
+        var thisCell = this.cellAt(x, y);
+        return (thisCell.type == 'void' || thisCell.type == 'block');
+    }
+    /* check if we have a black square in a given direction */
+    hasBlack(x, y, dir) {
+        var mapping_dict = {
+          'right': {'xcheck': this.width-1, 'xoffset': 1, 'yoffset': 0, 'dir2': 'left'}
+        , 'left': {'xcheck': 0, 'xoffset': -1, 'yoffset': 0, 'dir2': 'right'}
+        , 'top': {'ycheck': 0, 'xoffset': 0, 'yoffset': -1, 'dir2': 'bottom'}
+        , 'bottom': {'ycheck': this.height-1, 'xoffset': 0, 'yoffset': 1, 'dir2': 'top'}
+        };
+        var md = mapping_dict[dir];
+        if (x === md['xcheck'] || y === md['ycheck']) {
+          return true;
+        }
+        else if (this.isBlack(x + md['xoffset'], y + md['yoffset'])) {
+          return true;
+        }
+        else if (this.cellAt(x, y)[dir + '-bar']) {
+          return true;
+        }
+        else if (this.cellAt(x + md['xoffset'], y + md['yoffset'])[md['dir2'] + '-bar']) {
+          return true;
+        }
+        return false;
     }
 
+    // both startAcrossWord and startDownWord have to account for bars
+    startAcrossWord(x, y) {
+        return this.hasBlack(x, y, 'left') && x < this.width - 1 && !this.isBlack(x, y) && !this.hasBlack(x, y, 'right');
+    }
+    startDownWord(x, y) {
+        return this.hasBlack(x, y, 'top') && y < this.height - 1 && !this.isBlack(x, y) && !this.hasBlack(x, y, 'bottom');
+    }
+    // An array of grid numbers
     gridNumbering() {
         var numbers = [];
         var thisNumber = 1;
@@ -86,7 +92,7 @@ class xwGrid {
                     acrossEntries[thisNum]['cells'].push([x, y]);
                 }
                 // end the across entry if we hit the edge
-                if (x === this.width - 1 || this.isBlack(x, y)) {
+                if (this.hasBlack(x, y, 'right')) {
                     thisNum = null;
                 }
             }
@@ -110,7 +116,7 @@ class xwGrid {
                     downEntries[thisNum]['cells'].push([x, y]);
                 }
                 // end the down entry if we hit the bottom
-                if (y === this.height - 1) {
+                if (this.hasBlack(x, y, 'bottom')) {
                     thisNum = null;
                 }
             }
@@ -119,32 +125,13 @@ class xwGrid {
     }
 }
 
-/**
-* Since we're reading everything in as a binary string
-* we need a function to convert to a UTF-8 string
-* Note that if .readAsBinaryString() goes away,
-* we will have to change both this and the reading method.
-**/
-function BinaryStringToUTF8String(x) {
-    // convert to bytes array
-    var bytes = [];
-    for (var i = 0; i < x.length; ++i) {
-      var code = x.charCodeAt(i);
-      bytes.push([code]);
-    }
-    var bytes1 = new Uint8Array(bytes);
-    return new TextDecoder("utf-8").decode(bytes1);
-}
-
-
 function xw_read_ipuz(data) {
     // If `data` is a string, convert to object
     if (typeof(data) === 'string') {
         // need to read as UTF-8 first (it's generally loaded as binary)
-        data = BinaryStringToUTF8String(data);
+        //data = BinaryStringToUTF8String(data);
         data = JSON.parse(data);
     }
-
     /*
     * `metadata` has title, author, copyright, description (notes), height, width, crossword_type
     */
@@ -156,6 +143,7 @@ function xw_read_ipuz(data) {
     const EMPTY = data['empty'] || '0';
 
     // We only support "crossword" for now
+    // TODO: add in acrostic support
     if (kind.indexOf('crossword') !== -1) {
         var crossword_type = 'crossword';
     } else {
@@ -170,7 +158,8 @@ function xw_read_ipuz(data) {
         'description': data.intro || '',
         'height': height,
         'width': width,
-        'crossword_type': crossword_type
+        'crossword_type': crossword_type,
+        'fakeclues': data.fakeclues
     };
 
     /*
@@ -195,20 +184,25 @@ function xw_read_ipuz(data) {
                 var number = cell_attributes.toString();
             }
             else {
-                var number = cell_attributes['cell'];
+                var number = cell_attributes['cell'] || EMPTY;
+                number = number.toString();
                 if (number === EMPTY) {number = null;}
             }
-            if (number === EMPTY || number === BLOCK || number === 0) {
-                number = null;
-            }
+
             // solution
             var solution = '';
             try {
                 solution = data['solution'][y][x];
+                if (solution.value) {
+                    solution = solution.value;
+                } else if (solution.cell) {
+                    solution = solution.cell;
+                }
+
             } catch {}
             // type
             var type = null;
-            if (solution === '#' || solution['block']) {
+            if (solution === BLOCK || number === BLOCK) {
                 type = 'block';
             } else if (data['puzzle'][y][x] === null) {
                 type = 'void';
@@ -230,6 +224,11 @@ function xw_read_ipuz(data) {
             // background shape and color
             background_shape = style.shapebg;
             background_color = style.color;
+            // official iPuz style is RGB without a "#"
+            // we add that if it's missing
+            if (background_color && background_color.match('^[A-Fa-f0-9]{6}$')) {
+              background_color = '#' + background_color.toString();
+            }
             // top-right numbers
             var top_right_number = null;
             if (style.mark) {
@@ -239,6 +238,11 @@ function xw_read_ipuz(data) {
                 // we just read them in as `number` or `top_right_number` for now
                 if (!number) {number = style.mark.BL;}
                 if (!top_right_number) {top_right_number = style.mark.BR;}
+            }
+
+            // Change the "number" if it isn't real
+            if (number === EMPTY || number === BLOCK) {
+                number = null;
             }
 
             var new_cell = {
@@ -277,17 +281,20 @@ function xw_read_ipuz(data) {
     word_id = 1;
     // Iterate through the titles of the clues
     var titles = Object.keys(data['clues']);
-    if (titles === ['Down', 'Across']) {titles = ['Across', 'Down'];}
+    // Change the order if it's down first (CrossFire export bug)
+    if (titles[0].toLowerCase() == 'down' && titles[1].toLowerCase() == 'across') {
+      titles = [titles[1], titles[0]];
+    }
     titles.forEach( function(title) {
         var thisClues = [];
         data['clues'][title].forEach( function (clue) {
             var number, text;
             // a "clue" can be an array or an object
             if (Array.isArray(clue)) {
-                number = clue[0];
+                number = clue[0].toString();
                 text = clue[1];
             } else {
-                number = clue.number;
+                number = clue.number.toString();
                 text = clue.clue;
             }
             thisClues.push({'word': word_id, 'number': number, 'text': text});
@@ -312,7 +319,7 @@ function xw_read_ipuz(data) {
     */
     // We only do this if we haven't already populated `words`
     if (!words.length) {
-        var thisGrid = new xwGrid(data['solution'], data['puzzle'], block=BLOCK);
+        var thisGrid = new xwGrid(cells);
         var word_id = 1;
         var acrossEntries = thisGrid.acrossEntries();
         Object.keys(acrossEntries).forEach(function(i) {
@@ -326,5 +333,6 @@ function xw_read_ipuz(data) {
         });
     }
 
+    console.log(cells)
     return [metadata, cells, clues, words];
 }
