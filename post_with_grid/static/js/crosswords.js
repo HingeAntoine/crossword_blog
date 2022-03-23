@@ -124,6 +124,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
         this.grid_is_finished = false;
         this.need_increment = true;
+        this.give_warning = true;
         this.can_submit_score = true;
 
         // preload one puzzle
@@ -1072,6 +1073,16 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     };
 
     CrossWord.prototype.check_reveal = function(to_solve, reveal_or_check, e) {
+        // IF THIS IS FIRST TIME TRYING TO CHECK OR REVEAL : GIVE WARNING
+        if (this.give_warning & this.can_submit_score){
+            $("#warningModal").modal("show");
+            console.log("TEST TEST TEST TEST TEST")
+            this.give_warning = false;
+
+            return;
+        }
+
+        // ELSE NO SCORE
         this.can_submit_score = false;
 
         var my_cells = [], cell;
