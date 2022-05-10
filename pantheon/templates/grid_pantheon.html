@@ -32,15 +32,36 @@
             <tr>
                 <th class="th-sm">Pseudo</th>
                 <th class="th-sm">Score</th>
-                <th class="th-sm">Date</th>
             </tr>
             </thead>
             <tbody>
             {% for score in scores %}
             <tr>
-                <td>{{score.pseudo}}</td>
-                <td>{{score.time}}</td>
-                <td>{{score.solved_at}}</td>
+                <td>
+                    {% if score.rank == 1 %}
+                        <i class="em em-first_place_medal" aria-role="presentation"
+                           aria-label="MEDAILLE D'OR"></i>
+                        {% elif score.rank == 2 %}
+                        <i class="em em-second_place_medal" aria-role="presentation"
+                           aria-label="MEDAILLE D'ARGENT"></i>
+                        {% elif score.rank == 3 %}
+                        <i class="em em-third_place_medal" aria-role="presentation"
+                           aria-label="MEDAILLE DE BRONZE"></i>
+                        {% else %}
+                        <i class="em em-sports_medal" aria-role="presentation"
+                           aria-label="MEDAILLE"></i>
+                    {% endif %}
+                    {{score.pseudo}}
+                </td>
+                <td>
+                    {% if type == "meta" %}
+                        {{ score.solved_at }}
+                    {% elif type == "scrabeille" %}
+                        {{ score.score }}
+                    {% else %}
+                        {{ score.get_minute_secs }}
+                    {% endif %}
+                </td>
             </tr>
             {% endfor %}
             </tbody>

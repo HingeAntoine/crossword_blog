@@ -4,8 +4,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import datetime
 import django_filters
 
-from post_with_grid.models import Project, Score
-from post_with_grid.views import get_scores
+from post_with_grid.models import Project
+from post_with_grid.views import get_scores, get_type
 
 ##########
 # SCORES #
@@ -161,6 +161,7 @@ def grid_scores(request, grid_key):
     ######################
 
     context = {
+        "type": get_type(grid_key),
         "scores": response,
         "form": score_filter.form,
         "pagnav": {
