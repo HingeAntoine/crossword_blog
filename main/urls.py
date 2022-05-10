@@ -39,7 +39,7 @@ urlpatterns = [
         name="django.contrib.sitemaps.views.sitemap",
     ),
     path("", views.project_index, name="homepage"),
-    path("pantheon/", views.monthly_score_summary, name="monthly_score"),
+    path("pantheon/", include("pantheon.urls")),
     path("author/", include("author_page.urls")),
     path("grilles/", include("post_with_grid.urls")),
     path("blog/", include("blog_posts.urls")),
