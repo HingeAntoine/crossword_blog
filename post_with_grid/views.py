@@ -181,6 +181,7 @@ def project_detail(request, pk):
                 grid=pk,
                 pseudo=request.POST["name"],
                 time=int(request.POST["score"]),
+                private_leaderboard=request.POST["private_leaderboard"],
                 score=0,
             ).save()
 

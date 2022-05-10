@@ -96,6 +96,8 @@ class Score(models.Model):
     time = models.IntegerField()
     score = models.IntegerField()
     solved_at = models.DateTimeField(auto_now_add=True)
+    got_help = models.BooleanField(default=False)
+    private_leaderboard = models.CharField(max_length=100, default="")
 
     @property
     def get_minute_secs(self):

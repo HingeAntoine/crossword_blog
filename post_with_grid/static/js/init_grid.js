@@ -76,6 +76,7 @@ function init_grid(pk, file_url){
             data: {
                 'score': grid.getTime(),
                 'name': $('#inputPseudo').val(),
+                'private_leaderboard': $('#privateLeaderboard').val(),
             },
             success: function (data) {
                 // Change state of can_submit_score

@@ -59,8 +59,7 @@
 
 <!-- MODALS-->
 {% block grid_modals %}
-<div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
+<div class="modal fade" id="submitModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -74,8 +73,11 @@
                         <div class="invalid-feedback" id="pseudo-feedback">
                             Ce pseudo correspond déjà à un score pour la grille.
                         </div>
+                        <label for="privateLeaderboard">Panthéon privé</label>
+                        <input type="string" class="form-control" id="privateLeaderboard"
+                               placeholder="(Option) Entrez le nom de votre panthéon privé">
                     </div>
-                    <button type="submit" class="btn btn-primary">Soumettre
+                    <button type="submit" class="btn btn-primary mt-2">Soumettre
                     </button>
                 </form>
             </div>
