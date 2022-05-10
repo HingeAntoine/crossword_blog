@@ -3,7 +3,6 @@ from django.conf import settings
 from django.contrib import admin
 from post_with_grid.models import Project
 from post_with_grid.models import MetaGrid
-from post_with_grid.models import Edito
 from post_with_grid.models import Score
 from post_with_grid.models import Comment
 
@@ -91,10 +90,6 @@ class MetaGridAdmin(ProjectAdmin):
     )
 
 
-class EditoAdmin(admin.ModelAdmin):
-    fields = ("title", "content")
-
-
 class ScoreAdmin(admin.ModelAdmin):
     list_display = ("grid", "pseudo", "time", "solved_at")
 
@@ -105,6 +100,5 @@ class CommentAdmin(admin.ModelAdmin):
 
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(MetaGrid, MetaGridAdmin)
-admin.site.register(Edito, EditoAdmin)
 admin.site.register(Score, ScoreAdmin)
 admin.site.register(Comment, CommentAdmin)

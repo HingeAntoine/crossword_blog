@@ -86,17 +86,6 @@ class MetaGrid(Project):
 
 
 ###############
-# Edito Model #
-###############
-
-
-class Edito(models.Model):
-    title = models.CharField(max_length=200)
-    content = models.TextField()
-    date_created = models.DateField(auto_now_add=True)
-
-
-###############
 # Score Model #
 ###############
 
