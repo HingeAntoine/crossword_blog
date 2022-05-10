@@ -29,7 +29,7 @@ def project_index(request):
     grilles_vector = [
         {
             "grille": grids[i],
-            "scores": get_scores(grids[i].pk, max_list=MAX_NUMBER_OF_SCORES),
+            "scores": get_scores(grids[i].pk)[:MAX_NUMBER_OF_SCORES],
             "type": get_type(grids[i].pk),
         }
         for i in range(len(grids))

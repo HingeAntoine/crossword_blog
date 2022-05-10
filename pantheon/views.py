@@ -34,7 +34,7 @@ def monthly_score_summary(request):
 
     aggregated_result = {}
     for grid in grid_list:
-        scores = get_scores(grid, max_list=None)
+        scores = get_scores(grid)
         for score in scores:
             # Initialize dict
             if score.pseudo not in aggregated_result:
@@ -116,8 +116,10 @@ def grid_scores(request, grid_key):
     # Get grids, filtered and paginated #
     #####################################
 
-    projects = Score.objects.filter(grid=grid_key).order_by("solved_at")
-    score_filter = ScoreFilter(request.GET, queryset=projects)
+    scores = get_scores(grid_key)
+    score_filter = ScoreFilter(request.GET, queryset=scores)
+    score_filter.form.fields["private_leaderboard"].label = "Panthéon privé"
+
     paginator = Paginator(score_filter.qs, SCORE_LIST_SIZE)
 
     page = request.GET.get("page")
@@ -157,8 +159,6 @@ def grid_scores(request, grid_key):
     ######################
     # Return render dict #
     ######################
-
-    score_filter.form.fields["private_leaderboard"].label = "Panthéon privé"
 
     context = {
         "scores": response,

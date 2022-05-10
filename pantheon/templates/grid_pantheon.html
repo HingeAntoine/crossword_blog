@@ -30,16 +30,17 @@
         <table class="table">
             <thead>
             <tr>
-                <th class="th-sm">Score
-                </th>
+                <th class="th-sm">Pseudo</th>
+                <th class="th-sm">Score</th>
+                <th class="th-sm">Date</th>
             </tr>
             </thead>
             <tbody>
             {% for score in scores %}
             <tr>
-                <td>
-                    {{score.pseudo}} {{score.time}} {{score.solved_at}}
-                </td>
+                <td>{{score.pseudo}}</td>
+                <td>{{score.time}}</td>
+                <td>{{score.solved_at}}</td>
             </tr>
             {% endfor %}
             </tbody>
