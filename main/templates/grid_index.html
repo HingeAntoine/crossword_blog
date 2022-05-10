@@ -64,7 +64,7 @@
                     {% include "grid_scores.html" with scores=scores.scores type=scores.type %}
 
                     <div class="mt-4 text-center">
-                        <a href="" class="h5 link-secondary" style="text-decoration: none;">Voir plus de scores</a>
+                        <a href="{% url 'grid_score' scores.grille.pk %}" class="h5 link-secondary" style="text-decoration: none;">Voir plus de scores</a>
                     </div>
                 </div>
                 {% endfor %}
