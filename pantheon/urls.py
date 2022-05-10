@@ -20,7 +20,10 @@ from django.conf.urls.static import static
 from . import views
 
 
-urlpatterns = [path("", views.monthly_score_summary, name="monthly_score")]
+urlpatterns = [
+    path("", views.monthly_score_summary, name="monthly_score"),
+    path("<int:grid_key>/", views.grid_scores, name="grid_score"),
+]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -93,3 +93,7 @@ def monthly_score_summary(request):
     }
 
     return render(request, "monthly_pantheon.html", context)
+
+
+def grid_scores(request, grid_key):
+    return render(request, "grid_pantheon.html", {})
