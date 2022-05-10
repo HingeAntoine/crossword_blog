@@ -8,6 +8,7 @@ from post_with_grid.views import get_scores, get_type
 import datetime
 
 MAX_INDEX = 6
+MAX_NUMBER_OF_SCORES = 12
 
 
 #################
@@ -28,7 +29,7 @@ def project_index(request):
     grilles_vector = [
         {
             "grille": grids[i],
-            "scores": get_scores(grids[i].pk),
+            "scores": get_scores(grids[i].pk, max_list=MAX_NUMBER_OF_SCORES),
             "type": get_type(grids[i].pk),
         }
         for i in range(len(grids))
