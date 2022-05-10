@@ -1,4 +1,4 @@
-from .models import Project, Author
+from .models import Project
 import django_filters
 
 
