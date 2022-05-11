@@ -67,6 +67,7 @@ def scrabeille_detail(request, project, comments, pk):
             # GET REQUEST VARIABLE
             name = request.POST["name"]
             score = request.POST["score"]
+            private_leaderboard = request.POST["private_leaderboard"]
 
             # GET SCORES ASSOCIATED TO NAME, IF EXISTS
             scores_per_pseudo = Score.objects.filter(grid=pk, pseudo=name)
@@ -93,10 +94,18 @@ def scrabeille_detail(request, project, comments, pk):
 
             # IF ALL IS OK, SAVE SCORE
             if len(scores_per_pseudo) == 0:
-                Score(grid=pk, pseudo=name, time=0, score=score).save()
+                Score(
+                    grid=pk,
+                    pseudo=name,
+                    time=0,
+                    score=score,
+                    private_leaderboard=private_leaderboard,
+                ).save()
             else:
                 score_to_update = Score.objects.filter(grid=pk, pseudo=name)[0]
                 score_to_update.score = score
+                if len(private_leaderboard) > 0:
+                    score_to_update.private_leaderboard = private_leaderboard
                 score_to_update.save()
 
         return JsonResponse(

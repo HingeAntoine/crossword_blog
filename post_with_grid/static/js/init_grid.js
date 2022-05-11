@@ -171,6 +171,7 @@ function init_scrabeille(){
             data: {
                 'score': totalScore,
                 'name': $('#inputPseudo').val(),
+                'private_leaderboard': $('#privateLeaderboard').val(),
             },
             success: function (data) {
                 // Reload scores
