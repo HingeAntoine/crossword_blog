@@ -102,7 +102,7 @@ def monthly_score_summary(request):
 # SCORE PER GRID #
 ##################
 
-SCORE_LIST_SIZE = 20
+SCORE_LIST_SIZE = 15
 
 
 class ScoreFilter(django_filters.FilterSet):
