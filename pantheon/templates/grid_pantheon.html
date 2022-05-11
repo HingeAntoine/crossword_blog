@@ -30,8 +30,10 @@
         <table class="table">
             <thead>
             <tr>
+                <th class="th-sm">Rang</th>
                 <th class="th-sm">Pseudo</th>
                 <th class="th-sm">Score</th>
+                <th class="th-sm">Date</th>
             </tr>
             </thead>
             <tbody>
@@ -48,9 +50,10 @@
                         <i class="em em-third_place_medal" aria-role="presentation"
                            aria-label="MEDAILLE DE BRONZE"></i>
                         {% else %}
-                        <i class="em em-sports_medal" aria-role="presentation"
-                           aria-label="MEDAILLE"></i>
+                        {{score.rank}}.
                     {% endif %}
+                </td>
+                <td>
                     {{score.pseudo}}
                 </td>
                 <td>
@@ -61,6 +64,9 @@
                     {% else %}
                         {{ score.get_minute_secs }}
                     {% endif %}
+                </td>
+                <td>
+                    {{ score.solved_at }}
                 </td>
             </tr>
             {% endfor %}
