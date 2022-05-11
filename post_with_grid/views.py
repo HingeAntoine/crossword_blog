@@ -183,12 +183,17 @@ def project_detail(request, pk):
             if len(error_dict) > 0:
                 return JsonResponse(error_dict, status=403)
 
+            # INITIALIZE PRIVATE LEADERBOARD CORRECTLY
+            private_leaderboard = ""
+            if "private_leaderboard" in request.POST:
+                private_leaderboard = request.POST["private_leaderboard"]
+
             # Save the score
             Score(
                 grid=pk,
                 pseudo=request.POST["name"],
                 time=int(request.POST["score"]),
-                private_leaderboard=request.POST["private_leaderboard"],
+                private_leaderboard=private_leaderboard,
                 score=0,
             ).save()
 
