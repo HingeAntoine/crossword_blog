@@ -62,29 +62,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="answerModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5>Envoyer ou mettre à jour son score</h5>
-            </div>
-            <div class="modal-body">
-                <!-- Submit form -->
-                <form id="submit-form">
-                    <div class="form-group">
-                        <!-- Pseudo field -->
-                        <label for="inputPseudo">Pseudo</label>
-                        <input type="string" class="form-control" id="inputPseudo" placeholder="Entrez votre pseudo">
-                        <div class="invalid-feedback" id="pseudo-feedback"></div>
-                    </div>
-                    <button type="submit" class="btn btn-primary mt-4">
-                        Soumettre
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+{% include "modals/submit_modal.html" %}
 
 <div class="modal fade" id="solutionModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
