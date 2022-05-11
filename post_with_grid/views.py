@@ -111,6 +111,7 @@ def scrabeille_detail(request, project, comments, pk):
         "scrabeille_jeu.html",
         {
             "project": project,
+            "pk": pk,
             "scores": get_scores(pk),
             "comments": comments,
             "type": "scrabeille",

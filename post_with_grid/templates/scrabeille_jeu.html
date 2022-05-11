@@ -192,11 +192,10 @@
     </button>
 
     <!-- SCORE BUTTON -->
-    <button type="button" class="nav-link btn" data-bs-toggle="modal"
-            data-bs-target="#best-scores-modal">
+    <a type="button" class="nav-link btn" href="{% url 'grid_score' pk %}">
         <div class="em em-sports_medal"
              data-toggle="tooltip" data-placement="bottom" title="Voir les scores"></div>
-    </button>
+    </a>
 
     <!-- COMMENT BUTTON -->
     <button type="button" class="nav-link btn"
