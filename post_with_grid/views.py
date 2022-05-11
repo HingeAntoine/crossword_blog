@@ -200,23 +200,13 @@ def project_detail(request, pk):
         return render(
             request,
             "meta_detail.html",
-            {
-                "project": project,
-                "scores": get_scores(pk),
-                "comments": comments,
-                "type": "meta",
-            },
+            {"project": project, "comments": comments, "type": "meta"},
         )
     else:
         return render(
             request,
             "grid_detail.html",
-            {
-                "project": project,
-                "scores": get_scores(pk),
-                "comments": comments,
-                "type": "classique",
-            },
+            {"project": project, "comments": comments, "type": "classique"},
         )
 
 
