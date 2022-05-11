@@ -33,7 +33,6 @@
                 <th class="th-sm">Rang</th>
                 <th class="th-sm">Pseudo</th>
                 <th class="th-sm">Score</th>
-                <th class="th-sm">Date</th>
             </tr>
             </thead>
             <tbody>
@@ -64,9 +63,6 @@
                     {% else %}
                         {{ score.get_minute_secs }}
                     {% endif %}
-                </td>
-                <td>
-                    {{ score.solved_at }}
                 </td>
             </tr>
             {% endfor %}
