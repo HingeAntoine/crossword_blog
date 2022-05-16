@@ -116,6 +116,11 @@ def grid_scores(request, grid_key):
     # Get grids, filtered and paginated #
     #####################################
 
+    name = ""
+    if "name" in request.GET:
+        # Get name of player
+        name = request.GET.get("name")
+
     scores = get_scores(grid_key)
     score_filter = ScoreFilter(request.GET, queryset=scores)
     score_filter.form.fields["private_leaderboard"].label = "Panthéon privé"
@@ -127,9 +132,6 @@ def grid_scores(request, grid_key):
             page = request.GET.get("page")
             response = paginator.page(page)
         elif "name" in request.GET:
-            # Get name of player
-            name = request.GET.get("name")
-
             # Get rank linked to username
             rank_number = 0
             for score in score_filter.qs:
@@ -179,6 +181,7 @@ def grid_scores(request, grid_key):
     context = {
         "type": get_type(grid_key),
         "scores": response,
+        "name": name,
         "form": score_filter.form,
         "pagnav": {
             "first": url_first,

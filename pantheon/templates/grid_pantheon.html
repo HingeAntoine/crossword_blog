@@ -53,16 +53,20 @@
                     {% endif %}
                 </td>
                 <td>
+                    {% if score.pseudo == name %}<b>{% endif %}
                     {{score.pseudo}}
+                    {% if score.pseudo == name %}</b>{% endif %}
                 </td>
                 <td>
-                    {% if type == "meta" %}
-                        {{ score.solved_at }}
-                    {% elif type == "scrabeille" %}
-                        {{ score.score }}
-                    {% else %}
-                        {{ score.get_minute_secs }}
-                    {% endif %}
+                    {% if score.pseudo == name %}<b>{% endif %}
+                        {% if type == "meta" %}
+                            {{ score.solved_at }}
+                        {% elif type == "scrabeille" %}
+                            {{ score.score }}
+                        {% else %}
+                            {{ score.get_minute_secs }}
+                        {% endif %}
+                    {% if score.pseudo == name %}</b>{% endif %}
                 </td>
             </tr>
             {% endfor %}
