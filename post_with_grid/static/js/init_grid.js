@@ -82,12 +82,8 @@ function init_grid(pk, file_url){
                 // Change state of can_submit_score
                 grid.can_submit_score = false
 
-                // Reload scores
-                $('#ranking-content').html('').load(data.url);
-
-                // Toggle score modals
-                $('#submitModal').modal('hide');
-                $('#best-scores-modal').modal('show');
+                // Redirect to pantheon page
+                window.location.href = data.url;
             },
             error: function (data) {
                 $('#pseudo-feedback').text(data.responseJSON.error);
@@ -126,12 +122,8 @@ function init_meta(pk, file_url){
                 // Disable post button
                 $('#open-modal-button').prop('disabled', 'disabled');
 
-                // Reload scores
-                $('#ranking-content').html('').load(data.url);
-
-                // Toggle score modals
-                $('#answerModal').modal('hide');
-                $('#best-scores-modal').modal('show');
+                // Redirect to pantheon page
+                window.location.href = data.url;
             },
             error: function (data) {
                 // Reset error form

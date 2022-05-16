@@ -160,6 +160,7 @@ def project_detail(request, pk):
                 if norm_answer not in project.meta_answers:
                     error_dict["error_answer"] = "Ce n'est pas la bonne réponse."
 
+            name = ""
             if "name" in request.POST:
                 name = request.POST["name"]
 
@@ -189,7 +190,7 @@ def project_detail(request, pk):
             # Save the score
             Score(
                 grid=pk,
-                pseudo=request.POST["name"],
+                pseudo=name,
                 time=int(request.POST["score"]),
                 private_leaderboard=private_leaderboard,
                 score=0,
@@ -199,13 +200,7 @@ def project_detail(request, pk):
                 Project.objects.filter(pk=pk).update(solve_count=F("solve_count") + 1)
 
             # Return an ajax call response
-            return JsonResponse(
-                {
-                    "url": request.get_full_path()
-                    + "classement/?name="
-                    + request.POST["name"]
-                }
-            )
+            return JsonResponse({"url": "/pantheon/" + str(pk) + "/?name=" + name})
 
     # If the grid is a meta: display another page arrangement
     if isinstance(project, MetaGrid):
