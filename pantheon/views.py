@@ -141,8 +141,6 @@ def grid_scores(request, grid_key):
             response = paginator.page(int(rank_number / SCORE_LIST_SIZE) + 1)
         else:
             response = paginator.page(1)
-            page = request.GET.get("page")
-            response = paginator.page(page)
     except PageNotAnInteger:
         response = paginator.page(1)
     except EmptyPage:
