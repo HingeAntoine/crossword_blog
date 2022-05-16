@@ -122,9 +122,27 @@ def grid_scores(request, grid_key):
 
     paginator = Paginator(score_filter.qs, SCORE_LIST_SIZE)
 
-    page = request.GET.get("page")
     try:
-        response = paginator.page(page)
+        if "page" in request.GET:
+            page = request.GET.get("page")
+            response = paginator.page(page)
+        elif "name" in request.GET:
+            # Get name of player
+            name = request.GET.get("name")
+
+            # Get rank linked to username
+            rank_number = 0
+            for score in score_filter.qs:
+                if score.pseudo == name:
+                    rank_number = score.rank
+                    break
+
+            # Choose the right page
+            response = paginator.page(int(rank_number / SCORE_LIST_SIZE) + 1)
+        else:
+            response = paginator.page(1)
+            page = request.GET.get("page")
+            response = paginator.page(page)
     except PageNotAnInteger:
         response = paginator.page(1)
     except EmptyPage:
