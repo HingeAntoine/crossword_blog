@@ -174,12 +174,8 @@ function init_scrabeille(){
                 'private_leaderboard': $('#privateLeaderboard').val(),
             },
             success: function (data) {
-                // Reload scores
-                $('#ranking-content').html('').load(data.url);
-
-                // Toggle score modals
-                $('#answerModal').modal('hide');
-                $('#best-scores-modal').modal('show');
+                // Redirect to pantheon page
+                window.location.href = data.url;
             },
             error: function (data) {
                 // Reset error form

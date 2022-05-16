@@ -108,9 +108,7 @@ def scrabeille_detail(request, project, comments, pk):
                     score_to_update.private_leaderboard = private_leaderboard
                 score_to_update.save()
 
-        return JsonResponse(
-            {"url": request.get_full_path() + "classement/?name=" + name}
-        )
+        return JsonResponse({"url": "/pantheon/" + str(pk) + "/?name=" + name})
 
     with open(project.grid_file.path, "r") as stream:
         puzzle = yaml.safe_load(stream)
