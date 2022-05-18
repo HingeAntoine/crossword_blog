@@ -140,7 +140,7 @@ def grid_scores(request, grid_key):
                     break
 
             # Choose the right page
-            response = paginator.page(int(rank_number / SCORE_LIST_SIZE) + 1)
+            response = paginator.page(int((rank_number - 1) / SCORE_LIST_SIZE) + 1)
         else:
             response = paginator.page(1)
     except PageNotAnInteger:
