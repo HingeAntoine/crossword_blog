@@ -185,6 +185,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             this.cells[cell_x][cell_y].empty = cell.type == "block";
             this.cells[cell_x][cell_y].number = cell.number;
             this.cells[cell_x][cell_y].color = cell["background-color"];
+            this.cells[cell_x][cell_y].shape = cell["background-shape"];
             this.cells[cell_x][cell_y].letter = null;
             this.cells[cell_x][cell_y].bar = {'left' : cell["left-bar"], 'right': cell["right-bar"], 'top': cell["top-bar"], 'bottom': cell["bottom-bar"]}
         }
