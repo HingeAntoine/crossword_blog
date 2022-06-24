@@ -53,9 +53,8 @@ class Project(models.Model):
     )
     twitter_card_clue = models.CharField(max_length=200, blank=True)
 
-    # Count of solve and downloads
+    # Count of solve
     solve_count = models.IntegerField(default=0)
-    download_count = models.IntegerField(default=0)
 
     objects = InheritanceManager()
 
