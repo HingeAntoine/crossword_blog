@@ -869,6 +869,12 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         for(i in this.cells) {
             for(j in this.cells[i]) {
                 cell = this.cells[i][j];
+
+                // If cell is empty and supposed to be empty
+                if ( (cell.letter == "" || cell.letter == null) && cell.solution == " "){
+                    continue;
+                }
+
                 // if found cell without letter or with incorrect letter - return
                 if (!cell.empty && !cell.letter) {
                     return;
@@ -1077,7 +1083,6 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         // IF THIS IS FIRST TIME TRYING TO CHECK OR REVEAL : GIVE WARNING
         if (this.give_warning & this.can_submit_score){
             $("#warningModal").modal("show");
-            console.log("TEST TEST TEST TEST TEST")
             this.give_warning = false;
 
             return;
