@@ -13,6 +13,9 @@
 {% block page_content %}
 
 <!-- JAVASCRIPT BLOCK -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"
+        integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript" src="{% static 'js/status.js' %}"></script>
 
 <!-- TABLE BLOCK -->
@@ -20,8 +23,38 @@
     <div class="col-xl-3">
         <form method="get">
             {{ form | crispy }}
-            <button class="btn btn-primary mt-4" type="submit">Rechercher</button>
+            <button class="btn btn-primary mt-2" type="submit">Rechercher</button>
         </form>
+
+        {% if graph_data %}
+        <canvas id="myChart" width="400" height="200" class="mt-4"></canvas>
+        <script>
+            const ctx = document.getElementById('myChart');
+            const data = {
+                datasets: [{
+                  data: [{% for data in graph_data %} {{data}}, {% endfor %}],
+                }],
+                labels: [{% for data in graph_data %} 'data', {% endfor %}]
+            };
+            const config = {
+              type: 'bar',
+              data: data,
+              options: {
+                responsive: true,
+                plugins: {
+                  legend: {
+                    position: 'top',
+                  },
+                  title: {
+                    display: true,
+                    text: 'Chart.js Bar Chart'
+                  }
+                }
+              },
+            };
+            const myChart = new Chart(ctx, config);
+        </script>
+        {% endif %}
     </div>
 
     <div class="col-xl-9">

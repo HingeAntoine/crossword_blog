@@ -45,6 +45,22 @@ def get_scores(pk):
     return scores
 
 
+def get_graph_data(pk):
+    project = Project.objects.get_subclass(pk=pk)
+
+    # If the grid is a meta: display another page arrangement
+    if isinstance(project, MetaGrid):
+        # Scores are on a first come first serve basis
+        data = None
+    elif project.crossword_type == CrosswordsType.SCRABEILLE.value:
+        # Scores are ordered by best time
+        data = None
+    else:
+        # Scores are ordered by best time
+        data = [0, 15, 30, 20, 2]
+    return data
+
+
 def get_type(pk):
     project = Project.objects.get_subclass(pk=pk)
 
@@ -308,7 +324,7 @@ def project_ranking(request, pk):
         request,
         "grid_scores.html",
         {
-            "scores": get_scores(pk),
+            "scores": get_scores(pk)[0],
             "name": request.GET["name"] if "name" in request.GET else "",
             "type": get_type(pk),
         },

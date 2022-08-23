@@ -5,7 +5,12 @@ import datetime
 import django_filters
 
 from post_with_grid.models import Project
-from post_with_grid.views import get_scores, get_type, generate_pagination_urls
+from post_with_grid.views import (
+    get_scores,
+    get_graph_data,
+    get_type,
+    generate_pagination_urls,
+)
 
 ##########
 # SCORES #
@@ -165,6 +170,7 @@ def grid_scores(request, grid_key):
         "scores": response,
         "name": name,
         "form": score_filter.form,
+        "graph_data": get_graph_data(grid_key),
         "pagnav": {
             "first": url_first,
             "previous": url_previous,
