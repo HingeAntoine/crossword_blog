@@ -32,9 +32,9 @@
             const ctx = document.getElementById('myChart');
             const data = {
                 datasets: [{
-                  data: [{% for data in graph_data %} {{data}}, {% endfor %}],
+                  data: [{% for data in graph_data.bins_data %} {{data}}, {% endfor %}],
                 }],
-                labels: [{% for data in graph_data %} 'data', {% endfor %}]
+                labels: [{% for label in graph_data.bins_labels %} '{{label}}', {% endfor %}]
             };
             const config = {
               type: 'bar',
@@ -43,11 +43,11 @@
                 responsive: true,
                 plugins: {
                   legend: {
-                    position: 'top',
+                    position: 'none',
                   },
                   title: {
                     display: true,
-                    text: 'Chart.js Bar Chart'
+                    text: 'Répartition des scores'
                   }
                 }
               },

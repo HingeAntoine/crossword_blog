@@ -19,45 +19,55 @@ PAGINATOR_ARCHIVE_SIZE = 15
 
 def get_scores(pk):
     project = Project.objects.get_subclass(pk=pk)
+    scores = Score.objects.filter(grid=pk)
 
     # If the grid is a meta: display another page arrangement
     if isinstance(project, MetaGrid):
         # Scores are on a first come first serve basis
-        scores = (
-            Score.objects.filter(grid=pk)
-            .annotate(rank=Window(expression=Rank(), order_by=[F("solved_at")]))
-            .order_by("solved_at", "pseudo")
-        )
+        scores = scores.annotate(
+            rank=Window(expression=Rank(), order_by=[F("solved_at")])
+        ).order_by("solved_at", "pseudo")
     elif project.crossword_type == CrosswordsType.SCRABEILLE.value:
         # Scores are ordered by best time
-        scores = (
-            Score.objects.filter(grid=pk)
-            .annotate(rank=Window(expression=Rank(), order_by=[F("score").desc()]))
-            .order_by("-score")
-        )
+        scores = scores.annotate(
+            rank=Window(expression=Rank(), order_by=[F("score").desc()])
+        ).order_by("-score")
     else:
         # Scores are ordered by best time
-        scores = (
-            Score.objects.filter(grid=pk)
-            .annotate(rank=Window(expression=Rank(), order_by=[F("time")]))
-            .order_by("time", "solved_at", "pseudo")
-        )
+        scores = scores.annotate(
+            rank=Window(expression=Rank(), order_by=[F("time")])
+        ).order_by("time", "solved_at", "pseudo")
     return scores
 
 
 def get_graph_data(pk):
+    # Retrieve scores
     project = Project.objects.get_subclass(pk=pk)
+    scores = Score.objects.filter(grid=pk)
 
-    # If the grid is a meta: display another page arrangement
+    # Get data depending on grid type
     if isinstance(project, MetaGrid):
-        # Scores are on a first come first serve basis
         data = None
     elif project.crossword_type == CrosswordsType.SCRABEILLE.value:
-        # Scores are ordered by best time
         data = None
     else:
-        # Scores are ordered by best time
-        data = [0, 15, 30, 20, 2]
+        # Bins config
+        TIME_BINS = [time * 60 for time in [5, 10, 20, 30, 45, 60]]
+        BINS_LABELS = ["0-5", "5-10", "10-20", "10-30", "30-45", "45-60", "60+"]
+        times = [score.time for score in scores]
+
+        # Compute bins
+        bins = [0 for _ in BINS_LABELS]
+        for time in times:
+            for i in range(len(TIME_BINS)):
+                if time < TIME_BINS[i]:
+                    bins[i] += 1
+                    break
+
+        bins[-1] += len(times) - sum(bins)
+
+        # Format output
+        data = {"bins_labels": BINS_LABELS, "bins_data": bins}
     return data
 
 
