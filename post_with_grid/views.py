@@ -53,7 +53,7 @@ def get_graph_data(pk, name):
     else:
         # Bins config
         TIME_BINS = [time * 60 for time in [5, 10, 20, 30, 45, 60]]
-        BINS_LABELS = ["0-5", "5-10", "10-20", "10-30", "30-45", "45-60", "60+"]
+        BINS_LABELS = ["0-5", "5-10", "10-20", "20-30", "30-45", "45-60", "60+"]
         times = [score.time for score in scores]
 
         # Compute bins
