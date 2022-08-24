@@ -40,7 +40,7 @@ def get_scores(pk):
     return scores
 
 
-def get_graph_data(pk):
+def get_graph_data(pk, name):
     # Retrieve scores
     project = Project.objects.get_subclass(pk=pk)
     scores = Score.objects.filter(grid=pk)
@@ -66,8 +66,35 @@ def get_graph_data(pk):
 
         bins[-1] += len(times) - sum(bins)
 
+        # Compute colors
+        DEFAULT_COLOR = "rgba(255, 159, 64, 0.8)"
+        SELECTED_COLOR = "rgba(255, 99, 132, 0.8)"
+
+        background_colors = [DEFAULT_COLOR for _ in BINS_LABELS]
+
+        if (len(name) > 0) & (len(scores.filter(pseudo=name)) > 0):
+            score = scores.filter(pseudo=name)[0].time
+        else:
+            score = None
+
+        if score is not None:
+            color_index = None
+            for i in range(len(TIME_BINS)):
+                if score < TIME_BINS[i]:
+                    color_index = i
+                    break
+
+            if color_index is None:
+                color_index = -1
+
+            background_colors[color_index] = SELECTED_COLOR
+
         # Format output
-        data = {"bins_labels": BINS_LABELS, "bins_data": bins}
+        data = {
+            "bins_labels": BINS_LABELS,
+            "bins_data": bins,
+            "bins_colors": background_colors,
+        }
     return data
 
 

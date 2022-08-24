@@ -170,7 +170,7 @@ def grid_scores(request, grid_key):
         "scores": response,
         "name": name,
         "form": score_filter.form,
-        "graph_data": get_graph_data(grid_key),
+        "graph_data": get_graph_data(grid_key, name),
         "pagnav": {
             "first": url_first,
             "previous": url_previous,

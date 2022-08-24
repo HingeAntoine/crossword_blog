@@ -33,6 +33,7 @@
             const data = {
                 datasets: [{
                   data: [{% for data in graph_data.bins_data %} {{data}}, {% endfor %}],
+                  backgroundColor :[{% for color in graph_data.bins_colors %} '{{color}}', {% endfor %}],
                 }],
                 labels: [{% for label in graph_data.bins_labels %} '{{label}}', {% endfor %}]
             };
