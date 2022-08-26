@@ -351,23 +351,6 @@ def project_archives(request):
     )
 
 
-###########
-# Ranking #
-###########
-
-
-def project_ranking(request, pk):
-    return render(
-        request,
-        "grid_scores.html",
-        {
-            "scores": get_scores(pk)[0],
-            "name": request.GET["name"] if "name" in request.GET else "",
-            "type": get_type(pk),
-        },
-    )
-
-
 ############
 # Comments #
 ############
