@@ -108,7 +108,8 @@ function initialize_letters(){
         aElement.className = "hexLink";
         aElement.href = "#";
         aElement.appendChild(pElement);
-        aElement.addEventListener('click', clickLetter(char), false);
+        aElement.addEventListener('mousedown', clickLetter(char), false);
+        aElement.addEventListener('dblclick', void(0), false);
 
         var divElement = document.createElement('DIV');
         divElement.className = "hexIn";
