@@ -324,6 +324,8 @@ function showValidWords(){
         }
         if(discoveredWords.includes(validWords[w])){
             listword.classList.add("text-decoration-line-through");
+        } else {
+            listword.classList.add("fw-bolder");
         }
 
         // APPEND WORD TO LIST
