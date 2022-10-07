@@ -49,7 +49,6 @@ var ZIPJS_PATH = 'lib/zip';
 
 // errors
 var ERR_FILE_LOAD     = 'Error loading file';
-var ERR_UNZIP         = 'Failed to unzip file';
 var ERR_NOT_CROSSWORD = 'Error opening file. Probably not a crossword.';
 var ERR_NO_JQUERY     = 'jQuery not found';
 var ERR_NO_PUZJS      = 'Puz js not found';
@@ -60,7 +59,6 @@ var load_error = false;
 
 // Timer variables
 var xw_timer, xw_timer_seconds = 0;
-
 var xw_last_save;
 var xw_last_save_time = 0;
 var xw_last_save_running = false;
@@ -85,40 +83,34 @@ function loadFileFromServer(path, type) {
 function loadFromFile(file, type, deferred) {
     var reader = new FileReader();
     deferred = deferred || $.Deferred();
-    reader.onload = function(event) {
+    reader.onload = function (event) {
         var string = event.target.result;
-        if (type === FILE_PUZ) {
-            deferred.resolve(string);
-        }
+        deferred.resolve(string);
     };
-    if (type === FILE_PUZ) {
-        reader.readAsBinaryString(file);
-    } else {
+    if (type == "ipuz"){
         reader.readAsText(file);
+    } else {
+        reader.readAsBinaryString(file);
     }
     return deferred;
 }
 
-function unzip(zip_reader, success_callback, deferred) {
-    zip.workerScripts = {'inflater': [ZIPJS_PATH+'/z-worker.js', ZIPJS_PATH+'/inflate.js']};
-    // use a BlobReader to read the zip from a Blob object
-    zip.createReader(zip_reader, function(reader) {
-        // get all entries from the zip
-        reader.getEntries(function(entries) {
-            if (entries.length) {
-                // get first entry content as text
-                entries[0].getData(new zip.TextWriter(), function(text) {
-                    // text contains the entry data as a String
-                    if (typeof success_callback === 'function') {
-                        success_callback(text, deferred);
-                    }
-                });
-            }
-        });
-    }, function(error) {
-        deferred.reject(ERR_UNZIP);
-    });
-}
+//function loadFromFile(file, type, deferred) {
+//    var reader = new FileReader();
+//    deferred = deferred || $.Deferred();
+//    reader.onload = function(event) {
+//        var string = event.target.result;
+//        if (type === FILE_PUZ) {
+//            deferred.resolve(string);
+//        }
+//    };
+//    if (type === FILE_PUZ) {
+//        reader.readAsBinaryString(file);
+//    } else {
+//        reader.readAsText(file);
+//    }
+//    return deferred;
+//}
 
 // Return the first element of a string -- if it's null return null
 function firstChar(str) {

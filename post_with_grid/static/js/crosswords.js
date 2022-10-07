@@ -131,12 +131,14 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
         if (this.config.puzzle_file && this.config.puzzle_file.hasOwnProperty('url') && this.config.puzzle_file.hasOwnProperty('type')) {
             var error_callback = $.proxy(this.error, this);
             if ((this.config.puzzle_file.url).split('.')[1] == "ipuz") {
+                this.config.puzzle_file.type = "ipuz"
                 var loaded_callback = $.proxy(this.parseIPUZPuzzle, this);
             }
             else {
                 var loaded_callback = $.proxy(this.parsePUZPuzzle, this);
             }
 
+            console.log(this.config.puzzle_file.type)
             loadFileFromServer(this.config.puzzle_file.url, this.config.puzzle_file.type).then(loaded_callback, error_callback);
         }
     };
@@ -146,7 +148,9 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     };
 
     CrossWord.prototype.parseIPUZPuzzle = function(string) {
+        console.log(string)
         var puzzle = xw_read_ipuz(string);
+        console.log(puzzle)
 
         //************
         //* METADATA *
