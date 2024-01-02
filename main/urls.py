@@ -45,7 +45,6 @@ urlpatterns = [
     path("blog/", include("blog_posts.urls")),
     path("about/", views.about, name="about"),
     path("creation/", include("grid_creation_tool.urls")),
-    path("contact/", include("contact_email.urls"), name="contact"),
 ]
 
 if settings.DEBUG:
