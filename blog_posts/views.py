@@ -12,7 +12,6 @@ PAGINATOR_ARCHIVE_SIZE = 20
 def display_blog_post(request, url_blog):
     blog_post = BlogPost.objects.filter(url=url_blog)[0]
 
-    print(blog_post.date_created > date.today())
     if blog_post.date_created > date.today():
         return redirect("homepage")
 
