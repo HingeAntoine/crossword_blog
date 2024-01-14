@@ -179,10 +179,15 @@ def scrabeille_detail(request, project, comments, pk):
 
 
 def project_detail(request, pk):
+    # Check that grid exists before continuing
+    if not Project.objects.filter(pk=pk).exists():
+        return redirect("homepage")
+
+    # Get grid
     project = Project.objects.get_subclass(pk=pk)
 
     # IF PUBLICATION DATE IS IN THE FUTURE, RETURN TO HOMEPAGE
-    if project.date_created > datetime.date.today():
+    if (len(project) == 0) | (project.date_created > datetime.date.today()):
         return redirect("homepage")
 
     comments = Comment.objects.filter(grid_key=pk).order_by("commented_at")
