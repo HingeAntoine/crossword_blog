@@ -187,7 +187,7 @@ def project_detail(request, pk):
     project = Project.objects.get_subclass(pk=pk)
 
     # IF PUBLICATION DATE IS IN THE FUTURE, RETURN TO HOMEPAGE
-    if (len(project) == 0) | (project.date_created > datetime.date.today()):
+    if project.date_created > datetime.date.today():
         return redirect("homepage")
 
     comments = Comment.objects.filter(grid_key=pk).order_by("commented_at")
