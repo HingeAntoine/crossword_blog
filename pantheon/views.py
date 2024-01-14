@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 import datetime
@@ -117,6 +117,10 @@ class ScoreFilter(django_filters.FilterSet):
 
 
 def grid_scores(request, grid_key):
+    # Check that grid exists before continuing
+    if not Project.objects.filter(pk=grid_key).exists():
+        return redirect("homepage")
+
     #####################################
     # Get grids, filtered and paginated #
     #####################################
